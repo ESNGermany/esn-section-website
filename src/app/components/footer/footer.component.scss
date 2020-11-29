@@ -1,0 +1,44 @@
+.divider-top {
+  position: absolute;
+  top: -48px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.divider-top svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 48px;
+}
+
+.divider-top .shape-fill {
+  fill: #3a3a3a;
+}
+
+.icon {
+  vertical-align: -3px;
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 0;
+  margin-right: 3rem;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+.show-scrollTop {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.hov {
+  transition: transform 0.2s;
+}
+
+.hov:hover {
+  transform: scale(1.13);
+}

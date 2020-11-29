@@ -1,0 +1,80 @@
+.bg {
+  background: url("../../../assets/landing/landing1.jpg") #558f29;
+  // background-image: url("../../../assets/landing/landing1.jpg");
+  background-blend-mode: multiply;
+  background-position: center;
+  background-size: cover;
+  padding-bottom: 99px;
+}
+
+.divider-bottom {
+  position: absolute;
+  top: 136px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.divider-bottom svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 99px;
+}
+
+.divider-bottom .shape-fill {
+  fill: #fff;
+}
+.divider-top {
+  position: absolute;
+  top: 136px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.divider-top svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 64px;
+}
+
+.divider-top .shape-fill {
+  fill: #7ac143;
+}
+
+.addhover:hover:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -4px;
+  width: 48px;
+  height: 3px;
+  background: #fff;
+}
+
+.addhoverActive:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -4px;
+  width: 48px;
+  height: 3px;
+  background: #fff;
+}
+.menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.hov {
+  transition: transform 0.2s;
+}
+
+.hov:hover {
+  transform: scale(1.2);
+}

@@ -1,0 +1,156 @@
+<footer class="bg-footer relative">
+  <div class="divider-top">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M1200 0L0 0 892.25 114.72 1200 0z" class="shape-fill"></path>
+    </svg>
+  </div>
+  <div
+    *ngIf="!desktop"
+    class="scroll-to-top"
+    [ngClass]="{ 'show-scrollTop': windowScrolled }"
+  >
+    <button
+      (click)="scrollToTop()"
+      class="bg-esn-blue p-2 rounded-full block hov"
+    >
+      <img class="m-2 h-6" src="../../../assets/up2.png" />
+    </button>
+  </div>
+  <div
+    class="font-body text-white flex flex-wrap max-w-screen-xl m-auto sm:px-16 pt-8"
+  >
+    <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
+      <p class="font-bold uppercase pb-1 text-lg">Contact</p>
+      <p class="font-bold">Erasmus Student Network Freiburg e.V.</p>
+      <p class="pt-2">c/o EU-Büro</p>
+      <p>Sedanstraße 6</p>
+      <p>79098 Freiburg</p>
+      <p class="pt-1 pb-4">
+        <a
+          href="mailto:freiburg@esn-germany.de"
+          rel="noopener"
+          class="hover:underline"
+          >freiburg@esn-germany.de</a
+        >
+      </p>
+    </div>
+    <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
+      <p class="font-bold uppercase pb-1 text-lg">Links</p>
+      <p>
+        <a
+          routerLink="/imprint"
+          routerLinkActive="active"
+          class="hover:underline"
+          >Imprint</a
+        >
+      </p>
+      <p>
+        <a routerLink="/coc" routerLinkActive="active" class="hover:underline"
+          >Code of Conduct</a
+        >
+      </p>
+      <p>
+        <a
+          routerLink="/statutes"
+          routerLinkActive="active"
+          class="hover:underline"
+          >Statutes</a
+        >
+      </p>
+      <p>
+        <a routerLink="/epp" routerLinkActive="active" class="hover:underline"
+          >Event Policy Paper</a
+        >
+      </p>
+      <p>
+        <a
+          routerLink="/ordnung"
+          routerLinkActive="active"
+          class="hover:underline"
+          >Ordnung</a
+        >
+      </p>
+      <p class="pb-4">
+        <a
+          routerLink="/konsultationsordnung"
+          routerLinkActive="active"
+          class="hover:underline"
+          >Konsultationsordnung</a
+        >
+      </p>
+    </div>
+    <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
+      <p class="font-bold uppercase pb-1 text-lg">External Links</p>
+      <p>
+        <a
+          href="https://esncard.org/"
+          target="_blank"
+          rel="noopener"
+          class="hover:underline"
+          >ESNcard.org</a
+        >
+      </p>
+      <p>
+        <a
+          href="https://erasmusintern.org/"
+          target="_blank"
+          rel="noopener"
+          class="hover:underline"
+          >ErasmusIntern.org</a
+        >
+      </p>
+      <p class="pb-4">
+        <a
+          href="https://esn.org/"
+          target="_blank"
+          rel="noopener"
+          class="hover:underline"
+          >ESN International</a
+        >
+      </p>
+    </div>
+    <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
+      <p class="font-bold uppercase pb-1 text-lg">Social Media</p>
+      <p>
+        <a
+          href="https://facebook.com/esnfreiburg/"
+          target="_blank"
+          rel="noopener"
+          class="hover:underline"
+        >
+          Facebook
+        </a>
+      </p>
+      <p>
+        <a
+          href="https://www.instagram.com/esn_freiburg/"
+          target="_blank"
+          rel="noopener"
+          class="hover:underline"
+        >
+          Instagram
+        </a>
+      </p>
+      <!-- <p>
+        <a
+          href="https://twitter.com/esngermany/"
+          target="_blank"
+          rel="noopener"
+          class="hover:underline"
+        >
+          Twitter
+        </a>
+      </p> -->
+    </div>
+    <div class="w-full text-center my-4">
+      <p>
+        <img
+          src="../assets/logo/ESN-star-RGB.png"
+          alt="ESN star"
+          class="w-6 inline-block mx-auto"
+        />
+        created by the IT Team of ESN Freiburg e.V.
+      </p>
+    </div>
+  </div>
+</footer>
