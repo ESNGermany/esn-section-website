@@ -31,23 +31,23 @@ interface ContentItem {
 }
 
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss'],
+  selector: 'app-events-page',
+  templateUrl: './events-page.component.html',
+  styleUrls: ['./events-page.component.scss'],
 })
-export class LandingPageComponent implements OnInit {
+export class EventsPageComponent implements OnInit {
   public contentItemList: ContentItem[];
 
   constructor(private title: Title, private contentService: ContentService) {}
 
   ngOnInit() {
-    this.title.setTitle('Home | Erasmus Student Network Freiburg');
+    this.title.setTitle('Events | Erasmus Student Network Freiburg');
     this.getContent();
   }
 
   getContent(): void {
     this.contentService
-      .fetchPageContent('Landing_page')
+      .fetchPageContent('Events_page')
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
   }
 }

@@ -1,6 +1,6 @@
 .bg {
-  background: url("../../../assets/landing/landing1.jpg") #558f29;
-  // background-image: url("../../../assets/landing/landing1.jpg");
+  // background: url("../../../assets/Bilder\ Webseite\ neu/gasse1.png") #558f29;
+  background-image: url("../../../assets/Bilder\ Webseite\ neu/münster1.png");
   background-blend-mode: multiply;
   background-position: center;
   background-size: cover;
@@ -69,12 +69,4 @@
   position: absolute;
   top: 0;
   right: 0;
-}
-
-.hov {
-  transition: transform 0.2s;
-}
-
-.hov:hover {
-  transform: scale(1.2);
 }
