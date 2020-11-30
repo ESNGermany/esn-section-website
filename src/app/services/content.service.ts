@@ -18,7 +18,6 @@ interface ContentItem {
     | 'Landing_page'
     | 'Members_page'
     | 'Team_page'
-    | 'Events_page'
     | 'ESNcard_page';
   Order_on_page: number;
   Image: {
@@ -37,7 +36,7 @@ interface ContentItem {
 })
 export class ContentService {
   private url =
-    'https://strapi.esn-freiburg.de/website-contents?Page_for_display=';
+    'https://strapi.esn-freiburg.de/website-contents?_sort=Order_on_page&Page_for_display=';
   private fullUrl: string;
   constructor(
     private http: HttpClient,
