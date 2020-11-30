@@ -5,6 +5,8 @@ import { EsncardPageComponent } from './pages/esncard-page/esncard-page.componen
 import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { MembersPageComponent } from './pages/members-page/members-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
+import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,23 @@ const routes: Routes = [
     path: 'team',
     pathMatch: 'full',
     component: TeamPageComponent,
+  },
+  {
+    path: 'imprint',
+    pathMatch: 'full',
+    component: ImprintPageComponent,
+  },
+  {
+    path: 'error',
+    component: ErrorPageComponent,
+    data: {
+      title: 'Oopsie - ESN Germany',
+    },
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'error',
   },
 ];
 

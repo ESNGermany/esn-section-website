@@ -11,6 +11,8 @@ import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { MembersPageComponent } from './pages/members-page/members-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     EventsPageComponent,
     MembersPageComponent,
     TeamPageComponent,
+    ImprintPageComponent,
+    ErrorPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
