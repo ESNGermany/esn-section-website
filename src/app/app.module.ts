@@ -13,6 +13,7 @@ import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { PretixCalendarComponent } from './components/pretix-calendar/pretix-calendar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
     TeamPageComponent,
     ImprintPageComponent,
     ErrorPageComponent,
+    PretixCalendarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

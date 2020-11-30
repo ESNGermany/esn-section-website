@@ -1,15 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ImprintService } from 'src/app/services/imprint.service';
+
+interface ImprintItem {
+  id: string;
+  Title: string;
+  Text: string;
+}
 
 @Component({
   selector: 'app-imprint-page',
   templateUrl: './imprint-page.component.html',
-  styleUrls: ['./imprint-page.component.scss']
+  styleUrls: ['./imprint-page.component.scss'],
 })
 export class ImprintPageComponent implements OnInit {
+  public imprintItemList: ImprintItem;
 
-  constructor() { }
+  constructor(private title: Title, private imprintService: ImprintService) {}
 
   ngOnInit() {
+    this.title.setTitle('Imprint | Erasmus Student Network Freiburg');
+    this.getImprint();
   }
 
+  getImprint(): void {
+    this.imprintService
+      .fetchImprint()
+      .subscribe((imprintItemList) => (this.imprintItemList = imprintItemList));
+  }
 }
