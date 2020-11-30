@@ -5,7 +5,9 @@ import { EsncardPageComponent } from './pages/esncard-page/esncard-page.componen
 import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { MembersPageComponent } from './pages/members-page/members-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
+import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
 import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
+import { CocPageComponent } from './pages/coc-page/coc-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 const routes: Routes = [
@@ -38,6 +40,16 @@ const routes: Routes = [
     path: 'imprint',
     pathMatch: 'full',
     component: ImprintPageComponent,
+  },
+  {
+    path: 'statutes',
+    pathMatch: 'full',
+    component: StatutesPageComponent,
+  },
+  {
+    path: 'coc',
+    pathMatch: 'full',
+    component: CocPageComponent,
   },
   {
     path: 'error',

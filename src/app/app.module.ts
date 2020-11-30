@@ -14,6 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { PretixCalendarComponent } from './components/pretix-calendar/pretix-calendar.component';
+import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { CocPageComponent } from './pages/coc-page/coc-page.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +31,15 @@ import { PretixCalendarComponent } from './components/pretix-calendar/pretix-cal
     ImprintPageComponent,
     ErrorPageComponent,
     PretixCalendarComponent,
+    StatutesPageComponent,
+    CocPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MarkdownModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
