@@ -40,7 +40,9 @@ export class EsncardPageComponent implements OnInit {
   constructor(private title: Title, private contentService: ContentService) {}
 
   ngOnInit() {
-    this.title.setTitle('Home | Erasmus Student Network Freiburg');
+    this.title.setTitle(
+      'ESNcard & Partners | Erasmus Student Network Freiburg'
+    );
     this.getContent();
   }
 

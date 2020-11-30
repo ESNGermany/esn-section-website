@@ -10,6 +10,11 @@ export class EventsPageComponent implements OnInit {
   constructor(private title: Title) {}
 
   ngOnInit() {
-    this.title.setTitle('Events | Erasmus Student Network Freiburg');
+    if (!localStorage.getItem('reload')) {
+      localStorage.setItem('reload', 'no reload');
+      location.reload();
+    } else {
+      localStorage.removeItem('reload');
+    }
   }
 }
