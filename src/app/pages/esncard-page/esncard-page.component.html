@@ -1,5 +1,38 @@
 <app-navigation></app-navigation>
 <div class="max-w-screen-xl m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4">
+  <div class="m-auto mb-8 relative">
+    <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
+      Our Local Partners
+    </p>
+  </div>
+  <div class="font-body text-lg border border-graylight shadow-xl p-8 mb-16">
+    <div *ngFor="let p of partnerItemList">
+      <div class="flex items-center">
+        <div class="p-8 w">
+          <a
+            href="{{ p.Link }}"
+            class="text-esn-dark-blue hover:underline"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              *ngIf="p.Main_image.formats.thumbnail"
+              class="m-auto h-24"
+              src="https://strapi.esn-freiburg.de{{
+                p.Main_image.formats.thumbnail.url
+              }}"
+              alt="{{ p.Main_image.alternativeText }}"
+              title="{{ p.Main_image.alternativeText }}"
+            />
+          </a>
+        </div>
+        <div class="font-body text-lg">
+          <p class="font-bold">{{ p.Name }}</p>
+          <p>{{ p.Deal }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div *ngFor="let c of contentItemList" class="px-8 mb-24">
     <!-- text left img right -->
     <div *ngIf="c.Layout === 'Text_left_img_right'">
@@ -16,7 +49,7 @@
         class="flex items-center flex-col-reverse lg:flex-row"
       >
         <div [ngClass]="c.Image ? 'w-2/3' : 'w-full'">
-          <p class="font-body text-lg">{{ c.Text }}</p>
+          <markdown [data]="c.Text"></markdown>
         </div>
         <div *ngIf="c.Image" class="px-4">
           <img
@@ -51,9 +84,7 @@
           />
         </div>
         <div [ngClass]="c.Image ? 'w-2/3' : 'w-full'">
-          <p class="font-body text-lg">
-            {{ c.Text }}
-          </p>
+          <markdown [data]="c.Text"></markdown>
         </div>
       </div>
     </div>
@@ -80,9 +111,7 @@
           />
         </div>
         <div class="w-full">
-          <p class="font-body text-lg">
-            {{ c.Text }}
-          </p>
+          <markdown [data]="c.Text"></markdown>
         </div>
       </div>
     </div>
@@ -101,9 +130,7 @@
         class="flex items-center flex-col"
       >
         <div class="w-full">
-          <p class="font-body text-lg">
-            {{ c.Text }}
-          </p>
+          <markdown [data]="c.Text"></markdown>
         </div>
         <div *ngIf="c.Image" class="px-4">
           <img

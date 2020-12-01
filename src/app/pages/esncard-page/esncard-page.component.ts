@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
+import { PartnerService } from 'src/app/services/partner.service';
 
 interface ContentItem {
   id: string;
@@ -29,6 +30,22 @@ interface ContentItem {
   };
 }
 
+interface PartnerItem {
+  id: string;
+  Name: string;
+  Deal: string;
+  Link: string;
+  Main_image: {
+    id: string;
+    alternativeText: string;
+    formats: {
+      medium: {
+        url: string;
+      };
+    };
+  };
+}
+
 @Component({
   selector: 'app-esncard-page',
   templateUrl: './esncard-page.component.html',
@@ -36,16 +53,27 @@ interface ContentItem {
 })
 export class EsncardPageComponent implements OnInit {
   public contentItemList: ContentItem[];
+  public partnerItemList: PartnerItem[];
 
-  constructor(private title: Title, private contentService: ContentService) {}
+  constructor(
+    private title: Title,
+    private contentService: ContentService,
+    private partnerService: PartnerService
+  ) {}
 
   ngOnInit() {
     this.title.setTitle(
       'ESNcard & Partners | Erasmus Student Network Freiburg'
     );
     this.getContent();
+    this.getPartners();
   }
 
+  getPartners(): void {
+    this.partnerService
+      .fetchPagePartner()
+      .subscribe((partnerItemList) => (this.partnerItemList = partnerItemList));
+  }
   getContent(): void {
     this.contentService
       .fetchPageContent('ESNcard_page')

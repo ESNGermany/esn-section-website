@@ -51,7 +51,7 @@
         class="flex items-center flex-col-reverse lg:flex-row"
       >
         <div [ngClass]="c.Image ? 'w-2/3' : 'w-full'">
-          <p class="font-body text-lg">{{ c.Text }}</p>
+          <markdown [data]="c.Text"></markdown>
         </div>
         <div *ngIf="c.Image" class="px-4">
           <img
@@ -86,9 +86,7 @@
           />
         </div>
         <div [ngClass]="c.Image ? 'w-2/3' : 'w-full'">
-          <p class="font-body text-lg">
-            {{ c.Text }}
-          </p>
+          <markdown [data]="c.Text"></markdown>
         </div>
       </div>
     </div>
@@ -115,9 +113,7 @@
           />
         </div>
         <div class="w-full">
-          <p class="font-body text-lg">
-            {{ c.Text }}
-          </p>
+          <markdown [data]="c.Text"></markdown>
         </div>
       </div>
     </div>
@@ -136,9 +132,7 @@
         class="flex items-center flex-col"
       >
         <div class="w-full">
-          <p class="font-body text-lg">
-            {{ c.Text }}
-          </p>
+          <markdown [data]="c.Text"></markdown>
         </div>
         <div *ngIf="c.Image" class="px-4">
           <img
