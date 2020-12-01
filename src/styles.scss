@@ -4,6 +4,11 @@
 
 @import "tailwindcss/utilities";
 
+@font-face {
+  font-family: "Comic Sans";
+  src: url("./assets/fonts/Comic\ Sans\ MS\ 400.ttf");
+}
+
 markdown {
   overflow-wrap: break-word;
   word-wrap: break-word;

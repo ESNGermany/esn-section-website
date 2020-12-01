@@ -1,13 +1,58 @@
 <app-navigation></app-navigation>
 <div class="max-w-screen-xl m-auto sm:px-16 xl:mt-28 lg:mt-22 sm:mt-16">
   <div class="px-8 mb-16">
-    <div class="m-auto mb-8 relative">
+    <div class="m-auto mb-4 relative">
       <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
         We are ESN Freiburg.
       </p>
     </div>
   </div>
 </div>
+<!-- <div class="max-w-screen-2xl m-auto sm:px-16 xl:mt-22 lg:mt-22 sm:mt-16">
+  <div class="px-8 mb-16">
+    <div class="flex flex-col justify-center lg:flex-row">
+      <div class="flex flex-row justify-evenly">
+        <div class="">
+          <a
+            href="https://www.facebook.com/esnfreiburg"
+            target="_blank"
+            rel="noopener"
+            ><img
+              src="../../../assets/social/facebook-color.png"
+              class="h-44 mx-4 lg:mx-8"
+              alt="Facebook"
+              title="facebook"
+          /></a>
+        </div>
+        <div>
+          <a
+            href="https://www.instagram.com/esn_freiburg"
+            target="_blank"
+            rel="noopener"
+            ><img
+              src="../../../assets/social/instagram-color.png"
+              class="h-44 mx-4 lg:mx-8"
+              alt="Instagram"
+              title="instagram"
+          /></a>
+        </div>
+      </div>
+      <div class="w-full lg:w-2/3 mx-4">
+        <p class="font-body text-lg">
+          Welcome to the Erasmus Student Network Freiburg! We are an association
+          formed by German and international students with the aim of making the
+          Erasmus stay for the students who come to Freiburg unforgettable.
+          <br />
+          We offer cultural events of any kind and work closely with our local
+          partners. As we are part of the Europe-wide ESN network, you can get
+          the famous ESNcard from us and profit from the whole network of
+          friends and knowledge all over Europe. <br />
+          See our latest news & events on our social media and get to know us!
+        </p>
+      </div>
+    </div>
+  </div>
+</div> -->
 <div class="grid grid-cols-4 auto-rows-images gap-0.5 mb-24">
   <div class="col-span-3">
     <img
@@ -48,18 +93,23 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col-reverse lg:flex-row"
       >
-        <div [ngClass]="c.Image ? 'w-2/3' : 'w-full'">
+        <div *ngIf="c.Image" class="m-auto">
+          <figure
+            class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 lg:float-right w-4/5 lg:w-2/5 m-auto"
+          >
+            <img
+              src="https://strapi.esn-freiburg.de{{
+                c.Image.formats.medium.url
+              }}"
+              alt="{{ c.Image.alternativeText }}"
+              title="{{ c.Image.alternativeText }}"
+            />
+          </figure>
           <markdown [data]="c.Text"></markdown>
         </div>
-        <div *ngIf="c.Image" class="px-4">
-          <img
-            class="m-auto"
-            src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
-            alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
-          />
+        <div *ngIf="!c.Image" class="m-auto font-body text-lg">
+          <markdown [data]="c.Text"></markdown>
         </div>
       </div>
     </div>
@@ -75,17 +125,22 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col lg:flex-row"
       >
-        <div *ngIf="c.Image" class="px-4">
-          <img
-            class="m-auto"
-            src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
-            alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
-          />
+        <div *ngIf="c.Image" class="m-auto">
+          <figure
+            class="pr-0 lg:pr-8 pb-2 pl-0 pt-0 lg:float-left w-4/5 lg:w-2/5 m-auto"
+          >
+            <img
+              src="https://strapi.esn-freiburg.de{{
+                c.Image.formats.medium.url
+              }}"
+              alt="{{ c.Image.alternativeText }}"
+              title="{{ c.Image.alternativeText }}"
+            />
+          </figure>
+          <markdown [data]="c.Text"></markdown>
         </div>
-        <div [ngClass]="c.Image ? 'w-2/3' : 'w-full'">
+        <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
         </div>
       </div>

@@ -55,6 +55,7 @@ module.exports = {
     fontFamily: {
       body: ["Lato", "sans-serif"],
       heading: ["Oswald", "sans-serif"],
+      comic: ["Comic Sans"],
     },
     gridAutoRows: {
       images: "280px",

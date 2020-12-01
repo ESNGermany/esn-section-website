@@ -13,18 +13,23 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col-reverse lg:flex-row"
       >
-        <div [ngClass]="c.Image ? 'w-2/3' : 'w-full'">
+        <div *ngIf="c.Image" class="m-auto">
+          <figure
+            class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 lg:float-right w-4/5 lg:w-2/5 m-auto"
+          >
+            <img
+              src="https://strapi.esn-freiburg.de{{
+                c.Image.formats.medium.url
+              }}"
+              alt="{{ c.Image.alternativeText }}"
+              title="{{ c.Image.alternativeText }}"
+            />
+          </figure>
           <markdown [data]="c.Text"></markdown>
         </div>
-        <div *ngIf="c.Image" class="px-4">
-          <img
-            class="m-auto"
-            src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
-            alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
-          />
+        <div *ngIf="!c.Image" class="m-auto font-body text-lg">
+          <markdown [data]="c.Text"></markdown>
         </div>
       </div>
     </div>
@@ -40,17 +45,22 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col lg:flex-row"
       >
-        <div *ngIf="c.Image" class="px-4">
-          <img
-            class="m-auto"
-            src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
-            alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
-          />
+        <div *ngIf="c.Image" class="m-auto">
+          <figure
+            class="pr-0 lg:pr-8 pb-2 pl-0 pt-0 lg:float-left w-4/5 lg:w-2/5 m-auto"
+          >
+            <img
+              src="https://strapi.esn-freiburg.de{{
+                c.Image.formats.medium.url
+              }}"
+              alt="{{ c.Image.alternativeText }}"
+              title="{{ c.Image.alternativeText }}"
+            />
+          </figure>
+          <markdown [data]="c.Text"></markdown>
         </div>
-        <div [ngClass]="c.Image ? 'w-2/3' : 'w-full'">
+        <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
         </div>
       </div>
@@ -67,9 +77,9 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col"
+        class="flex items-center flex-col w-full"
       >
-        <div *ngIf="c.Image" class="px-4">
+        <div *ngIf="c.Image" class="p-4">
           <img
             class="m-auto"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
@@ -78,7 +88,7 @@
           />
         </div>
         <div class="w-full">
-          <markdown [data]="c.Text"></markdown>
+          <markdown [data]="c.Text" class="w-full"></markdown>
         </div>
       </div>
     </div>
