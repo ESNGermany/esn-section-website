@@ -10,6 +10,7 @@ export class EventsPageComponent implements OnInit {
   constructor(private title: Title) {}
 
   ngOnInit() {
+    this.title.setTitle('Events | Erasmus Student Network');
     if (!localStorage.getItem('reload')) {
       localStorage.setItem('reload', 'no reload');
       location.reload();

@@ -49,4 +49,9 @@ export class LandingPageComponent implements OnInit {
       .fetchPageContent('Landing_page')
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
   }
+
+  comic(): void {
+    const navinav = document.getElementById('navinav');
+    navinav.setAttribute('style', 'font-family: "Comic Sans"');
+  }
 }

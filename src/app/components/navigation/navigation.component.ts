@@ -23,9 +23,9 @@ export class NavigationComponent implements OnInit {
 
   @Input() activeMenu: string;
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  showMenu() {
+  showMenu(): void {
     const burger = document.getElementById('burger') as HTMLUListElement;
     const menu = document.getElementById('menu') as HTMLUListElement;
     burger.classList.add('hidden');
@@ -33,7 +33,7 @@ export class NavigationComponent implements OnInit {
     menu.classList.add('vis');
   }
 
-  hideMenu() {
+  hideMenu(): void {
     const burger = document.getElementById('burger') as HTMLUListElement;
     const menu = document.getElementById('menu') as HTMLUListElement;
     burger.classList.remove('hidden');
