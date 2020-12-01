@@ -24,7 +24,7 @@ interface PartnerItem {
   providedIn: 'root',
 })
 export class PartnerService {
-  private url = 'https://strapi.esn-freiburg.de/website-partners';
+  private url = 'https://strapi.esn-freiburg.de/website-partners?_sort=Name';
   constructor(
     private http: HttpClient,
     private messageService: MessageService
