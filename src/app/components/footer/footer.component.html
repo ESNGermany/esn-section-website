@@ -1,7 +1,11 @@
-<footer class="bg-footer relative">
-  <div class="divider-top">
+<footer id="foot" class="bg-footer relative">
+  <div id="foot2" class="divider-top">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path d="M1200 0L0 0 892.25 114.72 1200 0z" class="shape-fill"></path>
+      <path
+        id="foot3"
+        d="M1200 0L0 0 892.25 114.72 1200 0z"
+        class="shape-fill"
+      ></path>
     </svg>
   </div>
   <div
@@ -106,7 +110,9 @@
           alt="ESN star"
           class="w-6 inline-block mx-auto"
         />
-        created by the IT-Girl of ESN Freiburg e.V.
+        created by the
+        <span (mouseenter)="pink()" (mouseleave)="unpink()">IT-Girl</span> of
+        ESN Freiburg e.V.
       </p>
     </div>
   </div>
