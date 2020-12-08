@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 
 interface ContentItem {
@@ -27,6 +27,7 @@ interface ContentItem {
       };
     };
   };
+  Youtube_video_embed_link: string;
 }
 
 @Component({
@@ -36,8 +37,13 @@ interface ContentItem {
 })
 export class LandingPageComponent implements OnInit {
   public contentItemList: ContentItem[];
+  private url: string;
 
-  constructor(private title: Title, private contentService: ContentService) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private title: Title,
+    private contentService: ContentService
+  ) {}
 
   ngOnInit() {
     this.title.setTitle('Home | Erasmus Student Network Freiburg');
@@ -53,5 +59,9 @@ export class LandingPageComponent implements OnInit {
   comic(): void {
     const navinav = document.getElementById('navinav');
     navinav.setAttribute('style', 'font-family: "Comic Sans"');
+  }
+  getURL() {
+    this.url = this.contentItemList[1].Youtube_video_embed_link;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 }

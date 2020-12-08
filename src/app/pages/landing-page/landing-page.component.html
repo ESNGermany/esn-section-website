@@ -1,5 +1,5 @@
 <app-navigation></app-navigation>
-<div class="max-w-screen-xl m-auto sm:px-16 xl:mt-28 lg:mt-22 sm:mt-16">
+<div class="max-w-screen-xl m-auto sm:px-16 xl:mt-6 lg:mt-6 sm:mt-6">
   <div class="px-8 mb-16">
     <div class="m-auto mb-4 relative">
       <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
@@ -8,51 +8,6 @@
     </div>
   </div>
 </div>
-<!-- <div class="max-w-screen-2xl m-auto sm:px-16 xl:mt-22 lg:mt-22 sm:mt-16">
-  <div class="px-8 mb-16">
-    <div class="flex flex-col justify-center lg:flex-row">
-      <div class="flex flex-row justify-evenly">
-        <div class="">
-          <a
-            href="https://www.facebook.com/esnfreiburg"
-            target="_blank"
-            rel="noopener"
-            ><img
-              src="../../../assets/social/facebook-color.png"
-              class="h-44 mx-4 lg:mx-8"
-              alt="Facebook"
-              title="facebook"
-          /></a>
-        </div>
-        <div>
-          <a
-            href="https://www.instagram.com/esn_freiburg"
-            target="_blank"
-            rel="noopener"
-            ><img
-              src="../../../assets/social/instagram-color.png"
-              class="h-44 mx-4 lg:mx-8"
-              alt="Instagram"
-              title="instagram"
-          /></a>
-        </div>
-      </div>
-      <div class="w-full lg:w-2/3 mx-4">
-        <p class="font-body text-lg">
-          Welcome to the Erasmus Student Network Freiburg! We are an association
-          formed by German and international students with the aim of making the
-          Erasmus stay for the students who come to Freiburg unforgettable.
-          <br />
-          We offer cultural events of any kind and work closely with our local
-          partners. As we are part of the Europe-wide ESN network, you can get
-          the famous ESNcard from us and profit from the whole network of
-          friends and knowledge all over Europe. <br />
-          See our latest news & events on our social media and get to know us!
-        </p>
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class="grid grid-cols-4 auto-rows-images gap-0.5 mb-24">
   <div class="col-span-3">
     <img
@@ -106,10 +61,21 @@
               title="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <markdown [data]="c.Text"></markdown>
+          <div *ngIf="c.Text" class="w-full">
+            <markdown [data]="c.Text"></markdown>
+          </div>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
+        </div>
+        <div *ngIf="c.Youtube_video_embed_link">
+          <iframe
+            width="560"
+            height="315"
+            [src]="getURL()"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
@@ -138,7 +104,19 @@
               title="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <markdown [data]="c.Text"></markdown>
+          <div *ngIf="c.Text" class="w-full">
+            <markdown [data]="c.Text"></markdown>
+          </div>
+        </div>
+        <div *ngIf="c.Youtube_video_embed_link">
+          <iframe
+            width="560"
+            height="315"
+            src="{{ c.Youtube_video_embed_link }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -167,7 +145,17 @@
             title="{{ c.Image.alternativeText }}"
           />
         </div>
-        <div class="w-full">
+        <div *ngIf="c.Youtube_video_embed_link">
+          <iframe
+            width="560"
+            height="315"
+            src="{{ c.Youtube_video_embed_link }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div *ngIf="c.Text" class="w-full">
           <markdown [data]="c.Text"></markdown>
         </div>
       </div>
@@ -186,7 +174,17 @@
         }"
         class="flex items-center flex-col"
       >
-        <div class="w-full">
+        <div *ngIf="c.Youtube_video_embed_link">
+          <iframe
+            width="560"
+            height="315"
+            src="{{ c.Youtube_video_embed_link }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div *ngIf="c.Text" class="w-full">
           <markdown [data]="c.Text"></markdown>
         </div>
         <div *ngIf="c.Image" class="px-4">

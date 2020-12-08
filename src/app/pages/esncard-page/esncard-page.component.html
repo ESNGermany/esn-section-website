@@ -28,10 +28,21 @@
               title="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <markdown [data]="c.Text"></markdown>
+          <div *ngIf="c.Text" class="w-full">
+            <markdown [data]="c.Text"></markdown>
+          </div>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
+        </div>
+        <div *ngIf="c.Youtube_video_embed_link">
+          <iframe
+            width="560"
+            height="315"
+            [src]="getURL()"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
@@ -60,7 +71,19 @@
               title="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <markdown [data]="c.Text"></markdown>
+          <div *ngIf="c.Text" class="w-full">
+            <markdown [data]="c.Text"></markdown>
+          </div>
+        </div>
+        <div *ngIf="c.Youtube_video_embed_link">
+          <iframe
+            width="560"
+            height="315"
+            src="{{ c.Youtube_video_embed_link }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -89,7 +112,17 @@
             title="{{ c.Image.alternativeText }}"
           />
         </div>
-        <div class="w-full">
+        <div *ngIf="c.Youtube_video_embed_link">
+          <iframe
+            width="560"
+            height="315"
+            src="{{ c.Youtube_video_embed_link }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div *ngIf="c.Text" class="w-full">
           <markdown [data]="c.Text"></markdown>
         </div>
       </div>
@@ -108,7 +141,17 @@
         }"
         class="flex items-center flex-col"
       >
-        <div class="w-full">
+        <div *ngIf="c.Youtube_video_embed_link">
+          <iframe
+            width="560"
+            height="315"
+            src="{{ c.Youtube_video_embed_link }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div *ngIf="c.Text" class="w-full">
           <markdown [data]="c.Text"></markdown>
         </div>
         <div *ngIf="c.Image" class="px-4">
@@ -118,39 +161,6 @@
             alt="{{ c.Image.alternativeText }}"
             title="{{ c.Image.alternativeText }}"
           />
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="m-auto mb-8 relative">
-    <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
-      Our Local Partners
-    </p>
-  </div>
-  <div class="font-body text-lg border border-graylight shadow-xl p-8 mb-16">
-    <div *ngFor="let p of partnerItemList">
-      <div class="flex flex-col lg:flex-row items-center">
-        <div class="p-8 w">
-          <a
-            href="{{ p.Link }}"
-            class="text-esn-dark-blue hover:underline"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              *ngIf="p.Main_image.formats.thumbnail"
-              class="m-auto h-24"
-              src="https://strapi.esn-freiburg.de{{
-                p.Main_image.formats.thumbnail.url
-              }}"
-              alt="{{ p.Main_image.alternativeText }}"
-              title="{{ p.Main_image.alternativeText }}"
-            />
-          </a>
-        </div>
-        <div class="font-body text-lg">
-          <p class="font-bold text-center lg:text-left">{{ p.Name }}</p>
-          <p>{{ p.Deal }}</p>
         </div>
       </div>
     </div>
