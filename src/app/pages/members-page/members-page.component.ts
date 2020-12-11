@@ -16,7 +16,8 @@ interface ContentItem {
     | 'Landing_page'
     | 'Members_page'
     | 'Team_page'
-    | 'ESNcard_page';
+    | 'ESNcard_page'
+    | 'Incomings_page';
   Order_on_page: number;
   Image: {
     id: string;

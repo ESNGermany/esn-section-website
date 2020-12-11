@@ -17,6 +17,7 @@ import { PretixCalendarComponent } from './components/pretix-calendar/pretix-cal
 import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { CocPageComponent } from './pages/coc-page/coc-page.component';
+import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CocPageComponent } from './pages/coc-page/coc-page.component';
     PretixCalendarComponent,
     StatutesPageComponent,
     CocPageComponent,
+    IncomingsPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -70,3 +70,9 @@
   top: 0;
   right: 0;
 }
+.hov {
+  transition: transform 0.2s;
+}
+.hov:hover {
+  transform: scale(1.2);
+}

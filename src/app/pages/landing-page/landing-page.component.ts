@@ -16,7 +16,8 @@ interface ContentItem {
     | 'Landing_page'
     | 'Members_page'
     | 'Team_page'
-    | 'ESNcard_page';
+    | 'ESNcard_page'
+    | 'Incomings_page';
   Order_on_page: number;
   Image: {
     id: string;
@@ -58,7 +59,9 @@ export class LandingPageComponent implements OnInit {
 
   comic(): void {
     const navinav = document.getElementById('navinav');
+    const titeli = document.getElementById('titeli');
     navinav.setAttribute('style', 'font-family: "Comic Sans"');
+    titeli.setAttribute('style', 'font-family: "Comic Sans"');
   }
   getURL() {
     this.url = this.contentItemList[1].Youtube_video_embed_link;
