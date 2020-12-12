@@ -44,7 +44,7 @@
         ><img
           class="h-26 ml-8"
           alt="ESN logo"
-          src="../assets/logo/DE_colour-white.png"
+          src="../assets/logo/DE-freiburg-logo-colour-white.png"
       /></a>
     </div>
     <div
@@ -118,30 +118,43 @@
 </div>
 <div class="max-w-screen-2xl m-auto">
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible">
-    <a
-      href="https://facebook.com/esngermany/"
-      target="_blank"
-      rel="noopener"
-      title="Facebook"
-    >
-      <button class="bg-esn-green p-2 rounded-full hov">
-        <img class="m-2 h-6" src="../../../assets/social/facebook.png" />
-      </button>
-      <!-- <div class="chat">
-        <div class="bubble you">esnfreiburg</div>
-      </div> -->
-    </a>
-    <a
-      href="https://www.instagram.com/esngermany/"
-      target="_blank"
-      rel="noopener"
-      title="Instagram"
-      ><button class="bg-esn-green p-2 rounded-full block my-2 hov">
-        <img
-          class="m-2 h-6"
-          src="../../../assets/social/instagram.png"
-        /></button
-    ></a>
+    <div class="mar">
+      <div id="bubble1" class="bubble you invisible font-body">
+        @esn_freiburg
+      </div>
+      <a
+        href="https://www.instagram.com/esngermany/"
+        target="_blank"
+        rel="noopener"
+        ><button
+          class="bg-esn-green p-2 rounded-full block my-2 hov"
+          (mouseenter)="showBubble(1)"
+          (mouseleave)="hideBubble(1)"
+        >
+          <img
+            class="m-2 h-6"
+            src="../../../assets/social/instagram.png"
+          /></button
+      ></a>
+    </div>
+    <div>
+      <div id="bubble2" class="bubble you invisible font-body">
+        fb.com/esnfreiburg
+      </div>
+      <a
+        href="https://facebook.com/esnfreiburg/"
+        target="_blank"
+        rel="noopener"
+      >
+        <button
+          class="bg-esn-green p-2 rounded-full hov"
+          (mouseenter)="showBubble(2)"
+          (mouseleave)="hideBubble(2)"
+        >
+          <img class="m-2 h-6" src="../../../assets/social/facebook.png" />
+        </button>
+      </a>
+    </div>
   </div>
   <div class="m-auto">
     <div class="fixed bottom-0 right-0 visible lg:invisible z-10 mr-8 mb-8">

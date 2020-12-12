@@ -14,11 +14,10 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto flex items-top">
-          <div *ngIf="c.Text" class="w-full">
-            <markdown [data]="c.Text"></markdown>
-          </div>
-          <figure class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 w-4/5 lg:w-2/5 m-auto">
+        <div *ngIf="c.Image" class="m-auto">
+          <figure
+            class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 top-0 lg:float-right w-4/5 lg:w-2/5 m-auto"
+          >
             <img
               src="https://strapi.esn-freiburg.de{{
                 c.Image.formats.medium.url
@@ -27,6 +26,9 @@
               title="{{ c.Image.alternativeText }}"
             />
           </figure>
+          <div *ngIf="c.Text">
+            <markdown [data]="c.Text"></markdown>
+          </div>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -55,7 +57,7 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto flex items-top">
+        <div *ngIf="c.Image" class="m-auto">
           <figure
             class="pr-0 lg:pr-8 pb-2 pl-0 pt-0 lg:float-left w-4/5 lg:w-2/5 m-auto"
           >

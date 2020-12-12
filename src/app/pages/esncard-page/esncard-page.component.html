@@ -16,11 +16,10 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto flex items-top">
-          <div *ngIf="c.Text" class="w-full">
-            <markdown [data]="c.Text"></markdown>
-          </div>
-          <figure class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 w-4/5 lg:w-2/5 m-auto">
+        <div *ngIf="c.Image" class="m-auto">
+          <figure
+            class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 top-0 lg:float-right w-4/5 lg:w-2/5 m-auto"
+          >
             <img
               src="https://strapi.esn-freiburg.de{{
                 c.Image.formats.medium.url
@@ -29,6 +28,9 @@
               title="{{ c.Image.alternativeText }}"
             />
           </figure>
+          <div *ngIf="c.Text">
+            <markdown [data]="c.Text"></markdown>
+          </div>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -57,7 +59,7 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto flex items-top">
+        <div *ngIf="c.Image" class="m-auto">
           <figure
             class="pr-0 lg:pr-8 pb-2 pl-0 pt-0 lg:float-left w-4/5 lg:w-2/5 m-auto"
           >
@@ -178,24 +180,29 @@
   <div
     class="mx-8 flex flex-wrap items-center justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
   >
-    <ng-container *ngFor="let partner of partnerItemList">
-      <a
-        href="{{ partner.Link }}"
-        title="{{ partner.Main_image.alternativeText }}"
-        target="_blank"
-        rel="noopener"
-        class="w-1/3"
-      >
-        <figure class="m-2">
-          <img
+    <div *ngFor="let partner of partnerItemList">
+      <figure class="m-2">
+        <a
+          href="{{ partner.Link }}"
+          title="{{ partner.Main_image.alternativeText }}"
+          target="_blank"
+          rel="noopener"
+          class="w-1/3"
+          ><img
             *ngIf="partner.Main_image.formats.medium"
             class="imgh m-auto zoom"
             src="https://strapi.esn-freiburg.de{{
               partner.Main_image.formats.medium.url
             }}"
             alt="{{ partner.Main_image.alternativeText }}"
-          />
-          <img
+        /></a>
+        <a
+          href="{{ partner.Link }}"
+          title="{{ partner.Main_image.alternativeText }}"
+          target="_blank"
+          rel="noopener"
+          class="w-1/3"
+          ><img
             *ngIf="
               partner.Main_image.formats.thumbnail &&
               !partner.Main_image.formats.medium
@@ -205,15 +212,14 @@
               partner.Main_image.formats.thumbnail.url
             }}"
             alt="{{ partner.Main_image.alternativeText }}"
-          />
-          <figcaption class="pt-4 text-center">
-            <b>{{ partner.Name }}</b
-            ><br />
-            {{ partner.Deal }}
-          </figcaption>
-        </figure>
-      </a>
-    </ng-container>
+        /></a>
+        <figcaption class="pt-4 text-center">
+          <b>{{ partner.Name }}</b
+          ><br />
+          {{ partner.Deal }}
+        </figcaption>
+      </figure>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

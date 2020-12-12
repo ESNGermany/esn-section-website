@@ -41,4 +41,30 @@ export class NavigationComponent implements OnInit {
     menu.classList.remove('vis');
     menu.classList.add('hidden');
   }
+
+  showBubble(bubble: 1 | 2): void {
+    const b1 = document.getElementById('bubble1') as HTMLDivElement;
+    const b2 = document.getElementById('bubble2') as HTMLDivElement;
+    if (bubble === 1) {
+      b1.classList.remove('invisible');
+      b1.classList.add('visible');
+    }
+    if (bubble === 2) {
+      b2.classList.remove('invisible');
+      b2.classList.add('visible');
+    }
+  }
+
+  hideBubble(bubble: 1 | 2): void {
+    const b1 = document.getElementById('bubble1') as HTMLDivElement;
+    const b2 = document.getElementById('bubble2') as HTMLDivElement;
+    if (bubble === 1) {
+      b1.classList.remove('visible');
+      b1.classList.add('invisible');
+    }
+    if (bubble === 2) {
+      b2.classList.remove('visible');
+      b2.classList.add('invisible');
+    }
+  }
 }
