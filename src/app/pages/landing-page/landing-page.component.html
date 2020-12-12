@@ -2,8 +2,11 @@
 <div class="max-w-screen-xl m-auto sm:px-16 xl:mt-6 lg:mt-6 sm:mt-6">
   <div class="px-8 mb-16">
     <div class="m-auto mb-4 relative">
-      <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
-        We are ESN Freiburg.
+      <p
+        id="titeli"
+        class="font-heading text-esn-dark-blue font-bold text-4xl title"
+      >
+        Welcome to ESN Freiburg!
       </p>
     </div>
   </div>
@@ -11,7 +14,7 @@
 <div class="grid grid-cols-4 auto-rows-images gap-0.5 mb-24">
   <div class="col-span-3">
     <img
-      src="../../../assets/landing/landing1.png"
+      src="../../../assets/landing/landing55.png"
       class="object-cover h-full w-full"
     />
   </div>
@@ -29,7 +32,7 @@
   </div>
   <div class="col-span-2">
     <img
-      src="../../../assets/landing/landing4.png"
+      src="../../../assets/landing/landing77.png"
       class="object-cover h-full w-full"
     />
   </div>
@@ -49,10 +52,11 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto">
-          <figure
-            class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 lg:float-right w-4/5 lg:w-2/5 m-auto"
-          >
+        <div *ngIf="c.Image" class="m-auto flex items-top">
+          <div *ngIf="c.Text" class="w-full">
+            <markdown [data]="c.Text"></markdown>
+          </div>
+          <figure class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 w-4/5 lg:w-2/5 m-auto">
             <img
               src="https://strapi.esn-freiburg.de{{
                 c.Image.formats.medium.url
@@ -61,9 +65,6 @@
               title="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <div *ngIf="c.Text" class="w-full">
-            <markdown [data]="c.Text"></markdown>
-          </div>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -92,7 +93,7 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto">
+        <div *ngIf="c.Image" class="m-auto flex items-top">
           <figure
             class="pr-0 lg:pr-8 pb-2 pl-0 pt-0 lg:float-left w-4/5 lg:w-2/5 m-auto"
           >
@@ -139,7 +140,7 @@
       >
         <div *ngIf="c.Image" class="px-4">
           <img
-            class="m-auto"
+            class="m-auto py-4 w-full"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
             title="{{ c.Image.alternativeText }}"
@@ -189,7 +190,7 @@
         </div>
         <div *ngIf="c.Image" class="px-4">
           <img
-            class="m-auto"
+            class="m-auto py-4 w-3/5"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
             title="{{ c.Image.alternativeText }}"

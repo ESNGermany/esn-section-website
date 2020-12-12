@@ -16,10 +16,11 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto">
-          <figure
-            class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 lg:float-right w-4/5 lg:w-2/5 m-auto"
-          >
+        <div *ngIf="c.Image" class="m-auto flex items-top">
+          <div *ngIf="c.Text" class="w-full">
+            <markdown [data]="c.Text"></markdown>
+          </div>
+          <figure class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 w-4/5 lg:w-2/5 m-auto">
             <img
               src="https://strapi.esn-freiburg.de{{
                 c.Image.formats.medium.url
@@ -28,9 +29,6 @@
               title="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <div *ngIf="c.Text" class="w-full">
-            <markdown [data]="c.Text"></markdown>
-          </div>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -59,7 +57,7 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto">
+        <div *ngIf="c.Image" class="m-auto flex items-top">
           <figure
             class="pr-0 lg:pr-8 pb-2 pl-0 pt-0 lg:float-left w-4/5 lg:w-2/5 m-auto"
           >
@@ -106,7 +104,7 @@
       >
         <div *ngIf="c.Image" class="px-4">
           <img
-            class="m-auto"
+            class="m-auto py-4 w-full"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
             title="{{ c.Image.alternativeText }}"
@@ -156,7 +154,7 @@
         </div>
         <div *ngIf="c.Image" class="px-4">
           <img
-            class="m-auto"
+            class="m-auto py-4 w-3/5"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
             title="{{ c.Image.alternativeText }}"
@@ -164,6 +162,58 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div
+  class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
+>
+  <div class="m-auto mb-12 relative">
+    <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
+      Our Partners in Freiburg
+    </p>
+  </div>
+</div>
+<div class="max-w-screen-2xl m-auto mb-24">
+  <div *ngIf="!partnerItemList" class="bg-white w-screen h-screen"></div>
+  <div
+    class="mx-8 flex flex-wrap items-center justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
+  >
+    <ng-container *ngFor="let partner of partnerItemList">
+      <a
+        href="{{ partner.Link }}"
+        title="{{ partner.Main_image.alternativeText }}"
+        target="_blank"
+        rel="noopener"
+        class="w-1/3"
+      >
+        <figure class="m-2">
+          <img
+            *ngIf="partner.Main_image.formats.medium"
+            class="imgh m-auto zoom"
+            src="https://strapi.esn-freiburg.de{{
+              partner.Main_image.formats.medium.url
+            }}"
+            alt="{{ partner.Main_image.alternativeText }}"
+          />
+          <img
+            *ngIf="
+              partner.Main_image.formats.thumbnail &&
+              !partner.Main_image.formats.medium
+            "
+            class="imgh m-auto zoom"
+            src="https://strapi.esn-freiburg.de{{
+              partner.Main_image.formats.thumbnail.url
+            }}"
+            alt="{{ partner.Main_image.alternativeText }}"
+          />
+          <figcaption class="pt-4 text-center">
+            <b>{{ partner.Name }}</b
+            ><br />
+            {{ partner.Deal }}
+          </figcaption>
+        </figure>
+      </a>
+    </ng-container>
   </div>
 </div>
 <app-footer></app-footer>
