@@ -178,16 +178,19 @@
 <div class="max-w-screen-2xl m-auto mb-24">
   <div *ngIf="!partnerItemList" class="bg-white w-screen h-screen"></div>
   <div
-    class="mx-8 flex flex-wrap items-center justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
+    class="mx-8 flex flex-wrap items-end justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
   >
-    <div *ngFor="let partner of partnerItemList">
+    <div
+      *ngFor="let partner of partnerItemList"
+      class="flex flex-wrap items-end justify-evenly flexb3"
+    >
       <figure class="m-2">
         <a
           href="{{ partner.Link }}"
           title="{{ partner.Main_image.alternativeText }}"
           target="_blank"
           rel="noopener"
-          class="w-1/3"
+          class=""
           ><img
             *ngIf="partner.Main_image.formats.medium"
             class="imgh m-auto zoom"
@@ -201,7 +204,7 @@
           title="{{ partner.Main_image.alternativeText }}"
           target="_blank"
           rel="noopener"
-          class="w-1/3"
+          class=""
           ><img
             *ngIf="
               partner.Main_image.formats.thumbnail &&

@@ -16,14 +16,17 @@ interface FaqItem {
   providedIn: 'root',
 })
 export class FaqService {
-  private url = 'https://strapi.esn-freiburg.de/website-faqs';
+  private url =
+    'https://strapi.esn-freiburg.de/website-faqs?_sort=Order_within_category&Category=';
+  private fullUrl: string = '';
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) {}
 
-  fetchFaq(): Observable<FaqItem[]> {
-    return this.http.get<FaqItem[]>(this.url).pipe(
+  fetchFaq(category: string): Observable<FaqItem[]> {
+    this.fullUrl = this.url + category;
+    return this.http.get<FaqItem[]>(this.fullUrl).pipe(
       tap((_) => this.log('fetched faq')),
       catchError(this.handleError<FaqItem[]>('fetchFaqList', []))
     );

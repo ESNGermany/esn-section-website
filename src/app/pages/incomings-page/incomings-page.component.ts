@@ -47,7 +47,12 @@ interface ContentItem {
 })
 export class IncomingsPageComponent implements OnInit {
   public contentItemList: ContentItem[];
-  public faqItemList: FaqItem[];
+  public faqTransportItemList: FaqItem[];
+  public faqHousingItemList: FaqItem[];
+  public faqUniErasmusItemList: FaqItem[];
+  public faqCoronaItemList: FaqItem[];
+  public faqEsncardItemList: FaqItem[];
+  public faqOtherItemList: FaqItem[];
 
   constructor(
     private title: Title,
@@ -58,7 +63,12 @@ export class IncomingsPageComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('For Incomings | Erasmus Student Network Freiburg');
     this.getContent();
-    this.getFaq();
+    this.getFaqTransport();
+    this.getFaqHousing();
+    this.getFaqUniErasmus();
+    this.getFaqCorona();
+    this.getFaqEsncard();
+    this.getFaqOther();
   }
 
   getContent(): void {
@@ -67,9 +77,53 @@ export class IncomingsPageComponent implements OnInit {
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
   }
 
-  getFaq(): void {
+  getFaqTransport(): void {
     this.faqService
-      .fetchFaq()
-      .subscribe((faqItemList) => (this.faqItemList = faqItemList));
+      .fetchFaq('Transport')
+      .subscribe(
+        (faqTransportItemList) =>
+          (this.faqTransportItemList = faqTransportItemList)
+      );
+  }
+
+  getFaqHousing(): void {
+    this.faqService
+      .fetchFaq('Housing')
+      .subscribe(
+        (faqHousingItemList) => (this.faqHousingItemList = faqHousingItemList)
+      );
+  }
+
+  getFaqUniErasmus(): void {
+    this.faqService
+      .fetchFaq('Uni_Erasmus')
+      .subscribe(
+        (faqUniErasmusItemList) =>
+          (this.faqUniErasmusItemList = faqUniErasmusItemList)
+      );
+  }
+
+  getFaqCorona(): void {
+    this.faqService
+      .fetchFaq('Corona')
+      .subscribe(
+        (faqCoronaItemList) => (this.faqCoronaItemList = faqCoronaItemList)
+      );
+  }
+
+  getFaqEsncard(): void {
+    this.faqService
+      .fetchFaq('ESNcard')
+      .subscribe(
+        (faqEsncardItemList) => (this.faqEsncardItemList = faqEsncardItemList)
+      );
+  }
+
+  getFaqOther(): void {
+    this.faqService
+      .fetchFaq('Other')
+      .subscribe(
+        (faqOtherItemList) => (this.faqOtherItemList = faqOtherItemList)
+      );
   }
 }
