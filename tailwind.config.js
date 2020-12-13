@@ -1,9 +1,14 @@
+require("dotenv").config();
+const enablePurge = true;
 module.exports = {
   future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
-  purge: ["./src/**/*.html", "./src/**/*.ts"],
+  purge: {
+    enabled: enablePurge,
+    content: ["./src/**/*.html", "./src/**/*.ts", "./src/**/*.scss"],
+  },
   theme: {
     extend: {
       screens: {
