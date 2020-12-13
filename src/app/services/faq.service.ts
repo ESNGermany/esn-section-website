@@ -16,7 +16,7 @@ interface FaqItem {
   providedIn: 'root',
 })
 export class FaqService {
-  private url = 'https://strapi.esn-freiburg.de/website-faq';
+  private url = 'https://strapi.esn-freiburg.de/website-faqs';
   constructor(
     private http: HttpClient,
     private messageService: MessageService

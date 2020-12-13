@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import { StatutesPageComponent } from './pages/statutes-page/statutes-page.compo
 import { MarkdownModule } from 'ngx-markdown';
 import { CocPageComponent } from './pages/coc-page/coc-page.component';
 import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.component';
+import { ExpandableComponent } from './components/expandable/expandable.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +37,11 @@ import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.co
     StatutesPageComponent,
     CocPageComponent,
     IncomingsPageComponent,
+    ExpandableComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     MarkdownModule.forRoot(),
