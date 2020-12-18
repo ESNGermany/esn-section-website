@@ -8,13 +8,13 @@
   background: #2e3192;
 }
 
-.maxh {
-  height: 240px;
+.cont {
+  // min-width: 400px;
+  background-color: white;
 }
 
-.cont {
-  min-width: 400px;
-  background-color: white;
+.cont:hover {
+  background-color: #fafafa;
 }
 
 .exp:hover {

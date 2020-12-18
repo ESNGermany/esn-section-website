@@ -34,7 +34,7 @@ import {
       }
 
       .exp {
-        height: 48px;
+        min-height: 48px;
         align-items: center;
         padding: 0 24px;
       }
