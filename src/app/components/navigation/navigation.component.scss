@@ -27,26 +27,6 @@
 .divider-bottom .shape-fill {
   fill: #fff;
 }
-.divider-top {
-  position: absolute;
-  top: 136px;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.divider-top svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 64px;
-}
-
-.divider-top .shape-fill {
-  fill: #7ac143;
-}
-
 .addhover:hover:before {
   position: absolute;
   content: "";
