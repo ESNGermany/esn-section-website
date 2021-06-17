@@ -1,11 +1,14 @@
 .bg {
-  // background: url("../../../assets/header/gasse1.png") #558f29;
-  // background-image: url("../../../assets/header/münster1.png");
-  background-image: url("../../../assets/header/leicht-diagonal.png");
-  background-blend-mode: multiply;
+  background-image: linear-gradient(
+      69deg,
+      rgba(46, 49, 146, 0.8) 19%,
+      rgba(122, 193, 67, 0.8) 80%
+    ),
+    // url("../../../assets/header/Freiburg_black_white.jpg");
+    url("../../../assets/header/img_5574.jpg");
   background-position: center;
   background-size: cover;
-  padding-bottom: 103px; //99px;
+  padding-bottom: 103px;
 }
 
 .divider-bottom {
@@ -91,4 +94,16 @@
 
 .mar {
   margin-left: 32px;
+}
+
+.hover-zoom:hover {
+  background-color: #535353;
+}
+
+.bg-gradient {
+  background: linear-gradient(
+    36deg,
+    rgba(58, 58, 58, 1) 30%,
+    rgba(27, 27, 27, 1) 100%
+  );
 }
