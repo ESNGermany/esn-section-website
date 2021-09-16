@@ -54,9 +54,7 @@
               alt="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <div *ngIf="c.Text">
-            <markdown [data]="c.Text"></markdown>
-          </div>
+          <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -83,9 +81,7 @@
               alt="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <div *ngIf="c.Text" class="w-full">
-            <markdown [data]="c.Text"></markdown>
-          </div>
+          <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -106,14 +102,12 @@
       >
         <div *ngIf="c.Image" class="px-4">
           <img
-            class="m-auto py-4 w-full"
+            class="m-auto py-4"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
           />
         </div>
-        <div *ngIf="c.Text" class="w-full">
-          <markdown [data]="c.Text"></markdown>
-        </div>
+        <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
       </div>
     </div>
     <!-- text above img below -->
@@ -128,9 +122,7 @@
         }"
         class="flex items-center flex-col"
       >
-        <div *ngIf="c.Text" class="w-full">
-          <markdown [data]="c.Text"></markdown>
-        </div>
+        <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
         <div *ngIf="c.Image" class="px-4">
           <img
             class="m-auto py-4 w-3/5"
