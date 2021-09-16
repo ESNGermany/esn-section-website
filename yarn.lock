@@ -6459,10 +6459,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ngx-build-plus@12.0.1:
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/ngx-build-plus/-/ngx-build-plus-12.0.1.tgz#3cd5da9fd91d6fdc1d86ab6c7c5bef5c24c2ae78"
-  integrity sha512-eq4D66yK3iEWuGKn/0Mh0CEfO8zzc17ZZLMpN/tFIcDEcGwFCHs8absQRAc90kBNsxIXQxPqjxUDXdISfFKGRw==
+ngx-build-plus@12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-build-plus/-/ngx-build-plus-12.2.0.tgz#5f9870f210e4bd0ddb471f98294b210adf2ab3b2"
+  integrity sha512-y99qb/DabtIwW5PgOlCf/eXvm65ax5PPOuToZUHtjUD0IrZ7KRfd8fq/3s8OCYYNf4VSdop1EonmI08ftfeqMg==
   dependencies:
     "@schematics/angular" "^12.0.0"
     webpack-merge "^5.0.0"
