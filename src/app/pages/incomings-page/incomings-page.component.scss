@@ -45,3 +45,7 @@
   border-left: 6px solid #eaeaea;
   padding-left: 14px;
 }
+
+.answer-div {
+  @apply pl-4 pr-6 pt-2 pb-4 cont answer;
+}

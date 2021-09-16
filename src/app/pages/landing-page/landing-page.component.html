@@ -46,20 +46,7 @@
         }"
       >
         <div *ngIf="c.Image" class="m-auto">
-          <figure
-            class="
-              pl-0
-              lg:pl-8
-              pb-2
-              pr-0
-              pt-0
-              top-0
-              lg:float-right
-              w-4/5
-              lg:w-2/5
-              m-auto
-            "
-          >
+          <figure class="float-right-fig">
             <img
               src="https://strapi.esn-freiburg.de{{
                 c.Image.formats.medium.url
@@ -98,19 +85,7 @@
         }"
       >
         <div *ngIf="c.Image" class="m-auto">
-          <figure
-            class="
-              pr-0
-              lg:pr-8
-              pb-2
-              pl-0
-              pt-0
-              lg:float-left
-              w-4/5
-              lg:w-2/5
-              m-auto
-            "
-          >
+          <figure class="float-left-fig">
             <img
               src="https://strapi.esn-freiburg.de{{
                 c.Image.formats.medium.url
