@@ -9,6 +9,32 @@
   src: url("./assets/fonts/Comic\ Sans\ MS\ 400.ttf");
 }
 
+:root {
+  --esn-green: "#7ac143";
+  --esn-green-rgba: rgba(122, 193, 67, 0.8);
+  --esn-dark-green: "#558f29";
+  --esn-dark-green-rgba: rgba(85, 143, 41, 0.8);
+  --esn-blue: "#00aeef";
+  --esn-blue-rgba: rgba(46, 49, 146, 0.8);
+  --esn-pink: "#ec008c";
+  --esn-pink-rgba: rgba(236, 0, 140, 0.8);
+  --esn-lightpink: "#ffaabb";
+  --esn-lightpink-rgba: rgba(255, 170, 187, 0.8);
+  --esn-orange: "#f47b20";
+  --esn-orange-rgba: rgba(244, 123, 32, 0.8);
+  --esn-dark-blue: "#2e3192";
+  --esn-dark-blue-rgba: rgba(46, 49, 146, 0.8);
+  --black: "#000";
+  --gray: "#d3d3d3";
+  --graylight: "#eaeaea";
+  --graymap: "#5a5a5a";
+  --bluelight: "#afb2ff";
+  --white: "#fff";
+  --whitebg: "#efefef";
+  --footer: "#3a3a3a";
+  --transparent: "#ffffffff";
+}
+
 markdown {
   overflow-wrap: break-word;
   word-wrap: break-word;

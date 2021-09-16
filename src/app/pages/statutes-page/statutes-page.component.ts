@@ -4,6 +4,7 @@ import { StatutesService } from 'src/app/services/statutes.service';
 
 interface StatutesItem {
   id: string;
+  statutesTitle: string;
   Text: string;
 }
 

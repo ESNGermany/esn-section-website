@@ -21,16 +21,15 @@
   >
     <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Contact</p>
-      <p class="font-bold">Erasmus Student Network Freiburg e.V.</p>
-      <p class="pt-2">c/o EU-Büro</p>
-      <p>Sedanstraße 6</p>
-      <p>79098 Freiburg</p>
+      <p class="font-bold">{{ addressName }}</p>
+      <p>{{ addressStreet }}</p>
+      <p>{{ addressCity }}</p>
       <p class="pt-1 pb-4">
         <a
-          href="mailto:freiburg@esn-germany.de"
+          href="mailto:{{ addressEmail }}"
           rel="noopener"
           class="hover:underline"
-          >freiburg@esn-germany.de</a
+          >{{ addressEmail }}</a
         >
       </p>
     </div>
@@ -100,7 +99,7 @@
       <p class="font-bold uppercase pb-1 text-lg">Social Media</p>
       <p class="pb-1">
         <a
-          href="https://facebook.com/esnfreiburg/"
+          href="{{ facebookLink }}"
           target="_blank"
           rel="noopener"
           class="hover:underline"
@@ -109,12 +108,12 @@
             alt="Facebook"
             src="../../../assets/social/facebook.png"
             class="h-6 float-left pr-2"
-          />esnfreiburg
+          />{{ facebookName }}
         </a>
       </p>
       <p>
         <a
-          href="https://www.instagram.com/esn_freiburg/"
+          href="{{ instagramLink }}"
           target="_blank"
           rel="noopener"
           class="hover:underline"
@@ -123,7 +122,7 @@
             src="../../../assets/social/instagram.png"
             class="h-6 float-left pr-2"
           />
-          esn_freiburg
+          {{ instagramName }}
         </a>
       </p>
     </div>

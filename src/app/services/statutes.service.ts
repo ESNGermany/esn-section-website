@@ -6,6 +6,7 @@ import { MessageService } from './message.service';
 
 interface StatutesItem {
   id: string;
+  statutesTitle: string;
   Text: string;
 }
 

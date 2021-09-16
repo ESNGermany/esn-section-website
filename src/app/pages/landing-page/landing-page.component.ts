@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
+import { GlobalConstants } from 'src/app/global-constants';
 
 interface ContentItem {
   id: string;
@@ -37,11 +38,13 @@ interface ContentItem {
 })
 export class LandingPageComponent implements OnInit {
   public contentItemList: ContentItem[];
+  public welcomeMessage: string = GlobalConstants.welcomeMessage;
 
   constructor(private title: Title, private contentService: ContentService) {}
 
   ngOnInit() {
     this.title.setTitle('Home | Erasmus Student Network Freiburg');
+    // this.welcomeMessage = GlobalConstants.welcomeMessage;
     this.getContent();
   }
 
