@@ -1,0 +1,11 @@
+{
+  "extends": ["config:base"],
+  "lockFileMaintenance": { "enabled": true },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ],
+  "timezone": "Europe/Berlin"
+}
