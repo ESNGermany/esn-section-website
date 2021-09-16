@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, Title } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 import { PartnerService } from 'src/app/services/partner.service';
 
@@ -55,10 +55,8 @@ interface PartnerItem {
 export class EsncardPageComponent implements OnInit {
   public contentItemList: ContentItem[];
   public partnerItemList: PartnerItem[];
-  private url: string;
 
   constructor(
-    private sanitizer: DomSanitizer,
     private title: Title,
     private contentService: ContentService,
     private partnerService: PartnerService

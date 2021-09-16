@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, Title } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 
 interface ContentItem {
@@ -37,13 +37,8 @@ interface ContentItem {
 })
 export class TeamPageComponent implements OnInit {
   public contentItemList: ContentItem[];
-  private url: string;
 
-  constructor(
-    private sanitizer: DomSanitizer,
-    private title: Title,
-    private contentService: ContentService
-  ) {}
+  constructor(private title: Title, private contentService: ContentService) {}
 
   ngOnInit() {
     this.title.setTitle('Our Team | Erasmus Student Network Freiburg');
