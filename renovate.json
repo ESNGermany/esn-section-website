@@ -1,11 +1,11 @@
 {
   "extends": ["config:base"],
-  "excludePackageNames": ["typescript"],
   "lockFileMaintenance": { "enabled": true },
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": true,
+      "excludePackageNames": ["typescript"]
     }
   ],
   "timezone": "Europe/Berlin"
