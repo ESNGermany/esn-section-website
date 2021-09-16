@@ -19,7 +19,6 @@
                 c.Image.formats.medium.url
               }}"
               alt="{{ c.Image.alternativeText }}"
-              title="{{ c.Image.alternativeText }}"
             />
           </figure>
           <div *ngIf="c.Text">
@@ -49,7 +48,6 @@
                 c.Image.formats.medium.url
               }}"
               alt="{{ c.Image.alternativeText }}"
-              title="{{ c.Image.alternativeText }}"
             />
           </figure>
           <div *ngIf="c.Text" class="w-full">
@@ -78,7 +76,6 @@
             class="m-auto py-4 w-full"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
           />
         </div>
         <div *ngIf="c.Text" class="w-full">
@@ -106,7 +103,6 @@
             class="m-auto py-4 w-3/5"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
           />
         </div>
       </div>
@@ -140,12 +136,7 @@
       class="flex flex-wrap items-end justify-evenly flexb3"
     >
       <figure class="m-2">
-        <a
-          href="{{ partner.Link }}"
-          title="{{ partner.Main_image.alternativeText }}"
-          target="_blank"
-          rel="noopener"
-          class=""
+        <a href="{{ partner.Link }}" target="_blank" rel="noopener" class=""
           ><img
             *ngIf="partner.Main_image.formats.medium"
             class="imgh m-auto zoom"
@@ -154,12 +145,7 @@
             }}"
             alt="{{ partner.Main_image.alternativeText }}"
         /></a>
-        <a
-          href="{{ partner.Link }}"
-          title="{{ partner.Main_image.alternativeText }}"
-          target="_blank"
-          rel="noopener"
-          class=""
+        <a href="{{ partner.Link }}" target="_blank" rel="noopener" class=""
           ><img
             *ngIf="
               partner.Main_image.formats.thumbnail &&

@@ -32,13 +32,11 @@ import {
       :host {
         display: block;
       }
-
       .exp {
         min-height: 48px;
         align-items: center;
         padding: 0 24px;
       }
-
       .bgwhite {
         background: white;
       }

@@ -1,5 +1,5 @@
 <app-navigation></app-navigation>
-<div class="max-w-screen-xl m-auto sm:px-16 xl:mt-6 lg:mt-6 sm:mt-6">
+<div class="outer-div">
   <div class="px-8 mb-16">
     <div class="title-div4">
       <p id="titeli" class="title-p">Welcome to ESN Freiburg!</p>
@@ -52,7 +52,6 @@
                 c.Image.formats.medium.url
               }}"
               alt="{{ c.Image.alternativeText }}"
-              title="{{ c.Image.alternativeText }}"
             />
           </figure>
           <div *ngIf="c.Text">
@@ -82,7 +81,6 @@
                 c.Image.formats.medium.url
               }}"
               alt="{{ c.Image.alternativeText }}"
-              title="{{ c.Image.alternativeText }}"
             />
           </figure>
           <div *ngIf="c.Text" class="w-full">
@@ -111,7 +109,6 @@
             class="m-auto py-4 w-full"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
           />
         </div>
         <div *ngIf="c.Text" class="w-full">
@@ -139,7 +136,6 @@
             class="m-auto py-4 w-3/5"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
           />
         </div>
       </div>

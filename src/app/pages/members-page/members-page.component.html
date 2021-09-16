@@ -19,7 +19,6 @@
                 c.Image.formats.medium.url
               }}"
               alt="{{ c.Image.alternativeText }}"
-              title="{{ c.Image.alternativeText }}"
             />
           </figure>
           <div *ngIf="c.Text">
@@ -49,7 +48,6 @@
                 c.Image.formats.medium.url
               }}"
               alt="{{ c.Image.alternativeText }}"
-              title="{{ c.Image.alternativeText }}"
             />
           </figure>
           <div *ngIf="c.Text" class="w-full">
@@ -78,7 +76,6 @@
             class="m-auto py-4 w-full"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
           />
         </div>
         <div *ngIf="c.Text" class="w-full">
@@ -106,7 +103,6 @@
             class="m-auto py-4 w-3/5"
             src="https://strapi.esn-freiburg.de{{ c.Image.formats.medium.url }}"
             alt="{{ c.Image.alternativeText }}"
-            title="{{ c.Image.alternativeText }}"
           />
         </div>
       </div>

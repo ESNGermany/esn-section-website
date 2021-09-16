@@ -22,6 +22,10 @@
   @apply max-w-screen-xl m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4;
 }
 
+.outer-div {
+  @apply max-w-screen-xl m-auto sm:px-16 xl:mt-6 lg:mt-6 sm:mt-6;
+}
+
 .title::after {
   position: absolute;
   content: "";

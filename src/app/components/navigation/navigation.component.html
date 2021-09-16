@@ -10,39 +10,44 @@
 <!-- Mobile Menu that opens on click. Burger only visible when on mobile -->
 <div class="w-full">
   <ul
-    class="z-10 font-body text-white text-xl bg-gradient float-right w-3/5 hidden absolute right-0"
+    class="
+      z-10
+      font-body
+      text-white text-xl
+      bg-gradient
+      float-right
+      w-3/5
+      hidden
+      absolute
+      right-0
+    "
     id="menu"
   >
-    <a routerLink="/">
-      <li class="p-4 pl-8 border-b border-white hover-zoom">Home</li>
-    </a>
-    <a routerLink="/esncard">
-      <li class="p-4 pl-8 border-b border-white hover-zoom">
-        ESNcard & Partners
-      </li>
-    </a>
-    <a routerLink="/events">
-      <li class="p-4 pl-8 border-b border-white hover-zoom">Events</li>
-    </a>
-    <a routerLink="/for-incomings">
-      <li class="p-4 pl-8 border-b border-white hover-zoom">For Incomings</li>
-    </a>
-    <a routerLink="/for-members">
-      <li class="p-4 pl-8 border-b border-white hover-zoom">For Members</li>
-    </a>
-    <a routerLink="/team">
-      <li class="p-4 pl-8 border-b border-white hover-zoom">Our Team</li>
-    </a>
-    <a routerLink="/imprint">
-      <li class="p-4 pl-8 border-white hover-zoom">Imprint</li>
-    </a>
+    <a routerLink="/"><li class="mobile-li">Home</li></a>
+    <a routerLink="/esncard"><li class="mobile-li">ESNcard & Partners</li></a>
+    <a routerLink="/events"><li class="mobile-li">Events</li></a>
+    <a routerLink="/for-incomings"><li class="mobile-li">For Incomings</li></a>
+    <a routerLink="/for-members"><li class="mobile-li">For Members</li></a>
+    <a routerLink="/team"><li class="mobile-li">Our Team</li></a>
+    <a routerLink="/imprint"
+      ><li class="p-4 pl-8 border-white hover-zoom">Imprint</li></a
+    >
   </ul>
 </div>
 <!-- Logo and white top navigation -->
 <div class="w-full mb-16 bg">
   <nav
     id="navinav"
-    class="flex flex-nowrap items-center max-w-screen-2lg justify-between m-auto sm:px-16 pt-8 font-body"
+    class="
+      flex flex-nowrap
+      items-center
+      max-w-screen-2lg
+      justify-between
+      m-auto
+      sm:px-16
+      pt-8
+      font-body
+    "
   >
     <div class="flex items-center flex-shrink-0 text-2xl pr-8">
       <a routerLink="/" routerLinkActive="addhoverActive"
@@ -53,64 +58,56 @@
       /></a>
     </div>
     <div
-      class="px-8 w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:visible"
+      class="
+        px-8
+        w-full
+        block
+        flex-grow
+        lg:flex lg:items-center lg:w-auto
+        hidden
+        lg:visible
+      "
     >
       <div class="text-2xl flex justify-between lg:flex-grow max-w-screen-xl">
         <div class="relative">
           <a routerLink="/esncard" routerLinkActive="addhoverActive">
-            <button
-              type="button"
-              class="block mt-4 inline-block font-bold text-white focus:outline-none addhover"
-            >
-              ESNcard & Partners
-            </button></a
+            <button class="mobile-but">ESNcard & Partners</button></a
           >
         </div>
         <div class="relative">
           <a routerLink="/events" routerLinkActive="addhoverActive">
-            <button
-              type="button"
-              class="block mt-4 inline-block font-bold text-white focus:outline-none addhover"
-            >
-              Events
-            </button></a
+            <button class="mobile-but">Events</button></a
           >
         </div>
         <div class="relative">
           <a routerLink="/for-incomings" routerLinkActive="addhoverActive">
-            <button
-              type="button"
-              class="block mt-4 inline-block font-bold text-white focus:outline-none addhover"
-            >
-              For Incomings
-            </button></a
+            <button class="mobile-but">For Incomings</button></a
           >
         </div>
         <div class="relative">
           <a routerLink="/for-members" routerLinkActive="addhoverActive"
-            ><button
-              type="button"
-              class="block mt-4 inline-block font-bold text-white focus:outline-none addhover"
-            >
-              For Members
-            </button></a
+            ><button class="mobile-but">For Members</button></a
           >
         </div>
         <div class="relative">
           <a routerLink="/team" routerLinkActive="addhoverActive">
-            <button
-              type="button"
-              class="block mt-4 inline-block font-bold text-white focus:outline-none addhover"
-            >
-              Our Team
-            </button></a
+            <button class="mobile-but">Our Team</button></a
           >
         </div>
       </div>
     </div>
     <div class="block pr-8 sm:pr-16 lg:hidden" id="burger">
       <button
-        class="flex items-center px-3 py-2 border rounded text-white border-white"
+        class="
+          flex
+          items-center
+          px-3
+          py-2
+          border
+          rounded
+          text-white
+          border-white
+        "
         (click)="showMenu()"
       >
         <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">

@@ -49,3 +49,7 @@
 .answer-div {
   @apply pl-4 pr-6 pt-2 pb-4 cont answer;
 }
+
+.outer-div {
+  @apply max-w-screen-xl m-auto p-8 sm:p-0 sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4;
+}

@@ -6,6 +6,9 @@
   @apply font-heading text-esn-dark-blue font-bold text-4xl title;
 }
 
+.outer-div {
+  @apply max-w-screen-xl m-auto sm:px-16 xl:mt-28 lg:mt-22 sm:mt-16;
+}
 .title::after {
   position: absolute;
   content: "";
