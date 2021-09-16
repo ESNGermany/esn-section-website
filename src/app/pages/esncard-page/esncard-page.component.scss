@@ -1,3 +1,11 @@
+.title-div {
+  @apply m-auto mb-8 relative;
+}
+
+.title-p {
+  @apply font-heading text-esn-dark-blue font-bold text-4xl title;
+}
+
 .title::after {
   position: absolute;
   content: "";
@@ -30,4 +38,8 @@
 
 .flexb3 {
   flex-basis: 33.33333%;
+}
+
+.inputs {
+  @apply text-red-50 font-bold;
 }

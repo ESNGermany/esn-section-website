@@ -3,8 +3,8 @@
   <div *ngFor="let c of contentItemList" class="px-8 mb-24">
     <!-- text left img right -->
     <div *ngIf="c.Layout === 'Text_left_img_right'">
-      <div class="m-auto mb-8 relative">
-        <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
+      <div class="title-div">
+        <p class="title-p">
           {{ c.Title }}
         </p>
       </div>
@@ -16,7 +16,18 @@
       >
         <div *ngIf="c.Image" class="m-auto">
           <figure
-            class="pl-0 lg:pl-8 pb-2 pr-0 pt-0 top-0 lg:float-right w-4/5 lg:w-2/5 m-auto"
+            class="
+              pl-0
+              lg:pl-8
+              pb-2
+              pr-0
+              pt-0
+              top-0
+              lg:float-right
+              w-4/5
+              lg:w-2/5
+              m-auto
+            "
           >
             <img
               src="https://strapi.esn-freiburg.de{{
@@ -46,8 +57,8 @@
     </div>
     <!-- text right img left -->
     <div *ngIf="c.Layout === 'Text_right_img_left'">
-      <div class="m-auto mb-8 relative">
-        <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
+      <div class="title-div">
+        <p class="title-p">
           {{ c.Title }}
         </p>
       </div>
@@ -59,7 +70,17 @@
       >
         <div *ngIf="c.Image" class="m-auto">
           <figure
-            class="pr-0 lg:pr-8 pb-2 pl-0 pt-0 lg:float-left w-4/5 lg:w-2/5 m-auto"
+            class="
+              pr-0
+              lg:pr-8
+              pb-2
+              pl-0
+              pt-0
+              lg:float-left
+              w-4/5
+              lg:w-2/5
+              m-auto
+            "
           >
             <img
               src="https://strapi.esn-freiburg.de{{
@@ -73,16 +94,6 @@
             <markdown [data]="c.Text"></markdown>
           </div>
         </div>
-        <div *ngIf="c.Youtube_video_embed_link">
-          <iframe
-            width="560"
-            height="315"
-            src="{{ c.Youtube_video_embed_link }}"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
         </div>
@@ -90,8 +101,8 @@
     </div>
     <!-- text below img above -->
     <div *ngIf="c.Layout === 'Text_below_img_above'">
-      <div class="m-auto mb-8 relative">
-        <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
+      <div class="title-div">
+        <p class="title-p">
           {{ c.Title }}
         </p>
       </div>
@@ -110,16 +121,6 @@
             title="{{ c.Image.alternativeText }}"
           />
         </div>
-        <div *ngIf="c.Youtube_video_embed_link">
-          <iframe
-            width="560"
-            height="315"
-            src="{{ c.Youtube_video_embed_link }}"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
         <div *ngIf="c.Text" class="w-full">
           <markdown [data]="c.Text"></markdown>
         </div>
@@ -127,8 +128,8 @@
     </div>
     <!-- text above img below -->
     <div *ngIf="c.Layout === 'Text_above_img_below'">
-      <div class="m-auto mb-8 relative">
-        <p class="font-heading text-esn-dark-blue font-bold text-4xl title">
+      <div class="title-div">
+        <p class="title-p">
           {{ c.Title }}
         </p>
       </div>
@@ -139,16 +140,6 @@
         }"
         class="flex items-center flex-col"
       >
-        <div *ngIf="c.Youtube_video_embed_link">
-          <iframe
-            width="560"
-            height="315"
-            src="{{ c.Youtube_video_embed_link }}"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
         <div *ngIf="c.Text" class="w-full">
           <markdown [data]="c.Text"></markdown>
         </div>
