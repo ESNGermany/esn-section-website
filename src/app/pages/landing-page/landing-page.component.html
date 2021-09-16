@@ -62,15 +62,6 @@
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
         </div>
-        <div *ngIf="c.Youtube_video_embed_link">
-          <iframe
-            width="560"
-            height="315"
-            [src]="getURL()"
-            frameborder="0"
-            allowfullscreen
-          ></iframe>
-        </div>
       </div>
     </div>
     <!-- text right img left -->

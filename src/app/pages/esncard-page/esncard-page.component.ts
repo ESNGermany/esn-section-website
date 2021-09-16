@@ -29,7 +29,6 @@ interface ContentItem {
       };
     };
   };
-  Youtube_video_embed_link: string;
 }
 
 interface PartnerItem {
@@ -82,10 +81,5 @@ export class EsncardPageComponent implements OnInit {
     this.contentService
       .fetchPageContent('ESNcard_page')
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
-  }
-
-  getURL() {
-    this.url = this.contentItemList[1].Youtube_video_embed_link;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 }

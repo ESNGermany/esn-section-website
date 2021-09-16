@@ -28,7 +28,6 @@ interface ContentItem {
       };
     };
   };
-  Youtube_video_embed_link: string;
 }
 
 @Component({
@@ -62,9 +61,5 @@ export class LandingPageComponent implements OnInit {
     const titeli = document.getElementById('titeli');
     navinav.setAttribute('style', 'font-family: "Comic Sans"');
     titeli.setAttribute('style', 'font-family: "Comic Sans"');
-  }
-  getURL() {
-    this.url = this.contentItemList[1].Youtube_video_embed_link;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 }

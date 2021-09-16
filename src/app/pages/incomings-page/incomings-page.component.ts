@@ -37,7 +37,6 @@ interface ContentItem {
       };
     };
   };
-  Youtube_video_embed_link: string;
 }
 
 @Component({
