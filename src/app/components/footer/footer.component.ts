@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalConstants } from 'src/app/global-constants';
+import { MainItem } from 'src/app/app.component';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,29 +8,14 @@ import { GlobalConstants } from 'src/app/global-constants';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  public sectionLongName: string;
-  public addressEmail: string;
-  public instagramLink: string;
-  public instagramName: string;
-  public facebookLink: string;
-  public facebookName: string;
-  public addressName: string;
-  public addressStreet: string;
-  public addressCity: string;
+  public globals: MainItem;
 
-  constructor() {}
+  constructor(private mainService: MainService) {}
+
   ngOnInit(): void {
-    // this.sectionLongName = GlobalConstants.sectionLongName;
-    // this.addressEmail = GlobalConstants.addressEmail;
-    // this.instagramLink = GlobalConstants.instagramLink;
-    // this.instagramName = GlobalConstants.instagramName;
-    // this.facebookLink = GlobalConstants.facebookLink;
-    // this.facebookName = GlobalConstants.facebookName;
-    // this.addressName = GlobalConstants.addressName;
-    // this.addressStreet = GlobalConstants.addressStreet;
-    // this.addressCity = GlobalConstants.addressCity;
-    // this.sectionLongName = main
+    this.mainService.fetchMain().subscribe((global) => (this.globals = global));
   }
+
   pink(): void {
     const footer = document.getElementById('foot');
     const footer2 = document.getElementById('foot2');

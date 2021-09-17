@@ -20,6 +20,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { CocPageComponent } from './pages/coc-page/coc-page.component';
 import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
+import { MainService } from './services/main.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { ExpandableComponent } from './components/expandable/expandable.componen
     HttpClientModule,
     MarkdownModule.forRoot(),
   ],
-  providers: [],
+  providers: [MainService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

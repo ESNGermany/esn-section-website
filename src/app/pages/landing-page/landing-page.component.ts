@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
-import { GlobalConstants } from 'src/app/global-constants';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from 'src/app/app.component';
 
 interface ContentItem {
   id: string;
@@ -38,13 +39,16 @@ interface ContentItem {
 })
 export class LandingPageComponent implements OnInit {
   public contentItemList: ContentItem[];
-  public welcomeMessage: string = GlobalConstants.welcomeMessage;
+  public globals: MainItem;
 
-  constructor(private title: Title, private contentService: ContentService) {}
+  constructor(
+    private title: Title,
+    private contentService: ContentService,
+    private mainService: MainService
+  ) {}
 
   ngOnInit() {
     this.title.setTitle('Home | Erasmus Student Network Freiburg');
-    // this.welcomeMessage = GlobalConstants.welcomeMessage;
     this.getContent();
   }
 
@@ -52,6 +56,8 @@ export class LandingPageComponent implements OnInit {
     this.contentService
       .fetchPageContent('Landing_page')
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
+
+    this.mainService.fetchMain().subscribe((global) => (this.globals = global));
   }
 
   comic(): void {

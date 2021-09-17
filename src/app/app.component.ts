@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from './services/main.service';
 
-interface MainItem {
+export class MainItem {
   id: string;
   sectionShortName: string;
   sectionLongName: string;
@@ -11,9 +11,9 @@ interface MainItem {
   instagramName: string;
   pretixLink: string;
   addressNameFirstLine: string;
-  addressNameSecondLine: string;
-  addressNameThirdLine: string;
-  addressNameFourthLine: string;
+  addressStreetSecondLine: string;
+  addressCityThirdLine: string;
+  addressEmailFourthLine: string;
   welcomeMessageFrontPage: string;
   titleColor: string;
   buttonColor: string;
@@ -53,7 +53,6 @@ interface MainItem {
 export class AppComponent implements OnInit {
   title = 'esn-freiburg-website';
   public mainItem: MainItem;
-  public sectionShortName: string;
 
   constructor(private mainService: MainService) {}
 
@@ -65,7 +64,6 @@ export class AppComponent implements OnInit {
     this.mainService
       .fetchMain()
       .subscribe((mainItem) => (this.mainItem = mainItem));
-    this.sectionShortName = this.mainItem.sectionShortName;
   }
 }
 

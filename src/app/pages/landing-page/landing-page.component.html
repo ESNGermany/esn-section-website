@@ -1,8 +1,10 @@
 <app-navigation></app-navigation>
-<div class="outer-div">
+<div class="outer-div" *ngIf="globals.welcomeMessageFrontPage">
   <div class="px-8 mb-16">
     <div class="title-div4">
-      <p id="titeli" class="title-p">{{ welcomeMessage }}</p>
+      <p id="titeli" class="title-p">
+        {{ globals.welcomeMessageFrontPage }}
+      </p>
     </div>
   </div>
 </div>

@@ -14,9 +14,9 @@ interface MainItem {
   instagramName: string;
   pretixLink: string;
   addressNameFirstLine: string;
-  addressNameSecondLine: string;
-  addressNameThirdLine: string;
-  addressNameFourthLine: string;
+  addressStreetSecondLine: string;
+  addressCityThirdLine: string;
+  addressEmailFourthLine: string;
   welcomeMessageFrontPage: string;
   titleColor: string;
   buttonColor: string;
@@ -53,6 +53,7 @@ interface MainItem {
 })
 export class MainService {
   private url = 'https://strapi.esn-freiburg.de/website-main-information';
+  sectionShortName: any;
 
   constructor(
     private http: HttpClient,
@@ -75,5 +76,13 @@ export class MainService {
   }
   private log(message: string) {
     this.messageService.add(`ContentService: ${message}`);
+  }
+
+  setGlobals(MainItem: MainItem) {
+    this.sectionShortName = MainItem.sectionShortName;
+  }
+
+  getGlobals() {
+    return this.fetchMain();
   }
 }

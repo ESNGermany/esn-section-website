@@ -21,15 +21,21 @@
   >
     <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Contact</p>
-      <p class="font-bold">{{ addressName }}</p>
-      <p>{{ addressStreet }}</p>
-      <p>{{ addressCity }}</p>
-      <p class="pt-1 pb-4">
+      <p class="font-bold" *ngIf="globals.addressNameFirstLine">
+        {{ globals.addressNameFirstLine }}
+      </p>
+      <p *ngIf="globals.addressStreetSecondLine">
+        {{ globals.addressStreetSecondLine }}
+      </p>
+      <p *ngIf="globals.addressCityThirdLine">
+        {{ globals.addressCityThirdLine }}
+      </p>
+      <p class="pt-1 pb-4" *ngIf="globals.addressEmailFourthLine">
         <a
-          href="mailto:{{ addressEmail }}"
+          href="mailto:{{ globals.addressEmailFourthLine }}"
           rel="noopener"
           class="hover:underline"
-          >{{ addressEmail }}</a
+          >{{ globals.addressEmailFourthLine }}</a
         >
       </p>
     </div>
@@ -97,9 +103,10 @@
     </div>
     <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Social Media</p>
-      <p class="pb-1">
+      <p class="pb-1" *ngIf="globals.facebookLink">
         <a
-          href="{{ facebookLink }}"
+          *ngIf="globals.facebookName"
+          href="{{ globals.facebookLink }}"
           target="_blank"
           rel="noopener"
           class="hover:underline"
@@ -108,12 +115,13 @@
             alt="Facebook"
             src="../../../assets/social/facebook.png"
             class="h-6 float-left pr-2"
-          />{{ facebookName }}
+          />{{ globals.facebookName }}
         </a>
       </p>
-      <p>
+      <p *ngIf="globals.instagramLink">
         <a
-          href="{{ instagramLink }}"
+          *ngIf="globals.instagramName"
+          href="{{ globals.instagramLink }}"
           target="_blank"
           rel="noopener"
           class="hover:underline"
@@ -122,7 +130,7 @@
             src="../../../assets/social/instagram.png"
             class="h-6 float-left pr-2"
           />
-          {{ instagramName }}
+          {{ globals.instagramName }}
         </a>
       </p>
     </div>
