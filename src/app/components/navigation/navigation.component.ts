@@ -5,6 +5,8 @@ import {
   OnInit,
   ElementRef,
 } from '@angular/core';
+import { MainItem } from 'src/app/app.component';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-navigation',
@@ -12,7 +14,9 @@ import {
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  constructor(private el: ElementRef) {}
+  public globals: MainItem;
+
+  constructor(private el: ElementRef, private mainService: MainService) {}
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
@@ -23,7 +27,9 @@ export class NavigationComponent implements OnInit {
 
   @Input() activeMenu: string;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mainService.fetchMain().subscribe((global) => (this.globals = global));
+  }
 
   showMenu(): void {
     const burger = document.getElementById('burger') as HTMLUListElement;

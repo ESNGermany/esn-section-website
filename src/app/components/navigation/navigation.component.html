@@ -54,7 +54,7 @@
         ><img
           class="h-26 ml-8"
           alt="ESN logo"
-          src="../assets/logo/DE-freiburg-logo-colour.png"
+          src="https://strapi.esn-freiburg.de{{ globals.officialLogo.url }}"
       /></a>
     </div>
     <div
@@ -123,12 +123,9 @@
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible">
     <div class="mar">
       <div id="bubble1" class="bubble you invisible font-body">
-        @esn_freiburg
+        {{ globals.instagramName }}
       </div>
-      <a
-        href="https://www.instagram.com/esn_freiburg/"
-        target="_blank"
-        rel="noopener"
+      <a href="{{ globals.instagramLink }}" target="_blank" rel="noopener"
         ><button
           class="bg-esn-green p-2 rounded-full block my-2 hov"
           (mouseenter)="showBubble(1)"
@@ -142,13 +139,9 @@
     </div>
     <div>
       <div id="bubble2" class="bubble you invisible font-body">
-        fb.com/esnfreiburg
+        {{ globals.facebookName }}
       </div>
-      <a
-        href="https://facebook.com/esnfreiburg/"
-        target="_blank"
-        rel="noopener"
-      >
+      <a href="{{ globals.facebookLink }}" target="_blank" rel="noopener">
         <button
           class="bg-esn-green p-2 rounded-full hov"
           (mouseenter)="showBubble(2)"
@@ -162,7 +155,7 @@
   <div class="m-auto">
     <div class="fixed bottom-0 right-0 visible lg:invisible z-10 mr-8 mb-8">
       <a
-        href="https://facebook.com/esnfreiburg/"
+        href="{{ globals.facebookLink }}"
         target="_blank"
         rel="noopener"
         title="Facebook"
@@ -173,7 +166,7 @@
           /></button
       ></a>
       <a
-        href="https://www.instagram.com/esn_freiburg/"
+        href="{{ globals.instagramLink }}"
         target="_blank"
         rel="noopener"
         title="Instagram"

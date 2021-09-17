@@ -21,6 +21,7 @@ interface MainItem {
   titleColor: string;
   buttonColor: string;
   officialLogo: {
+    url: string;
     alternativeText: string;
     formats: {
       thumbnail: {
