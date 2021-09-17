@@ -36,7 +36,8 @@ interface ContentItem {
   styleUrls: ['./members-page.component.scss'],
 })
 export class MembersPageComponent implements OnInit {
-  public contentItemList: ContentItem[];
+  contentItemList: ContentItem[];
+  contentLoaded: Promise<boolean>;
 
   constructor(private title: Title, private contentService: ContentService) {}
 
@@ -48,6 +49,9 @@ export class MembersPageComponent implements OnInit {
   getContent(): void {
     this.contentService
       .fetchPageContent('Members_page')
-      .subscribe((contentItemList) => (this.contentItemList = contentItemList));
+      .subscribe((contentItemList) => {
+        this.contentItemList = contentItemList;
+        this.contentLoaded = Promise.resolve(true);
+      });
   }
 }

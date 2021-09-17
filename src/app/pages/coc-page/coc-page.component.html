@@ -1,5 +1,5 @@
 <app-navigation></app-navigation>
-<div class="outer">
+<div *ngIf="contentLoaded | async" class="outer">
   <div class="markdown-div">
     <markdown [data]="cocItemList.MarkdownText"></markdown>
   </div>

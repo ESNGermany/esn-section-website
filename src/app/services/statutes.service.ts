@@ -10,9 +10,7 @@ interface StatutesItem {
   Text: string;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class StatutesService {
   private url = 'https://strapi.esn-freiburg.de/website-statutes';
   constructor(

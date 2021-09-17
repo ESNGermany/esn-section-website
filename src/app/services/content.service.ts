@@ -32,9 +32,7 @@ interface ContentItem {
   };
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ContentService {
   private url =
     'https://strapi.esn-freiburg.de/website-contents?_sort=Order_on_page&Page_for_display=';

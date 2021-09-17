@@ -38,8 +38,9 @@ interface ContentItem {
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  public contentItemList: ContentItem[];
-  public globals: MainItem;
+  contentItemList: ContentItem[];
+  globals: MainItem;
+  contentLoaded: Promise<boolean>;
 
   constructor(
     private title: Title,
@@ -57,7 +58,10 @@ export class LandingPageComponent implements OnInit {
       .fetchPageContent('Landing_page')
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
 
-    this.mainService.fetchMain().subscribe((global) => (this.globals = global));
+    this.mainService.fetchMain().subscribe((global) => {
+      this.globals = global;
+      this.contentLoaded = Promise.resolve(true);
+    });
   }
 
   comic(): void {

@@ -10,9 +10,7 @@ interface ImprintItem {
   Text: string;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ImprintService {
   private url = 'https://strapi.esn-freiburg.de/website-imprint';
   constructor(

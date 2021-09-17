@@ -9,9 +9,7 @@ interface CocItem {
   MarkdownText: string;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CocService {
   private url = 'https://strapi.esn-germany.de/web-legal-documents/4';
   constructor(

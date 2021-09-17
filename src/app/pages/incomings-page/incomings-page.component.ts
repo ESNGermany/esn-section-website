@@ -45,13 +45,14 @@ interface ContentItem {
   styleUrls: ['./incomings-page.component.scss'],
 })
 export class IncomingsPageComponent implements OnInit {
-  public contentItemList: ContentItem[];
-  public faqTransportItemList: FaqItem[];
-  public faqHousingItemList: FaqItem[];
-  public faqUniErasmusItemList: FaqItem[];
-  public faqCoronaItemList: FaqItem[];
-  public faqEsncardItemList: FaqItem[];
-  public faqOtherItemList: FaqItem[];
+  contentItemList: ContentItem[];
+  faqTransportItemList: FaqItem[];
+  faqHousingItemList: FaqItem[];
+  faqUniErasmusItemList: FaqItem[];
+  faqCoronaItemList: FaqItem[];
+  faqEsncardItemList: FaqItem[];
+  faqOtherItemList: FaqItem[];
+  contentLoaded: Promise<boolean>;
 
   constructor(
     private title: Title,
@@ -119,10 +120,9 @@ export class IncomingsPageComponent implements OnInit {
   }
 
   getFaqOther(): void {
-    this.faqService
-      .fetchFaq('Other')
-      .subscribe(
-        (faqOtherItemList) => (this.faqOtherItemList = faqOtherItemList)
-      );
+    this.faqService.fetchFaq('Other').subscribe((faqOtherItemList) => {
+      this.faqOtherItemList = faqOtherItemList;
+      this.contentLoaded = Promise.resolve(true);
+    });
   }
 }

@@ -14,7 +14,7 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  public globals: MainItem;
+  globals: MainItem;
 
   constructor(private el: ElementRef, private mainService: MainService) {}
 
@@ -28,7 +28,9 @@ export class NavigationComponent implements OnInit {
   @Input() activeMenu: string;
 
   ngOnInit(): void {
-    this.mainService.fetchMain().subscribe((global) => (this.globals = global));
+    this.mainService.fetchMain().subscribe((global) => {
+      this.globals = global;
+    });
   }
 
   showMenu(): void {

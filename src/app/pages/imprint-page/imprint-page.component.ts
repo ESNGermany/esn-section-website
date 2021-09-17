@@ -14,7 +14,8 @@ interface ImprintItem {
   styleUrls: ['./imprint-page.component.scss'],
 })
 export class ImprintPageComponent implements OnInit {
-  public imprintItemList: ImprintItem;
+  imprintItemList: ImprintItem;
+  contentLoaded: Promise<boolean>;
 
   constructor(private title: Title, private imprintService: ImprintService) {}
 
@@ -24,8 +25,9 @@ export class ImprintPageComponent implements OnInit {
   }
 
   getImprint(): void {
-    this.imprintService
-      .fetchImprint()
-      .subscribe((imprintItemList) => (this.imprintItemList = imprintItemList));
+    this.imprintService.fetchImprint().subscribe((imprintItemList) => {
+      this.imprintItemList = imprintItemList;
+      this.contentLoaded = Promise.resolve(true);
+    });
   }
 }

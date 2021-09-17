@@ -21,6 +21,13 @@ import { CocPageComponent } from './pages/coc-page/coc-page.component';
 import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { MainService } from './services/main.service';
+import { ContentService } from './services/content.service';
+import { CocService } from './services/coc.service';
+import { FaqService } from './services/faq.service';
+import { ImprintService } from './services/imprint.service';
+import { MessageService } from './services/message.service';
+import { PartnerService } from './services/partner.service';
+import { StatutesService } from './services/statutes.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +54,16 @@ import { MainService } from './services/main.service';
     HttpClientModule,
     MarkdownModule.forRoot(),
   ],
-  providers: [MainService],
+  providers: [
+    MainService,
+    ContentService,
+    CocService,
+    FaqService,
+    ImprintService,
+    MessageService,
+    PartnerService,
+    StatutesService,
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

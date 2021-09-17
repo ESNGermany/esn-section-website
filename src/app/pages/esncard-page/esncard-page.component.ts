@@ -53,8 +53,9 @@ interface PartnerItem {
   styleUrls: ['./esncard-page.component.scss'],
 })
 export class EsncardPageComponent implements OnInit {
-  public contentItemList: ContentItem[];
-  public partnerItemList: PartnerItem[];
+  contentItemList: ContentItem[];
+  partnerItemList: PartnerItem[];
+  contentLoaded: Promise<boolean>;
 
   constructor(
     private title: Title,
@@ -71,13 +72,17 @@ export class EsncardPageComponent implements OnInit {
   }
 
   getPartners(): void {
-    this.partnerService
-      .fetchPagePartner()
-      .subscribe((partnerItemList) => (this.partnerItemList = partnerItemList));
+    this.partnerService.fetchPagePartner().subscribe((partnerItemList) => {
+      this.partnerItemList = partnerItemList;
+      this.contentLoaded = Promise.resolve(true);
+    });
   }
   getContent(): void {
     this.contentService
       .fetchPageContent('ESNcard_page')
-      .subscribe((contentItemList) => (this.contentItemList = contentItemList));
+      .subscribe((contentItemList) => {
+        this.contentItemList = contentItemList;
+        this.contentLoaded = Promise.resolve(true);
+      });
   }
 }

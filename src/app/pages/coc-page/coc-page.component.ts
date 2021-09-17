@@ -14,6 +14,7 @@ interface CocItem {
 })
 export class CocPageComponent implements OnInit {
   public cocItemList: CocItem;
+  contentLoaded: Promise<boolean>;
 
   constructor(private title: Title, private cocService: CocService) {}
 
@@ -23,8 +24,9 @@ export class CocPageComponent implements OnInit {
   }
 
   getCoc(): void {
-    this.cocService
-      .fetchCoc()
-      .subscribe((cocItemList) => (this.cocItemList = cocItemList));
+    this.cocService.fetchCoc().subscribe((cocItemList) => {
+      this.cocItemList = cocItemList;
+      this.contentLoaded = Promise.resolve(true);
+    });
   }
 }

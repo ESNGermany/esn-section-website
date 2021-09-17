@@ -9,11 +9,15 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class FooterComponent implements OnInit {
   public globals: MainItem;
+  contentLoaded: Promise<boolean>;
 
   constructor(private mainService: MainService) {}
 
   ngOnInit(): void {
-    this.mainService.fetchMain().subscribe((global) => (this.globals = global));
+    this.mainService.fetchMain().subscribe((global) => {
+      this.globals = global;
+      this.contentLoaded = Promise.resolve(true);
+    });
   }
 
   pink(): void {

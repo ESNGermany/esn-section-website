@@ -14,7 +14,8 @@ interface StatutesItem {
   styleUrls: ['./statutes-page.component.scss'],
 })
 export class StatutesPageComponent implements OnInit {
-  public statutesItemList: StatutesItem;
+  statutesItemList: StatutesItem;
+  contentLoaded: Promise<boolean>;
 
   constructor(private title: Title, private statutesService: StatutesService) {}
 
@@ -24,10 +25,9 @@ export class StatutesPageComponent implements OnInit {
   }
 
   getStatutes(): void {
-    this.statutesService
-      .fetchStatutes()
-      .subscribe(
-        (statutesItemList) => (this.statutesItemList = statutesItemList)
-      );
+    this.statutesService.fetchStatutes().subscribe((statutesItemList) => {
+      this.statutesItemList = statutesItemList;
+      this.contentLoaded = Promise.resolve(true);
+    });
   }
 }

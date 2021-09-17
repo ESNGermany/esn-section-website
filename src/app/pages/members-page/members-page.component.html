@@ -1,5 +1,5 @@
 <app-navigation></app-navigation>
-<div class="outer-imgbox">
+<div *ngIf="contentLoaded | async" class="outer-imgbox">
   <div *ngFor="let c of contentItemList" class="px-8 mb-24">
     <!-- text left img right -->
     <div *ngIf="c.Layout === 'Text_left_img_right'">

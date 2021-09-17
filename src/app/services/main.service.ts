@@ -49,9 +49,7 @@ interface MainItem {
   ];
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MainService {
   private url = 'https://strapi.esn-freiburg.de/website-main-information';
   sectionShortName: any;

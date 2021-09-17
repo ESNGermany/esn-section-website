@@ -20,9 +20,7 @@ interface PartnerItem {
   };
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class PartnerService {
   private url = 'https://strapi.esn-freiburg.de/website-partners?_sort=Order';
   constructor(

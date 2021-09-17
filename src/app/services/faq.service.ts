@@ -12,9 +12,7 @@ interface FaqItem {
   Order_within_category: number;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FaqService {
   private url =
     'https://strapi.esn-freiburg.de/website-faqs?_sort=Order_within_category&Category=';
