@@ -18,7 +18,6 @@ interface MainItem {
   addressCityThirdLine: string;
   addressEmailFourthLine: string;
   welcomeMessageFrontPage: string;
-  titleColor: string;
   buttonColor: string;
   officialLogo: {
     url: string;
@@ -75,13 +74,5 @@ export class MainService {
   }
   private log(message: string) {
     this.messageService.add(`ContentService: ${message}`);
-  }
-
-  setGlobals(MainItem: MainItem) {
-    this.sectionShortName = MainItem.sectionShortName;
-  }
-
-  getGlobals() {
-    return this.fetchMain();
   }
 }

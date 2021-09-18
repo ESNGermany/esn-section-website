@@ -121,13 +121,13 @@
 <!-- Social Media buttons with hover-effect on the right side (bottom if mobile) -->
 <div class="max-w-screen-2xl m-auto">
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible">
-    <div class="">
-      <div id="bubble1" class="mar bubble you invisible font-body">
+    <div class="mar">
+      <div id="bubble1" class="bubble you invisible font-body">
         {{ globals.instagramName }}
       </div>
       <a href="{{ globals.instagramLink }}" target="_blank" rel="noopener"
         ><button
-          class="bg-esn-green p-2 rounded-full block my-2 hov"
+          class="rightbuttoncolor p-2 rounded-full block my-2 hov"
           (mouseenter)="showBubble(1)"
           (mouseleave)="hideBubble(1)"
         >
@@ -143,7 +143,7 @@
       </div>
       <a href="{{ globals.facebookLink }}" target="_blank" rel="noopener">
         <button
-          class="bg-esn-green p-2 rounded-full hov"
+          class="rightbuttoncolor p-2 rounded-full hov"
           (mouseenter)="showBubble(2)"
           (mouseleave)="hideBubble(2)"
         >
@@ -159,7 +159,7 @@
         target="_blank"
         rel="noopener"
         title="Facebook"
-        ><button class="bg-esn-green p-2 rounded-full hov">
+        ><button class="rightbuttoncolor p-2 rounded-full hov">
           <img
             class="m-2 h-6"
             src="../../../assets/social/facebook.png"
@@ -170,7 +170,7 @@
         target="_blank"
         rel="noopener"
         title="Instagram"
-        ><button class="bg-esn-green p-2 rounded-full mx-2 hov">
+        ><button class="rightbuttoncolor p-2 rounded-full mx-2 hov">
           <img
             class="m-2 h-6"
             src="../../../assets/social/instagram.png"

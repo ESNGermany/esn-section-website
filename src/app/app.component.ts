@@ -15,7 +15,6 @@ export class MainItem {
   addressCityThirdLine: string;
   addressEmailFourthLine: string;
   welcomeMessageFrontPage: string;
-  titleColor: string;
   buttonColor: string;
   officialLogo: {
     url: string;

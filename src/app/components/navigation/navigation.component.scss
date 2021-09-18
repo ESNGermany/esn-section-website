@@ -1,14 +1,17 @@
 .bg {
   background-image: linear-gradient(
       69deg,
-      var(--esn-pink-rgba) 19%,
-      var(--esn-orange-rgba) 80%
+      var(--esn-blue-rgba) 19%,
+      var(--right-buttoncolor-rgba) 80%
     ),
-    url("../../../assets/header/Freiburg_black_white.jpg");
-  // url("../../../assets/header/img_5574.jpg");
+    url("../../../assets/header/Freiburg_black_white.jpg"); // replace bw header image
   background-position: center;
   background-size: cover;
   padding-bottom: 103px;
+}
+
+.rightbuttoncolor {
+  background-color: var(--right-buttoncolor-rgba);
 }
 
 .divider-bottom {
@@ -56,6 +59,7 @@
 }
 .hov {
   transition: transform 0.2s;
+  float: right;
 }
 .hov:hover {
   transform: scale(1.14);
