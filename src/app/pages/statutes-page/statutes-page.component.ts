@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { StatutesService } from 'src/app/services/statutes.service';
+import { MainService } from 'src/app/services/main.service';
 
 interface StatutesItem {
   id: string;
@@ -16,11 +17,15 @@ interface StatutesItem {
 export class StatutesPageComponent implements OnInit {
   statutesItemList: StatutesItem;
   contentLoaded: Promise<boolean>;
+  siteTitle: string;
 
-  constructor(private title: Title, private statutesService: StatutesService) {}
+  constructor(
+    private title: Title,
+    private statutesService: StatutesService,
+    private mainService: MainService
+  ) {}
 
   ngOnInit() {
-    this.title.setTitle('Statutes | Erasmus Student Network Freiburg');
     this.getStatutes();
   }
 
@@ -28,6 +33,11 @@ export class StatutesPageComponent implements OnInit {
     this.statutesService.fetchStatutes().subscribe((statutesItemList) => {
       this.statutesItemList = statutesItemList;
       this.contentLoaded = Promise.resolve(true);
+    });
+    this.mainService.fetchMain().subscribe((mainItem) => {
+      this.siteTitle = mainItem.sectionLongName;
+      const title = 'Statutes | ' + this.siteTitle;
+      this.title.setTitle(title);
     });
   }
 }

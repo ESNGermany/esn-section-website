@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
+import { MainService } from 'src/app/services/main.service';
 
 interface ContentItem {
   id: string;
@@ -40,11 +41,15 @@ export class TeamPageComponent implements OnInit {
   contentItemList: ContentItem[] = [];
   contentLoaded: Promise<boolean>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  siteTitle: string;
 
-  constructor(private title: Title, private contentService: ContentService) {}
+  constructor(
+    private title: Title,
+    private contentService: ContentService,
+    private mainService: MainService
+  ) {}
 
   ngOnInit() {
-    this.title.setTitle('Our Team | Erasmus Student Network Freiburg');
     this.getContent();
   }
 
@@ -55,5 +60,10 @@ export class TeamPageComponent implements OnInit {
         this.contentItemList = contentItemList;
         this.contentLoaded = Promise.resolve(true);
       });
+    this.mainService.fetchMain().subscribe((mainItem) => {
+      this.siteTitle = mainItem.sectionLongName;
+      const title = 'Our Team | ' + this.siteTitle;
+      this.title.setTitle(title);
+    });
   }
 }

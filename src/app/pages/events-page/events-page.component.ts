@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-events-page',
@@ -7,15 +8,21 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./events-page.component.scss'],
 })
 export class EventsPageComponent implements OnInit {
-  constructor(private title: Title) {}
+  siteTitle: string;
+
+  constructor(private title: Title, private mainService: MainService) {}
 
   ngOnInit() {
-    this.title.setTitle('Events | Erasmus Student Network');
     if (!localStorage.getItem('reload')) {
       localStorage.setItem('reload', 'no reload');
       location.reload();
     } else {
       localStorage.removeItem('reload');
     }
+    this.mainService.fetchMain().subscribe((mainItem) => {
+      this.siteTitle = mainItem.sectionLongName;
+      const title = 'Events | ' + this.siteTitle;
+      this.title.setTitle(title);
+    });
   }
 }

@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 import { PartnerService } from 'src/app/services/partner.service';
 import { environment } from 'src/environments/environment';
+import { MainService } from 'src/app/services/main.service';
 
 interface ContentItem {
   id: string;
@@ -58,17 +59,16 @@ export class EsncardPageComponent implements OnInit {
   partnerItemList: PartnerItem[] = [];
   contentLoaded: Promise<boolean>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  siteTitle: string;
 
   constructor(
     private title: Title,
     private contentService: ContentService,
-    private partnerService: PartnerService
+    private partnerService: PartnerService,
+    private mainService: MainService
   ) {}
 
   ngOnInit() {
-    this.title.setTitle(
-      'ESNcard & Partners | Erasmus Student Network Freiburg'
-    );
     this.getContent();
     this.getPartners();
   }
@@ -77,6 +77,11 @@ export class EsncardPageComponent implements OnInit {
     this.partnerService.fetchPagePartner().subscribe((partnerItemList) => {
       this.partnerItemList = partnerItemList;
       this.contentLoaded = Promise.resolve(true);
+    });
+    this.mainService.fetchMain().subscribe((mainItem) => {
+      this.siteTitle = mainItem.sectionLongName;
+      const title = 'ESNcard & Partners | ' + this.siteTitle;
+      this.title.setTitle(title);
     });
   }
   getContent(): void {

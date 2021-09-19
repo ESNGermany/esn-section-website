@@ -10,8 +10,6 @@ export class ErrorPageComponent implements OnInit {
   constructor(private title: Title) {}
 
   ngOnInit() {
-    this.title.setTitle(
-      'Oopsie... Page not found | Erasmus Student Network Freiburg'
-    );
+    this.title.setTitle('Oopsie... Page not found');
   }
 }

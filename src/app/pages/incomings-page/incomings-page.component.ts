@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 import { FaqService } from 'src/app/services/faq.service';
+import { MainService } from 'src/app/services/main.service';
 
 interface FaqItem {
   id: string;
@@ -53,15 +54,16 @@ export class IncomingsPageComponent implements OnInit {
   faqEsncardItemList: FaqItem[] = [];
   faqOtherItemList: FaqItem[] = [];
   contentLoaded: Promise<boolean>;
+  siteTitle: string;
 
   constructor(
     private title: Title,
     private contentService: ContentService,
-    private faqService: FaqService
+    private faqService: FaqService,
+    private mainService: MainService
   ) {}
 
   ngOnInit() {
-    this.title.setTitle('For Incomings | Erasmus Student Network Freiburg');
     this.getContent();
     this.getFaqTransport();
     this.getFaqHousing();
@@ -75,6 +77,11 @@ export class IncomingsPageComponent implements OnInit {
     this.contentService
       .fetchPageContent('Incomings_page')
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
+    this.mainService.fetchMain().subscribe((mainItem) => {
+      this.siteTitle = mainItem.sectionLongName;
+      const title = 'For Incomings | ' + this.siteTitle;
+      this.title.setTitle(title);
+    });
   }
 
   getFaqTransport(): void {

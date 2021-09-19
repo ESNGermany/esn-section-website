@@ -43,6 +43,7 @@ export class LandingPageComponent implements OnInit {
   globals: MainItem;
   contentLoaded: Promise<boolean>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  siteTitle: string;
 
   constructor(
     private title: Title,
@@ -51,7 +52,6 @@ export class LandingPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.title.setTitle('Home | Erasmus Student Network Freiburg');
     this.getContent();
   }
 
@@ -63,6 +63,9 @@ export class LandingPageComponent implements OnInit {
     this.mainService.fetchMain().subscribe((global) => {
       this.globals = global;
       this.contentLoaded = Promise.resolve(true);
+      this.siteTitle = global.sectionLongName;
+      const title = 'Home | ' + this.siteTitle;
+      this.title.setTitle(title);
     });
   }
 

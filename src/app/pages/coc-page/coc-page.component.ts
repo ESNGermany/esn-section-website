@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { CocService } from 'src/app/services/coc.service';
+import { MainService } from 'src/app/services/main.service';
 
 interface CocItem {
   id: string;
@@ -15,11 +16,15 @@ interface CocItem {
 export class CocPageComponent implements OnInit {
   public cocItemList: CocItem;
   contentLoaded: Promise<boolean>;
+  siteTitle: string;
 
-  constructor(private title: Title, private cocService: CocService) {}
+  constructor(
+    private title: Title,
+    private cocService: CocService,
+    private mainService: MainService
+  ) {}
 
   ngOnInit() {
-    this.title.setTitle('Code of Conduct | Erasmus Student Network Freiburg');
     this.getCoc();
   }
 
@@ -27,6 +32,11 @@ export class CocPageComponent implements OnInit {
     this.cocService.fetchCoc().subscribe((cocItemList) => {
       this.cocItemList = cocItemList;
       this.contentLoaded = Promise.resolve(true);
+    });
+    this.mainService.fetchMain().subscribe((mainItem) => {
+      this.siteTitle = mainItem.sectionLongName;
+      const title = 'Code of Conduct | ' + this.siteTitle;
+      this.title.setTitle(title);
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ImprintService } from 'src/app/services/imprint.service';
+import { MainService } from 'src/app/services/main.service';
 
 interface ImprintItem {
   id: string;
@@ -16,11 +17,15 @@ interface ImprintItem {
 export class ImprintPageComponent implements OnInit {
   imprintItemList: ImprintItem;
   contentLoaded: Promise<boolean>;
+  siteTitle: string;
 
-  constructor(private title: Title, private imprintService: ImprintService) {}
+  constructor(
+    private title: Title,
+    private imprintService: ImprintService,
+    private mainService: MainService
+  ) {}
 
   ngOnInit() {
-    this.title.setTitle('Imprint | Erasmus Student Network Freiburg');
     this.getImprint();
   }
 
@@ -28,6 +33,11 @@ export class ImprintPageComponent implements OnInit {
     this.imprintService.fetchImprint().subscribe((imprintItemList) => {
       this.imprintItemList = imprintItemList;
       this.contentLoaded = Promise.resolve(true);
+    });
+    this.mainService.fetchMain().subscribe((mainItem) => {
+      this.siteTitle = mainItem.sectionLongName;
+      const title = 'Imprint | ' + this.siteTitle;
+      this.title.setTitle(title);
     });
   }
 }
