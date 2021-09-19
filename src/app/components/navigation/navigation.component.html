@@ -127,9 +127,10 @@
       </div>
       <a href="{{ globals?.instagramLink }}" target="_blank" rel="noopener"
         ><button
-          class="rightbuttoncolor p-2 rounded-full block my-2 hov"
+          class="p-2 rounded-full block my-2 hov"
           (mouseenter)="showBubble(1)"
           (mouseleave)="hideBubble(1)"
+          [ngStyle]="buttonColor()"
         >
           <img
             class="m-2 h-6"
@@ -143,9 +144,10 @@
       </div>
       <a href="{{ globals?.facebookLink }}" target="_blank" rel="noopener">
         <button
-          class="rightbuttoncolor p-2 rounded-full hov"
+          class="p-2 rounded-full hov"
           (mouseenter)="showBubble(2)"
           (mouseleave)="hideBubble(2)"
+          [ngStyle]="buttonColor()"
         >
           <img class="m-2 h-6" src="../../../assets/social/facebook.png" />
         </button>
@@ -159,7 +161,7 @@
         target="_blank"
         rel="noopener"
         title="Facebook"
-        ><button class="rightbuttoncolor p-2 rounded-full hov">
+        ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor()">
           <img
             class="m-2 h-6"
             src="../../../assets/social/facebook.png"
@@ -170,7 +172,7 @@
         target="_blank"
         rel="noopener"
         title="Instagram"
-        ><button class="rightbuttoncolor p-2 rounded-full mx-2 hov">
+        ><button class="p-2 rounded-full mx-2 hov" [ngStyle]="buttonColor()">
           <img
             class="m-2 h-6"
             src="../../../assets/social/instagram.png"

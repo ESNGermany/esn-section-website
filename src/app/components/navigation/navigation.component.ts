@@ -35,6 +35,7 @@ export class NavigationComponent implements OnInit {
         this.globals.officialLogo.url =
           environment.STRAPI_SECTION_URL_IMAGE + this.globals.officialLogo.url;
       }
+      console.log(this.globals.buttonColor);
     });
   }
 
@@ -78,6 +79,23 @@ export class NavigationComponent implements OnInit {
     if (bubble === 2) {
       b2.classList.remove('visible');
       b2.classList.add('invisible');
+    }
+  }
+
+  buttonColor(): Object {
+    switch (this.globals.buttonColor) {
+      case 'esnGreen':
+        return { 'background-color': 'rgba(122, 193, 67, 0.8)' };
+      case 'esnPink':
+        return { 'background-color': 'rgba(236, 0, 140, 0.8)' };
+      case 'esnOrange':
+        return { 'background-color': 'rgba(244, 123, 32, 0.8)' };
+      case 'esnLightBlue':
+        return { 'background-color': 'rgba(0, 174, 239, 0.8)' };
+      case 'esnDarkBlue':
+        return { 'background-color': 'rgba(46, 49, 146, 0.8)' };
+      default:
+        return { 'background-color': 'rgba(255, 255, 255, 1)' };
     }
   }
 }
