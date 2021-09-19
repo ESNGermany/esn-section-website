@@ -37,7 +37,7 @@ interface ContentItem {
   styleUrls: ['./members-page.component.scss'],
 })
 export class MembersPageComponent implements OnInit {
-  contentItemList: ContentItem[];
+  contentItemList: ContentItem[] = [];
   contentLoaded: Promise<boolean>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 

@@ -39,7 +39,7 @@ interface ContentItem {
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  contentItemList: ContentItem[];
+  contentItemList: ContentItem[] = [];
   globals: MainItem;
   contentLoaded: Promise<boolean>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;

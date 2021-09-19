@@ -22,20 +22,20 @@
     <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Contact</p>
       <p class="font-bold">
-        {{ globals.addressNameFirstLine }}
+        {{ globals?.addressNameFirstLine }}
       </p>
       <p>
-        {{ globals.addressStreetSecondLine }}
+        {{ globals?.addressStreetSecondLine }}
       </p>
       <p>
-        {{ globals.addressCityThirdLine }}
+        {{ globals?.addressCityThirdLine }}
       </p>
       <p class="pt-1 pb-4">
         <a
-          href="mailto:{{ globals.addressEmailFourthLine }}"
+          href="mailto:{{ globals?.addressEmailFourthLine }}"
           rel="noopener"
           class="hover:underline"
-          >{{ globals.addressEmailFourthLine }}</a
+          >{{ globals?.addressEmailFourthLine }}</a
         >
       </p>
     </div>
@@ -105,7 +105,7 @@
       <p class="font-bold uppercase pb-1 text-lg">Social Media</p>
       <p class="pb-1">
         <a
-          href="{{ globals.facebookLink }}"
+          href="{{ globals?.facebookLink }}"
           target="_blank"
           rel="noopener"
           class="hover:underline"
@@ -114,12 +114,12 @@
             alt="Facebook"
             src="../../../assets/social/facebook.png"
             class="h-6 float-left pr-2"
-          />{{ globals.facebookName }}
+          />{{ globals?.facebookName }}
         </a>
       </p>
       <p>
         <a
-          href="{{ globals.instagramLink }}"
+          href="{{ globals?.instagramLink }}"
           target="_blank"
           rel="noopener"
           class="hover:underline"
@@ -128,7 +128,7 @@
             src="../../../assets/social/instagram.png"
             class="h-6 float-left pr-2"
           />
-          {{ globals.instagramName }}
+          {{ globals?.instagramName }}
         </a>
       </p>
     </div>

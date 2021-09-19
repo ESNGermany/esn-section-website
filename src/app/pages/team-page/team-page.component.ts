@@ -37,7 +37,7 @@ interface ContentItem {
   styleUrls: ['./team-page.component.scss'],
 })
 export class TeamPageComponent implements OnInit {
-  contentItemList: ContentItem[];
+  contentItemList: ContentItem[] = [];
   contentLoaded: Promise<boolean>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 

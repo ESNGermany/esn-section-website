@@ -45,13 +45,13 @@ interface ContentItem {
   styleUrls: ['./incomings-page.component.scss'],
 })
 export class IncomingsPageComponent implements OnInit {
-  contentItemList: ContentItem[];
-  faqTransportItemList: FaqItem[];
-  faqHousingItemList: FaqItem[];
-  faqUniErasmusItemList: FaqItem[];
-  faqCoronaItemList: FaqItem[];
-  faqEsncardItemList: FaqItem[];
-  faqOtherItemList: FaqItem[];
+  contentItemList: ContentItem[] = [];
+  faqTransportItemList: FaqItem[] = [];
+  faqHousingItemList: FaqItem[] = [];
+  faqUniErasmusItemList: FaqItem[] = [];
+  faqCoronaItemList: FaqItem[] = [];
+  faqEsncardItemList: FaqItem[] = [];
+  faqOtherItemList: FaqItem[] = [];
   contentLoaded: Promise<boolean>;
 
   constructor(

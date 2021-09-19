@@ -31,8 +31,10 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.mainService.fetchMain().subscribe((global) => {
       this.globals = global;
-      this.globals.officialLogo.url =
-        environment.STRAPI_SECTION_URL_IMAGE + this.globals.officialLogo.url;
+      if (this.globals.officialLogo) {
+        this.globals.officialLogo.url =
+          environment.STRAPI_SECTION_URL_IMAGE + this.globals.officialLogo.url;
+      }
     });
   }
 

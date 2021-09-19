@@ -54,8 +54,8 @@ interface PartnerItem {
   styleUrls: ['./esncard-page.component.scss'],
 })
 export class EsncardPageComponent implements OnInit {
-  contentItemList: ContentItem[];
-  partnerItemList: PartnerItem[];
+  contentItemList: ContentItem[] = [];
+  partnerItemList: PartnerItem[] = [];
   contentLoaded: Promise<boolean>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
