@@ -51,7 +51,7 @@ export class MainItem {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'esn-freiburg-website';
+  title = 'ESN';
   public mainItem: MainItem;
 
   constructor(private mainService: MainService) {}
