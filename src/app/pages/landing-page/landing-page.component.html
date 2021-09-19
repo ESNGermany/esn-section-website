@@ -51,9 +51,7 @@
           <div *ngIf="c.Image" class="m-auto">
             <figure class="float-right-fig">
               <img
-                src="https://strapi.esn-freiburg.de{{
-                  c.Image.formats.medium.url
-                }}"
+                src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
                 alt="{{ c.Image.alternativeText }}"
               />
             </figure>
@@ -78,9 +76,7 @@
           <div *ngIf="c.Image" class="m-auto">
             <figure class="float-left-fig">
               <img
-                src="https://strapi.esn-freiburg.de{{
-                  c.Image.formats.medium.url
-                }}"
+                src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
                 alt="{{ c.Image.alternativeText }}"
               />
             </figure>
@@ -106,9 +102,7 @@
           <div *ngIf="c.Image" class="px-4">
             <img
               class="m-auto py-4"
-              src="https://strapi.esn-freiburg.de{{
-                c.Image.formats.medium.url
-              }}"
+              src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
               alt="{{ c.Image.alternativeText }}"
             />
           </div>
@@ -131,9 +125,7 @@
           <div *ngIf="c.Image" class="px-4">
             <img
               class="m-auto py-4 w-3/5"
-              src="https://strapi.esn-freiburg.de{{
-                c.Image.formats.medium.url
-              }}"
+              src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
               alt="{{ c.Image.alternativeText }}"
             />
           </div>

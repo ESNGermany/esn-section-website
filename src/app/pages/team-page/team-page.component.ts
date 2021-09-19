@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
+import { environment } from 'src/environments/environment';
 
 interface ContentItem {
   id: string;
@@ -38,6 +39,7 @@ interface ContentItem {
 export class TeamPageComponent implements OnInit {
   contentItemList: ContentItem[];
   contentLoaded: Promise<boolean>;
+  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
   constructor(private title: Title, private contentService: ContentService) {}
 

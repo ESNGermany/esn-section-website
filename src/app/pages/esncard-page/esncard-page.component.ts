@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 import { PartnerService } from 'src/app/services/partner.service';
+import { environment } from 'src/environments/environment';
 
 interface ContentItem {
   id: string;
@@ -56,6 +57,7 @@ export class EsncardPageComponent implements OnInit {
   contentItemList: ContentItem[];
   partnerItemList: PartnerItem[];
   contentLoaded: Promise<boolean>;
+  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
   constructor(
     private title: Title,

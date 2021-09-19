@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { MainItem } from 'src/app/app.component';
 import { MainService } from 'src/app/services/main.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navigation',
@@ -30,6 +31,8 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.mainService.fetchMain().subscribe((global) => {
       this.globals = global;
+      this.globals.officialLogo.url =
+        environment.STRAPI_SECTION_URL_IMAGE + this.globals.officialLogo.url;
     });
   }
 

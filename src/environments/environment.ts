@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  STRAPI_SECTION_URL: 'https://sections.esn-germany.de/esnfreiburg-', // replace section
+  STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
 };
 
 /*

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 interface FaqItem {
@@ -15,7 +16,8 @@ interface FaqItem {
 @Injectable()
 export class FaqService {
   private url =
-    'https://strapi.esn-freiburg.de/website-faqs?_sort=Order_within_category&Category=';
+    environment.STRAPI_SECTION_URL +
+    'faqs?_sort=Order_within_category&Category=';
   private fullUrl: string = '';
   constructor(
     private http: HttpClient,

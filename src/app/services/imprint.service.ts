@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 interface ImprintItem {
@@ -12,7 +13,7 @@ interface ImprintItem {
 
 @Injectable()
 export class ImprintService {
-  private url = 'https://strapi.esn-freiburg.de/website-imprint';
+  private url = environment.STRAPI_SECTION_URL + 'imprint';
   constructor(
     private http: HttpClient,
     private messageService: MessageService

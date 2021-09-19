@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 interface MainItem {
@@ -50,7 +51,7 @@ interface MainItem {
 
 @Injectable()
 export class MainService {
-  private url = 'https://strapi.esn-freiburg.de/website-main-information';
+  private url = environment.STRAPI_SECTION_URL + 'main-information';
   sectionShortName: any;
 
   constructor(

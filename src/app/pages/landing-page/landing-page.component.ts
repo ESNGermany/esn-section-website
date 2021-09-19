@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 import { MainService } from 'src/app/services/main.service';
 import { MainItem } from 'src/app/app.component';
+import { environment } from 'src/environments/environment';
 
 interface ContentItem {
   id: string;
@@ -41,6 +42,7 @@ export class LandingPageComponent implements OnInit {
   contentItemList: ContentItem[];
   globals: MainItem;
   contentLoaded: Promise<boolean>;
+  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
   constructor(
     private title: Title,

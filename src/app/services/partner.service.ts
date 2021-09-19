@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 interface PartnerItem {
@@ -22,7 +23,7 @@ interface PartnerItem {
 
 @Injectable()
 export class PartnerService {
-  private url = 'https://strapi.esn-freiburg.de/website-partners?_sort=Order';
+  private url = environment.STRAPI_SECTION_URL + 'partners?_sort=Order';
   constructor(
     private http: HttpClient,
     private messageService: MessageService

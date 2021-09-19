@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 interface ContentItem {
@@ -35,7 +36,8 @@ interface ContentItem {
 @Injectable()
 export class ContentService {
   private url =
-    'https://strapi.esn-freiburg.de/website-contents?_sort=Order_on_page&Page_for_display=';
+    environment.STRAPI_SECTION_URL +
+    'contents?_sort=Order_on_page&Page_for_display=';
   private fullUrl: string;
   constructor(
     private http: HttpClient,
