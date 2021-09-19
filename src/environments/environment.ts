@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  STRAPI_SECTION_URL: 'https://sections.esn-germany.de/esnfreiburg-', // replace section
+  STRAPI_SECTION_URL: 'REPLACE_STRAPI_SECTIONS_BASEURL', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
 };
 
