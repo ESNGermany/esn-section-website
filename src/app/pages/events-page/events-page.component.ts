@@ -9,6 +9,9 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class EventsPageComponent implements OnInit {
   siteTitle: string;
+  pretixLink: string;
+  facebookLink: string;
+  instagramLink: string;
 
   constructor(private title: Title, private mainService: MainService) {}
 
@@ -21,6 +24,9 @@ export class EventsPageComponent implements OnInit {
     }
     this.mainService.fetchMain().subscribe((mainItem) => {
       this.siteTitle = mainItem.sectionLongName;
+      this.pretixLink = mainItem.pretixLink;
+      this.facebookLink = mainItem.facebookLink;
+      this.instagramLink = mainItem.instagramLink;
       const title = 'Events | ' + this.siteTitle;
       this.title.setTitle(title);
     });

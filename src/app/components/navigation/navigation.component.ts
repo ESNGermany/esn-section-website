@@ -35,7 +35,6 @@ export class NavigationComponent implements OnInit {
         this.globals.officialLogo.url =
           environment.STRAPI_SECTION_URL_IMAGE + this.globals.officialLogo.url;
       }
-      console.log(this.globals.buttonColor);
     });
   }
 

@@ -2,25 +2,57 @@
 <div class="outer-div">
   <div class="px-8 mb-24">
     <div class="title-div">
-      <p class="title-p">Find our newest events here.</p>
-    </div>
-    <div class="m-auto block font-body text-lg mb-8">
-      <p>
-        We are aware of the current situation concerning COVID-19. Therefore we
-        are organising less events with more restrictions. Unless you don't hear
-        otherwise, our events will take place as planned. For most events, you
-        need to buy tickets in advance as we need a complete participants list.
-        Keep yourself updated (e.g. on the
-        <a
-          href="https://www.rki.de/EN/Content/infections/epidemiology/outbreaks/COVID-19/COVID19.html"
-          target="_blank"
-          rel="noopener"
-          class="text-esn-dark-blue hover:underline"
-          >official RKI website</a
-        >) and stay safe!
+      <p *ngIf="pretixLink" class="title-p">Find our newest events here.</p>
+      <p *ngIf="!pretixLink" class="title-p">
+        Check out the links below for our events!
       </p>
     </div>
-    <app-pretix-calendar></app-pretix-calendar>
+    <div class="font-body text-lg border border-graylight shadow-xl p-8">
+      <div class="m-auto block font-body text-lg mb-8">
+        <p>
+          We are aware of the current situation concerning COVID-19. Therefore
+          we are organising less events with more restrictions. Unless you don't
+          hear otherwise, our events will take place as planned. For most
+          events, you need to buy tickets in advance as we need a complete
+          participants list. Keep yourself updated (e.g. on the
+          <a
+            href="https://www.rki.de/EN/Content/infections/epidemiology/outbreaks/COVID-19/COVID19.html"
+            target="_blank"
+            rel="noopener"
+            class="text-esn-dark-blue hover:underline"
+            >official RKI website</a
+          >) and stay safe!
+        </p>
+      </div>
+      <div *ngIf="pretixLink">
+        <app-pretix-calendar></app-pretix-calendar>
+      </div>
+      <div class="flex flex-wrap items-end justify-evenly flexb3">
+        <figure class="m-2">
+          <img
+            class="imgh m-auto"
+            src="../../../assets/social/calendar_grey.png"
+            alt="calendar"
+          />
+          <figcaption class="pt-4 text-center">
+            <a
+              class="text-esn-dark-blue hover:underline"
+              target="_blank"
+              rel="noopener"
+              href="{{ facebookLink }}"
+              >Facebook</a
+            ><br /><br />
+            <a
+              class="text-esn-dark-blue hover:underline"
+              target="_blank"
+              rel="noopener"
+              href="{{ instagramLink }}"
+              >Instagram</a
+            >
+          </figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>
