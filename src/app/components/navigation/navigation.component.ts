@@ -82,19 +82,19 @@ export class NavigationComponent implements OnInit {
   }
 
   buttonColor(): Object {
-    switch (this.globals.buttonColor) {
+    switch (this.globals?.buttonColor) {
       case 'esnGreen':
-        return { 'background-color': 'rgba(122, 193, 67, 0.8)' };
+        return { 'background-color': 'rgb(122, 193, 67)' };
       case 'esnPink':
-        return { 'background-color': 'rgba(236, 0, 140, 0.8)' };
+        return { 'background-color': 'rgb(236, 0, 140)' };
       case 'esnOrange':
-        return { 'background-color': 'rgba(244, 123, 32, 0.8)' };
+        return { 'background-color': 'rgb(244, 123, 32)' };
       case 'esnLightBlue':
-        return { 'background-color': 'rgba(0, 174, 239, 0.8)' };
+        return { 'background-color': 'rgb(0, 174, 239)' };
       case 'esnDarkBlue':
-        return { 'background-color': 'rgba(46, 49, 146, 0.8)' };
+        return { 'background-color': 'rgb(46, 49, 146)' };
       default:
-        return { 'background-color': 'rgba(255, 255, 255, 1)' };
+        return { 'background-color': 'rgb(255, 255, 255, 1)' };
     }
   }
 }

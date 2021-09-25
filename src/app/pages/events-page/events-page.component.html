@@ -24,33 +24,36 @@
           >) and stay safe!
         </p>
       </div>
+      <div *ngIf="pretixLink === 'cal'">
+        <full-calendar
+          id="calendar"
+          [options]="calendarOptions"
+        ></full-calendar>
+        <div
+          class="
+            bg-graylight
+            text-black
+            px-8
+            py-4
+            mt-4
+            border border-graylight
+            rounded
+          "
+        >
+          <h2 id="title" class="font-bold text-xl"></h2>
+          <div id="date" class="textgray"></div>
+          <div id="details"></div>
+          <a
+            id="link"
+            class="pt-4 text-esn-dark-blue hover:underline"
+            target="_blank"
+            rel="noopener"
+          ></a>
+          <p id="cause">Click on an event to display more information!</p>
+        </div>
+      </div>
       <div *ngIf="pretixLink">
         <app-pretix-calendar></app-pretix-calendar>
-      </div>
-      <div class="flex flex-wrap items-end justify-evenly flexb3">
-        <figure class="m-2">
-          <img
-            class="imgh m-auto"
-            src="../../../assets/social/calendar_grey.png"
-            alt="calendar"
-          />
-          <figcaption class="pt-4 text-center">
-            <a
-              class="text-esn-dark-blue hover:underline"
-              target="_blank"
-              rel="noopener"
-              href="{{ facebookLink }}"
-              >Facebook</a
-            ><br /><br />
-            <a
-              class="text-esn-dark-blue hover:underline"
-              target="_blank"
-              rel="noopener"
-              href="{{ instagramLink }}"
-              >Instagram</a
-            >
-          </figcaption>
-        </figure>
       </div>
     </div>
   </div>

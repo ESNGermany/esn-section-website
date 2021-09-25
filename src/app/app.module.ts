@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -29,6 +33,12 @@ import { MessageService } from './services/message.service';
 import { PartnerService } from './services/partner.service';
 import { StatutesService } from './services/statutes.service';
 
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+]);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +59,7 @@ import { StatutesService } from './services/statutes.service';
   ],
   imports: [
     BrowserModule,
+    FullCalendarModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
