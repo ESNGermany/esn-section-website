@@ -6415,10 +6415,10 @@ ngx-markdown@12.0.1:
     prismjs "^1.23.0"
     tslib "^2.1.0"
 
-ngx-tailwind@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/ngx-tailwind/-/ngx-tailwind-2.2.1.tgz#c01faf1357dde9b713e270a2e9614694bb92de45"
-  integrity sha512-O9PGjZZUHZ9bS9upI6lNmKTyv1XBqXeRyAKwAKoUOq1+TQ7wKrzKDoRvoh7CDygdTqwml3W0RWFFTKjiv1XmIA==
+ngx-tailwind@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/ngx-tailwind/-/ngx-tailwind-2.2.2.tgz#b63ce6dcf428516e6ac596ce89fd8b4ef8ae9e45"
+  integrity sha512-t+YlajIwPggjohUxsbcyK4v1Q/xZZA4lZS8B4RSHI00Gsc2BgGZRgOm5/bzDD9dDf8pWsjz2PPuFJgyi8h1gvg==
   dependencies:
     "@angular-devkit/core" "^12.0.0"
     "@angular-devkit/schematics" "^12.0.0"
