@@ -72,7 +72,12 @@ export class LandingPageComponent implements OnInit {
   comic(): void {
     const navinav = document.getElementById('navinav');
     const titeli = document.getElementById('titeli');
-    navinav.setAttribute('style', 'font-family: "Comic Sans"');
-    titeli.setAttribute('style', 'font-family: "Comic Sans"');
+    if (navinav.getAttribute('style') == 'font-family: "Comic Sans"') {
+      navinav.setAttribute('style', 'font-family: "Oswald"');
+      titeli.setAttribute('style', 'font-family: "Oswald"');
+    } else {
+      navinav.setAttribute('style', 'font-family: "Comic Sans"');
+      titeli.setAttribute('style', 'font-family: "Comic Sans"');
+    }
   }
 }
