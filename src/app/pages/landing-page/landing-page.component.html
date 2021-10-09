@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-  <div class="grid grid-cols-4 auto-rows-images gap-0.5 mb-24">
+  <!-- <div class="grid grid-cols-4 auto-rows-images gap-0.5 mb-24">
     <div class="col-span-3">
       <img
         src="../../../assets/landing/landing55.png"
@@ -34,6 +34,20 @@
         class="object-cover h-full w-full"
       />
     </div>
+  </div> -->
+  <div
+    id="nanogallery2"
+    data-nanogallery2='{
+    "itemsBaseURL": "https://nanogallery2.nanostudio.org/samples/"
+  }'
+  >
+    <a (click)="comic()" data-ngthumb="img_01.jpg">landing55</a>
+    <a (click)="comic()" href="img_02.jpg" data-ngthumb="landing2.png"
+      >landing2</a
+    >
+    <a (click)="comic()" href="img_03.jpg" data-ngthumb="landing3.png"
+      >landing3</a
+    >
   </div>
   <div class="outer-imgbox">
     <div *ngFor="let c of contentItemList" class="px-8 mb-24">
