@@ -121,7 +121,7 @@
 <!-- Social Media buttons with hover-effect on the right side (bottom if mobile) -->
 <div class="max-w-screen-2xl m-auto">
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible">
-    <div class="mar">
+    <div *ngIf="globals?.instagramLink" class="mar">
       <div id="bubble1" class="bubble you invisible font-body">
         {{ globals?.instagramName }}
       </div>
@@ -138,13 +138,13 @@
           /></button
       ></a>
     </div>
-    <div>
+    <div *ngIf="globals?.facebookLink">
       <div id="bubble2" class="bubble you invisible font-body">
-        {{ globals?.facebookName }}
+        fb.com/{{ globals?.facebookName }}
       </div>
       <a href="{{ globals?.facebookLink }}" target="_blank" rel="noopener">
         <button
-          class="p-2 rounded-full hov"
+          class="p-2 rounded-full block my-2 hov"
           (mouseenter)="showBubble(2)"
           (mouseleave)="hideBubble(2)"
           [ngStyle]="buttonColor()"
@@ -154,8 +154,11 @@
       </a>
     </div>
   </div>
-  <div class="m-auto">
-    <div class="fixed bottom-0 right-0 visible lg:invisible z-10 mr-8 mb-8">
+  <div class="m-auto" *ngIf="globals?.instagramLink">
+    <div
+      *ngIf="globals?.facebookLink"
+      class="fixed bottom-0 right-0 visible lg:invisible z-10 mr-8 mb-8"
+    >
       <a
         href="{{ globals?.facebookLink }}"
         target="_blank"
@@ -172,7 +175,7 @@
         target="_blank"
         rel="noopener"
         title="Instagram"
-        ><button class="p-2 rounded-full mx-2 hov" [ngStyle]="buttonColor()">
+        ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor()">
           <img
             class="m-2 h-6"
             src="../../../assets/social/instagram.png"

@@ -103,7 +103,7 @@
     </div>
     <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Social Media</p>
-      <p class="pb-1">
+      <p *ngIf="globals?.facebookName" class="pb-1">
         <a
           href="{{ globals?.facebookLink }}"
           target="_blank"
@@ -117,7 +117,7 @@
           />{{ globals?.facebookName }}
         </a>
       </p>
-      <p>
+      <p *ngIf="globals?.instagramLink && globals?.instagramName">
         <a
           href="{{ globals?.instagramLink }}"
           target="_blank"
