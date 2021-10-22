@@ -15,7 +15,13 @@
         <div *ngIf="c.Image" class="m-auto">
           <figure class="float-right-fig">
             <img
+              *ngIf="c.Image.formats"
               src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
+              alt="{{ c.Image.alternativeText }}"
+            />
+            <img
+              *ngIf="!c.Image.formats"
+              src="{{ strapiLink }}{{ c.Image.url }}"
               alt="{{ c.Image.alternativeText }}"
             />
           </figure>
@@ -40,7 +46,13 @@
         <div *ngIf="c.Image" class="m-auto">
           <figure class="float-left-fig">
             <img
+              *ngIf="c.Image.formats"
               src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
+              alt="{{ c.Image.alternativeText }}"
+            />
+            <img
+              *ngIf="!c.Image.formats"
+              src="{{ strapiLink }}{{ c.Image.url }}"
               alt="{{ c.Image.alternativeText }}"
             />
           </figure>
@@ -65,8 +77,15 @@
       >
         <div *ngIf="c.Image" class="px-4">
           <img
+            *ngIf="c.Image.formats"
             class="m-auto py-4"
             src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
+            alt="{{ c.Image.alternativeText }}"
+          />
+          <img
+            *ngIf="!c.Image.formats"
+            class="m-auto py-4"
+            src="{{ strapiLink }}{{ c.Image.url }}"
             alt="{{ c.Image.alternativeText }}"
           />
         </div>
@@ -88,8 +107,15 @@
         <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
         <div *ngIf="c.Image" class="px-4">
           <img
+            *ngIf="c.Image.formats"
             class="m-auto py-4 w-3/5"
             src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
+            alt="{{ c.Image.alternativeText }}"
+          />
+          <img
+            *ngIf="!c.Image.formats"
+            class="m-auto py-4 w-3/5"
+            src="{{ strapiLink }}{{ c.Image.url }}"
             alt="{{ c.Image.alternativeText }}"
           />
         </div>

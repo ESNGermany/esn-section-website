@@ -32,6 +32,7 @@ interface ContentItem {
   Image: {
     id: string;
     alternativeText: string;
+    url: string;
     formats: {
       medium: {
         url: string;

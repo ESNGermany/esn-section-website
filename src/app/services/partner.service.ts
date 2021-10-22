@@ -13,6 +13,7 @@ interface PartnerItem {
   Main_image: {
     id: string;
     alternativeText: string;
+    url: string;
     formats: {
       medium: {
         url: string;
