@@ -19,10 +19,10 @@ export class ImprintService {
     private messageService: MessageService
   ) {}
 
-  fetchImprint(): Observable<ImprintItem> {
-    return this.http.get<ImprintItem>(this.url).pipe(
+  fetchImprint(): Observable<ImprintItem[]> {
+    return this.http.get<ImprintItem[]>(this.url).pipe(
       tap((_) => this.log('fetched imprint')),
-      catchError(this.handleError<ImprintItem>('fetchImprintList'))
+      catchError(this.handleError<ImprintItem[]>('fetchImprintList'))
     );
   }
 

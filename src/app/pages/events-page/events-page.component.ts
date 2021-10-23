@@ -65,13 +65,13 @@ export class EventsPageComponent implements OnInit {
       localStorage.removeItem('reload');
     }
     this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem.sectionLongName;
-      this.pretixLink = mainItem.pretixLink;
+      this.siteTitle = mainItem[0].sectionLongName;
+      this.pretixLink = mainItem[0].pretixLink;
       if (this.pretixLink.length == 0) {
         this.pretixLink = 'cal';
       }
-      this.facebookLink = mainItem.facebookLink;
-      this.instagramLink = mainItem.instagramLink;
+      this.facebookLink = mainItem[0].facebookLink;
+      this.instagramLink = mainItem[0].instagramLink;
       const title = 'Events | ' + this.siteTitle;
       this.title.setTitle(title);
     });

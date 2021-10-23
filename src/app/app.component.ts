@@ -63,6 +63,6 @@ export class AppComponent implements OnInit {
   getMain(): void {
     this.mainService
       .fetchMain()
-      .subscribe((mainItem) => (this.mainItem = mainItem));
+      .subscribe((mainItem) => (this.mainItem = mainItem[0]));
   }
 }

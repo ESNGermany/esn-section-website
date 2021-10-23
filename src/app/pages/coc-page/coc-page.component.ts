@@ -34,7 +34,7 @@ export class CocPageComponent implements OnInit {
       this.contentLoaded = Promise.resolve(true);
     });
     this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem.sectionLongName;
+      this.siteTitle = mainItem[0].sectionLongName;
       const title = 'Code of Conduct | ' + this.siteTitle;
       this.title.setTitle(title);
     });

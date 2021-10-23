@@ -59,10 +59,10 @@ export class MainService {
     private messageService: MessageService
   ) {}
 
-  fetchMain(): Observable<MainItem> {
-    return this.http.get<MainItem>(this.url).pipe(
+  fetchMain(): Observable<MainItem[]> {
+    return this.http.get<MainItem[]>(this.url).pipe(
       tap((_) => this.log('fetched main information')),
-      catchError(this.handleError<MainItem>('fetchMainInformation'))
+      catchError(this.handleError<MainItem[]>('fetchMainInformation'))
     );
   }
 

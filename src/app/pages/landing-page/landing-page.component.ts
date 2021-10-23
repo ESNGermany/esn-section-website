@@ -72,9 +72,9 @@ export class LandingPageComponent implements OnInit {
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
 
     this.mainService.fetchMain().subscribe((global) => {
-      this.globals = global;
+      this.globals = global[0];
       this.contentLoaded = Promise.resolve(true);
-      this.siteTitle = global.sectionLongName;
+      this.siteTitle = global[0].sectionLongName;
       const title = 'Home | ' + this.siteTitle;
       this.title.setTitle(title);
     });

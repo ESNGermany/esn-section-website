@@ -31,11 +31,11 @@ export class StatutesPageComponent implements OnInit {
 
   getStatutes(): void {
     this.statutesService.fetchStatutes().subscribe((statutesItemList) => {
-      this.statutesItemList = statutesItemList;
+      this.statutesItemList = statutesItemList[0];
       this.contentLoaded = Promise.resolve(true);
     });
     this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem.sectionLongName;
+      this.siteTitle = mainItem[0].sectionLongName;
       const title = 'Statutes | ' + this.siteTitle;
       this.title.setTitle(title);
     });

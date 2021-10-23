@@ -62,7 +62,7 @@ export class MembersPageComponent implements OnInit {
         this.contentLoaded = Promise.resolve(true);
       });
     this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem.sectionLongName;
+      this.siteTitle = mainItem[0].sectionLongName;
       const title = 'For Members | ' + this.siteTitle;
       this.title.setTitle(title);
     });

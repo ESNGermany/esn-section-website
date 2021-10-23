@@ -31,11 +31,11 @@ export class ImprintPageComponent implements OnInit {
 
   getImprint(): void {
     this.imprintService.fetchImprint().subscribe((imprintItemList) => {
-      this.imprintItemList = imprintItemList;
+      this.imprintItemList = imprintItemList[0];
       this.contentLoaded = Promise.resolve(true);
     });
     this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem.sectionLongName;
+      this.siteTitle = mainItem[0].sectionLongName;
       const title = 'Imprint | ' + this.siteTitle;
       this.title.setTitle(title);
     });

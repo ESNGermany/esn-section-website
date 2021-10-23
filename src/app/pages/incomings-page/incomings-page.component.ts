@@ -79,7 +79,7 @@ export class IncomingsPageComponent implements OnInit {
       .fetchPageContent('Incomings_page')
       .subscribe((contentItemList) => (this.contentItemList = contentItemList));
     this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem.sectionLongName;
+      this.siteTitle = mainItem[0].sectionLongName;
       const title = 'For Incomings | ' + this.siteTitle;
       this.title.setTitle(title);
     });

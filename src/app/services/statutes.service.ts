@@ -19,10 +19,10 @@ export class StatutesService {
     private messageService: MessageService
   ) {}
 
-  fetchStatutes(): Observable<StatutesItem> {
-    return this.http.get<StatutesItem>(this.url).pipe(
+  fetchStatutes(): Observable<StatutesItem[]> {
+    return this.http.get<StatutesItem[]>(this.url).pipe(
       tap((_) => this.log('fetched statutes')),
-      catchError(this.handleError<StatutesItem>('fetchStatutesList'))
+      catchError(this.handleError<StatutesItem[]>('fetchStatutesList'))
     );
   }
 

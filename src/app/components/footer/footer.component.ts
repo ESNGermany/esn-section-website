@@ -15,7 +15,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainService.fetchMain().subscribe((global) => {
-      this.globals = global;
+      this.globals = global[0];
       this.contentLoaded = Promise.resolve(true);
     });
   }
