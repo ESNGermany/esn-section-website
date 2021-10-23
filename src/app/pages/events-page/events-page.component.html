@@ -2,29 +2,13 @@
 <div class="outer-div">
   <div class="px-8 mb-24">
     <div class="title-div">
-      <p *ngIf="pretixLink" class="title-p">Find our newest events here.</p>
-      <p *ngIf="!pretixLink" class="title-p">
-        Check out the links below for our events!
-      </p>
+      <p class="title-p">Find our newest events here.</p>
     </div>
     <div class="font-body text-lg border border-graylight shadow-xl p-8">
       <div class="m-auto block font-body text-lg mb-8">
-        <p>
-          We are aware of the current situation concerning COVID-19. Therefore
-          we are organising less events with more restrictions. Unless you don't
-          hear otherwise, our events will take place as planned. For most
-          events, you need to buy tickets in advance as we need a complete
-          participants list. Keep yourself updated (e.g. on the
-          <a
-            href="https://www.rki.de/EN/Content/infections/epidemiology/outbreaks/COVID-19/COVID19.html"
-            target="_blank"
-            rel="noopener"
-            class="text-esn-dark-blue hover:underline"
-            >official RKI website</a
-          >) and stay safe!
-        </p>
+        <markdown [data]="eventPageText"></markdown>
       </div>
-      <div *ngIf="pretixLink === 'cal'">
+      <div *ngIf="!pretixLink">
         <full-calendar
           id="calendar"
           [options]="calendarOptions"
@@ -49,12 +33,10 @@
             target="_blank"
             rel="noopener"
           ></a>
-          <p id="cause">Click on an event to display more information!</p>
+          <p id="cause">Click on any event to display more information!</p>
         </div>
       </div>
-      <div *ngIf="pretixLink">
-        <app-pretix-calendar></app-pretix-calendar>
-      </div>
+      <app-pretix-calendar></app-pretix-calendar>
     </div>
   </div>
 </div>

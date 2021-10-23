@@ -2,9 +2,9 @@
 <div *ngIf="contentLoaded | async" class="outer">
   <div class="markdown-div">
     <div class="title-div">
-      <p class="title-p">{{ statutesItemList.statutesTitle }}</p>
+      <p class="title-p">Satzung</p>
     </div>
-    <markdown [data]="statutesItemList.Text"></markdown>
+    <markdown [data]="statutesItemList?.Text"></markdown>
   </div>
 </div>
 <app-footer></app-footer>

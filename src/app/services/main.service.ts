@@ -20,6 +20,7 @@ interface MainItem {
   addressEmailFourthLine: string;
   welcomeMessageFrontPage: string;
   buttonColor: string;
+  eventPageText: string;
   officialLogo: {
     url: string;
     alternativeText: string;
@@ -51,7 +52,10 @@ interface MainItem {
 
 @Injectable()
 export class MainService {
-  private url = environment.STRAPI_SECTION_URL + 'main-informations?_created_by=' + environment.STRAPI_SECTION_ID;
+  private url =
+    environment.STRAPI_SECTION_URL +
+    'main-informations?_created_by=' +
+    environment.STRAPI_SECTION_ID;
   sectionShortName: any;
 
   constructor(

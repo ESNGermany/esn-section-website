@@ -7,13 +7,15 @@ import { MessageService } from './message.service';
 
 interface StatutesItem {
   id: string;
-  statutesTitle: string;
   Text: string;
 }
 
 @Injectable()
 export class StatutesService {
-  private url = environment.STRAPI_SECTION_URL + 'statutes?_created_by=' + environment.STRAPI_SECTION_ID ;
+  private url =
+    environment.STRAPI_SECTION_URL +
+    'statutes?_created_by=' +
+    environment.STRAPI_SECTION_ID;
   constructor(
     private http: HttpClient,
     private messageService: MessageService

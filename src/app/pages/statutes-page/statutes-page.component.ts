@@ -5,7 +5,6 @@ import { MainService } from 'src/app/services/main.service';
 
 interface StatutesItem {
   id: string;
-  statutesTitle: string;
   Text: string;
 }
 

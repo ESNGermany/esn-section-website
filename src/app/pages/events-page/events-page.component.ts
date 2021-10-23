@@ -14,6 +14,7 @@ export class EventsPageComponent implements OnInit {
   pretixLink: string;
   facebookLink: string;
   instagramLink: string;
+  eventPageText: string;
 
   constructor(private title: Title, private mainService: MainService) {}
 
@@ -39,7 +40,11 @@ export class EventsPageComponent implements OnInit {
       appendLog(title, details, cause, link, date);
     },
     events: async function () {
-      const result = await fetch(environment.STRAPI_SECTION_URL + `events?_created_by=` + environment.STRAPI_SECTION_ID);
+      const result = await fetch(
+        environment.STRAPI_SECTION_URL +
+          `events?_created_by=` +
+          environment.STRAPI_SECTION_ID
+      );
       const result_2 = await result.json();
       if (result_2) {
         return result_2.map((r) => ({
@@ -66,8 +71,10 @@ export class EventsPageComponent implements OnInit {
     }
     this.mainService.fetchMain().subscribe((mainItem) => {
       this.siteTitle = mainItem[0].sectionLongName;
+      this.eventPageText = mainItem[0].eventPageText;
       this.pretixLink = mainItem[0].pretixLink;
-      if (this.pretixLink.length == 0) {
+      if (this.pretixLink === '""') {
+        console.log('empty');
         this.pretixLink = 'cal';
       }
       this.facebookLink = mainItem[0].facebookLink;
