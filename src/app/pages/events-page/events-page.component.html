@@ -1,43 +1,45 @@
 <app-navigation></app-navigation>
-<div class="outer-div">
-  <div class="px-8 mb-24">
-    <div class="title-div">
-      <p class="title-p">Find our newest events here.</p>
-    </div>
-    <div class="font-body text-lg border border-graylight shadow-xl p-8">
-      <div class="m-auto block font-body text-lg mb-8">
-        <markdown [data]="eventPageText"></markdown>
+<div *ngIf="contentLoaded | async">
+  <div class="outer-div">
+    <div class="px-8 mb-24">
+      <div class="title-div">
+        <p class="title-p">Find our newest events here.</p>
       </div>
-      <div *ngIf="pretixLink == 'cal'">
-        <full-calendar
-          id="calendar"
-          [options]="calendarOptions"
-        ></full-calendar>
-        <div
-          class="
-            bg-graylight
-            text-black
-            px-8
-            py-4
-            mt-4
-            border border-graylight
-            rounded
-          "
-        >
-          <h2 id="title" class="font-bold text-xl"></h2>
-          <div id="date" class="textgray"></div>
-          <div id="details"></div>
-          <a
-            id="link"
-            class="pt-4 text-esn-dark-blue hover:underline"
-            target="_blank"
-            rel="noopener"
-          ></a>
-          <p id="cause">Click on any event to display more information!</p>
+      <div class="font-body text-lg border border-graylight shadow-xl p-8">
+        <div class="m-auto block font-body text-lg mb-8">
+          <markdown [data]="globals?.eventPageText"></markdown>
         </div>
-      </div>
-      <div *ngIf="pretixLink != 'cal'">
-        <app-pretix-calendar></app-pretix-calendar>
+        <div *ngIf="globals?.pretixLink === cal">
+          <full-calendar
+            id="calendar"
+            [options]="calendarOptions"
+          ></full-calendar>
+          <div
+            class="
+              bg-graylight
+              text-black
+              px-8
+              py-4
+              mt-4
+              border border-graylight
+              rounded
+            "
+          >
+            <h2 id="title" class="font-bold text-xl"></h2>
+            <div id="date" class="textgray"></div>
+            <div id="details"></div>
+            <a
+              id="link"
+              class="pt-4 text-esn-dark-blue hover:underline"
+              target="_blank"
+              rel="noopener"
+            ></a>
+            <p id="cause">Click on any event to display more information!</p>
+          </div>
+        </div>
+        <div *ngIf="globals?.pretixLink !== cal">
+          <app-pretix-calendar></app-pretix-calendar>
+        </div>
       </div>
     </div>
   </div>

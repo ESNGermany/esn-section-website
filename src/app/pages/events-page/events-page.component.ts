@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { MainService } from 'src/app/services/main.service';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { environment } from 'src/environments/environment';
+import { MainItem } from 'src/app/app.component';
 
 @Component({
   selector: 'app-events-page',
@@ -11,10 +12,9 @@ import { environment } from 'src/environments/environment';
 })
 export class EventsPageComponent implements OnInit {
   siteTitle: string;
-  pretixLink: string;
-  facebookLink: string;
-  instagramLink: string;
-  eventPageText: string;
+  globals: MainItem;
+  contentLoaded: Promise<boolean>;
+  cal = 'cal';
 
   constructor(private title: Title, private mainService: MainService) {}
 
@@ -69,15 +69,17 @@ export class EventsPageComponent implements OnInit {
     } else {
       localStorage.removeItem('reload');
     }
-    this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem[0].sectionLongName;
-      this.eventPageText = mainItem[0].eventPageText;
-      this.pretixLink = mainItem[0].pretixLink;
-      this.facebookLink = mainItem[0].facebookLink;
-      this.instagramLink = mainItem[0].instagramLink;
+    this.getMain();
+    console.log(this.globals.pretixLink);
+  }
+
+  getMain(): void {
+    this.mainService.fetchMain().subscribe((global) => {
+      this.globals = global[0];
+      this.contentLoaded = Promise.resolve(true);
+      this.siteTitle = global[0].sectionLongName;
       const title = 'Events | ' + this.siteTitle;
       this.title.setTitle(title);
-      console.log(this.pretixLink);
     });
   }
 }
