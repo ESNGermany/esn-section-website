@@ -13,7 +13,7 @@ interface StatutesItem {
 
 @Injectable()
 export class StatutesService {
-  private url = environment.STRAPI_SECTION_URL + 'statutes';
+  private url = environment.STRAPI_SECTION_URL + 'statutes?_created_by=' + environment.STRAPI_SECTION_ID ;
   constructor(
     private http: HttpClient,
     private messageService: MessageService

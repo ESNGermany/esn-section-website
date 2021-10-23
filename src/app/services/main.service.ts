@@ -51,7 +51,7 @@ interface MainItem {
 
 @Injectable()
 export class MainService {
-  private url = environment.STRAPI_SECTION_URL + 'main-information';
+  private url = environment.STRAPI_SECTION_URL + 'main-informations?_created_by=' + environment.STRAPI_SECTION_ID;
   sectionShortName: any;
 
   constructor(

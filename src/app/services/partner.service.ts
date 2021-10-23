@@ -24,7 +24,7 @@ interface PartnerItem {
 
 @Injectable()
 export class PartnerService {
-  private url = environment.STRAPI_SECTION_URL + 'partners?_sort=Order';
+  private url = environment.STRAPI_SECTION_URL + 'partners?_created_by=' + environment.STRAPI_SECTION_ID + '&_sort=Order';
   constructor(
     private http: HttpClient,
     private messageService: MessageService

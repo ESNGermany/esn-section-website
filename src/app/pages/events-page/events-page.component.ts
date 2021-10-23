@@ -39,7 +39,7 @@ export class EventsPageComponent implements OnInit {
       appendLog(title, details, cause, link, date);
     },
     events: async function () {
-      const result = await fetch(environment.STRAPI_SECTION_URL + `events`);
+      const result = await fetch(environment.STRAPI_SECTION_URL + `events?_created_by=` + environment.STRAPI_SECTION_ID);
       const result_2 = await result.json();
       if (result_2) {
         return result_2.map((r) => ({

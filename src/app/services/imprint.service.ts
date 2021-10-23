@@ -13,7 +13,7 @@ interface ImprintItem {
 
 @Injectable()
 export class ImprintService {
-  private url = environment.STRAPI_SECTION_URL + 'imprint';
+  private url = environment.STRAPI_SECTION_URL + 'imprint?_created_by=' + environment.STRAPI_SECTION_ID;
   constructor(
     private http: HttpClient,
     private messageService: MessageService

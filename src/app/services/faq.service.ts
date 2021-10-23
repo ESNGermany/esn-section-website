@@ -17,7 +17,7 @@ interface FaqItem {
 export class FaqService {
   private url =
     environment.STRAPI_SECTION_URL +
-    'faqs?_sort=Order_within_category&Category=';
+    'faqs?_created_by=' + environment.STRAPI_SECTION_ID + '&_sort=Order_within_category&Category=';
   private fullUrl: string = '';
   constructor(
     private http: HttpClient,
