@@ -4,6 +4,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { MainService } from 'src/app/services/main.service';
 import { MainItem } from 'src/app/app.component';
 import { environment } from 'src/environments/environment';
+import { GalleryItem, ImageItem } from 'ng-gallery';
 
 interface ContentItem {
   id: string;
@@ -40,6 +41,7 @@ interface ContentItem {
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
+  images: GalleryItem[];
   contentItemList: ContentItem[] = [];
   globals: MainItem;
   contentLoaded: Promise<boolean>;
@@ -54,6 +56,14 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit() {
     this.getContent();
+
+    this.images = [
+      // REPLACE_SLIDER_IMAGES
+      // new ImageItem({
+      //   src: '../../../../assets/landing/landing1.png',
+      //   thumb: '../../../../assets/landing/landing1.png',
+      // }),
+    ];
   }
 
   getContent(): void {

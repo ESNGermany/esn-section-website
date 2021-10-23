@@ -32,6 +32,7 @@ import { ImprintService } from './services/imprint.service';
 import { MessageService } from './services/message.service';
 import { PartnerService } from './services/partner.service';
 import { StatutesService } from './services/statutes.service';
+import { GalleryModule } from 'ng-gallery';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -60,6 +61,7 @@ FullCalendarModule.registerPlugins([
   imports: [
     BrowserModule,
     FullCalendarModule,
+    GalleryModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,

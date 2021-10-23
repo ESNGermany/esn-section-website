@@ -3,36 +3,22 @@
   <div class="outer-div">
     <div class="px-8 mb-16">
       <div class="title-div4">
-        <p id="titeli" class="title-p">
+        <p id="titeli" class="title-p-welcome">
           {{ globals?.welcomeMessageFrontPage }}
         </p>
       </div>
     </div>
   </div>
-  <div class="grid grid-cols-4 auto-rows-images gap-0.5 mb-24">
-    <div class="col-span-3">
-      <img
-        src="../../../assets/landing/landing55.png"
-        class="object-cover h-full w-full"
-      />
-    </div>
-    <div class="row-span-2">
-      <img
-        src="../../../assets/landing/landing2.png"
-        class="object-cover h-full w-full"
-      />
-    </div>
-    <div (click)="comic()">
-      <img
-        src="../../../assets/landing/landing3.png"
-        class="object-cover h-full w-full"
-      />
-    </div>
-    <div class="col-span-2">
-      <img
-        src="../../../assets/landing/landing1.png"
-        class="object-cover h-full w-full"
-      />
+  <div class="bg-graylight my-4 py-4">
+    <div class="w-3/5 m-auto">
+      <gallery
+        [items]="images"
+        [counter]="false"
+        [thumbMode]="'free'"
+        [thumbPosition]="'right'"
+        [autoPlay]="true"
+        [playerInterval]="6000"
+      ></gallery>
     </div>
   </div>
   <div class="outer-imgbox">

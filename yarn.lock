@@ -158,6 +158,15 @@
   dependencies:
     tslib "^2.2.0"
 
+"@angular/cdk@^12.2.11":
+  version "12.2.11"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-12.2.11.tgz#e4f9f45508a0a808eba0b7f6df86e20c86df8306"
+  integrity sha512-GgBB3NdVSv6RnDDOMspeLGg3uCbbmWIEIQ9VIqT5TWXWnljd2EANOQWdLu+fkmRzJn66FFdlTtJ6rHYoY/oBkA==
+  dependencies:
+    tslib "^2.2.0"
+  optionalDependencies:
+    parse5 "^5.0.0"
+
 "@angular/cdk@~12.0.0":
   version "12.0.6"
   resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-12.0.6.tgz#bea895aace78b9498869ad82d83dd7b9bdfa2cd8"
@@ -6447,6 +6456,13 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+ng-gallery@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ng-gallery/-/ng-gallery-5.0.0.tgz#7daccec2e6223e5baee1eaa183c49ce172e51700"
+  integrity sha512-RFnMLJss8XbR7mmaKW39adPe78uzPp+ttv0l1hraq6IRcebTK7Ltzp8dVVg+fzdbx+cTmadespR6nD/icgrckg==
+  dependencies:
+    tslib "^2.0.0"
 
 ngx-build-plus@12.2.0:
   version "12.2.0"
