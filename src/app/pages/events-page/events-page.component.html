@@ -8,7 +8,7 @@
       <div class="m-auto block font-body text-lg mb-8">
         <markdown [data]="eventPageText"></markdown>
       </div>
-      <div *ngIf="!pretixLink">
+      <div *ngIf="pretixLink == 'cal'">
         <full-calendar
           id="calendar"
           [options]="calendarOptions"
@@ -36,7 +36,9 @@
           <p id="cause">Click on any event to display more information!</p>
         </div>
       </div>
-      <app-pretix-calendar></app-pretix-calendar>
+      <div *ngIf="pretixLink != 'cal'">
+        <app-pretix-calendar></app-pretix-calendar>
+      </div>
     </div>
   </div>
 </div>

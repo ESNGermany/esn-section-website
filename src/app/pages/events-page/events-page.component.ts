@@ -73,14 +73,11 @@ export class EventsPageComponent implements OnInit {
       this.siteTitle = mainItem[0].sectionLongName;
       this.eventPageText = mainItem[0].eventPageText;
       this.pretixLink = mainItem[0].pretixLink;
-      if (this.pretixLink === '""') {
-        console.log('empty');
-        this.pretixLink = 'cal';
-      }
       this.facebookLink = mainItem[0].facebookLink;
       this.instagramLink = mainItem[0].instagramLink;
       const title = 'Events | ' + this.siteTitle;
       this.title.setTitle(title);
+      console.log(this.pretixLink);
     });
   }
 }
