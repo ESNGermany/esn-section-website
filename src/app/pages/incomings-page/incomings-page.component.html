@@ -1,75 +1,6 @@
 <app-navigation></app-navigation>
 <div *ngIf="contentLoaded | async" class="outer-div">
   <div class="px-8 mb-24">
-    <div class="title-div">
-      <p class="title-p">Frequently Asked Questions</p>
-    </div>
-    <div class="font-body text-xl font-bold pb-2">Housing</div>
-    <div class="exp-shadow mb-6">
-      <app-expandable class="exp" *ngFor="let faq of faqHousingItemList">
-        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
-        <div class="answer-div">
-          <div class="answer-col">
-            <markdown [data]="faq.Answer"></markdown>
-          </div>
-        </div>
-      </app-expandable>
-    </div>
-    <div class="font-body text-xl font-bold pb-2">Transport</div>
-    <div class="exp-shadow mb-6">
-      <app-expandable class="exp" *ngFor="let faq of faqTransportItemList">
-        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
-        <div class="answer-div">
-          <div class="answer-col">
-            <markdown [data]="faq.Answer"></markdown>
-          </div>
-        </div>
-      </app-expandable>
-    </div>
-    <div class="font-body text-xl font-bold pb-2">ESNcard</div>
-    <div class="exp-shadow mb-6">
-      <app-expandable class="exp" *ngFor="let faq of faqEsncardItemList">
-        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
-        <div class="answer-div">
-          <div class="answer-col">
-            <markdown [data]="faq.Answer"></markdown>
-          </div>
-        </div>
-      </app-expandable>
-    </div>
-    <div class="font-body text-xl font-bold pb-2">Corona</div>
-    <div class="exp-shadow mb-6">
-      <app-expandable class="exp" *ngFor="let faq of faqCoronaItemList">
-        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
-        <div class="answer-div">
-          <div class="answer-col">
-            <markdown [data]="faq.Answer"></markdown>
-          </div>
-        </div>
-      </app-expandable>
-    </div>
-    <div class="font-body text-xl font-bold pb-2">Uni/Erasmus</div>
-    <div class="exp-shadow mb-6">
-      <app-expandable class="exp" *ngFor="let faq of faqUniErasmusItemList">
-        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
-        <div class="answer-div">
-          <div class="answer-col">
-            <markdown [data]="faq.Answer"></markdown>
-          </div>
-        </div>
-      </app-expandable>
-    </div>
-    <div class="font-body text-xl font-bold pb-2">Other</div>
-    <div class="exp-shadow mb-6">
-      <app-expandable class="exp" *ngFor="let faq of faqOtherItemList">
-        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
-        <div class="answer-div">
-          <div class="answer-col">
-            <markdown [data]="faq.Answer"></markdown>
-          </div>
-        </div>
-      </app-expandable>
-    </div>
     <div *ngFor="let c of contentItemList" class="mb-24">
       <!-- text left img right -->
       <div *ngIf="c.Layout === 'Text_left_img_right'">
@@ -191,6 +122,75 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="title-div">
+      <p class="title-p">Frequently Asked Questions</p>
+    </div>
+    <div class="font-body text-xl font-bold pb-2">Housing</div>
+    <div class="exp-shadow mb-6">
+      <app-expandable class="exp" *ngFor="let faq of faqHousingItemList">
+        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
+        <div class="answer-div">
+          <div class="answer-col">
+            <markdown [data]="faq.Answer"></markdown>
+          </div>
+        </div>
+      </app-expandable>
+    </div>
+    <div class="font-body text-xl font-bold pb-2">Transport</div>
+    <div class="exp-shadow mb-6">
+      <app-expandable class="exp" *ngFor="let faq of faqTransportItemList">
+        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
+        <div class="answer-div">
+          <div class="answer-col">
+            <markdown [data]="faq.Answer"></markdown>
+          </div>
+        </div>
+      </app-expandable>
+    </div>
+    <div class="font-body text-xl font-bold pb-2">ESNcard</div>
+    <div class="exp-shadow mb-6">
+      <app-expandable class="exp" *ngFor="let faq of faqEsncardItemList">
+        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
+        <div class="answer-div">
+          <div class="answer-col">
+            <markdown [data]="faq.Answer"></markdown>
+          </div>
+        </div>
+      </app-expandable>
+    </div>
+    <div class="font-body text-xl font-bold pb-2">Corona</div>
+    <div class="exp-shadow mb-6">
+      <app-expandable class="exp" *ngFor="let faq of faqCoronaItemList">
+        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
+        <div class="answer-div">
+          <div class="answer-col">
+            <markdown [data]="faq.Answer"></markdown>
+          </div>
+        </div>
+      </app-expandable>
+    </div>
+    <div class="font-body text-xl font-bold pb-2">Uni/Erasmus</div>
+    <div class="exp-shadow mb-6">
+      <app-expandable class="exp" *ngFor="let faq of faqUniErasmusItemList">
+        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
+        <div class="answer-div">
+          <div class="answer-col">
+            <markdown [data]="faq.Answer"></markdown>
+          </div>
+        </div>
+      </app-expandable>
+    </div>
+    <div class="font-body text-xl font-bold pb-2">Other</div>
+    <div class="exp-shadow mb-6">
+      <app-expandable class="exp" *ngFor="let faq of faqOtherItemList">
+        <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
+        <div class="answer-div">
+          <div class="answer-col">
+            <markdown [data]="faq.Answer"></markdown>
+          </div>
+        </div>
+      </app-expandable>
     </div>
   </div>
 </div>
