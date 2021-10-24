@@ -22,6 +22,7 @@ interface ContentItem {
     | 'ESNcard_page'
     | 'Incomings_page';
   Order_on_page: number;
+  url: string;
   Image: {
     id: string;
     alternativeText: string;
@@ -38,7 +39,9 @@ interface ContentItem {
 export class ContentService {
   private url =
     environment.STRAPI_SECTION_URL +
-    'contents?_created_by=' + environment.STRAPI_SECTION_ID + '&_sort=Order_on_page&Page_for_display=';
+    'contents?_created_by=' +
+    environment.STRAPI_SECTION_ID +
+    '&_sort=Order_on_page&Page_for_display=';
   private fullUrl: string;
   constructor(
     private http: HttpClient,

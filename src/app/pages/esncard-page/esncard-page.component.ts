@@ -22,6 +22,7 @@ interface ContentItem {
     | 'ESNcard_page'
     | 'Incomings_page';
   Order_on_page: number;
+  url: string;
   Image: {
     id: string;
     alternativeText: string;

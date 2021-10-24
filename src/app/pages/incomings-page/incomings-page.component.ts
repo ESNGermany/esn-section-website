@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ContentService } from 'src/app/services/content.service';
 import { FaqService } from 'src/app/services/faq.service';
 import { MainService } from 'src/app/services/main.service';
+import { environment } from 'src/environments/environment';
 
 interface FaqItem {
   id: string;
@@ -29,6 +30,7 @@ interface ContentItem {
     | 'ESNcard_page'
     | 'Incomings_page';
   Order_on_page: number;
+  url: string;
   Image: {
     id: string;
     alternativeText: string;
@@ -56,6 +58,7 @@ export class IncomingsPageComponent implements OnInit {
   faqOtherItemList: FaqItem[] = [];
   contentLoaded: Promise<boolean>;
   siteTitle: string;
+  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
   constructor(
     private title: Title,
