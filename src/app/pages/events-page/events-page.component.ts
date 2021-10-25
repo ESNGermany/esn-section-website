@@ -14,8 +14,7 @@ export class EventsPageComponent implements OnInit {
   siteTitle: string;
   globals: MainItem;
   contentLoaded: Promise<boolean>;
-  cal = 'cal';
-  pretixLink = 'cal';
+  pretixLink;
 
   constructor(private title: Title, private mainService: MainService) {
     this.getMain();
