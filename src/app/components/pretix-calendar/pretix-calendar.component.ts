@@ -10,11 +10,17 @@ export class PretixCalendarComponent implements OnInit {
 
   ngOnInit() {
     this.loadJsFile('https://pretix.eu/widget/v1.en.js');
+    this.addStyleCalendar();
   }
   public loadJsFile(url) {
     let node = document.createElement('script');
     node.src = url;
     node.type = 'text/javascript';
     document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  addStyleCalendar() {
+    const widget = document.getElementById('pretixwidget');
+    widget.setAttribute('style', 'calendar');
   }
 }
