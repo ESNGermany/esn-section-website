@@ -15,8 +15,11 @@ export class EventsPageComponent implements OnInit {
   globals: MainItem;
   contentLoaded: Promise<boolean>;
   cal = 'cal';
+  pretixLink = 'cal';
 
-  constructor(private title: Title, private mainService: MainService) {}
+  constructor(private title: Title, private mainService: MainService) {
+    this.getMain();
+  }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -62,16 +65,7 @@ export class EventsPageComponent implements OnInit {
     },
   };
 
-  ngOnInit() {
-    if (!localStorage.getItem('reload')) {
-      localStorage.setItem('reload', 'no reload');
-      location.reload();
-    } else {
-      localStorage.removeItem('reload');
-    }
-    this.getMain();
-    console.log(this.globals.pretixLink);
-  }
+  ngOnInit() {}
 
   getMain(): void {
     this.mainService.fetchMain().subscribe((global) => {
@@ -80,6 +74,10 @@ export class EventsPageComponent implements OnInit {
       this.siteTitle = global[0].sectionLongName;
       const title = 'Events | ' + this.siteTitle;
       this.title.setTitle(title);
+      this.pretixLink = global[0].pretixLink;
+      let x = global.length;
+      // console.log(this.globals.pretixLink);
+      // console.log(this.pretixLink);
     });
   }
 }
