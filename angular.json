@@ -25,8 +25,8 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/_redirects", "src/assets"],
-            "styles": ["src/styles.scss", "src/pretix.css"],
-            "scripts": ["src/assets/js/pretix.js"]
+            "styles": ["src/styles.scss"],
+            "scripts": []
           },
           "configurations": {
             "production": {
