@@ -9,7 +9,7 @@ export class PretixCalendarComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.loadJsFile('https://pretix.eu/demo/democon/widget/v1.css');
+    this.loadJsFile('https://pretix.eu/widget/v1.en.js');
   }
   public loadJsFile(url) {
     let node = document.createElement('script');
