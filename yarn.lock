@@ -1295,12 +1295,21 @@
     jsdom "16.6.0"
     tslib "^2.3.0"
 
-"@nguniversal/express-engine@12.1.0":
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/@nguniversal/express-engine/-/express-engine-12.1.0.tgz#b3457e57b23232541b018cc073454a0c5b944733"
-  integrity sha512-rgJ+ZlToX2wC7u8H5kIlT0lL3HNE7Awdazoc0HbeVV9xlCKBye29ndTAON6JZEn+8tIVAN0sZioziBZED/Yrvg==
+"@nguniversal/common@12.1.3":
+  version "12.1.3"
+  resolved "https://registry.yarnpkg.com/@nguniversal/common/-/common-12.1.3.tgz#57d745250a45959c6b9c8a05bbdd704b8c3ca52f"
+  integrity sha512-0fP8ThHx3vePJxTdic5cz9hvWnqB2Uvx2uf1JQ68zto8ZXrasOeB8kT+ujhuUIyH8AR98BYMudMXCVvq+UbkeA==
   dependencies:
-    "@nguniversal/common" "12.1.0"
+    critters "0.0.12"
+    jsdom "16.6.0"
+    tslib "^2.3.0"
+
+"@nguniversal/express-engine@12.1.3":
+  version "12.1.3"
+  resolved "https://registry.yarnpkg.com/@nguniversal/express-engine/-/express-engine-12.1.3.tgz#c8813e21a43465addc30da2abccc7a8d67138215"
+  integrity sha512-iu/7Al3NjwdwJw3ALyW9n7MzAQ75/Ca/cd2xWi7rzgvev2pgakZfvn2/EbB8oFI6xOSvA2irA29BeobkR4crlw==
+  dependencies:
+    "@nguniversal/common" "12.1.3"
     tslib "^2.3.0"
 
 "@nodelib/fs.scandir@2.1.5":
@@ -3117,6 +3126,18 @@ critters@0.0.10:
     css "^3.0.0"
     parse5 "^6.0.1"
     parse5-htmlparser2-tree-adapter "^6.0.1"
+    pretty-bytes "^5.3.0"
+
+critters@0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/critters/-/critters-0.0.12.tgz#32baa87526e053a41b67e19921673ed92264e2ab"
+  integrity sha512-ujxKtKc/mWpjrOKeaACTaQ1aP0O31M0ZPWhfl85jZF1smPU4Ivb9va5Ox2poif4zVJQQo0LCFlzGtEZAsCAPcw==
+  dependencies:
+    chalk "^4.1.0"
+    css-select "^4.1.3"
+    parse5 "^6.0.1"
+    parse5-htmlparser2-tree-adapter "^6.0.1"
+    postcss "^8.3.7"
     pretty-bytes "^5.3.0"
 
 cross-spawn@^6.0.0:
@@ -6359,6 +6380,11 @@ nanoid@^3.1.23:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.25.tgz#09ca32747c0e543f0e1814b7d3793477f9c8e152"
   integrity sha512-rdwtIXaXCLFAQbnfqDRnI6jaRHp9fTcYBjtFKE8eezcZ7LuLjhUaQGNeMXf1HmRoCH32CLz6XwX0TtxEOS/A3Q==
 
+nanoid@^3.1.30:
+  version "3.1.30"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.30.tgz#63f93cc548d2a113dc5dfbc63bfa09e2b9b64362"
+  integrity sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==
+
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -7000,6 +7026,11 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+
+picocolors@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
+  integrity sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==
 
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3:
   version "2.3.0"
@@ -7684,6 +7715,15 @@ postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2, postcss@^7.0.32, postcss@^7.0.
     chalk "^2.4.2"
     source-map "^0.6.1"
     supports-color "^6.1.0"
+
+postcss@^8.3.7:
+  version "8.3.11"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.11.tgz#c3beca7ea811cd5e1c4a3ec6d2e7599ef1f8f858"
+  integrity sha512-hCmlUAIlUiav8Xdqw3Io4LcpA1DOt7h3LSTAC4G6JGHFFaWzI6qvFt9oilvl8BmkbBRX1IhM90ZAmpk68zccQA==
+  dependencies:
+    nanoid "^3.1.30"
+    picocolors "^1.0.0"
+    source-map-js "^0.6.2"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
