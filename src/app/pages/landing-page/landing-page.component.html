@@ -1,5 +1,4 @@
-<app-navigation></app-navigation>
-<div *ngIf="contentLoaded | async">
+<div *ngIf="contentInfo$ | async as contentItemList">
   <div class="outer-div">
     <div class="px-8 mb-16">
       <div class="title-div4">
@@ -146,4 +145,3 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>

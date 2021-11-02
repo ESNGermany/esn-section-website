@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-interface FaqItem {
+export interface FaqItem {
   id: string;
   Question: string;
   Answer: string;
@@ -17,16 +17,20 @@ interface FaqItem {
 export class FaqService {
   private url =
     environment.STRAPI_SECTION_URL +
-    'faqs?_created_by=' + environment.STRAPI_SECTION_ID + '&_sort=Order_within_category&Category=';
+    'faqs?_created_by=' +
+    environment.STRAPI_SECTION_ID +
+    '&_sort=Order_within_category&Category=';
   private fullUrl: string = '';
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) {}
 
-  fetchFaq(category: string): Observable<FaqItem[]> {
+  fetchFaq(category: string): Observable<unknown> {
     this.fullUrl = this.url + category;
     return this.http.get<FaqItem[]>(this.fullUrl).pipe(
+      shareReplay(1),
       tap((_) => this.log('fetched faq')),
       catchError(this.handleError<FaqItem[]>('fetchFaqList', []))
     );

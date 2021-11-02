@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MainItem } from 'src/app/app.component';
-import { MainService } from 'src/app/services/main.service';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { map, Observable, shareReplay } from 'rxjs';
+import { MainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,22 +9,24 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  public globals: MainItem;
-  contentLoaded: Promise<boolean>;
+  globals$: Observable<MainItem>;
 
-  constructor(private mainService: MainService) {}
+  constructor(
+    private mainService: MainService,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
-  ngOnInit(): void {
-    this.mainService.fetchMain().subscribe((global) => {
-      this.globals = global[0];
-      this.contentLoaded = Promise.resolve(true);
-    });
+  async ngOnInit() {
+    this.globals$ = this.mainService.fetchMain().pipe(
+      shareReplay(1),
+      map((res) => res[0])
+    );
   }
 
   pink(): void {
-    const footer = document.getElementById('foot');
-    const footer2 = document.getElementById('foot2');
-    const footer3 = document.getElementById('foot3');
+    const footer = this.document.getElementById('foot');
+    const footer2 = this.document.getElementById('foot2');
+    const footer3 = this.document.getElementById('foot3');
     footer.setAttribute('style', 'background-color: #ec008c');
     footer2.setAttribute('style', 'fill: #ec008c');
     footer3.setAttribute('style', 'fill: #ec008c');

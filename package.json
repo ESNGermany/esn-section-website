@@ -1,5 +1,5 @@
 {
-  "name": "esn-freiburg-website",
+  "name": "esn-sections-website",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -10,10 +10,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:prod": "ng build --prod",
-    "dev:ssr": "ng run esn-germany-website:serve-ssr",
-    "serve:ssr": "node dist/esn-germany-website/server/main.js",
-    "build:ssr": "ng build --prod && ng run esn-germany-website:server:production",
-    "prerender": "ng run esn-germany-website:prerender"
+    "dev:ssr": "ng run esn-sections-website:serve-ssr",
+    "serve:ssr": "node dist/esn-sections-website/server/main.js",
+    "build:ssr": "ng build && ng run esn-sections-website:server",
+    "prerender": "ng run esn-sections-website:prerender",
+    "prerender:freiburg": "ng run esn-sections-website:prerender --configuration freiburg"
   },
   "private": true,
   "dependencies": {
@@ -25,12 +26,14 @@
     "@angular/forms": "12.2.6",
     "@angular/platform-browser": "12.2.6",
     "@angular/platform-browser-dynamic": "12.2.6",
+    "@angular/platform-server": "12.2.6",
     "@angular/router": "12.2.6",
     "@fullcalendar/angular": "^5.9.0",
     "@fullcalendar/daygrid": "^5.9.0",
     "@fullcalendar/interaction": "^5.9.0",
     "@nguniversal/express-engine": "12.1.0",
     "autoprefixer": "10.3.4",
+    "express": "^4.15.2",
     "ng-gallery": "^5.0.0",
     "rxjs": "7.3.0",
     "tslib": "2.3.1",

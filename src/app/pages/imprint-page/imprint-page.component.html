@@ -1,5 +1,4 @@
-<app-navigation></app-navigation>
-<div *ngIf="contentLoaded | async" class="outer">
+<div *ngIf="imprintItemList$ | async as imprintItemList" class="outer">
   <div class="markdown-div">
     <div class="title-div">
       <p class="title-p">{{ imprintItemList.Title }}</p>
@@ -7,4 +6,3 @@
     <markdown [data]="imprintItemList.Text"></markdown>
   </div>
 </div>
-<app-footer></app-footer>

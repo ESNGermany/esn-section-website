@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-interface PartnerItem {
+export interface PartnerItem {
   id: string;
   Name: string;
   Deal: string;
@@ -24,17 +24,26 @@ interface PartnerItem {
 
 @Injectable()
 export class PartnerService {
-  private url = environment.STRAPI_SECTION_URL + 'partners?_created_by=' + environment.STRAPI_SECTION_ID + '&_sort=Order';
+  private url =
+    environment.STRAPI_SECTION_URL +
+    'partners?_created_by=' +
+    environment.STRAPI_SECTION_ID +
+    '&_sort=Order';
+  private dataRequest;
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {}
-
-  fetchPagePartner(): Observable<PartnerItem[]> {
-    return this.http.get<PartnerItem[]>(this.url).pipe(
+  ) {
+    this.dataRequest = this.http.get<PartnerItem[]>(this.url).pipe(
+      shareReplay(1),
       tap((_) => this.log('fetched partner')),
       catchError(this.handleError<PartnerItem[]>('fetchPartnerList', []))
     );
+  }
+
+  fetchPagePartner(): Observable<PartnerItem[]> {
+    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

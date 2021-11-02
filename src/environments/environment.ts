@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: '3' // 3 = Cologne
+  STRAPI_SECTION_ID: '6', // 3 = Cologne
 };
 
 /*

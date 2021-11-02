@@ -1,5 +1,4 @@
-<app-navigation></app-navigation>
-<div *ngIf="contentLoaded | async" class="outer-imgbox">
+<div *ngIf="contentInfo$ | async as contentItemList" class="outer-imgbox">
   <div *ngFor="let c of contentItemList" class="px-8 mb-24">
     <!-- text left img right -->
     <div *ngIf="c.Layout === 'Text_left_img_right'">
@@ -123,4 +122,3 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>

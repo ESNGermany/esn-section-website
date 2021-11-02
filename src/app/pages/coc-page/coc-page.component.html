@@ -1,7 +1,5 @@
-<app-navigation></app-navigation>
-<div *ngIf="contentLoaded | async" class="outer">
+<div *ngIf="cocItem$ | async as cocItem" class="outer">
   <div class="markdown-div">
-    <markdown [data]="cocItemList.MarkdownText"></markdown>
+    <markdown [data]="cocItem.MarkdownText"></markdown>
   </div>
 </div>
-<app-footer></app-footer>

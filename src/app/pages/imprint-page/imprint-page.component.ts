@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ImprintService } from 'src/app/services/imprint.service';
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { ImprintItem, ImprintService } from 'src/app/services/imprint.service';
 import { MainService } from 'src/app/services/main.service';
-
-interface ImprintItem {
-  id: string;
-  Title: string;
-  Text: string;
-}
 
 @Component({
   selector: 'app-imprint-page',
@@ -15,9 +10,7 @@ interface ImprintItem {
   styleUrls: ['./imprint-page.component.scss'],
 })
 export class ImprintPageComponent implements OnInit {
-  imprintItemList: ImprintItem;
-  contentLoaded: Promise<boolean>;
-  siteTitle: string;
+  imprintItemList$: Observable<ImprintItem>;
 
   constructor(
     private title: Title,
@@ -25,19 +18,13 @@ export class ImprintPageComponent implements OnInit {
     private mainService: MainService
   ) {}
 
-  ngOnInit() {
-    this.getImprint();
-  }
-
-  getImprint(): void {
-    this.imprintService.fetchImprint().subscribe((imprintItemList) => {
-      this.imprintItemList = imprintItemList[0];
-      this.contentLoaded = Promise.resolve(true);
-    });
-    this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem[0].sectionLongName;
-      const title = 'Imprint | ' + this.siteTitle;
-      this.title.setTitle(title);
-    });
+  async ngOnInit() {
+    this.imprintItemList$ = this.imprintService.fetchImprint().pipe(
+      shareReplay(1),
+      map((res) => res[0])
+    );
+    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
+    const title = 'Imprint | ' + mainInfo?.sectionLongName;
+    this.title.setTitle(title);
   }
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MainService } from 'src/app/services/main.service';
+import { MainItem, MainService } from 'src/app/services/main.service';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { environment } from 'src/environments/environment';
-import { MainItem } from 'src/app/app.component';
+import { DOCUMENT } from '@angular/common';
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-events-page',
@@ -11,14 +12,15 @@ import { MainItem } from 'src/app/app.component';
   styleUrls: ['./events-page.component.scss'],
 })
 export class EventsPageComponent implements OnInit {
-  siteTitle: string;
-  globals: MainItem;
-  contentLoaded: Promise<boolean>;
+  globals$: Observable<MainItem>;
+
   pretixLink;
 
-  constructor(private title: Title, private mainService: MainService) {
-    this.getMain();
-  }
+  constructor(
+    private title: Title,
+    private mainService: MainService,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -64,20 +66,13 @@ export class EventsPageComponent implements OnInit {
     },
   };
 
-  ngOnInit() {}
-
-  getMain(): void {
-    this.mainService.fetchMain().subscribe((global) => {
-      this.globals = global[0];
-      this.contentLoaded = Promise.resolve(true);
-      this.siteTitle = global[0].sectionLongName;
-      const title = 'Events | ' + this.siteTitle;
-      this.title.setTitle(title);
-      this.pretixLink = global[0].pretixLink;
-      let x = global.length;
-      // console.log(this.globals.pretixLink);
-      // console.log(this.pretixLink);
-    });
+  async ngOnInit() {
+    this.globals$ = this.mainService.fetchMain().pipe(
+      shareReplay(1),
+      map((res) => res[0])
+    );
+    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
+    this.title.setTitle('Events | ' + mainInfo?.sectionLongName);
   }
 }
 function appendLog(
@@ -87,19 +82,20 @@ function appendLog(
   link: string,
   date: Date
 ) {
-  var detailsEl = document.createElement('div');
+  var detailsEl = this.document.createElement('div');
   detailsEl.textContent = details;
-  document.querySelector('#details').innerHTML = '';
-  document.querySelector('#details').appendChild(detailsEl);
+  this.document.querySelector('#details').innerHTML = '';
+  this.document.querySelector('#details').appendChild(detailsEl);
 
-  document.querySelector('#title').innerHTML = title;
+  this.document.querySelector('#title').innerHTML = title;
 
-  document.querySelector('#cause').innerHTML = 'Cause: ' + convertCause(cause);
+  this.document.querySelector('#cause').innerHTML =
+    'Cause: ' + convertCause(cause);
 
-  document.querySelector('#link').innerHTML = link;
-  document.querySelector('#link').setAttribute('href', link);
+  this.document.querySelector('#link').innerHTML = link;
+  this.document.querySelector('#link').setAttribute('href', link);
 
-  document.querySelector('#date').innerHTML =
+  this.document.querySelector('#date').innerHTML =
     date.toLocaleString('de-DE', {
       day: 'numeric',
       month: 'long',

@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-interface StatutesItem {
+export interface StatutesItem {
   id: string;
   Text: string;
 }
@@ -16,16 +16,21 @@ export class StatutesService {
     environment.STRAPI_SECTION_URL +
     'statutes?_created_by=' +
     environment.STRAPI_SECTION_ID;
+  private dataRequest;
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {}
-
-  fetchStatutes(): Observable<StatutesItem[]> {
-    return this.http.get<StatutesItem[]>(this.url).pipe(
+  ) {
+    this.dataRequest = this.http.get<StatutesItem>(this.url).pipe(
+      shareReplay(1),
       tap((_) => this.log('fetched statutes')),
-      catchError(this.handleError<StatutesItem[]>('fetchStatutesList'))
+      catchError(this.handleError<StatutesItem>('fetchStatutesList'))
     );
+  }
+
+  fetchStatutes(): Observable<StatutesItem> {
+    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

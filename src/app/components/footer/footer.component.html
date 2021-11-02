@@ -1,4 +1,8 @@
-<footer *ngIf="contentLoaded | async" id="foot" class="bg-footer relative">
+<footer
+  *ngIf="globals$ | async as globals"
+  id="foot"
+  class="bg-footer relative"
+>
   <div id="foot2" class="divider-top">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path

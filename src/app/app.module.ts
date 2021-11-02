@@ -59,7 +59,7 @@ FullCalendarModule.registerPlugins([
     ExpandableComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     FullCalendarModule,
     GalleryModule,
     BrowserAnimationsModule,
