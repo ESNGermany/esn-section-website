@@ -84,36 +84,36 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  // async getBgImage(): Promise<unknown> {
-  //   const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
-  //   const imgUrl =
-  //     environment.STRAPI_SECTION_URL_IMAGE + mainInfo?.headerImage.url;
-  //   const color = mainInfo?.buttonColor;
-  //   return {
-  //     'background-image':
-  //       'linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%,' +
-  //       color +
-  //       ' 80%), url("' +
-  //       imgUrl +
-  //       '")',
-  //   };
-  // }
+  async getBgImage(): Promise<unknown> {
+    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
+    const imgUrl =
+      environment.STRAPI_SECTION_URL_IMAGE + mainInfo?.headerImage.url;
+    const color = mainInfo?.buttonColor;
+    return {
+      'background-image':
+        'linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%,' +
+        color +
+        ' 80%), url("' +
+        imgUrl +
+        '")',
+    };
+  }
 
-  // async buttonColor(): Promise<unknown> {
-  //   const globals = await firstValueFrom(this.globals$);
-  //   switch (globals?.buttonColor) {
-  //     case 'esnGreen':
-  //       return { 'background-color': 'rgb(122, 193, 67)' };
-  //     case 'esnPink':
-  //       return { 'background-color': 'rgb(236, 0, 140)' };
-  //     case 'esnOrange':
-  //       return { 'background-color': 'rgb(244, 123, 32)' };
-  //     case 'esnLightBlue':
-  //       return { 'background-color': 'rgb(0, 174, 239)' };
-  //     case 'esnDarkBlue':
-  //       return { 'background-color': 'rgb(46, 49, 146)' };
-  //     default:
-  //       return { 'background-color': 'rgb(255, 255, 255, 1)' };
-  //   }
-  // }
+  async buttonColor(): Promise<unknown> {
+    const globals = await firstValueFrom(this.globals$);
+    switch (globals?.buttonColor) {
+      case 'esnGreen':
+        return { 'background-color': 'rgb(122, 193, 67)' };
+      case 'esnPink':
+        return { 'background-color': 'rgb(236, 0, 140)' };
+      case 'esnOrange':
+        return { 'background-color': 'rgb(244, 123, 32)' };
+      case 'esnLightBlue':
+        return { 'background-color': 'rgb(0, 174, 239)' };
+      case 'esnDarkBlue':
+        return { 'background-color': 'rgb(46, 49, 146)' };
+      default:
+        return { 'background-color': 'rgb(255, 255, 255, 1)' };
+    }
+  }
 }

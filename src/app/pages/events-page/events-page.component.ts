@@ -5,6 +5,8 @@ import { CalendarOptions } from '@fullcalendar/angular';
 import { environment } from 'src/environments/environment';
 import { DOCUMENT } from '@angular/common';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { EventItem, EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-events-page',
@@ -13,13 +15,15 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 })
 export class EventsPageComponent implements OnInit {
   globals$: Observable<MainItem>;
+  events$: Observable<EventItem[]>;
 
   pretixLink;
 
   constructor(
     private title: Title,
     private mainService: MainService,
-    @Inject(DOCUMENT) private document: Document
+    private eventsService: EventsService,
+    public http: HttpClient
   ) {}
 
   calendarOptions: CalendarOptions = {
@@ -43,27 +47,24 @@ export class EventsPageComponent implements OnInit {
       const date = info.event.start;
       appendLog(title, details, cause, link, date);
     },
-    events: async function () {
-      const result = await fetch(
-        environment.STRAPI_SECTION_URL +
-          `events?_created_by=` +
-          environment.STRAPI_SECTION_ID
-      );
-      const result_2 = await result.json();
-      if (result_2) {
-        return result_2.map((r) => ({
-          start: new Date(r.start),
-          end: new Date(r.end),
-          title: r.title,
-          url: r.url,
-          extendedProps: {
-            details: r.details,
-            cause: r.causes,
-          },
-        }));
-      }
-      return [];
-    },
+    // events: async function () {
+    //   const [result] = await firstValueFrom(this.eventsService.fetchEvents());
+
+    //   // const result_2 = await result.json();
+    //   if (result) {
+    //     return result.map((r) => ({
+    //       start: new Date(r.start),
+    //       end: new Date(r.end),
+    //       title: r.title,
+    //       url: r.url,
+    //       extendedProps: {
+    //         details: r.details,
+    //         cause: r.causes,
+    //       },
+    //     }));
+    //   }
+    //   return [];
+    // },
   };
 
   async ngOnInit() {
@@ -73,6 +74,9 @@ export class EventsPageComponent implements OnInit {
     );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Events | ' + mainInfo?.sectionLongName);
+    // this.events$ = this.eventsService.fetchEvents().pipe(shareReplay(1));
+    const [events] = await firstValueFrom(this.eventsService.fetchEvents());
+    this.calendarOptions.events = events;
   }
 }
 function appendLog(
@@ -82,28 +86,23 @@ function appendLog(
   link: string,
   date: Date
 ) {
-  var detailsEl = this.document.createElement('div');
-  detailsEl.textContent = details;
-  this.document.querySelector('#details').innerHTML = '';
-  this.document.querySelector('#details').appendChild(detailsEl);
-
-  this.document.querySelector('#title').innerHTML = title;
-
-  this.document.querySelector('#cause').innerHTML =
-    'Cause: ' + convertCause(cause);
-
-  this.document.querySelector('#link').innerHTML = link;
-  this.document.querySelector('#link').setAttribute('href', link);
-
-  this.document.querySelector('#date').innerHTML =
-    date.toLocaleString('de-DE', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: false,
-    }) + ' Uhr';
+  // var detailsEl = document.createElement('div');
+  // detailsEl.textContent = details;
+  // document.querySelector('#details').innerHTML = '';
+  // document.querySelector('#details').appendChild(detailsEl);
+  // document.querySelector('#title').innerHTML = title;
+  // document.querySelector('#cause').innerHTML = 'Cause: ' + convertCause(cause);
+  // document.querySelector('#link').innerHTML = link;
+  // document.querySelector('#link').setAttribute('href', link);
+  // document.querySelector('#date').innerHTML =
+  //   date.toLocaleString('de-DE', {
+  //     day: 'numeric',
+  //     month: 'long',
+  //     year: 'numeric',
+  //     hour: 'numeric',
+  //     minute: '2-digit',
+  //     hour12: false,
+  //   }) + ' Uhr';
 }
 
 function convertCause(cause: string) {
