@@ -169,8 +169,8 @@
     </div>
     <div class="font-body text-xl font-bold pb-2">Corona</div>
     <div
-      c*ngIf="faqCoronaItemList$ | async as faqCoronaItemList"
-      lass="exp-shadow mb-6"
+      *ngIf="faqCoronaItemList$ | async as faqCoronaItemList"
+      class="exp-shadow mb-6"
     >
       <app-expandable class="exp" *ngFor="let faq of faqCoronaItemList">
         <p slot="header" class="font-body text-md">{{ faq.Question }}</p>

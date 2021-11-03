@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class MembersPageComponent implements OnInit {
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
-  contentInfo$: Observable<ContentItem>;
+  contentInfo$: Observable<ContentItem[]>;
 
   constructor(
     private title: Title,
@@ -25,8 +25,7 @@ export class MembersPageComponent implements OnInit {
     this.contentInfo$ = this.contentService
       .fetchPageContent('Members_page')
       .pipe(
-        shareReplay(1),
-        map((res) => res[0])
+        shareReplay(1)
       );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('For Members | ' + mainInfo?.sectionLongName);

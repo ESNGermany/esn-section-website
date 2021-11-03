@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { map, Observable, shareReplay } from 'rxjs';
-import { MainItem, MainService } from 'src/app/services/main.service';
+import {DOCUMENT, isPlatformBrowser} from '@angular/common';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {map, Observable, shareReplay} from 'rxjs';
+import {MainItem, MainService} from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-pretix-calendar',
@@ -13,17 +13,22 @@ export class PretixCalendarComponent implements OnInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: string,
     private mainService: MainService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
-    this.loadJsFile('https://pretix.eu/widget/v1.en.js');
-    this.addStyleCalendar();
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res) => res[0])
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadJsFile('https://pretix.eu/widget/v1.en.js');
+      this.addStyleCalendar();
+      this.globals$ = this.mainService.fetchMain().pipe(
+        shareReplay(1),
+        map((res) => res[0])
+      );
+    }
   }
+
   public loadJsFile(url) {
     let node = this.document.createElement('script');
     node.src = url;

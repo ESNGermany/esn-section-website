@@ -13,7 +13,7 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 export class TeamPageComponent implements OnInit {
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
-  contentInfo$: Observable<ContentItem>;
+  contentInfo$: Observable<ContentItem[]>;
 
   constructor(
     private title: Title,
@@ -23,8 +23,7 @@ export class TeamPageComponent implements OnInit {
 
   async ngOnInit() {
     this.contentInfo$ = this.contentService.fetchPageContent('Team_page').pipe(
-      shareReplay(1),
-      map((res) => res[0])
+      shareReplay(1)
     );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Our Team | ' + mainInfo?.sectionLongName);

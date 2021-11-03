@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MainItem, MainService } from 'src/app/services/main.service';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { environment } from 'src/environments/environment';
-import { DOCUMENT } from '@angular/common';
+import {DOCUMENT, isPlatformBrowser} from '@angular/common';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { EventItem, EventsService } from 'src/app/services/events.service';
@@ -18,12 +18,14 @@ export class EventsPageComponent implements OnInit {
   events$: Observable<EventItem[]>;
 
   pretixLink;
+  browser = false;
 
   constructor(
     private title: Title,
     private mainService: MainService,
     private eventsService: EventsService,
-    public http: HttpClient
+    public http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: string,
   ) {}
 
   calendarOptions: CalendarOptions = {
@@ -38,7 +40,7 @@ export class EventsPageComponent implements OnInit {
       meridiem: false,
       hour12: false,
     },
-    eventClick: function (info) {
+    eventClick: info => {
       info.jsEvent.preventDefault();
       const title = info.event.title;
       const details = info.event.extendedProps.details;
@@ -75,8 +77,11 @@ export class EventsPageComponent implements OnInit {
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Events | ' + mainInfo?.sectionLongName);
     // this.events$ = this.eventsService.fetchEvents().pipe(shareReplay(1));
-    const [events] = await firstValueFrom(this.eventsService.fetchEvents());
-    this.calendarOptions.events = events;
+    if (isPlatformBrowser(this.platformId)) {
+      const [events] = await firstValueFrom(this.eventsService.fetchEvents());
+      this.calendarOptions.events = events;
+      this.browser = true;
+    }
   }
 }
 function appendLog(

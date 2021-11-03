@@ -12,13 +12,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./incomings-page.component.scss'],
 })
 export class IncomingsPageComponent implements OnInit {
-  contentInfo$: Observable<ContentItem>;
-  faqTransportItemList$: Observable<FaqItem>;
-  faqHousingItemList$: Observable<FaqItem>;
-  faqUniErasmusItemList$: Observable<FaqItem>;
-  faqCoronaItemList$: Observable<FaqItem>;
-  faqEsncardItemList$: Observable<FaqItem>;
-  faqOtherItemList$: Observable<FaqItem>;
+  contentInfo$: Observable<ContentItem[]>;
+  faqTransportItemList$: Observable<FaqItem[]>;
+  faqHousingItemList$: Observable<FaqItem[]>;
+  faqUniErasmusItemList$: Observable<FaqItem[]>;
+  faqCoronaItemList$: Observable<FaqItem[]>;
+  faqEsncardItemList$: Observable<FaqItem[]>;
+  faqOtherItemList$: Observable<FaqItem[]>;
 
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
@@ -33,40 +33,33 @@ export class IncomingsPageComponent implements OnInit {
     this.contentInfo$ = this.contentService
       .fetchPageContent('Incomings_page')
       .pipe(
-        shareReplay(1),
-        map((res) => res[0])
+        shareReplay(1)
       );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('For Incomings | ' + mainInfo?.sectionLongName);
 
     this.faqTransportItemList$ = this.faqService.fetchFaq('Transport').pipe(
       shareReplay(1),
-      map((res) => res[0])
     );
 
     this.faqHousingItemList$ = this.faqService.fetchFaq('Housing').pipe(
       shareReplay(1),
-      map((res) => res[0])
     );
 
     this.faqUniErasmusItemList$ = this.faqService.fetchFaq('Uni_Erasmus').pipe(
       shareReplay(1),
-      map((res) => res[0])
     );
 
     this.faqCoronaItemList$ = this.faqService.fetchFaq('Corona').pipe(
       shareReplay(1),
-      map((res) => res[0])
     );
 
     this.faqEsncardItemList$ = this.faqService.fetchFaq('ESNcard').pipe(
       shareReplay(1),
-      map((res) => res[0])
     );
 
     this.faqOtherItemList$ = this.faqService.fetchFaq('Other').pipe(
       shareReplay(1),
-      map((res) => res[0])
     );
   }
 }

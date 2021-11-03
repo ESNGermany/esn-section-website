@@ -27,7 +27,7 @@ export class FaqService {
     private messageService: MessageService
   ) {}
 
-  fetchFaq(category: string): Observable<unknown> {
+  fetchFaq(category: string): Observable<FaqItem[]> {
     this.fullUrl = this.url + category;
     return this.http.get<FaqItem[]>(this.fullUrl).pipe(
       shareReplay(1),

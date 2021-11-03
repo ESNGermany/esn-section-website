@@ -49,7 +49,7 @@ export class ContentService {
     private messageService: MessageService
   ) {}
 
-  fetchPageContent(page: string): Observable<unknown> {
+  fetchPageContent(page: string): Observable<ContentItem[]> {
     this.fullUrl = this.url + page;
     return this.http.get<ContentItem[]>(this.fullUrl).pipe(
       shareReplay(1),

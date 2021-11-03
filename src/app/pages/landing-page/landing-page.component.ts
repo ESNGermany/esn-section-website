@@ -16,7 +16,7 @@ export class LandingPageComponent implements OnInit {
   images: GalleryItem[];
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
-  contentInfo$: Observable<ContentItem>;
+  contentInfo$: Observable<ContentItem[]>;
   globals$: Observable<MainItem>;
 
   constructor(
@@ -34,8 +34,7 @@ export class LandingPageComponent implements OnInit {
     this.contentInfo$ = this.contentService
       .fetchPageContent('Landing_page')
       .pipe(
-        shareReplay(1),
-        map((res) => res[0])
+        shareReplay(1)
       );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Home | ' + mainInfo?.sectionLongName);

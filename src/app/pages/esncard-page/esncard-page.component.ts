@@ -12,8 +12,8 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./esncard-page.component.scss'],
 })
 export class EsncardPageComponent implements OnInit {
-  contentInfo$: Observable<ContentItem>;
-  partnerInfo$: Observable<PartnerItem>;
+  contentInfo$: Observable<ContentItem[]>;
+  partnerInfo$: Observable<PartnerItem[]>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
   constructor(
@@ -27,12 +27,10 @@ export class EsncardPageComponent implements OnInit {
     this.contentInfo$ = this.contentService
       .fetchPageContent('ESNcard_page')
       .pipe(
-        shareReplay(1),
-        map((res) => res[0])
+        shareReplay(1)
       );
     this.partnerInfo$ = this.partnerService.fetchPagePartner().pipe(
-      shareReplay(1),
-      map((res) => res[0])
+      shareReplay(1)
     );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('ESNcard & Partners | ' + mainInfo?.sectionLongName);

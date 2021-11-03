@@ -8,7 +8,7 @@
         <div class="m-auto block font-body text-lg mb-8">
           <markdown [data]="globals?.eventPageText"></markdown>
         </div>
-        <div *ngIf="!pretixLink">
+        <div *ngIf="!pretixLink && browser">
           <full-calendar
             id="calendar"
             [options]="calendarOptions"

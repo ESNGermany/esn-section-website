@@ -66,6 +66,7 @@ export class MainService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
+    console.log(this.url);
     this.dataRequest = this.http.get<MainItem[]>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched main information')),

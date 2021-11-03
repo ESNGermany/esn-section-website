@@ -1323,6 +1323,11 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
+"@ngneat/tailwind@^7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@ngneat/tailwind/-/tailwind-7.0.3.tgz#fff7edff35642b249d8711a9b10d5753216dd4a9"
+  integrity sha512-o9quceIAomYD+P/40tJ1n1G/CkWcAa1dWW5/acCz4qnS7ajhGsBoSD4N+usi+vqdoEJnunCsoEBWL9OMsSwcFA==
+
 "@ngtools/webpack@12.2.6":
   version "12.2.6"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-12.2.6.tgz#9bb1c1b9b21deceee183e5eae96db7350caefdcd"
