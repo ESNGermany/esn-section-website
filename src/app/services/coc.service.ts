@@ -6,6 +6,7 @@ import { MessageService } from './message.service';
 
 export interface CocItem {
   id: string;
+  Title: string;
   MarkdownText: string;
 }
 

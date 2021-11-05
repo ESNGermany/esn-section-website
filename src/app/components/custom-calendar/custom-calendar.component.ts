@@ -40,9 +40,7 @@ export class CustomCalendarComponent implements OnInit {
       const date = info.event.start;
       appendLog(title, details, cause, link, date);
     },
-    events: this.eventsFetch().then((res) => {
-      return res;
-    }),
+    events: {},
   };
 
   async ngOnInit() {

@@ -11,6 +11,7 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class CocPageComponent implements OnInit {
   cocItem$: Observable<CocItem>;
+
   constructor(
     private title: Title,
     private cocService: CocService,
@@ -20,7 +21,7 @@ export class CocPageComponent implements OnInit {
   async ngOnInit() {
     this.cocItem$ = this.cocService.fetchCoc().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res) => res)
     );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     const title = 'Code of Conduct | ' + mainInfo?.sectionLongName;

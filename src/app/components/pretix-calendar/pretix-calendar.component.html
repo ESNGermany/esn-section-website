@@ -1,28 +1,11 @@
-<!-- <div *ngIf="globals$ | async as globals">
-  <div
-    class="pretix-widget-compat"
-    event="{{ globals?.pretixLink }}?style=calendar"
-  ></div>
-</div> -->
-<!-- <noscript>
-  <div class="pretix-widget">
-    <div class="pretix-widget-info-message">
-      JavaScript is disabled in your browser. To access our ticket shop without
-      JavaScript, please
-      <a target="_blank" href="">click here</a>.
-    </div>
-  </div>
-</noscript> -->
-
 <div *ngIf="globals$ | async as globals">
-  <div class="pretix-widget-compat" event="{{ globals.pretixLink }}"></div>
+  <div id="pretixdiv" class="pretix-widget-compat" event=""></div>
   <noscript>
     <div class="pretix-widget">
       <div class="pretix-widget-info-message">
         JavaScript is disabled in your browser. To access our ticket shop
         without JavaScript, please
-        <a target="_blank" href="https://pretix.eu/demo/democon/">click here</a
-        >.
+        <a target="_blank" href="{{ globals?.pretixLink }}">click here</a>.
       </div>
     </div>
   </noscript>

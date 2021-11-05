@@ -42,8 +42,8 @@ export class NavigationComponent implements OnInit {
     );
     this.bgImage$ = this.globals$.pipe(
       map((res) => ({
-        'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.buttonColor(
-          res.buttonColor
+        'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
+          res?.buttonColor
         )}, 0.8) 80%), url("${environment.STRAPI_SECTION_URL_IMAGE}${
           res.headerImage.url
         }")`,
@@ -51,7 +51,7 @@ export class NavigationComponent implements OnInit {
     );
     this.buttonColor$ = this.globals$.pipe(
       map((res) => ({
-        'background-color': `${this.buttonColor(res.buttonColor)})`,
+        'background-color': `${this.getButtonColor(res?.buttonColor)})`,
       }))
     );
   }
@@ -99,7 +99,7 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  buttonColor(colorString: string): string {
+  getButtonColor(colorString: string): string {
     switch (colorString) {
       case 'esnGreen':
         return 'rgb(122, 193, 67';

@@ -6,6 +6,15 @@
   @apply m-auto block mb-24 px-16 font-body;
 }
 
+.title-div {
+  @apply m-auto mb-8 relative;
+}
+
+.title-p {
+  @extend .title;
+  @apply font-heading text-esn-dark-blue font-bold text-4xl;
+}
+
 .title::after {
   position: absolute;
   content: "";
