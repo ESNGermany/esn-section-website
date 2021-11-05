@@ -33,19 +33,19 @@ export class LandingPageComponent implements OnInit {
     );
     this.contentInfo$ = this.contentService
       .fetchPageContent('Landing_page')
-      .pipe(
-        shareReplay(1)
-      );
+      .pipe(shareReplay(1));
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Home | ' + mainInfo?.sectionLongName);
 
-    this.images = [
-      // REPLACE_SLIDER_IMAGES
-      // new ImageItem({
-      //   src: '../../../../assets/landing/landing1.png',
-      //   thumb: '../../../../assets/landing/landing1.png',
-      // }),
-    ];
+    this.images = [];
+    for (let img of mainInfo?.imageGridFrontPage) {
+      this.images.unshift(
+        new ImageItem({
+          src: `${environment.STRAPI_SECTION_URL_IMAGE}${img.formats.medium.url}`,
+          thumb: `${environment.STRAPI_SECTION_URL_IMAGE}${img.formats.thumbnail.url}`,
+        })
+      );
+    }
   }
 
   comic(): void {

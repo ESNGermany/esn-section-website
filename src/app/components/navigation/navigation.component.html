@@ -35,7 +35,7 @@
   </ul>
 </div>
 <!-- Logo and white top navigation -->
-   <div class="w-full mb-16 bg" [ngStyle]="bgImage$ | async">
+<div class="w-full mb-16 bg" [ngStyle]="bgImage$ | async">
   <nav
     id="navinav"
     class="
@@ -126,8 +126,10 @@
         {{ globals?.instagramName }}
       </div> -->
       <a href="{{ globals?.instagramLink }}" target="_blank" rel="noopener">
-        <button class="p-2 rounded-full block my-2 hov">
-          <!-- [ngStyle]="buttonColor()" -->
+        <button
+          class="p-2 rounded-full block my-2 hov"
+          [ngStyle]="buttonColor$ | async"
+        >
           <img class="m-2 h-6" src="../../../assets/social/instagram.png" />
         </button>
       </a>
@@ -137,8 +139,10 @@
         fb.com/{{ globals?.facebookName }}
       </div> -->
       <a href="{{ globals?.facebookLink }}" target="_blank" rel="noopener">
-        <button class="p-2 rounded-full block my-2 hov">
-          <!-- [ngStyle]="buttonColor()" -->
+        <button
+          class="p-2 rounded-full block my-2 hov"
+          [ngStyle]="buttonColor$ | async"
+        >
           <img class="m-2 h-6" src="../../../assets/social/facebook.png" />
         </button>
       </a>
@@ -154,8 +158,7 @@
         target="_blank"
         rel="noopener"
         title="Facebook"
-        ><button class="p-2 rounded-full hov">
-          <!-- ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor() | async"> -->
+        ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor$ | async">
           <img
             class="m-2 h-6"
             src="../../../assets/social/facebook.png"
@@ -166,8 +169,7 @@
         target="_blank"
         rel="noopener"
         title="Instagram"
-        ><button class="p-2 rounded-full hov">
-          <!-- ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor() | async"> -->
+        ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor$ | async">
           <img
             class="m-2 h-6"
             src="../../../assets/social/instagram.png"

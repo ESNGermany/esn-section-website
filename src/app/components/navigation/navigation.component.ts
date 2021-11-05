@@ -1,8 +1,15 @@
-import {DOCUMENT} from '@angular/common';
-import {Component, ElementRef, HostListener, Inject, Input, OnInit,} from '@angular/core';
-import {firstValueFrom, map, Observable, shareReplay} from 'rxjs';
-import {MainItem, MainService} from 'src/app/services/main.service';
-import {environment} from 'src/environments/environment';
+import { DOCUMENT } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Inject,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { MainItem, MainService } from 'src/app/services/main.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navigation',
@@ -13,13 +20,13 @@ export class NavigationComponent implements OnInit {
   globals$: Observable<MainItem>;
   @Input() activeMenu: string;
   public bgImage$: Observable<unknown>;
+  public buttonColor$: Observable<unknown>;
 
   constructor(
     private el: ElementRef,
     private mainService: MainService,
     @Inject(DOCUMENT) private document: Document
-  ) {
-  }
+  ) {}
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
@@ -35,8 +42,16 @@ export class NavigationComponent implements OnInit {
     );
     this.bgImage$ = this.globals$.pipe(
       map((res) => ({
-        'background-image':
-          `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%,${'rgba(122, 193, 67, 0.8)'} 80%), url("${environment.STRAPI_SECTION_URL_IMAGE}${res.headerImage.url}")`,
+        'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.buttonColor(
+          res.buttonColor
+        )}, 0.8) 80%), url("${environment.STRAPI_SECTION_URL_IMAGE}${
+          res.headerImage.url
+        }")`,
+      }))
+    );
+    this.buttonColor$ = this.globals$.pipe(
+      map((res) => ({
+        'background-color': `${this.buttonColor(res.buttonColor)})`,
       }))
     );
   }
@@ -84,21 +99,20 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  async buttonColor(): Promise<unknown> {
-    const globals = await firstValueFrom(this.globals$);
-    switch (globals?.buttonColor) {
+  buttonColor(colorString: string): string {
+    switch (colorString) {
       case 'esnGreen':
-        return {'background-color': 'rgb(122, 193, 67)'};
+        return 'rgb(122, 193, 67';
       case 'esnPink':
-        return {'background-color': 'rgb(236, 0, 140)'};
+        return 'rgb(236, 0, 140';
       case 'esnOrange':
-        return {'background-color': 'rgb(244, 123, 32)'};
+        return 'rgb(244, 123, 32';
       case 'esnLightBlue':
-        return {'background-color': 'rgb(0, 174, 239)'};
+        return 'rgb(0, 174, 239';
       case 'esnDarkBlue':
-        return {'background-color': 'rgb(46, 49, 146)'};
+        return 'rgb(46, 49, 146';
       default:
-        return {'background-color': 'rgb(255, 255, 255, 1)'};
+        return 'rgb(255, 255, 255';
     }
   }
 }

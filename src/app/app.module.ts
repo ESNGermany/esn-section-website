@@ -33,6 +33,7 @@ import { MessageService } from './services/message.service';
 import { PartnerService } from './services/partner.service';
 import { StatutesService } from './services/statutes.service';
 import { GalleryModule } from 'ng-gallery';
+import { CustomCalendarComponent } from './components/custom-calendar/custom-calendar.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -57,6 +58,7 @@ FullCalendarModule.registerPlugins([
     CocPageComponent,
     IncomingsPageComponent,
     ExpandableComponent,
+    CustomCalendarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

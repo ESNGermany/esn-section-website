@@ -18,10 +18,8 @@ export interface EventItem {
   providedIn: 'root',
 })
 export class EventsService {
-  private url =
-    environment.STRAPI_SECTION_URL +
-    `events?_created_by=` +
-    environment.STRAPI_SECTION_ID;
+  private url = environment.STRAPI_SECTION_URL + `events?_created_by=` + '9';
+  // environment.STRAPI_SECTION_ID;
   private dataRequest;
 
   constructor(
