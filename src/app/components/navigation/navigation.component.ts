@@ -7,7 +7,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom, map, Observable, shareReplay, take } from 'rxjs';
 import { MainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 
@@ -45,7 +45,7 @@ export class NavigationComponent implements OnInit {
         'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
           res?.buttonColor
         )}, 0.8) 80%), url("${environment.STRAPI_SECTION_URL_IMAGE}${
-          res.headerImage.url
+          res?.headerImage.url
         }")`,
       }))
     );

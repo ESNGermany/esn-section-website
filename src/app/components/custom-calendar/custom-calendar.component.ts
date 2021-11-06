@@ -1,10 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {
-  CalendarOptions,
-  EventInput,
-  EventSourceInput,
-} from '@fullcalendar/angular';
+import { CalendarOptions, EventSourceInput } from '@fullcalendar/angular';
 import { firstValueFrom, shareReplay } from 'rxjs';
 import { EventItem, EventsService } from 'src/app/services/events.service';
 import { environment } from 'src/environments/environment';
@@ -17,7 +13,9 @@ import { environment } from 'src/environments/environment';
 export class CustomCalendarComponent implements OnInit {
   pretixLink;
 
-  constructor(private eventsService: EventsService, private http: HttpClient) {}
+  constructor() {}
+
+  async ngOnInit() {}
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -40,33 +38,28 @@ export class CustomCalendarComponent implements OnInit {
       const date = info.event.start;
       appendLog(title, details, cause, link, date);
     },
-    events: {},
+    events: async function () {
+      const result = await fetch(
+        environment.STRAPI_SECTION_URL +
+          `events?_created_by=` +
+          environment.STRAPI_SECTION_ID
+      );
+      const result_2 = await result.json();
+      if (result_2) {
+        return result_2.map((r) => ({
+          start: new Date(r.start),
+          end: new Date(r.end),
+          title: r.title,
+          url: r.url,
+          extendedProps: {
+            details: r.details,
+            cause: r.causes,
+          },
+        }));
+      }
+      return [];
+    },
   };
-
-  async ngOnInit() {
-    // const [events] = await firstValueFrom(this.eventsService.fetchEvents());
-    // this.calendarOptions.events = events;
-  }
-
-  async eventsFetch(): Promise<EventInput[]> {
-    const [events] = await firstValueFrom(this.eventsService.fetchEvents());
-
-    // const result_2 = await [events].json();
-    console.log(events);
-    if (events) {
-      return [events].map((r) => ({
-        start: new Date(r.start),
-        end: new Date(r.end),
-        title: r.title,
-        url: r.url,
-        extendedProps: {
-          details: r.details,
-          cause: r.causes,
-        },
-      }));
-    }
-    return [];
-  }
 }
 
 function appendLog(

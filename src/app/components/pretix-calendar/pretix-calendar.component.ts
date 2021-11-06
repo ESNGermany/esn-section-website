@@ -1,5 +1,5 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 import { MainItem, MainService } from 'src/app/services/main.service';
 
@@ -16,8 +16,7 @@ export class PretixCalendarComponent implements OnInit {
     private mainService: MainService
   ) {}
 
-  ngOnInit() {
-    this.loadJsFile('https://pretix.eu/widget/v1.en.js');
+  async ngOnInit() {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res) => res[0])
@@ -25,18 +24,12 @@ export class PretixCalendarComponent implements OnInit {
     this.addStyleCalendar();
   }
 
-  public loadJsFile(url) {
-    let node = this.document.createElement('script');
-    node.src = url;
-    node.type = 'text/javascript';
-    this.document.getElementsByTagName('head')[0].appendChild(node);
-  }
-
   async addStyleCalendar() {
-    const widget = this.document.getElementById('pretixdiv');
     const [globals] = await firstValueFrom(this.mainService.fetchMain());
-    console.log(globals.pretixLink);
-    widget.setAttribute('event', globals.pretixLink);
-    // widget.setAttribute('style', 'calendar');
+    const widget = this.document.getElementById('pretixdiv');
+    if (widget) {
+      widget.setAttribute('event', globals.pretixLink);
+      widget.setAttribute('style', 'calendar');
+    }
   }
 }

@@ -8,11 +8,12 @@
       </div>
     </div>
   </div>
-  <div class="bg-graylight my-4 py-4">
-    <div class="w-3/5 m-auto">
+  <div class="bg-graylight my-1 py-1 xl:my-4 xl:py-4">
+    <div class="w-4/5 xl:w-3/5 mx-auto">
       <gallery
         [items]="images"
         [counter]="false"
+        [thumb]="showThumb"
         [thumbMode]="'free'"
         [thumbPosition]="'right'"
         [autoPlay]="true"

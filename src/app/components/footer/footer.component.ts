@@ -27,8 +27,10 @@ export class FooterComponent implements OnInit {
     const footer = this.document.getElementById('foot');
     const footer2 = this.document.getElementById('foot2');
     const footer3 = this.document.getElementById('foot3');
+    const strapiLink = this.document.getElementById('strapiLink');
     footer.setAttribute('style', 'background-color: #ec008c');
     footer2.setAttribute('style', 'fill: #ec008c');
     footer3.setAttribute('style', 'fill: #ec008c');
+    strapiLink.setAttribute('style', 'color: #eaeaea !important');
   }
 }
