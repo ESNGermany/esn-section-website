@@ -2,9 +2,11 @@
   <div class="outer-div">
     <div class="px-8 mb-16">
       <div class="title-div4">
-        <p id="titeli" class="title-p-welcome">
-          {{ globals?.welcomeMessageFrontPage }}
-        </p>
+        <div *ngIf="globals$ | async as globals">
+          <p id="titeli" class="title-p-welcome">
+            {{ globals?.welcomeMessageFrontPage }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
