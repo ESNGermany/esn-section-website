@@ -5,6 +5,10 @@ import { PartnerItem, PartnerService } from 'src/app/services/partner.service';
 import { environment } from 'src/environments/environment';
 import { MainItem, MainService } from 'src/app/services/main.service';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import {
+  NationalPartnerItem,
+  NationalPartnersService,
+} from 'src/app/services/national-partners.service';
 
 @Component({
   selector: 'app-esncard-page',
@@ -17,11 +21,13 @@ export class EsncardPageComponent implements OnInit {
   globals$: Observable<MainItem>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
   cityName: string;
+  nationalPartner$: Observable<NationalPartnerItem[]>;
 
   constructor(
     private title: Title,
     private contentService: ContentService,
     private partnerService: PartnerService,
+    private nationalPartnerService: NationalPartnersService,
     private mainService: MainService
   ) {}
 
@@ -36,6 +42,9 @@ export class EsncardPageComponent implements OnInit {
       shareReplay(1),
       map((res) => res[0])
     );
+    this.nationalPartner$ = this.nationalPartnerService
+      .fetchPageNationalPartner()
+      .pipe(shareReplay(1));
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('ESNcard & Partners | ' + mainInfo?.sectionLongName);
     this.cityName = mainInfo?.sectionShortName.split(' ')[1];
