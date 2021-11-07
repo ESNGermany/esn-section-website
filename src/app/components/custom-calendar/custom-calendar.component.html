@@ -1,7 +1,6 @@
 <div *ngIf="!pretixLink">
-  <full-calendar id="calendar" [options]="calendarOptions"></full-calendar>
-  <div
-    class="
+  <full-calendar id="calendar" [options]="calendarOptions" *ngIf="isBrowser$ | async"></full-calendar>
+  <div *ngIf="event$| async as event" class="
       bg-graylight
       text-black
       px-8
@@ -9,17 +8,16 @@
       mt-4
       border border-graylight
       rounded
-    "
-  >
-    <h2 id="title" class="font-bold text-xl"></h2>
-    <div id="date" class="textgray"></div>
-    <div id="details"></div>
+    ">
+    <h2 class="font-bold text-xl">{{ event.title }}</h2>
+    <p class="textgray">{{ event.start | date: 'medium' }}</p>
+    <p>{{ event.extendedProps.cause }}</p>
+    <markdown [data]="event.extendedProps.details"></markdown>
     <a
-      id="link"
       class="pt-4 text-esn-dark-blue hover:underline"
       target="_blank"
       rel="noopener"
-    ></a>
-    <p id="cause">Click on any event to display more information!</p>
+      [href]="event.url"
+    >{{event.url}}</a>
   </div>
 </div>

@@ -1,91 +1,64 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { CalendarOptions, EventSourceInput } from '@fullcalendar/angular';
-import { firstValueFrom, shareReplay } from 'rxjs';
-import { EventItem, EventsService } from 'src/app/services/events.service';
-import { environment } from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {CalendarOptions} from '@fullcalendar/angular';
+import {BehaviorSubject, firstValueFrom} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-custom-calendar',
   templateUrl: './custom-calendar.component.html',
   styleUrls: ['./custom-calendar.component.scss'],
 })
-export class CustomCalendarComponent implements OnInit {
+export class CustomCalendarComponent {
   pretixLink;
+  calendarOptions: CalendarOptions;
+  isBrowser$ = new BehaviorSubject(false);
+  event$ = new BehaviorSubject(null);
 
-  constructor() {}
-
-  async ngOnInit() {}
-
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    firstDay: 1,
-    showNonCurrentDates: false,
-    fixedWeekCount: false,
-    aspectRatio: 1.8,
-    eventTimeFormat: {
-      hour: 'numeric',
-      minute: '2-digit',
-      meridiem: false,
-      hour12: false,
-    },
-    eventClick: (info) => {
-      info.jsEvent.preventDefault();
-      const title = info.event.title;
-      const details = info.event.extendedProps.details;
-      const cause = info.event.extendedProps.cause;
-      const link = info.event.url;
-      const date = info.event.start;
-      appendLog(title, details, cause, link, date);
-    },
-    events: async function () {
-      const result = await fetch(
-        environment.STRAPI_SECTION_URL +
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId:object) {
+    if(isPlatformBrowser(platformId)){
+      this.isBrowser$.next(true);
+    }
+    this.calendarOptions = {
+      initialView: 'dayGridMonth',
+      firstDay: 1,
+      showNonCurrentDates: false,
+      fixedWeekCount: false,
+      aspectRatio: 1.8,
+      eventTimeFormat: {
+        hour: 'numeric',
+        minute: '2-digit',
+        meridiem: false,
+        hour12: false,
+      },
+      eventClick: (info) => {
+        info.jsEvent.preventDefault();
+        this.event$.next(info.event);
+      },
+      events: async function () {
+        const result_2 = await firstValueFrom(http.get<{ start: string, end: string, title: string, url: string, details: string, causes: string }[]>(
+          environment.STRAPI_SECTION_URL +
           `events?_created_by=` +
           environment.STRAPI_SECTION_ID
-      );
-      const result_2 = await result.json();
-      if (result_2) {
-        return result_2.map((r) => ({
-          start: new Date(r.start),
-          end: new Date(r.end),
-          title: r.title,
-          url: r.url,
-          extendedProps: {
-            details: r.details,
-            cause: r.causes,
-          },
-        }));
-      }
-      return [];
-    },
-  };
-}
+        ));
+        if (result_2) {
+          return result_2.map((r) => ({
+            start: new Date(r.start),
+            end: new Date(r.end),
+            title: r.title,
+            url: r.url,
+            extendedProps: {
+              details: r.details,
+              cause: 'Cause: ' + convertCause(r.causes),
+            },
+          }));
+        }
+        return [];
+      },
+    };
+  }
 
-function appendLog(
-  title: string,
-  details: string,
-  cause: string,
-  link: string,
-  date: Date
-) {
-  var detailsEl = document.createElement('div');
-  detailsEl.textContent = details;
-  document.querySelector('#details').innerHTML = '';
-  document.querySelector('#details').appendChild(detailsEl);
-  document.querySelector('#title').innerHTML = title;
-  document.querySelector('#cause').innerHTML = 'Cause: ' + convertCause(cause);
-  document.querySelector('#link').innerHTML = link;
-  document.querySelector('#link').setAttribute('href', link);
-  document.querySelector('#date').innerHTML =
-    date.toLocaleString('de-DE', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: false,
-    }) + ' Uhr';
 }
 
 function convertCause(cause: string) {
