@@ -1,5 +1,4 @@
-<app-navigation></app-navigation>
-<div *ngIf="contentLoaded | async">
+<div *ngIf="globals$ | async as globals">
   <div class="outer-div">
     <div class="px-8 mb-24">
       <div class="title-div">
@@ -9,39 +8,13 @@
         <div class="m-auto block font-body text-lg mb-8">
           <markdown [data]="globals?.eventPageText"></markdown>
         </div>
-        <div *ngIf="!pretixLink">
-          <full-calendar
-            id="calendar"
-            [options]="calendarOptions"
-          ></full-calendar>
-          <div
-            class="
-              bg-graylight
-              text-black
-              px-8
-              py-4
-              mt-4
-              border border-graylight
-              rounded
-            "
-          >
-            <h2 id="title" class="font-bold text-xl"></h2>
-            <div id="date" class="textgray"></div>
-            <div id="details"></div>
-            <a
-              id="link"
-              class="pt-4 text-esn-dark-blue hover:underline"
-              target="_blank"
-              rel="noopener"
-            ></a>
-            <p id="cause">Click on any event to display more information!</p>
-          </div>
+        <div *ngIf="!globals?.usePretixCalendar">
+          <app-custom-calendar></app-custom-calendar>
         </div>
-        <div *ngIf="pretixLink">
+        <div *ngIf="globals?.usePretixCalendar">
           <app-pretix-calendar></app-pretix-calendar>
         </div>
       </div>
     </div>
   </div>
 </div>
-<app-footer></app-footer>

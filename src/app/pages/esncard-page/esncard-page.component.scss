@@ -3,7 +3,8 @@
 }
 
 .title-p {
-  @apply font-heading text-esn-dark-blue font-bold text-4xl title;
+  @extend .title;
+  @apply font-heading text-esn-dark-blue font-bold text-4xl;
 }
 
 .float-right-fig {

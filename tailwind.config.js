@@ -1,13 +1,13 @@
-require("dotenv").config();
-const enablePurge = true;
+const { guessProductionMode } = require("@ngneat/tailwind");
+
+process.env.TAILWIND_MODE = guessProductionMode() ? 'build' : 'watch';
+
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
+  mode: 'jit',
   purge: {
-    enabled: enablePurge,
-    content: ["./src/**/*.html", "./src/**/*.ts", "./src/**/*.scss"],
+    content: [
+      './src/**/*.{html,ts,css,scss,sass,less,styl}',
+    ]
   },
   theme: {
     extend: {

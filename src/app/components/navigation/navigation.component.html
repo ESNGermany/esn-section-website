@@ -35,7 +35,7 @@
   </ul>
 </div>
 <!-- Logo and white top navigation -->
-<div class="w-full mb-16 bg">
+<div class="w-full mb-16 bg" [ngStyle]="bgImage$ | async">
   <nav
     id="navinav"
     class="
@@ -119,7 +119,7 @@
   </nav>
 </div>
 <!-- Social Media buttons with hover-effect on the right side (bottom if mobile) -->
-<div class="max-w-screen-2xl m-auto">
+<div class="max-w-screen-2xl m-auto" *ngIf="globals$ | async as globals">
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible">
     <div *ngIf="globals?.instagramLink" class="mar">
       <!-- <div id="bubble1" class="bubble you invisible font-body">
@@ -128,7 +128,7 @@
       <a href="{{ globals?.instagramLink }}" target="_blank" rel="noopener">
         <button
           class="p-2 rounded-full block my-2 hov"
-          [ngStyle]="buttonColor()"
+          [ngStyle]="buttonColor$ | async"
         >
           <img class="m-2 h-6" src="../../../assets/social/instagram.png" />
         </button>
@@ -141,7 +141,7 @@
       <a href="{{ globals?.facebookLink }}" target="_blank" rel="noopener">
         <button
           class="p-2 rounded-full block my-2 hov"
-          [ngStyle]="buttonColor()"
+          [ngStyle]="buttonColor$ | async"
         >
           <img class="m-2 h-6" src="../../../assets/social/facebook.png" />
         </button>
@@ -158,7 +158,7 @@
         target="_blank"
         rel="noopener"
         title="Facebook"
-        ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor()">
+        ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor$ | async">
           <img
             class="m-2 h-6"
             src="../../../assets/social/facebook.png"
@@ -169,7 +169,7 @@
         target="_blank"
         rel="noopener"
         title="Instagram"
-        ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor()">
+        ><button class="p-2 rounded-full hov" [ngStyle]="buttonColor$ | async">
           <img
             class="m-2 h-6"
             src="../../../assets/social/instagram.png"

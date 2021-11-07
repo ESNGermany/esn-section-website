@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-interface MainItem {
+export interface MainItem {
   id: string;
   sectionShortName: string;
   sectionLongName: string;
@@ -14,6 +14,7 @@ interface MainItem {
   instagramLink: string;
   instagramName: string;
   pretixLink: string;
+  usePretixCalendar: boolean;
   addressNameFirstLine: string;
   addressStreetSecondLine: string;
   addressCityThirdLine: string;
@@ -32,7 +33,11 @@ interface MainItem {
   };
   headerImage: {
     alternativeText: string;
+    url: string;
     formats: {
+      large: {
+        url: string;
+      };
       medium: {
         url: string;
       };
@@ -43,6 +48,9 @@ interface MainItem {
       alternativeText: string;
       formats: {
         medium: {
+          url: string;
+        };
+        thumbnail: {
           url: string;
         };
       };
@@ -56,18 +64,21 @@ export class MainService {
     environment.STRAPI_SECTION_URL +
     'main-informations?_created_by=' +
     environment.STRAPI_SECTION_ID;
-  sectionShortName: any;
+  private dataRequest;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {}
-
-  fetchMain(): Observable<MainItem[]> {
-    return this.http.get<MainItem[]>(this.url).pipe(
+  ) {
+    this.dataRequest = this.http.get<MainItem[]>(this.url).pipe(
+      shareReplay(1),
       tap((_) => this.log('fetched main information')),
       catchError(this.handleError<MainItem[]>('fetchMainInformation'))
     );
+  }
+
+  fetchMain(): Observable<MainItem[]> {
+    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

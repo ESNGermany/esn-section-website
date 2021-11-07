@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "d945788f-7402-42e5-ab90-baeee22efd92"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "esn-freiburg-website": {
+    "esn-sections-website": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -15,15 +18,14 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "ngx-build-plus:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "extraWebpackConfig": "webpack.config.js",
-            "outputPath": "dist/esn-freiburg-website/browser",
+            "outputPath": "dist/esn-sections-website/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
+            "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/_redirects", "src/assets"],
             "styles": ["src/styles.scss", "src/pretix.css"],
             "scripts": []
@@ -36,14 +38,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractCss": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -56,31 +51,48 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "freiburg": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.freiburg.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "ngx-build-plus:dev-server",
-          "options": {
-            "extraWebpackConfig": "webpack.config.js",
-            "browserTarget": "esn-freiburg-website:build"
-          },
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "esn-freiburg-website:build:production"
+              "browserTarget": "esn-sections-website:build:production"
+            },
+            "development": {
+              "browserTarget": "esn-sections-website:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "esn-freiburg-website:build"
+            "browserTarget": "esn-sections-website:build"
           }
         },
         "test": {
-          "builder": "ngx-build-plus:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "extraWebpackConfig": "webpack.config.js",
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
@@ -90,31 +102,82 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "esn-freiburg-website:serve"
+            "outputPath": "dist/esn-sections-website/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "esn-freiburg-website:serve:production"
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "freiburg": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.freiburg.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
             }
-          }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "esn-sections-website:build:development",
+              "serverTarget": "esn-sections-website:server:development"
+            },
+            "freiburg": {
+              "browserTarget": "esn-sections-website:build:freiburg",
+              "serverTarget": "esn-sections-website:server:freiburg"
+            },
+            "production": {
+              "browserTarget": "esn-sections-website:build:production",
+              "serverTarget": "esn-sections-website:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "esn-sections-website:build:production",
+              "serverTarget": "esn-sections-website:server:production"
+            },
+            "freiburg": {
+              "browserTarget": "esn-sections-website:build:freiburg",
+              "serverTarget": "esn-sections-website:server:freiburg"
+            },
+            "development": {
+              "browserTarget": "esn-sections-website:build:development",
+              "serverTarget": "esn-sections-website:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
   },
-  "defaultProject": "esn-freiburg-website"
+  "defaultProject": "esn-sections-website"
 }

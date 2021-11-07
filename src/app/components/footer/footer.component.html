@@ -1,4 +1,8 @@
-<footer *ngIf="contentLoaded | async" id="foot" class="bg-footer relative">
+<footer
+  *ngIf="globals$ | async as globals"
+  id="foot"
+  class="bg-footer relative"
+>
   <div id="foot2" class="divider-top">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path
@@ -19,7 +23,7 @@
       pt-8
     "
   >
-    <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
+    <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Contact</p>
       <p class="font-bold">
         {{ globals?.addressNameFirstLine }}
@@ -39,7 +43,7 @@
         >
       </p>
     </div>
-    <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
+    <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Links</p>
       <p>
         <a
@@ -62,7 +66,7 @@
           >Statutes</a
         >
       </p>
-      <p>
+      <p class="pb-4">
         <a
           routerLink="/for-incomings"
           routerLinkActive="active"
@@ -71,7 +75,7 @@
         >
       </p>
     </div>
-    <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
+    <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase pb-1 text-lg">External Links</p>
       <p>
         <a
@@ -101,9 +105,9 @@
         >
       </p>
     </div>
-    <div class="sm:w-full lg:w-1/2 xl:w-1/4 px-8">
+    <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Social Media</p>
-      <p *ngIf="globals?.facebookName" class="pb-1">
+      <p *ngIf="globals?.facebookName" class="pb-4">
         <a
           href="{{ globals?.facebookLink }}"
           target="_blank"
@@ -117,7 +121,7 @@
           />{{ globals?.facebookName }}
         </a>
       </p>
-      <p *ngIf="globals?.instagramLink && globals?.instagramName">
+      <p *ngIf="globals?.instagramLink && globals?.instagramName" class="pb-4">
         <a
           href="{{ globals?.instagramLink }}"
           target="_blank"
@@ -131,6 +135,24 @@
           {{ globals?.instagramName }}
         </a>
       </p>
+    </div>
+    <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
+      <p class="font-bold uppercase pb-1 text-lg">Supported By</p>
+      <div>
+        <a
+          href="https://eu.daad.de/service/ansprechpartner/lei/de/46405-lokale-erasmus-initiativen/"
+          rel="noopener"
+          target="_blank"
+          class="hover:underline"
+        >
+          <img
+            src="../../../assets/logo/lei-white.png"
+            alt="Lokale Erasmus+ Initiative Logo"
+            class="pb-2"
+          />
+          <p>Lokale Erasmus+ Initiativen</p>
+        </a>
+      </div>
     </div>
     <div class="w-full text-center my-4">
       <div class="w-10 inline-block mx-auto">
@@ -149,6 +171,15 @@
         />
         created by the
         <span (mouseenter)="pink()">IT-Girl</span> of ESN Freiburg e.V.
+      </p>
+      <p class="mx-auto text-graylight" id="strapiLink">
+        <a
+          href="https://sections.esn-germany.de/admin/auth/login"
+          class="hover:underline"
+          target="_blank"
+          rel="noopener"
+          >Enter Strapi here (for admins)</a
+        >
       </p>
     </div>
   </div>

@@ -1,5 +1,4 @@
-<app-navigation></app-navigation>
-<div *ngIf="contentLoaded | async" class="outer-div">
+<div *ngIf="contentInfo$ | async as contentItemList" class="outer-div">
   <div class="px-8 mb-24">
     <div *ngFor="let c of contentItemList" class="mb-24">
       <!-- text left img right -->
@@ -127,7 +126,10 @@
       <p class="title-p">Frequently Asked Questions</p>
     </div>
     <div class="font-body text-xl font-bold pb-2">Housing</div>
-    <div class="exp-shadow mb-6">
+    <div
+      *ngIf="faqHousingItemList$ | async as faqHousingItemList"
+      class="exp-shadow mb-6"
+    >
       <app-expandable class="exp" *ngFor="let faq of faqHousingItemList">
         <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
         <div class="answer-div">
@@ -138,7 +140,10 @@
       </app-expandable>
     </div>
     <div class="font-body text-xl font-bold pb-2">Transport</div>
-    <div class="exp-shadow mb-6">
+    <div
+      *ngIf="faqTransportItemList$ | async as faqTransportItemList"
+      class="exp-shadow mb-6"
+    >
       <app-expandable class="exp" *ngFor="let faq of faqTransportItemList">
         <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
         <div class="answer-div">
@@ -149,7 +154,10 @@
       </app-expandable>
     </div>
     <div class="font-body text-xl font-bold pb-2">ESNcard</div>
-    <div class="exp-shadow mb-6">
+    <div
+      *ngIf="faqEsncardItemList$ | async as faqEsncardItemList"
+      class="exp-shadow mb-6"
+    >
       <app-expandable class="exp" *ngFor="let faq of faqEsncardItemList">
         <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
         <div class="answer-div">
@@ -160,7 +168,10 @@
       </app-expandable>
     </div>
     <div class="font-body text-xl font-bold pb-2">Corona</div>
-    <div class="exp-shadow mb-6">
+    <div
+      *ngIf="faqCoronaItemList$ | async as faqCoronaItemList"
+      class="exp-shadow mb-6"
+    >
       <app-expandable class="exp" *ngFor="let faq of faqCoronaItemList">
         <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
         <div class="answer-div">
@@ -171,7 +182,10 @@
       </app-expandable>
     </div>
     <div class="font-body text-xl font-bold pb-2">Uni/Erasmus</div>
-    <div class="exp-shadow mb-6">
+    <div
+      *ngIf="faqUniErasmusItemList$ | async as faqUniErasmusItemList"
+      class="exp-shadow mb-6"
+    >
       <app-expandable class="exp" *ngFor="let faq of faqUniErasmusItemList">
         <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
         <div class="answer-div">
@@ -182,7 +196,10 @@
       </app-expandable>
     </div>
     <div class="font-body text-xl font-bold pb-2">Other</div>
-    <div class="exp-shadow mb-6">
+    <div
+      *ngIf="faqOtherItemList$ | async as faqOtherItemList"
+      class="exp-shadow mb-6"
+    >
       <app-expandable class="exp" *ngFor="let faq of faqOtherItemList">
         <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
         <div class="answer-div">
@@ -194,4 +211,3 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>

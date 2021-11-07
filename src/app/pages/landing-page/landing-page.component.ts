@@ -1,40 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ContentService } from 'src/app/services/content.service';
-import { MainService } from 'src/app/services/main.service';
-import { MainItem } from 'src/app/app.component';
+import { ContentItem, ContentService } from 'src/app/services/content.service';
+import { MainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 import { GalleryItem, ImageItem } from 'ng-gallery';
-
-interface ContentItem {
-  id: string;
-  Title: string;
-  Text: string;
-  Layout:
-    | 'Text_above_img_below'
-    | 'Text_below_img_above'
-    | 'Text_left_img_right'
-    | 'Text_right_img_left';
-  Wrap_in_shadow_box: boolean;
-  Page_for_display:
-    | 'Landing_page'
-    | 'Members_page'
-    | 'Team_page'
-    | 'ESNcard_page'
-    | 'Incomings_page';
-  Order_on_page: number;
-  url: string;
-  Image: {
-    id: string;
-    alternativeText: string;
-    url: string;
-    formats: {
-      medium: {
-        url: string;
-      };
-    };
-  };
-}
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-landing-page',
@@ -43,47 +20,66 @@ interface ContentItem {
 })
 export class LandingPageComponent implements OnInit {
   images: GalleryItem[];
-  contentItemList: ContentItem[] = [];
-  globals: MainItem;
-  contentLoaded: Promise<boolean>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
-  siteTitle: string;
+  showThumb: boolean = true;
+  innerWidth: any;
+
+  contentInfo$: Observable<ContentItem[]>;
+  globals$: Observable<MainItem>;
+  isBrowser: boolean;
 
   constructor(
     private title: Title,
     private contentService: ContentService,
-    private mainService: MainService
-  ) {}
-
-  ngOnInit() {
-    this.getContent();
-
-    this.images = [
-      // REPLACE_SLIDER_IMAGES
-      // new ImageItem({
-      //   src: '../../../../assets/landing/landing1.png',
-      //   thumb: '../../../../assets/landing/landing1.png',
-      // }),
-    ];
+    private mainService: MainService,
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  getContent(): void {
-    this.contentService
-      .fetchPageContent('Landing_page')
-      .subscribe((contentItemList) => (this.contentItemList = contentItemList));
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.setGalleryThumb();
+  }
 
-    this.mainService.fetchMain().subscribe((global) => {
-      this.globals = global[0];
-      this.contentLoaded = Promise.resolve(true);
-      this.siteTitle = global[0].sectionLongName;
-      const title = 'Home | ' + this.siteTitle;
-      this.title.setTitle(title);
-    });
+  async ngOnInit() {
+    this.globals$ = this.mainService.fetchMain().pipe(
+      shareReplay(1),
+      map((res) => res[0])
+    );
+    this.contentInfo$ = this.contentService
+      .fetchPageContent('Landing_page')
+      .pipe(shareReplay(1));
+    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
+    this.title.setTitle('Home | ' + mainInfo?.sectionLongName);
+
+    this.setGalleryThumb();
+
+    this.images = [];
+    if (mainInfo?.imageGridFrontPage) {
+      for (let img of mainInfo.imageGridFrontPage) {
+        this.images.unshift(
+          new ImageItem({
+            src: `${environment.STRAPI_SECTION_URL_IMAGE}${img.formats.medium.url}`,
+            thumb: `${environment.STRAPI_SECTION_URL_IMAGE}${img.formats.thumbnail.url}`,
+          })
+        );
+      }
+    }
+  }
+
+  setGalleryThumb(): void {
+    if (this.isBrowser) {
+      if (window.innerWidth < 1000) {
+        this.showThumb = false;
+      }
+    }
   }
 
   comic(): void {
-    const navinav = document.getElementById('navinav');
-    const titeli = document.getElementById('titeli');
+    const navinav = this.document.getElementById('navinav');
+    const titeli = this.document.getElementById('titeli');
     if (navinav.getAttribute('style') == 'font-family: "Comic Sans"') {
       navinav.setAttribute('style', 'font-family: "Oswald"');
       titeli.setAttribute('style', 'font-family: "Oswald"');

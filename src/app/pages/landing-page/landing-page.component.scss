@@ -7,7 +7,8 @@
 }
 
 .title-p {
-  @apply font-heading text-esn-dark-blue font-bold text-4xl title;
+  @extend .title;
+  @apply font-heading text-esn-dark-blue font-bold text-4xl;
 }
 .title-p-welcome {
   @apply font-heading text-esn-dark-blue font-bold text-5xl;
@@ -41,4 +42,10 @@
 
 gallery {
   background-color: rgba(234, 234, 234, var(--tw-bg-opacity)) !important;
+}
+
+@media only screen and (max-width: 820px) {
+  gallery {
+    height: 340px;
+  }
 }

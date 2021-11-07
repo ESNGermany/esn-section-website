@@ -3,7 +3,8 @@
 }
 
 .title-p {
-  @apply font-heading text-esn-dark-blue font-bold text-4xl title;
+  @extend .title;
+  @apply font-heading text-esn-dark-blue font-bold text-4xl;
 }
 
 .title::after {
@@ -47,7 +48,9 @@
 }
 
 .answer-div {
-  @apply pl-4 pr-6 pt-2 pb-4 cont answer;
+  @extend .cont;
+  @extend .answer;
+  @apply pl-4 pr-6 pt-2 pb-4;
 }
 
 .outer-div {

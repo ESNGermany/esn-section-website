@@ -1,0 +1,25 @@
+<div *ngIf="!pretixLink">
+  <full-calendar id="calendar" [options]="calendarOptions"></full-calendar>
+  <div
+    class="
+      bg-graylight
+      text-black
+      px-8
+      py-4
+      mt-4
+      border border-graylight
+      rounded
+    "
+  >
+    <h2 id="title" class="font-bold text-xl"></h2>
+    <div id="date" class="textgray"></div>
+    <div id="details"></div>
+    <a
+      id="link"
+      class="pt-4 text-esn-dark-blue hover:underline"
+      target="_blank"
+      rel="noopener"
+    ></a>
+    <p id="cause">Click on any event to display more information!</p>
+  </div>
+</div>

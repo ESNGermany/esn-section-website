@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { CocService } from 'src/app/services/coc.service';
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { CocItem, CocService } from 'src/app/services/coc.service';
 import { MainService } from 'src/app/services/main.service';
-
-interface CocItem {
-  id: string;
-  MarkdownText: string;
-}
 
 @Component({
   selector: 'app-coc-page',
@@ -14,9 +10,7 @@ interface CocItem {
   styleUrls: ['./coc-page.component.scss'],
 })
 export class CocPageComponent implements OnInit {
-  public cocItemList: CocItem;
-  contentLoaded: Promise<boolean>;
-  siteTitle: string;
+  cocItem$: Observable<CocItem>;
 
   constructor(
     private title: Title,
@@ -24,19 +18,13 @@ export class CocPageComponent implements OnInit {
     private mainService: MainService
   ) {}
 
-  ngOnInit() {
-    this.getCoc();
-  }
-
-  getCoc(): void {
-    this.cocService.fetchCoc().subscribe((cocItemList) => {
-      this.cocItemList = cocItemList;
-      this.contentLoaded = Promise.resolve(true);
-    });
-    this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem[0].sectionLongName;
-      const title = 'Code of Conduct | ' + this.siteTitle;
-      this.title.setTitle(title);
-    });
+  async ngOnInit() {
+    this.cocItem$ = this.cocService.fetchCoc().pipe(
+      shareReplay(1),
+      map((res) => res)
+    );
+    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
+    const title = 'Code of Conduct | ' + mainInfo?.sectionLongName;
+    this.title.setTitle(title);
   }
 }

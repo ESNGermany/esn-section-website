@@ -1,5 +1,4 @@
-<app-navigation></app-navigation>
-<div *ngIf="contentLoaded | async" class="outer">
+<div *ngIf="statutesItemList$ | async as statutesItemList" class="outer">
   <div class="markdown-div">
     <div class="title-div">
       <p class="title-p">Satzung</p>
@@ -7,4 +6,3 @@
     <markdown [data]="statutesItemList?.Text"></markdown>
   </div>
 </div>
-<app-footer></app-footer>

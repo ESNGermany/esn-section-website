@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { StatutesService } from 'src/app/services/statutes.service';
+import {
+  StatutesItem,
+  StatutesService,
+} from 'src/app/services/statutes.service';
 import { MainService } from 'src/app/services/main.service';
-
-interface StatutesItem {
-  id: string;
-  Text: string;
-}
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-statutes-page',
@@ -14,9 +13,7 @@ interface StatutesItem {
   styleUrls: ['./statutes-page.component.scss'],
 })
 export class StatutesPageComponent implements OnInit {
-  statutesItemList: StatutesItem;
-  contentLoaded: Promise<boolean>;
-  siteTitle: string;
+  statutesItemList$: Observable<StatutesItem>;
 
   constructor(
     private title: Title,
@@ -24,19 +21,13 @@ export class StatutesPageComponent implements OnInit {
     private mainService: MainService
   ) {}
 
-  ngOnInit() {
-    this.getStatutes();
-  }
-
-  getStatutes(): void {
-    this.statutesService.fetchStatutes().subscribe((statutesItemList) => {
-      this.statutesItemList = statutesItemList[0];
-      this.contentLoaded = Promise.resolve(true);
-    });
-    this.mainService.fetchMain().subscribe((mainItem) => {
-      this.siteTitle = mainItem[0].sectionLongName;
-      const title = 'Statutes | ' + this.siteTitle;
-      this.title.setTitle(title);
-    });
+  async ngOnInit() {
+    this.statutesItemList$ = this.statutesService.fetchStatutes().pipe(
+      shareReplay(1),
+      map((res) => res[0])
+    );
+    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
+    const title = 'Statutes | ' + mainInfo?.sectionLongName;
+    this.title.setTitle(title);
   }
 }
