@@ -1,5 +1,5 @@
 <div *ngIf="contentInfo$ | async as contentItemList" class="outer-imgbox">
-  <div *ngFor="let c of contentItemList" class="px-8 mb-24">
+  <div *ngFor="let c of contentItemList" class="px-4 mb-20">
     <!-- text left img right -->
     <div *ngIf="c.Layout === 'Text_left_img_right'">
       <div class="title-div">
@@ -32,7 +32,7 @@
       </div>
     </div>
     <!-- text right img left -->
-    <div *ngIf="c.Layout === 'Text_right_img_left'">
+    <div *ngIf="c.Layout === 'Text_right_img_left'" class="mb-2">
       <div class="title-div">
         <p class="title-p">{{ c.Title }}</p>
       </div>
@@ -42,7 +42,7 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto">
+        <div *ngIf="c.Image" class="m-auto mb-4 overflow-hidden">
           <figure class="float-left-fig">
             <img
               *ngIf="c.Image.formats?.medium"
