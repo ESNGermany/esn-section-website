@@ -122,3 +122,107 @@
     </div>
   </div>
 </div>
+<div
+  class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
+  *ngIf="globals$ | async as globals"
+>
+  <div *ngIf="partnerInfo$ | async as partnerItemList">
+    <div *ngIf="partnerItemList.length > 0">
+      <div class="title-div">
+        <p class="title-p">Our Local Partners in {{ cityName }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="max-w-screen-2xl m-auto mb-24">
+  <div *ngIf="partnerInfo$ | async as partnerItemList">
+    <div
+      class="mx-8 flex flex-wrap items-end justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
+      *ngIf="partnerItemList.length > 0"
+    >
+      <div
+        *ngFor="let partner of partnerItemList"
+        class="flex flex-wrap items-end justify-evenly flexb3"
+      >
+        <figure class="m-2">
+          <a href="{{ partner.Link }}" target="_blank" rel="noopener" class=""
+            ><img
+              *ngIf="partner.Main_image.formats.medium"
+              class="imgh m-auto zoom"
+              src="{{ strapiLink }}{{ partner.Main_image.formats.medium.url }}"
+              alt="{{ partner.Main_image.alternativeText }}"
+          /></a>
+          <a href="{{ partner.Link }}" target="_blank" rel="noopener" class=""
+            ><img
+              *ngIf="
+                partner.Main_image.formats.thumbnail &&
+                !partner.Main_image.formats.medium
+              "
+              class="imgh m-auto zoom"
+              src="{{ strapiLink }}{{
+                partner.Main_image.formats.thumbnail.url
+              }}"
+              alt="{{ partner.Main_image.alternativeText }}"
+          /></a>
+          <figcaption class="pt-4 text-center">
+            <b>{{ partner.Name }}</b
+            ><br />
+            {{ partner.Deal }}
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
+>
+  <div *ngIf="nationalPartner$ | async as naPa">
+    <div *ngIf="naPa.length > 0">
+      <div class="title-div">
+        <p class="title-p">Our National Partners from ESN Germany</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="max-w-screen-2xl m-auto mb-24">
+  <div *ngIf="nationalPartner$ | async as naPa">
+    <div
+      class="mx-8 flex flex-wrap items-end justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
+      *ngIf="naPa.length > 0"
+    >
+      <div
+        *ngFor="let partner of naPa"
+        class="flex flex-wrap items-end justify-evenly flexb3"
+      >
+        <figure class="m-2">
+          <a href="{{ partner.Link }}" target="_blank" rel="noopener" class=""
+            ><img
+              *ngIf="partner.Logo.formats.medium"
+              class="imgh m-auto zoom"
+              src="https://strapi.esn-germany.de{{
+                partner.Logo.formats.medium.url
+              }}"
+              alt="{{ partner.Logo.alternativeText }}"
+          /></a>
+          <a href="{{ partner.Link }}" target="_blank" rel="noopener" class=""
+            ><img
+              *ngIf="
+                partner.Logo.formats.thumbnail && !partner.Logo.formats.medium
+              "
+              class="imgh m-auto zoom"
+              src="https://strapi.esn-germany.de{{
+                partner.Logo.formats.thumbnail.url
+              }}"
+              alt="{{ partner.Logo.alternativeText }}"
+          /></a>
+          <figcaption class="pt-4 text-center">
+            <b>{{ partner.Name }}</b>
+            <!-- ><br /> -->
+            <!-- {{ partner.Deal }} -->
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
