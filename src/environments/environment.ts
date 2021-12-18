@@ -6,30 +6,30 @@ export const environment = {
   production: false,
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 4
+  STRAPI_SECTION_ID: 3
 };
 
 
 // STRAPI_SECTION_IDs:
-// 1: 
-// 2: 
-// 3: Köln
-// 4: Braunschweig
-// 5: Bayreuth
-// 6: 
-// 7: 
-// 8: Saarbrücken
-// 9: Hannover
-// 10: Dortmund
-// 11: Frankfurt
-// 12: 
-// 13: Berlin
-// 14: 
+//  1: ---- (Webmaster)
+//  2: ---- Freiburg
+//  3: LIVE Köln
+//  4: LIVE Braunschweig
+//  5: LIVE Bayreuth
+//  6: ---- (Viki)
+//  7: ---- Heidelberg
+//  8: TEST Saarbrücken
+//  9: LIVE Hannover
+// 10: TEST Dortmund
+// 11: LIVE Frankfurt
+// 12: ---- Karlsruhe
+// 13: LIVE Berlin
+// 14: ---- Düsseldorf
 // 15: 
-// 16: TU Dresden
-// 17: Halle
-// 18: Darmstadt
-// 19: Konstanz
-// 20: MESA
-// 21: 
-// 22: Hildesheim
+// 16: TEST TU Dresden
+// 17: LIVE Halle
+// 18: TEST Darmstadt
+// 19: TEST Konstanz
+// 20: LIVE MESA München
+// 21: ---- Landau
+// 22: TEST Hildesheim
