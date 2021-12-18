@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
+  timeStamp: '18-12-2021 09:12:28',
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 3
+  STRAPI_SECTION_ID: 3,
 };
-
 
 // STRAPI_SECTION_IDs:
 //  1: ---- (Webmaster)
@@ -25,7 +25,7 @@ export const environment = {
 // 12: ---- Karlsruhe
 // 13: LIVE Berlin
 // 14: ---- Düsseldorf
-// 15: 
+// 15:
 // 16: TEST TU Dresden
 // 17: LIVE Halle
 // 18: TEST Darmstadt

@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 import { MainItem, MainService } from 'src/app/services/main.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -10,6 +11,7 @@ import { MainItem, MainService } from 'src/app/services/main.service';
 })
 export class FooterComponent implements OnInit {
   globals$: Observable<MainItem>;
+  timestamp: string = environment.timeStamp;
 
   constructor(
     private mainService: MainService,
