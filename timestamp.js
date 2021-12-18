@@ -1,6 +1,6 @@
 var replace = require('replace-in-file');
 const moment = require('moment-timezone');
-var timeStamp = moment(new Date()).tz('Europe/Berlin').format("DD-MM-YYYY hh:mm:ss");
+var timeStamp = moment(new Date()).tz('Europe/Berlin').format("YYYY-MM-DD HH:mm:ss");
 const options = {
     files: [
         'src/environments/environment.ts',
