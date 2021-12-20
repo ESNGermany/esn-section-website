@@ -52,15 +52,6 @@
                 }
               ]
             },
-            "freiburg": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.freiburg.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -120,15 +111,6 @@
                 }
               ]
             },
-            "freiburg": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.freiburg.ts"
-                }
-              ]
-            },
             "development": {
               "optimization": false,
               "sourceMap": true,
@@ -143,10 +125,6 @@
             "development": {
               "browserTarget": "esn-sections-website:build:development",
               "serverTarget": "esn-sections-website:server:development"
-            },
-            "freiburg": {
-              "browserTarget": "esn-sections-website:build:freiburg",
-              "serverTarget": "esn-sections-website:server:freiburg"
             },
             "production": {
               "browserTarget": "esn-sections-website:build:production",
@@ -164,10 +142,6 @@
             "production": {
               "browserTarget": "esn-sections-website:build:production",
               "serverTarget": "esn-sections-website:server:production"
-            },
-            "freiburg": {
-              "browserTarget": "esn-sections-website:build:freiburg",
-              "serverTarget": "esn-sections-website:server:freiburg"
             },
             "development": {
               "browserTarget": "esn-sections-website:build:development",

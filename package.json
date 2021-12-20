@@ -14,7 +14,6 @@
     "serve:ssr": "node dist/esn-sections-website/server/main.js",
     "build:ssr": "ng build && ng run esn-sections-website:server",
     "prerender": "ng run esn-sections-website:prerender",
-    "prerender:freiburg": "ng run esn-sections-website:prerender --configuration freiburg",
     "timestamp": "node ./timestamp.js"
   },
   "private": true,
