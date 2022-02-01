@@ -18,6 +18,8 @@ export interface NationalPartnerItem {
       };
     };
   };
+  show: boolean;
+  buttonText: string;
 }
 
 @Injectable({

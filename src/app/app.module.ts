@@ -34,6 +34,7 @@ import { PartnerService } from './services/partner.service';
 import { StatutesService } from './services/statutes.service';
 import { GalleryModule } from 'ng-gallery';
 import { CustomCalendarComponent } from './components/custom-calendar/custom-calendar.component';
+import { NationalPartnersComponent } from './components/national-partners/national-partners.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -59,6 +60,7 @@ FullCalendarModule.registerPlugins([
     IncomingsPageComponent,
     ExpandableComponent,
     CustomCalendarComponent,
+    NationalPartnersComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
