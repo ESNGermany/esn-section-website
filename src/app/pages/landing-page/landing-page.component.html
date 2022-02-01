@@ -10,19 +10,62 @@
       </div>
     </div>
   </div>
-  <div class="bg-graylight my-1 py-1 xl:my-4 xl:py-4">
-    <div class="w-4/5 xl:w-3/5 mx-auto">
-      <gallery
-        [items]="images"
-        [counter]="false"
-        [thumb]="showThumb"
-        [thumbMode]="'free'"
-        [thumbPosition]="'right'"
-        [autoPlay]="true"
-        [playerInterval]="6000"
-      ></gallery>
+  <ng-container *ngIf="!globals?.useImageSlideshow; else imageGrid">
+    <div class="bg-graylight my-1 py-1 xl:my-4 xl:py-4">
+      <div class="w-4/5 xl:w-3/5 mx-auto">
+        <gallery
+          [items]="images"
+          [counter]="false"
+          [thumb]="showThumb"
+          [thumbMode]="'free'"
+          [thumbPosition]="'right'"
+          [autoPlay]="true"
+          [playerInterval]="6000"
+        ></gallery>
+      </div>
     </div>
-  </div>
+  </ng-container>
+
+  <ng-template #imageGrid>
+    <div
+      class="grid grid-cols-4 auto-rows-images gap-0.5 mb-24"
+      *ngIf="globals$ | async as globals"
+    >
+      <div class="col-span-3">
+        <img
+          src="{{ strapiLink }}{{
+            globals?.imageGridFrontPage[0].formats.medium.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+      </div>
+      <div class="row-span-2">
+        <img
+          src="{{ strapiLink }}{{
+            globals?.imageGridFrontPage[1].formats.medium.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+      </div>
+      <div (click)="comic()">
+        <img
+          src="{{ strapiLink }}{{
+            globals?.imageGridFrontPage[2].formats.medium.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+      </div>
+      <div class="col-span-2">
+        <img
+          src="{{ strapiLink }}{{
+            globals?.imageGridFrontPage[3].formats.medium.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+      </div>
+    </div>
+  </ng-template>
+
   <div class="outer-imgbox">
     <div *ngFor="let c of contentItemList" class="px-8 mb-24">
       <!-- text left img right -->

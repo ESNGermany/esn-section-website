@@ -15,6 +15,7 @@ export interface MainItem {
   instagramName: string;
   pretixLink: string;
   usePretixCalendar: boolean;
+  useImageSlideshow: boolean;
   addressNameFirstLine: string;
   addressStreetSecondLine: string;
   addressCityThirdLine: string;
