@@ -1,7 +1,7 @@
 <div *ngIf="contentInfo$ | async as contentItemList" class="outer-imgbox">
   <div *ngFor="let c of contentItemList" class="px-4 mb-20">
     <!-- text left img right -->
-    <div *ngIf="c.Layout === 'Text_left_img_right'">
+    <ng-container *ngIf="c.Layout === 'Text_left_img_right'">
       <div class="title-div">
         <p class="title-p">{{ c.Title }}</p>
       </div>
@@ -11,26 +11,32 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto overflow-hidden">
-          <figure class="float-right-fig">
-            <img
-              *ngIf="c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-              alt="{{ c.Image.alternativeText }}"
-            />
-            <img
-              *ngIf="!c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.url }}"
-              alt="{{ c.Image.alternativeText }}"
-            />
-          </figure>
-          <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
-        </div>
-        <div *ngIf="!c.Image" class="m-auto font-body text-lg">
-          <markdown [data]="c.Text"></markdown>
-        </div>
+        <ng-container *ngIf="c.Image; else noImage">
+          <div class="m-auto overflow-hidden">
+            <figure class="float-right-fig">
+              <img
+                *ngIf="c.Image.formats?.medium"
+                src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
+                alt="{{ c.Image.alternativeText }}"
+              />
+              <img
+                *ngIf="!c.Image.formats?.medium"
+                src="{{ strapiLink }}{{ c.Image.url }}"
+                alt="{{ c.Image.alternativeText }}"
+              />
+            </figure>
+          </div>
+          <ng-container *ngIf="c.Text"
+            ><markdown [data]="c.Text"></markdown
+          ></ng-container>
+        </ng-container>
+        <ng-template #noImage>
+          <div class="m-auto font-body text-lg">
+            <markdown [data]="c.Text"></markdown>
+          </div>
+        </ng-template>
       </div>
-    </div>
+    </ng-container>
     <!-- text right img left -->
     <div *ngIf="c.Layout === 'Text_right_img_left'" class="mb-2">
       <div class="title-div">
@@ -55,7 +61,9 @@
               alt="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+          <ng-container *ngIf="c.Text"
+            ><markdown [data]="c.Text"></markdown
+          ></ng-container>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -63,7 +71,7 @@
       </div>
     </div>
     <!-- text below img above -->
-    <div *ngIf="c.Layout === 'Text_below_img_above'">
+    <ng-container *ngIf="c.Layout === 'Text_below_img_above'">
       <div class="title-div">
         <p class="title-p">{{ c.Title }}</p>
       </div>
@@ -90,9 +98,9 @@
         </div>
         <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
       </div>
-    </div>
+    </ng-container>
     <!-- text above img below -->
-    <div *ngIf="c.Layout === 'Text_above_img_below'">
+    <ng-container *ngIf="c.Layout === 'Text_above_img_below'">
       <div class="title-div">
         <p class="title-p">{{ c.Title }}</p>
       </div>
@@ -103,7 +111,9 @@
         }"
         class="flex items-center flex-col"
       >
-        <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+        <ng-container *ngIf="c.Text"
+          ><markdown [data]="c.Text"></markdown
+        ></ng-container>
         <div *ngIf="c.Image" class="px-4">
           <img
             *ngIf="c.Image.formats?.medium"
@@ -119,6 +129,6 @@
           />
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>

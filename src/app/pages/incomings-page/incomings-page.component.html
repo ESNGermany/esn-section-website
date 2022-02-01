@@ -25,7 +25,9 @@
                 alt="{{ c.Image.alternativeText }}"
               />
             </figure>
-            <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+            <ng-container *ngIf="c.Text"
+              ><markdown [data]="c.Text"></markdown
+            ></ng-container>
           </div>
           <div *ngIf="!c.Image" class="m-auto font-body text-lg">
             <markdown [data]="c.Text"></markdown>
@@ -33,7 +35,7 @@
         </div>
       </div>
       <!-- text right img left -->
-      <div *ngIf="c.Layout === 'Text_right_img_left'">
+      <ng-container *ngIf="c.Layout === 'Text_right_img_left'">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
         </div>
@@ -56,15 +58,17 @@
                 alt="{{ c.Image.alternativeText }}"
               />
             </figure>
-            <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+            <ng-container *ngIf="c.Text"
+              ><markdown [data]="c.Text"></markdown
+            ></ng-container>
           </div>
           <div *ngIf="!c.Image" class="m-auto font-body text-lg">
             <markdown [data]="c.Text"></markdown>
           </div>
         </div>
-      </div>
+      </ng-container>
       <!-- text below img above -->
-      <div *ngIf="c.Layout === 'Text_below_img_above'">
+      <ng-container *ngIf="c.Layout === 'Text_below_img_above'">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
         </div>
@@ -89,11 +93,13 @@
               alt="{{ c.Image.alternativeText }}"
             />
           </div>
-          <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+          <ng-container *ngIf="c.Text"
+            ><markdown [data]="c.Text"></markdown
+          ></ng-container>
         </div>
-      </div>
+      </ng-container>
       <!-- text above img below -->
-      <div *ngIf="c.Layout === 'Text_above_img_below'">
+      <ng-container *ngIf="c.Layout === 'Text_above_img_below'">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
         </div>
@@ -104,7 +110,9 @@
           }"
           class="flex items-center flex-col"
         >
-          <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+          <ng-container *ngIf="c.Text"
+            ><markdown [data]="c.Text"></markdown
+          ></ng-container>
           <div *ngIf="c.Image" class="px-4">
             <img
               *ngIf="c.Image.formats?.medium"
@@ -120,12 +128,12 @@
             />
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
     <div class="title-div">
       <p class="title-p">Frequently Asked Questions</p>
     </div>
-    <div *ngIf="faqHousingItemList$ | async as faqHousingItemList">
+    <ng-container *ngIf="faqHousingItemList$ | async as faqHousingItemList">
       <div
         *ngIf="faqHousingItemList.length > 0"
         class="font-body text-xl font-bold pb-2"
@@ -142,8 +150,8 @@
           </div>
         </app-expandable>
       </div>
-    </div>
-    <div *ngIf="faqTransportItemList$ | async as faqTransportItemList">
+    </ng-container>
+    <ng-container *ngIf="faqTransportItemList$ | async as faqTransportItemList">
       <div
         *ngIf="faqTransportItemList.length > 0"
         class="font-body text-xl font-bold pb-2"
@@ -160,8 +168,8 @@
           </div>
         </app-expandable>
       </div>
-    </div>
-    <div *ngIf="faqEsncardItemList$ | async as faqEsncardItemList">
+    </ng-container>
+    <ng-container *ngIf="faqEsncardItemList$ | async as faqEsncardItemList">
       <div
         *ngIf="faqEsncardItemList.length > 0"
         class="font-body text-xl font-bold pb-2"
@@ -178,8 +186,8 @@
           </div>
         </app-expandable>
       </div>
-    </div>
-    <div *ngIf="faqCoronaItemList$ | async as faqCoronaItemList">
+    </ng-container>
+    <ng-container *ngIf="faqCoronaItemList$ | async as faqCoronaItemList">
       <div
         *ngIf="faqCoronaItemList.length > 0"
         class="font-body text-xl font-bold pb-2"
@@ -196,8 +204,10 @@
           </div>
         </app-expandable>
       </div>
-    </div>
-    <div *ngIf="faqUniErasmusItemList$ | async as faqUniErasmusItemList">
+    </ng-container>
+    <ng-container
+      *ngIf="faqUniErasmusItemList$ | async as faqUniErasmusItemList"
+    >
       <div
         *ngIf="faqUniErasmusItemList.length > 0"
         class="font-body text-xl font-bold pb-2"
@@ -214,8 +224,8 @@
           </div>
         </app-expandable>
       </div>
-    </div>
-    <div *ngIf="faqOtherItemList$ | async as faqOtherItemList">
+    </ng-container>
+    <ng-container *ngIf="faqOtherItemList$ | async as faqOtherItemList">
       <div
         *ngIf="faqOtherItemList.length > 0"
         class="font-body text-xl font-bold pb-2"
@@ -232,6 +242,6 @@
           </div>
         </app-expandable>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>

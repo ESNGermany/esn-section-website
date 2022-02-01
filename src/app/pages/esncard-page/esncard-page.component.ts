@@ -29,7 +29,12 @@ export class EsncardPageComponent implements OnInit {
     private partnerService: PartnerService,
     private nationalPartnerService: NationalPartnersService,
     private mainService: MainService
-  ) {}
+  ) {
+    this.globals$ = this.mainService.fetchMain().pipe(
+      shareReplay(1),
+      map((res) => res[0])
+    );
+  }
 
   async ngOnInit() {
     this.contentInfo$ = this.contentService
@@ -38,15 +43,29 @@ export class EsncardPageComponent implements OnInit {
     this.partnerInfo$ = this.partnerService
       .fetchPagePartner()
       .pipe(shareReplay(1));
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res) => res[0])
-    );
+
     this.nationalPartner$ = this.nationalPartnerService
       .fetchPageNationalPartner()
       .pipe(shareReplay(1));
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('ESNcard & Partners | ' + mainInfo?.sectionLongName);
     this.cityName = mainInfo?.sectionShortName.split(' ')[1];
+
+    // initialize each buttontext
+    this.partnerService.fetchPagePartner().subscribe((listPartners) => {
+      for (let p of listPartners) {
+        p.buttonText = 'Learn More ↓';
+      }
+    });
+  }
+
+  toggleInfo(partner): void {
+    partner.show = !partner.show;
+
+    if (!partner.show) {
+      partner.buttonText = `Learn more ↓`;
+    } else {
+      partner.buttonText = `Hide text ↑`;
+    }
   }
 }

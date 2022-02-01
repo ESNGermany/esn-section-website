@@ -20,6 +20,8 @@ export interface PartnerItem {
       };
     };
   };
+  show: boolean;
+  buttonText: string;
 }
 
 @Injectable()

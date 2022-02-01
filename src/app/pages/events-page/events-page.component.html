@@ -8,12 +8,12 @@
         <div class="m-auto block font-body text-lg mb-8">
           <markdown [data]="globals?.eventPageText"></markdown>
         </div>
-        <div *ngIf="!globals?.usePretixCalendar">
+        <ng-container *ngIf="!globals?.usePretixCalendar; else pretixCalendar">
           <app-custom-calendar></app-custom-calendar>
-        </div>
-        <div *ngIf="globals?.usePretixCalendar">
+        </ng-container>
+        <ng-template #pretixCalendar>
           <app-pretix-calendar></app-pretix-calendar>
-        </div>
+        </ng-template>
       </div>
     </div>
   </div>
