@@ -1,35 +1,33 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { map, Observable, shareReplay } from 'rxjs';
 import { MainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-pretix-calendar',
   templateUrl: './pretix-calendar.component.html',
-  styleUrls: ['./pretix-calendar.component.scss'],
 })
-export class PretixCalendarComponent implements OnInit {
-  globals$: Observable<MainItem>;
+export class PretixCalendarComponent implements AfterViewInit {
+  public globals$: Observable<MainItem>;
+  private pretixLink: string;
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private mainService: MainService
-  ) {}
+  @ViewChild('pretixCal') el: ElementRef;
 
-  async ngOnInit() {
+  constructor(private mainService: MainService) {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res) => res[0])
     );
-    this.addStyleCalendar();
+
+    this.mainService
+      .fetchMain()
+      .subscribe((value) => (this.pretixLink = value[0].pretixLink));
   }
 
-  async addStyleCalendar() {
-    const [globals] = await firstValueFrom(this.mainService.fetchMain());
-    const widget = this.document.getElementById('pretixdiv');
-    if (widget) {
-      widget.setAttribute('event', globals.pretixLink);
-      widget.setAttribute('style', 'calendar');
-    }
+  async ngAfterViewInit() {
+    this.el.nativeElement.innerHTML = `<div
+        class="pretix-widget-compat"
+        event="${this.pretixLink}"
+        style="calendar"
+      ></div>`;
   }
 }
