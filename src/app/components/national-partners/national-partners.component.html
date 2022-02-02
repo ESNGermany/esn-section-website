@@ -30,9 +30,12 @@
             {{ partner.buttonText }}
           </button>
           <br />
-          <p class="font-normal text-left" [hidden]="!partner.show">
-            {{ partner.Description }}
-          </p>
+          <markdown
+            [hidden]="!partner.show"
+            [data]="partner.Description"
+            style="text-align: left"
+          >
+          </markdown>
         </figcaption>
       </figure>
     </ng-container>

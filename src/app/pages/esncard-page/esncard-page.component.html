@@ -11,7 +11,7 @@
             c.Wrap_in_shadow_box
         }"
       >
-        <div *ngIf="c.Image" class="m-auto overflow-hidden">
+        <div *ngIf="c.Image" class="m-auto">
           <figure class="float-right-fig">
             <img
               *ngIf="c.Image.formats?.medium"
@@ -177,9 +177,12 @@
               {{ partner.buttonText }}
             </button>
             <br />
-            <p class="font-normal text-left" [hidden]="!partner.show">
-              {{ partner.Deal }}
-            </p>
+            <markdown
+              [hidden]="!partner.show"
+              [data]="partner.Deal"
+              style="text-align: left"
+            >
+            </markdown>
           </figcaption>
         </figure>
       </div>
