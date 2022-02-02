@@ -35,6 +35,9 @@ import { StatutesService } from './services/statutes.service';
 import { GalleryModule } from 'ng-gallery';
 import { CustomCalendarComponent } from './components/custom-calendar/custom-calendar.component';
 import { NationalPartnersComponent } from './components/national-partners/national-partners.component';
+import { EventsService } from './services/events.service';
+import { MenuService } from './services/menus.service';
+import { NationalPartnersService } from './services/national-partners.service';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -45,22 +48,23 @@ FullCalendarModule.registerPlugins([
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
+    CustomCalendarComponent,
+    ExpandableComponent,
     FooterComponent,
+    NationalPartnersComponent,
+    NavigationComponent,
+    PretixCalendarComponent,
+    CocPageComponent,
+    ErrorPageComponent,
     LandingPageComponent,
     EsncardPageComponent,
     EventsPageComponent,
-    MembersPageComponent,
-    TeamPageComponent,
     ImprintPageComponent,
-    ErrorPageComponent,
-    PretixCalendarComponent,
-    StatutesPageComponent,
-    CocPageComponent,
     IncomingsPageComponent,
-    ExpandableComponent,
-    CustomCalendarComponent,
-    NationalPartnersComponent,
+    LandingPageComponent,
+    MembersPageComponent,
+    StatutesPageComponent,
+    TeamPageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -72,12 +76,15 @@ FullCalendarModule.registerPlugins([
     MarkdownModule.forRoot(),
   ],
   providers: [
-    MainService,
-    ContentService,
     CocService,
+    ContentService,
+    EventsService,
     FaqService,
     ImprintService,
+    MainService,
+    MenuService,
     MessageService,
+    NationalPartnersService,
     PartnerService,
     StatutesService,
   ],

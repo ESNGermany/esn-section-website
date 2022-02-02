@@ -16,9 +16,11 @@ import {
       (click)="toggleState()"
     >
       <ng-content select="[slot=header]"></ng-content>
-      <i [@indicatorRotate]="state$ | async" class="material-icons"
-        >expand_more</i
-      >
+      <img
+        [@indicatorRotate]="state$ | async"
+        src="assets/fonts/MaterialIcons/expand_more.png"
+        width="24px"
+      />
     </div>
     <div
       [@openClose]="state$ | async"
