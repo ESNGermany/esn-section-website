@@ -10,20 +10,22 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="!globals?.useImageSlideshow; else imageGrid">
-    <div class="bg-graylight my-1 py-1 xl:my-4 xl:py-4">
-      <div class="w-4/5 xl:w-3/5 mx-auto">
-        <gallery
-          [items]="images"
-          [counter]="false"
-          [thumb]="showThumb"
-          [thumbMode]="'free'"
-          [thumbPosition]="'right'"
-          [autoPlay]="true"
-          [playerInterval]="6000"
-        ></gallery>
+  <ng-container *ngIf="globals$ | async as globals">
+    <ng-container *ngIf="globals?.useImageSlideshow; else imageGrid">
+      <div class="bg-graylight my-1 py-1 xl:my-4 xl:py-4">
+        <div class="w-4/5 xl:w-3/5 mx-auto">
+          <gallery
+            [items]="images"
+            [counter]="false"
+            [thumb]="showThumb"
+            [thumbMode]="'free'"
+            [thumbPosition]="'right'"
+            [autoPlay]="true"
+            [playerInterval]="6000"
+          ></gallery>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </ng-container>
 
   <ng-template #imageGrid>
