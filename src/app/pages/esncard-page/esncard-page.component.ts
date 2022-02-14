@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ContentItem, ContentService } from 'src/app/services/content.service';
 import { PartnerItem, PartnerService } from 'src/app/services/partner.service';
 import { environment } from 'src/environments/environment';
 import { MainItem, MainService } from 'src/app/services/main.service';
@@ -16,16 +15,16 @@ import {
   styleUrls: ['./esncard-page.component.scss'],
 })
 export class EsncardPageComponent implements OnInit {
-  contentInfo$: Observable<ContentItem[]>;
   partnerInfo$: Observable<PartnerItem[]>;
   globals$: Observable<MainItem>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
   cityName: string;
   nationalPartner$: Observable<NationalPartnerItem[]>;
 
+  page: string = 'ESNcard_page';
+
   constructor(
     private title: Title,
-    private contentService: ContentService,
     private partnerService: PartnerService,
     private nationalPartnerService: NationalPartnersService,
     private mainService: MainService
@@ -37,9 +36,6 @@ export class EsncardPageComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.contentInfo$ = this.contentService
-      .fetchPageContent('ESNcard_page')
-      .pipe(shareReplay(1));
     this.partnerInfo$ = this.partnerService
       .fetchPagePartner()
       .pipe(shareReplay(1));

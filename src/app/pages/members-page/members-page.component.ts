@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, Observable, shareReplay } from 'rxjs';
-import { ContentItem, ContentService } from 'src/app/services/content.service';
+import { firstValueFrom } from 'rxjs';
 import { MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 
@@ -13,18 +12,11 @@ import { environment } from 'src/environments/environment';
 export class MembersPageComponent implements OnInit {
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
-  contentInfo$: Observable<ContentItem[]>;
+  page: string = 'Members_page';
 
-  constructor(
-    private title: Title,
-    private contentService: ContentService,
-    private mainService: MainService
-  ) {}
+  constructor(private title: Title, private mainService: MainService) {}
 
   async ngOnInit() {
-    this.contentInfo$ = this.contentService
-      .fetchPageContent('Members_page')
-      .pipe(shareReplay(1));
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('For Members | ' + mainInfo?.sectionLongName);
   }

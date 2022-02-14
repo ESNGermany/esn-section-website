@@ -28,6 +28,8 @@ export class LandingPageComponent implements OnInit {
   globals$: Observable<MainItem>;
   isBrowser: boolean;
 
+  page: string = 'Landing_page';
+
   constructor(
     private title: Title,
     private contentService: ContentService,
@@ -49,7 +51,7 @@ export class LandingPageComponent implements OnInit {
       map((res) => res[0])
     );
     this.contentInfo$ = this.contentService
-      .fetchPageContent('Landing_page')
+      .fetchPageContent(this.page)
       .pipe(shareReplay(1));
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Home | ' + mainInfo?.sectionLongName);
