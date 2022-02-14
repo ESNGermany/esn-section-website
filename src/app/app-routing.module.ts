@@ -1,77 +1,57 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { EsncardPageComponent } from './pages/esncard-page/esncard-page.component';
+import { EventsPageComponent } from './pages/events-page/events-page.component';
+import { MembersPageComponent } from './pages/members-page/members-page.component';
+import { TeamPageComponent } from './pages/team-page/team-page.component';
+import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
+import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.component';
+import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
+import { CocPageComponent } from './pages/coc-page/coc-page.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () =>
-      import('./pages/landing-page/landing-page.component').then(
-        (m) => m.LandingPageComponent
-      ),
+    component: LandingPageComponent,
   },
   {
     path: 'esncard',
-    loadChildren: () =>
-      import('./pages/esncard-page/esncard-page.component').then(
-        (m) => m.EsncardPageComponent
-      ),
+    component: EsncardPageComponent,
   },
   {
     path: 'events',
-    loadChildren: () =>
-      import('./pages/events-page/events-page.component').then(
-        (m) => m.EventsPageComponent
-      ),
+    component: EventsPageComponent,
   },
   {
     path: 'for-members',
-    loadChildren: () =>
-      import('./pages/members-page/members-page.component').then(
-        (m) => m.MembersPageComponent
-      ),
+    component: MembersPageComponent,
   },
   {
     path: 'team',
-    loadChildren: () =>
-      import('./pages/team-page/team-page.component').then(
-        (m) => m.TeamPageComponent
-      ),
+    component: TeamPageComponent,
   },
   {
     path: 'for-incomings',
-    loadChildren: () =>
-      import('./pages/incomings-page/incomings-page.component').then(
-        (m) => m.IncomingsPageComponent
-      ),
+    component: IncomingsPageComponent,
   },
   {
     path: 'imprint',
-    loadChildren: () =>
-      import('./pages/imprint-page/imprint-page.component').then(
-        (m) => m.ImprintPageComponent
-      ),
+    component: ImprintPageComponent,
   },
   {
     path: 'statutes',
-    loadChildren: () =>
-      import('./pages/statutes-page/statutes-page.component').then(
-        (m) => m.StatutesPageComponent
-      ),
+    component: StatutesPageComponent,
   },
   {
     path: 'coc',
-    loadChildren: () =>
-      import('./pages/coc-page/coc-page.component').then(
-        (m) => m.CocPageComponent
-      ),
+    component: CocPageComponent,
   },
   {
     path: 'error',
-    loadChildren: () =>
-      import('./pages/error-page/error-page.component').then(
-        (m) => m.ErrorPageComponent
-      ),
+    component: ErrorPageComponent,
     data: {
       title: 'Oopsie - ESN Germany',
     },
