@@ -3,7 +3,6 @@ import { Title } from '@angular/platform-browser';
 import { firstValueFrom, Observable, shareReplay } from 'rxjs';
 import { FaqItem, FaqService } from 'src/app/services/faq.service';
 import { MainService } from 'src/app/services/main.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-incomings-page',
@@ -17,8 +16,6 @@ export class IncomingsPageComponent implements OnInit {
   faqCoronaItemList$: Observable<FaqItem[]>;
   faqEsncardItemList$: Observable<FaqItem[]>;
   faqOtherItemList$: Observable<FaqItem[]>;
-
-  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
   page: string = 'Incomings_page';
 
