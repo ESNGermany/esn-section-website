@@ -1,12 +1,8 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MainItem, MainService } from 'src/app/services/main.service';
-import { CalendarOptions } from '@fullcalendar/angular';
-import { environment } from 'src/environments/environment';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { EventItem, EventsService } from 'src/app/services/events.service';
 
 @Component({
   selector: 'app-events-page',

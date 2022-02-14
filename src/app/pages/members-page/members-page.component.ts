@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom, Observable, shareReplay } from 'rxjs';
 import { ContentItem, ContentService } from 'src/app/services/content.service';
 import { MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
@@ -24,9 +24,7 @@ export class MembersPageComponent implements OnInit {
   async ngOnInit() {
     this.contentInfo$ = this.contentService
       .fetchPageContent('Members_page')
-      .pipe(
-        shareReplay(1)
-      );
+      .pipe(shareReplay(1));
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('For Members | ' + mainInfo?.sectionLongName);
   }

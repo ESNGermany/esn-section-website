@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ContentItem, ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
 import { MainService } from 'src/app/services/main.service';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom, Observable, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-team-page',
@@ -22,9 +22,9 @@ export class TeamPageComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.contentInfo$ = this.contentService.fetchPageContent('Team_page').pipe(
-      shareReplay(1)
-    );
+    this.contentInfo$ = this.contentService
+      .fetchPageContent('Team_page')
+      .pipe(shareReplay(1));
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Our Team | ' + mainInfo?.sectionLongName);
   }

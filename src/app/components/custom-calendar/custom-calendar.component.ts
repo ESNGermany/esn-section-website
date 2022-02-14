@@ -1,14 +1,13 @@
-import {HttpClient} from '@angular/common/http';
-import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {CalendarOptions} from '@fullcalendar/angular';
-import {BehaviorSubject, firstValueFrom} from 'rxjs';
-import {environment} from 'src/environments/environment';
-import {isPlatformBrowser} from "@angular/common";
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { CalendarOptions } from '@fullcalendar/angular';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-custom-calendar',
   templateUrl: './custom-calendar.component.html',
-  styleUrls: ['./custom-calendar.component.scss'],
 })
 export class CustomCalendarComponent {
   pretixLink;
@@ -16,8 +15,11 @@ export class CustomCalendarComponent {
   isBrowser$ = new BehaviorSubject(false);
   event$ = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId:object) {
-    if(isPlatformBrowser(platformId)){
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
+    if (isPlatformBrowser(platformId)) {
       this.isBrowser$.next(true);
     }
     this.calendarOptions = {
@@ -37,11 +39,22 @@ export class CustomCalendarComponent {
         this.event$.next(info.event);
       },
       events: async function () {
-        const result_2 = await firstValueFrom(http.get<{ start: string, end: string, title: string, url: string, details: string, causes: string }[]>(
-          environment.STRAPI_SECTION_URL +
-          `events?_created_by=` +
-          environment.STRAPI_SECTION_ID
-        ));
+        const result_2 = await firstValueFrom(
+          http.get<
+            {
+              start: string;
+              end: string;
+              title: string;
+              url: string;
+              details: string;
+              causes: string;
+            }[]
+          >(
+            environment.STRAPI_SECTION_URL +
+              `events?_created_by=` +
+              environment.STRAPI_SECTION_ID
+          )
+        );
         if (result_2) {
           return result_2.map((r) => ({
             start: new Date(r.start),
@@ -58,7 +71,6 @@ export class CustomCalendarComponent {
       },
     };
   }
-
 }
 
 function convertCause(cause: string) {

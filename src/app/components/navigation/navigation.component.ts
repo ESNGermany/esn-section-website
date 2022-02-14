@@ -7,7 +7,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { firstValueFrom, map, Observable, shareReplay, take } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { MainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 
