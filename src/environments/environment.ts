@@ -7,12 +7,12 @@ export const environment = {
   timeStamp: '2022-02-02 22:14:08',
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 8,
+  STRAPI_SECTION_ID: 24,
 };
 
 // STRAPI_SECTION_IDs:
 //  1: (Webmaster)
-//  2: TEST Freiburg
+//  2: LIVE Freiburg
 //  3: LIVE Köln
 //  4: LIVE Braunschweig
 //  5: LIVE Bayreuth
@@ -32,8 +32,10 @@ export const environment = {
 // 19: LIVE Konstanz
 // 20: LIVE MESA München
 // 21: TEST Landau
-// 22: TEST Hildesheim
+// 22: LIVE Hildesheim
 // 23: TEST Bochum
 // 24: TEST Augsburg
-// 25: TEST Kiel
+// 25: LIVE Kiel
 // 26: TEST Mannheim
+// 27: TEST Frankfurt (Oder)
+// 28: TEST HTW Dresden
