@@ -73,7 +73,7 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col"
+        class="flex flex-col"
       >
         <div *ngIf="c.Image" class="px-4">
           <img
@@ -89,7 +89,9 @@
             alt="{{ c.Image.alternativeText }}"
           />
         </div>
-        <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+        <div *ngIf="c.Text">
+          <markdown [data]="c.Text"></markdown>
+        </div>
       </div>
     </ng-container>
     <!-- text above img below -->
@@ -102,7 +104,7 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col"
+        class="flex flex-col"
       >
         <ng-container *ngIf="c.Text"
           ><markdown [data]="c.Text"></markdown
