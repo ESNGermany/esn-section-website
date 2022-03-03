@@ -22,25 +22,47 @@
         class="flex flex-wrap items-end justify-evenly flexb3"
       >
         <figure class="m-2">
-          <a href="{{ partner.Link }}" target="_blank" rel="noopener" class=""
+          <a
+            *ngIf="partner.Main_image.formats.medium"
+            href="{{ partner.Link }}"
+            target="_blank"
+            rel="noopener"
+            class=""
             ><img
-              *ngIf="partner.Main_image.formats.medium"
               class="imgh m-auto zoom"
               src="{{ strapiLink }}{{ partner.Main_image.formats.medium.url }}"
               alt="{{ partner.Main_image.alternativeText }}"
           /></a>
-          <a href="{{ partner.Link }}" target="_blank" rel="noopener" class=""
+          <a
+            *ngIf="
+              partner.Main_image.formats.thumbnail &&
+              !partner.Main_image.formats.medium
+            "
+            href="{{ partner.Link }}"
+            target="_blank"
+            rel="noopener"
+            class=""
             ><img
-              *ngIf="
-                partner.Main_image.formats.thumbnail &&
-                !partner.Main_image.formats.medium
-              "
               class="imgh m-auto zoom"
               src="{{ strapiLink }}{{
                 partner.Main_image.formats.thumbnail.url
               }}"
               alt="{{ partner.Main_image.alternativeText }}"
           /></a>
+          <a
+            *ngIf="
+              partner.Main_image.url && !partner.Main_image.formats.thumbnail
+            "
+            href="{{ partner.Link }}"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              class="imgh m-auto zoom"
+              src="{{ strapiLink }}{{ partner.Main_image.url }}"
+              alt="{{ partner.Main_image.alternativeText }}"
+            />
+          </a>
           <figcaption class="pt-4 text-center font-bold">
             {{ partner.Name }}
             <br />
