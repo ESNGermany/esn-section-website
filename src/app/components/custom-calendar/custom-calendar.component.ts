@@ -10,7 +10,7 @@ import { isPlatformBrowser } from '@angular/common';
   templateUrl: './custom-calendar.component.html',
 })
 export class CustomCalendarComponent {
-  pretixLink;
+  pretixLink?: string;
   calendarOptions: CalendarOptions;
   isBrowser$ = new BehaviorSubject(false);
   event$ = new BehaviorSubject(null);
@@ -34,7 +34,7 @@ export class CustomCalendarComponent {
         meridiem: false,
         hour12: false,
       },
-      eventClick: (info) => {
+      eventClick: (info: any) => {
         info.jsEvent.preventDefault();
         this.event$.next(info.event);
       },

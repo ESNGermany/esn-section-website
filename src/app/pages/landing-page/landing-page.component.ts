@@ -19,13 +19,12 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  images: GalleryItem[];
+  images!: GalleryItem[];
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
   showThumb: boolean = true;
-  innerWidth: any;
 
-  contentInfo$: Observable<ContentItem[]>;
-  globals$: Observable<MainItem>;
+  contentInfo$: Observable<ContentItem[]> | undefined;
+  globals$: Observable<MainItem> | undefined;
   isBrowser: boolean;
 
   page: string = 'Landing_page';
@@ -41,14 +40,14 @@ export class LandingPageComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize() {
     this.setGalleryThumb();
   }
 
   async ngOnInit() {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
     this.contentInfo$ = this.contentService
       .fetchPageContent(this.page)
@@ -80,14 +79,14 @@ export class LandingPageComponent implements OnInit {
   }
 
   comic(): void {
-    const navinav = this.document.getElementById('navinav');
-    const titeli = this.document.getElementById('titeli');
-    if (navinav.getAttribute('style') == 'font-family: "Comic Sans"') {
-      navinav.setAttribute('style', 'font-family: "Oswald"');
-      titeli.setAttribute('style', 'font-family: "Oswald"');
+    const navigation = this.document.getElementById('navinav');
+    const title = this.document.getElementById('titeli');
+    if (navigation?.getAttribute('style') == 'font-family: "Comic Sans"') {
+      navigation.setAttribute('style', 'font-family: "Oswald"');
+      title?.setAttribute('style', 'font-family: "Oswald"');
     } else {
-      navinav.setAttribute('style', 'font-family: "Comic Sans"');
-      titeli.setAttribute('style', 'font-family: "Comic Sans"');
+      navigation?.setAttribute('style', 'font-family: "Comic Sans"');
+      title?.setAttribute('style', 'font-family: "Comic Sans"');
     }
   }
 }

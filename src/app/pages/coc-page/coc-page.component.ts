@@ -10,7 +10,7 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./coc-page.component.scss'],
 })
 export class CocPageComponent implements OnInit {
-  cocItem$: Observable<CocItem>;
+  cocItem$: Observable<CocItem> | undefined;
 
   constructor(
     private title: Title,

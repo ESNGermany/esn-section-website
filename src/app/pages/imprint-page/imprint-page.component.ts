@@ -10,7 +10,7 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./imprint-page.component.scss'],
 })
 export class ImprintPageComponent implements OnInit {
-  imprintItemList$: Observable<ImprintItem>;
+  imprintItemList$: Observable<ImprintItem> | undefined;
 
   constructor(
     private title: Title,
@@ -21,7 +21,7 @@ export class ImprintPageComponent implements OnInit {
   async ngOnInit() {
     this.imprintItemList$ = this.imprintService.fetchImprint().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     const title = 'Imprint | ' + mainInfo?.sectionLongName;

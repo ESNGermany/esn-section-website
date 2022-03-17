@@ -10,12 +10,12 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./incomings-page.component.scss'],
 })
 export class IncomingsPageComponent implements OnInit {
-  faqTransportItemList$: Observable<FaqItem[]>;
-  faqHousingItemList$: Observable<FaqItem[]>;
-  faqUniErasmusItemList$: Observable<FaqItem[]>;
-  faqCoronaItemList$: Observable<FaqItem[]>;
-  faqEsncardItemList$: Observable<FaqItem[]>;
-  faqOtherItemList$: Observable<FaqItem[]>;
+  faqTransportItemList$: Observable<FaqItem[]> | undefined;
+  faqHousingItemList$: Observable<FaqItem[]> | undefined;
+  faqUniErasmusItemList$: Observable<FaqItem[]> | undefined;
+  faqCoronaItemList$: Observable<FaqItem[]> | undefined;
+  faqEsncardItemList$: Observable<FaqItem[]> | undefined;
+  faqOtherItemList$: Observable<FaqItem[]> | undefined;
 
   page: string = 'Incomings_page';
 

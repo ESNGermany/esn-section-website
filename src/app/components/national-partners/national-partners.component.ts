@@ -11,7 +11,7 @@ import {
   styleUrls: ['./national-partners.component.scss'],
 })
 export class NationalPartnersComponent implements OnInit {
-  nationalPartners$: Observable<NationalPartnerItem[]>;
+  nationalPartners$: Observable<NationalPartnerItem[]> | undefined;
 
   constructor(private nationalPartnersService: NationalPartnersService) {}
 
@@ -29,7 +29,7 @@ export class NationalPartnersComponent implements OnInit {
       });
   }
 
-  toggleInfo(partner): void {
+  toggleInfo(partner: NationalPartnerItem): void {
     partner.show = !partner.show;
 
     if (!partner.show) {

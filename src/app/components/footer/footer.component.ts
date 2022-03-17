@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  globals$: Observable<MainItem>;
+  globals$: Observable<MainItem> | undefined;
   timestamp: string = environment.timeStamp;
 
   constructor(
@@ -21,7 +21,7 @@ export class FooterComponent implements OnInit {
   async ngOnInit() {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
   }
 
@@ -30,9 +30,9 @@ export class FooterComponent implements OnInit {
     const footer2 = this.document.getElementById('foot2');
     const footer3 = this.document.getElementById('foot3');
     const strapiLink = this.document.getElementById('strapiLink');
-    footer.setAttribute('style', 'background-color: #ec008c');
-    footer2.setAttribute('style', 'fill: #ec008c');
-    footer3.setAttribute('style', 'fill: #ec008c');
-    strapiLink.setAttribute('style', 'color: #eaeaea !important');
+    footer!.setAttribute('style', 'background-color: #ec008c');
+    footer2!.setAttribute('style', 'fill: #ec008c');
+    footer3!.setAttribute('style', 'fill: #ec008c');
+    strapiLink!.setAttribute('style', 'color: #eaeaea !important');
   }
 }

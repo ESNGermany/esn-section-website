@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./content-item.component.scss'],
 })
 export class ContentItemComponent implements OnInit {
-  @Input() page: string;
+  @Input() page!: string;
 
-  contentInfo$: Observable<ContentItem[]>;
+  contentInfo$: Observable<ContentItem[]> | undefined;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
   constructor(private contentService: ContentService) {}

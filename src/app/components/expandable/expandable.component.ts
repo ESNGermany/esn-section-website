@@ -63,7 +63,9 @@ import {
 })
 export class ExpandableComponent {
   public state$ = new BehaviorSubject('closed');
+
   constructor() {}
+
   public toggleState(): void {
     if (this.state$.value === 'closed') {
       this.state$.next('open');

@@ -13,7 +13,7 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./statutes-page.component.scss'],
 })
 export class StatutesPageComponent implements OnInit {
-  statutesItemList$: Observable<StatutesItem>;
+  statutesItemList$: Observable<StatutesItem> | undefined;
 
   constructor(
     private title: Title,
@@ -24,7 +24,7 @@ export class StatutesPageComponent implements OnInit {
   async ngOnInit() {
     this.statutesItemList$ = this.statutesService.fetchStatutes().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     const title = 'Statutes | ' + mainInfo?.sectionLongName;

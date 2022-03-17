@@ -15,11 +15,11 @@ import {
   styleUrls: ['./esncard-page.component.scss'],
 })
 export class EsncardPageComponent implements OnInit {
-  partnerInfo$: Observable<PartnerItem[]>;
+  partnerInfo$: Observable<PartnerItem[]> | undefined;
   globals$: Observable<MainItem>;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
-  cityName: string;
-  nationalPartner$: Observable<NationalPartnerItem[]>;
+  cityName?: string;
+  nationalPartner$: Observable<NationalPartnerItem[]> | undefined;
 
   page: string = 'ESNcard_page';
 
@@ -31,7 +31,7 @@ export class EsncardPageComponent implements OnInit {
   ) {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
   }
 
@@ -55,7 +55,7 @@ export class EsncardPageComponent implements OnInit {
     });
   }
 
-  toggleInfo(partner): void {
+  toggleInfo(partner: PartnerItem): void {
     partner.show = !partner.show;
 
     if (!partner.show) {

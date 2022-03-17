@@ -42,7 +42,7 @@ export class ContentService {
     'contents?_created_by=' +
     environment.STRAPI_SECTION_ID +
     '&_sort=Order_on_page&Page_for_display=';
-  private fullUrl: string;
+  private fullUrl?: string;
 
   constructor(
     private http: HttpClient,

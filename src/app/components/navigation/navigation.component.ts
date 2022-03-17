@@ -17,10 +17,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  globals$: Observable<MainItem>;
-  @Input() activeMenu: string;
-  public bgImage$: Observable<unknown>;
-  public buttonColor$: Observable<unknown>;
+  globals$: Observable<MainItem> | undefined;
+  @Input() activeMenu?: string;
+  public bgImage$: Observable<object> | undefined;
+  public buttonColor$: Observable<object> | undefined;
 
   constructor(
     private el: ElementRef,
@@ -29,7 +29,7 @@ export class NavigationComponent implements OnInit {
   ) {}
 
   @HostListener('document:click', ['$event'])
-  clickout(event) {
+  clickout(event: Event) {
     if (!this.el.nativeElement.contains(event.target)) {
       this.hideMenu();
     }
@@ -38,7 +38,7 @@ export class NavigationComponent implements OnInit {
   async ngOnInit() {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
     this.bgImage$ = this.globals$.pipe(
       map((res) => ({
