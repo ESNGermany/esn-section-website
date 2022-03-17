@@ -4,7 +4,9 @@
     <div class="title-div">
       <p class="title-p">Frequently Asked Questions</p>
     </div>
-    <ng-container *ngIf="faqHousingItemList$ | async as faqHousingItemList">
+    <ng-container
+      *ngIf="faqHousingItemList$ | async as faqHousingItemList; else loading"
+    >
       <div
         *ngIf="faqHousingItemList.length > 0"
         class="font-body text-xl font-bold pb-2"
@@ -22,6 +24,9 @@
         </app-expandable>
       </div>
     </ng-container>
+    <ng-template #loading>
+      <div class="loader"></div>
+    </ng-template>
     <ng-container *ngIf="faqTransportItemList$ | async as faqTransportItemList">
       <div
         *ngIf="faqTransportItemList.length > 0"

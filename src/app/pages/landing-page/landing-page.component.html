@@ -1,4 +1,4 @@
-<ng-container *ngIf="contentInfo$ | async as contentItemList">
+<ng-container *ngIf="contentInfo$ | async as contentItemList; else loading">
   <div class="outer-div">
     <div class="px-8 mb-16">
       <div class="title-div4">
@@ -36,7 +36,7 @@
       <div class="col-span-3">
         <img
           src="{{ strapiLink }}{{
-            globals?.imageGridFrontPage[0].formats.medium.url
+            globals!.imageGridFrontPage[0].formats.medium.url
           }}"
           class="object-cover h-full w-full"
         />
@@ -44,7 +44,7 @@
       <div class="row-span-2">
         <img
           src="{{ strapiLink }}{{
-            globals?.imageGridFrontPage[1].formats.medium.url
+            globals!.imageGridFrontPage[1].formats.medium.url
           }}"
           class="object-cover h-full w-full"
         />
@@ -52,7 +52,7 @@
       <div (click)="comic()">
         <img
           src="{{ strapiLink }}{{
-            globals?.imageGridFrontPage[2].formats.medium.url
+            globals!.imageGridFrontPage[2].formats.medium.url
           }}"
           class="object-cover h-full w-full"
         />
@@ -60,7 +60,7 @@
       <div class="col-span-2">
         <img
           src="{{ strapiLink }}{{
-            globals?.imageGridFrontPage[3].formats.medium.url
+            globals!.imageGridFrontPage[3].formats.medium.url
           }}"
           class="object-cover h-full w-full"
         />
@@ -68,4 +68,5 @@
     </div>
   </ng-template>
 </ng-container>
+<ng-template #loading><div class="loader"></div></ng-template>
 <app-content-item [page]="page"></app-content-item>

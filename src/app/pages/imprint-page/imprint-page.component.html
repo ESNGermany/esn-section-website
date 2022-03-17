@@ -1,4 +1,7 @@
-<div *ngIf="imprintItemList$ | async as imprintItemList" class="outer">
+<div
+  *ngIf="imprintItemList$ | async as imprintItemList; else loading"
+  class="outer"
+>
   <div class="markdown-div">
     <div class="title-div">
       <p class="title-p">{{ imprintItemList.Title }}</p>
@@ -6,3 +9,4 @@
     <markdown [data]="imprintItemList.Text"></markdown>
   </div>
 </div>
+<ng-template #loading><div class="loader"></div></ng-template>
