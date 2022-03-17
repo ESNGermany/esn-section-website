@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  timeStamp: '2022-02-02 22:14:08',
+  timeStamp: '2022-03-15 22:14:08',
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 24,
+  STRAPI_SECTION_ID: 3,
 };
 
 // STRAPI_SECTION_IDs:
@@ -39,3 +39,4 @@ export const environment = {
 // 26: TEST Mannheim
 // 27: TEST Frankfurt (Oder)
 // 28: TEST HTW Dresden
+// 29: TEST Koblenz
