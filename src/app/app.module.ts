@@ -28,6 +28,7 @@ import { MembersPageComponent } from './pages/members-page/members-page.componen
 import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
 
+import { CookieService } from 'ngx-cookie-service';
 import { GalleryModule } from 'ng-gallery';
 import { HttpClientModule } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
@@ -73,7 +74,6 @@ FullCalendarModule.registerPlugins([
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    FullCalendarModule,
     GalleryModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -81,6 +81,7 @@ FullCalendarModule.registerPlugins([
     MarkdownModule.forRoot(),
   ],
   providers: [
+    FullCalendarModule,
     CocService,
     ContentService,
     EventsService,
@@ -92,6 +93,7 @@ FullCalendarModule.registerPlugins([
     NationalPartnersService,
     PartnerService,
     StatutesService,
+    CookieService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
