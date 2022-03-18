@@ -10,7 +10,9 @@
       </div>
     </ng-container>
   </ng-container>
-  <ng-template #loading><div class="loader"></div></ng-template>
+  <ng-template #loading>
+    <img width="200px" class="m-auto" src="assets/social/ESN-star-spinner.gif"
+  /></ng-template>
 </div>
 <div class="max-w-screen-2xl m-auto mb-24">
   <ng-container *ngIf="partnerInfo$ | async as partnerItemList">

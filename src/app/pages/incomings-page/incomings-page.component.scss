@@ -56,18 +56,3 @@
 .outer-div {
   @apply max-w-screen-xl m-auto p-8 sm:p-0 sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4;
 }
-
-.loader {
-  margin: auto;
-  border: 20px solid #9698db;
-  border-radius: 50%;
-  border-top: 20px solid #2e3192;
-  width: 200px;
-  height: 200px;
-  animation: spinner 2.5s linear infinite;
-}
-
-@keyframes spinner {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}

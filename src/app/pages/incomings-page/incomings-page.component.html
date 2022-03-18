@@ -25,8 +25,11 @@
       </div>
     </ng-container>
     <ng-template #loading>
-      <div class="loader"></div>
-    </ng-template>
+      <img
+        width="200px"
+        class="m-auto"
+        src="assets/social/ESN-star-spinner.gif"
+    /></ng-template>
     <ng-container *ngIf="faqTransportItemList$ | async as faqTransportItemList">
       <div
         *ngIf="faqTransportItemList.length > 0"

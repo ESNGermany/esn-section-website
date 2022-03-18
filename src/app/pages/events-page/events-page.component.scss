@@ -36,18 +36,3 @@
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
-
-.loader {
-  margin: auto;
-  border: 20px solid #9698db;
-  border-radius: 50%;
-  border-top: 20px solid #2e3192;
-  width: 200px;
-  height: 200px;
-  animation: spinner 2.5s linear infinite;
-}
-
-@keyframes spinner {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
