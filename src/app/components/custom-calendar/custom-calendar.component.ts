@@ -56,7 +56,7 @@ export class CustomCalendarComponent {
           )
         );
         if (result_2) {
-          return result_2.map((r) => ({
+          return result_2.map((r: any) => ({
             start: new Date(r.start),
             end: new Date(r.end),
             title: r.title,
