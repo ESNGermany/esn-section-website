@@ -79,6 +79,7 @@ FullCalendarModule.registerPlugins([
     AppRoutingModule,
     HttpClientModule,
     MarkdownModule.forRoot(),
+    FullCalendarModule,
   ],
   providers: [
     FullCalendarModule,
