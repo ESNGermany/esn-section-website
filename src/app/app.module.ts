@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NationalPartnersComponent } from './components/national-partners/national-partners.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PretixCalendarComponent } from './components/pretix-calendar/pretix-calendar.component';
+import { OlaContentItemComponent } from './components/ola-content-item/ola-content-item.component';
 
 import { CocPageComponent } from './pages/coc-page/coc-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
@@ -60,6 +61,7 @@ FullCalendarModule.registerPlugins([
     FooterComponent,
     NationalPartnersComponent,
     NavigationComponent,
+    OlaContentItemComponent,
     PretixCalendarComponent,
     CocPageComponent,
     ErrorPageComponent,
