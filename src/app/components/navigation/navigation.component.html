@@ -85,32 +85,36 @@
 <!-- Social Media buttons with hover-effect on the right side (bottom if mobile) -->
 <div class="max-w-screen-2xl m-auto" *ngIf="globals$ | async as globals">
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible">
-    <div *ngIf="globals?.instagramLink" class="mar">
-      <!-- <div id="bubble1" class="bubble you invisible font-body">
-        {{ globals?.instagramName }}
-      </div> -->
+    <div *ngIf="globals?.instagramLink" class="ml-8">
       <a href="{{ globals?.instagramLink }}" target="_blank" rel="noopener">
+        <div id="bubble1" class="bubble invisible font-body">
+          {{ makeSomething(globals?.instagramName) }}
+        </div>
         <button
           class="p-2 rounded-full block my-2 hov"
+          (mouseenter)="showBubble(1)"
+          (mouseleave)="hideBubble(1)"
           [ngStyle]="buttonColor$ | async"
         >
           <img class="m-2 h-6" src="../../../assets/social/instagram.png" />
         </button>
       </a>
     </div>
-    <ng-container *ngIf="globals?.facebookLink">
-      <!-- <div id="bubble2" class="bubble you invisible font-body">
-        fb.com/{{ globals?.facebookName }}
-      </div> -->
+    <div *ngIf="globals?.facebookLink">
       <a href="{{ globals?.facebookLink }}" target="_blank" rel="noopener">
+        <div id="bubble2" class="bubble invisible font-body">
+          fb.com/{{ makeSomething(globals?.facebookName) }}
+        </div>
         <button
           class="p-2 rounded-full block my-2 hov"
           [ngStyle]="buttonColor$ | async"
+          (mouseenter)="showBubble(2)"
+          (mouseleave)="hideBubble(2)"
         >
           <img class="m-2 h-6" src="../../../assets/social/facebook.png" />
         </button>
       </a>
-    </ng-container>
+    </div>
   </div>
   <ng-container class="m-auto" *ngIf="globals?.instagramLink">
     <div

@@ -38,10 +38,10 @@ export class NavigationComponent implements OnInit {
   async ngOnInit() {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res: any) => res[0])
+      map((res: MainItem[]) => res[0])
     );
     this.bgImage$ = this.globals$.pipe(
-      map((res) => ({
+      map((res: MainItem) => ({
         'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
           res?.buttonColor
         )}, 0.8) 80%), url("${environment.STRAPI_SECTION_URL_IMAGE}${
@@ -50,10 +50,14 @@ export class NavigationComponent implements OnInit {
       }))
     );
     this.buttonColor$ = this.globals$.pipe(
-      map((res) => ({
+      map((res: MainItem) => ({
         'background-color': `${this.getButtonColor(res?.buttonColor)})`,
       }))
     );
+  }
+
+  public makeSomething(name: string): string {
+    return name;
   }
 
   showMenu(): void {
