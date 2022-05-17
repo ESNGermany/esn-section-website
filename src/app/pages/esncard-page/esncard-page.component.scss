@@ -41,12 +41,13 @@
 .imgh {
   max-height: 7rem;
 }
+
 .zoom {
   transition: transform 0.2s;
-}
 
-.zoom:hover {
-  transform: scale(1.08);
+  &:hover {
+    transform: scale(1.08);
+  }
 }
 
 .flexb3 {

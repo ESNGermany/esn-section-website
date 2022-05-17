@@ -25,10 +25,10 @@
 
 .hov {
   transition: transform 0.2s;
-}
 
-.hov:hover {
-  transform: scale(1.13);
+  &:hover {
+    transform: scale(1.13);
+  }
 }
 
 .text-graylight {
