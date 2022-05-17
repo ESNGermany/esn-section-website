@@ -1,13 +1,5 @@
-import { DOCUMENT, Location } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  Inject,
-  OnInit,
-} from '@angular/core';
-import { Router } from 'express';
-import * as path from 'path';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
@@ -22,32 +14,11 @@ export class NavigationComponent implements OnInit {
   globals$: Observable<IMainItem> | undefined;
   public bgImage$: Observable<object> | undefined;
   public buttonColor$: Observable<object> | undefined;
-  private isMenuActive: boolean = false;
 
   constructor(
-    private el: ElementRef,
     private mainService: MainService,
-    @Inject(DOCUMENT) private document: Document,
-    private readonly location: Location
+    @Inject(DOCUMENT) private document: Document
   ) {}
-
-  // @HostListener('document:click', ['$event'])
-  // clickout(event: Event) {
-  //   if (!this.el.nativeElement.contains(event.target)) {
-  //     if (this.isMenuActive) {
-  //       this.hideMenu();
-  //     }
-  //   }
-  // }
-
-  // @HostListener('document:click', ['$event'])
-  // click(event: Event) {
-  //   if (this.location.path() === '') {
-  //     // console.log(this.location.path());
-  //     const trailing = this.document.getElementsByClassName('addhoverActive');
-  //     // console.log(trailing);
-  //   }
-  // }
 
   async ngOnInit(): Promise<void> {
     this.globals$ = this.mainService.fetchMain().pipe(
@@ -70,30 +41,24 @@ export class NavigationComponent implements OnInit {
     );
   }
 
-  public makeSomething(name: string): string {
-    return name;
-  }
-
-  showMenu(): void {
+  public showMenu(): void {
     const burger = this.document.getElementById('burger') as HTMLUListElement;
     const menu = this.document.getElementById('menu') as HTMLUListElement;
     burger.classList.add('hidden');
     menu.classList.remove('hidden');
     menu.classList.add('vis');
-    // this.isMenuActive = true;
   }
 
-  hideMenu(): void {
+  public hideMenu(): void {
     const burger = this.document.getElementById('burger') as HTMLUListElement;
     const menu = this.document.getElementById('menu') as HTMLUListElement;
     burger.classList.remove('hidden');
     burger.classList.add('vis');
     menu.classList.remove('vis');
     menu.classList.add('hidden');
-    // this.isMenuActive = false;
   }
 
-  showBubble(bubble: 1 | 2): void {
+  public showBubble(bubble: 1 | 2): void {
     const b1 = this.document.getElementById('bubble1') as HTMLDivElement;
     const b2 = this.document.getElementById('bubble2') as HTMLDivElement;
     if (bubble === 1) {
@@ -106,7 +71,7 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  hideBubble(bubble: 1 | 2): void {
+  public hideBubble(bubble: 1 | 2): void {
     const b1 = this.document.getElementById('bubble1') as HTMLDivElement;
     const b2 = this.document.getElementById('bubble2') as HTMLDivElement;
     if (bubble === 1) {
@@ -119,7 +84,7 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  getButtonColor(colorString: string): string {
+  private getButtonColor(colorString: string): string {
     switch (colorString) {
       case 'esnGreen':
         return 'rgb(122, 193, 67';
