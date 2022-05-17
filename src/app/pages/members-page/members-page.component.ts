@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
+
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
@@ -9,11 +10,11 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./members-page.component.scss'],
 })
 export class MembersPageComponent implements OnInit {
-  page: string = 'Members_page';
+  public page: string = 'Members_page';
 
   constructor(private title: Title, private mainService: MainService) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('For Members | ' + mainInfo?.sectionLongName);
   }

@@ -10,43 +10,8 @@ import {
 
 @Component({
   selector: 'app-expandable',
-  template: `
-    <div
-      class="cursor-pointer flex flex-row justify-between font-md font-body exp"
-      (click)="toggleState()"
-    >
-      <ng-content select="[slot=header]"></ng-content>
-      <img
-        [@indicatorRotate]="state$ | async"
-        src="assets/fonts/MaterialIcons/expand_more.png"
-        width="24px"
-      />
-    </div>
-    <div
-      [@openClose]="state$ | async"
-      class="overflow-hidden text-md font-body bgwhite"
-    >
-      <ng-content></ng-content>
-    </div>
-  `,
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-      .exp {
-        min-height: 48px;
-        align-items: center;
-        padding: 0 24px;
-      }
-      .bgwhite {
-        background: white;
-      }
-      .bgwhite:hover {
-        background: white;
-      }
-    `,
-  ],
+  templateUrl: 'expandable.component.html',
+  styleUrls: ['./expandable.component.scss'],
   animations: [
     trigger('openClose', [
       state('open', style({ height: '*', visibility: 'visible' })),

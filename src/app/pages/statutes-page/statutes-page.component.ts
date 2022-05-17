@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+
 import {
-  StatutesItem,
+  IStatutesItem,
   StatutesService,
 } from 'src/app/services/statutes.service';
 import { MainService } from 'src/app/services/main.service';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-statutes-page',
@@ -13,7 +14,7 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./statutes-page.component.scss'],
 })
 export class StatutesPageComponent implements OnInit {
-  statutesItemList$: Observable<StatutesItem> | undefined;
+  statutesItemList$: Observable<IStatutesItem> | undefined;
 
   constructor(
     private title: Title,
@@ -21,7 +22,7 @@ export class StatutesPageComponent implements OnInit {
     private mainService: MainService
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.statutesItemList$ = this.statutesService.fetchStatutes().pipe(
       shareReplay(1),
       map((res: any) => res[0])

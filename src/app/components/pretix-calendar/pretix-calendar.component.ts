@@ -7,15 +7,16 @@ import {
   ViewChild,
 } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
-import { MainItem, MainService } from 'src/app/services/main.service';
 import { DOCUMENT } from '@angular/common';
+
+import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-pretix-calendar',
   templateUrl: './pretix-calendar.component.html',
 })
 export class PretixCalendarComponent implements OnInit, AfterViewInit {
-  public globals$: Observable<MainItem>;
+  public globals$: Observable<IMainItem>;
   private pretixLink?: string;
 
   @ViewChild('pretixCal') el: ElementRef | undefined;
@@ -34,12 +35,12 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
       .subscribe((value) => (this.pretixLink = value[0].pretixLink));
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.loadJsFile('https://pretix.eu/widget/v1.en.js');
     this.loadCssFile('https://pretix.eu/demo/democon/widget/v1.css');
   }
 
-  async ngAfterViewInit() {
+  async ngAfterViewInit(): Promise<void> {
     this.el!.nativeElement.innerHTML = `<div
         class="pretix-widget-compat"
         event="${this.pretixLink}"

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { firstValueFrom, Observable, shareReplay } from 'rxjs';
-import { FaqItem, FaqService } from 'src/app/services/faq.service';
+
+import { IFaqItem, FaqService } from 'src/app/services/faq.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
@@ -10,14 +11,14 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./incomings-page.component.scss'],
 })
 export class IncomingsPageComponent implements OnInit {
-  faqTransportItemList$: Observable<FaqItem[]> | undefined;
-  faqHousingItemList$: Observable<FaqItem[]> | undefined;
-  faqUniErasmusItemList$: Observable<FaqItem[]> | undefined;
-  faqCoronaItemList$: Observable<FaqItem[]> | undefined;
-  faqEsncardItemList$: Observable<FaqItem[]> | undefined;
-  faqOtherItemList$: Observable<FaqItem[]> | undefined;
+  faqTransportItemList$: Observable<IFaqItem[]> | undefined;
+  faqHousingItemList$: Observable<IFaqItem[]> | undefined;
+  faqUniErasmusItemList$: Observable<IFaqItem[]> | undefined;
+  faqCoronaItemList$: Observable<IFaqItem[]> | undefined;
+  faqEsncardItemList$: Observable<IFaqItem[]> | undefined;
+  faqOtherItemList$: Observable<IFaqItem[]> | undefined;
 
-  page: string = 'Incomings_page';
+  public page: string = 'Incomings_page';
 
   constructor(
     private title: Title,
@@ -25,7 +26,7 @@ export class IncomingsPageComponent implements OnInit {
     private mainService: MainService
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('For Incomings | ' + mainInfo?.sectionLongName);
 

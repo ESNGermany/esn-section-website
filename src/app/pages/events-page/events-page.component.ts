@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MainItem, MainService } from 'src/app/services/main.service';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+
+import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-events-page',
@@ -10,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./events-page.component.scss'],
 })
 export class EventsPageComponent implements OnInit {
-  globals$: Observable<MainItem> | undefined;
+  globals$: Observable<IMainItem> | undefined;
   pretixLink?: string;
 
   public loadPretix: boolean;
@@ -23,7 +24,7 @@ export class EventsPageComponent implements OnInit {
     this.loadPretix = this.cookieService.get('pretix') === 'true';
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res: any) => res[0])

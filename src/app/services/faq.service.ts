@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-export interface FaqItem {
+export interface IFaqItem {
   id: string;
   Question: string;
   Answer: string;
@@ -27,12 +28,12 @@ export class FaqService {
     private messageService: MessageService
   ) {}
 
-  fetchFaq(category: string): Observable<FaqItem[]> {
+  fetchFaq(category: string): Observable<IFaqItem[]> {
     this.fullUrl = this.url + category;
-    return this.http.get<FaqItem[]>(this.fullUrl).pipe(
+    return this.http.get<IFaqItem[]>(this.fullUrl).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched faq')),
-      catchError(this.handleError<FaqItem[]>('fetchFaqList', []))
+      catchError(this.handleError<IFaqItem[]>('fetchFaqList', []))
     );
   }
 

@@ -1,4 +1,7 @@
-<div *ngIf="contentInfo$ | async as contentItemList" class="outer-imgbox">
+<div
+  *ngIf="contentInfo$ | async as contentItemList; else loading"
+  class="outer-imgbox"
+>
   <div *ngFor="let c of contentItemList" class="px-4 mb-20">
     <!-- text left img right -->
     <ng-container *ngIf="c.Layout === 'Text_left_img_right'">
@@ -128,3 +131,9 @@
     </ng-container>
   </div>
 </div>
+<ng-template #loading>
+  <img
+    width="200px"
+    class="m-auto mb-26"
+    src="assets/social/ESN-star-spinner.gif"
+/></ng-template>

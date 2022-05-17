@@ -3,16 +3,13 @@
   class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
   *ngIf="globals$ | async as globals"
 >
-  <ng-container *ngIf="partnerInfo$ | async as partnerItemList; else loading">
+  <ng-container *ngIf="partnerInfo$ | async as partnerItemList">
     <ng-container *ngIf="partnerItemList.length > 0">
       <div class="title-div">
         <p class="title-p">Our Local Partners in {{ cityName }}</p>
       </div>
     </ng-container>
   </ng-container>
-  <ng-template #loading>
-    <img width="200px" class="m-auto" src="assets/social/ESN-star-spinner.gif"
-  /></ng-template>
 </div>
 <div class="max-w-screen-2xl m-auto mb-24">
   <ng-container *ngIf="partnerInfo$ | async as partnerItemList">

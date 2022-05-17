@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { isPlatformBrowser } from '@angular/common';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-custom-calendar',

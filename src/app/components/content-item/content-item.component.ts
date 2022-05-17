@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
-import { ContentItem, ContentService } from 'src/app/services/content.service';
+
+import { IContentItem, ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,12 +12,12 @@ import { environment } from 'src/environments/environment';
 export class ContentItemComponent implements OnInit {
   @Input() page!: string;
 
-  contentInfo$: Observable<ContentItem[]> | undefined;
+  contentInfo$: Observable<IContentItem[]> | undefined;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
 
   constructor(private contentService: ContentService) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.contentInfo$ = this.contentService
       .fetchPageContent(this.page)
       .pipe(shareReplay(1));

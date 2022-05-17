@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
+
 import {
-  NationalPartnerItem,
+  INationalPartnerItem,
   NationalPartnersService,
 } from 'src/app/services/national-partners.service';
 
@@ -11,7 +12,7 @@ import {
   styleUrls: ['./national-partners.component.scss'],
 })
 export class NationalPartnersComponent implements OnInit {
-  nationalPartners$: Observable<NationalPartnerItem[]> | undefined;
+  nationalPartners$: Observable<INationalPartnerItem[]> | undefined;
 
   constructor(private nationalPartnersService: NationalPartnersService) {}
 
@@ -29,7 +30,7 @@ export class NationalPartnersComponent implements OnInit {
       });
   }
 
-  toggleInfo(partner: NationalPartnerItem): void {
+  toggleInfo(partner: INationalPartnerItem): void {
     partner.show = !partner.show;
 
     if (!partner.show) {

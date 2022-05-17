@@ -6,12 +6,13 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ContentItem, ContentService } from 'src/app/services/content.service';
-import { MainItem, MainService } from 'src/app/services/main.service';
-import { environment } from 'src/environments/environment';
 import { GalleryItem, ImageItem } from 'ng-gallery';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
+import { IContentItem, ContentService } from 'src/app/services/content.service';
+import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -19,15 +20,14 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  images!: GalleryItem[];
-  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
-  showThumb: boolean = true;
+  contentInfo$: Observable<IContentItem[]> | undefined;
+  globals$: Observable<IMainItem> | undefined;
 
-  contentInfo$: Observable<ContentItem[]> | undefined;
-  globals$: Observable<MainItem> | undefined;
-  isBrowser: boolean;
-
-  page: string = 'Landing_page';
+  public images!: GalleryItem[];
+  public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  public showThumb: boolean = true;
+  public isBrowser: boolean;
+  public page: string = 'Landing_page';
 
   constructor(
     private title: Title,
@@ -40,11 +40,11 @@ export class LandingPageComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     this.setGalleryThumb();
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res: any) => res[0])
@@ -70,7 +70,7 @@ export class LandingPageComponent implements OnInit {
     }
   }
 
-  setGalleryThumb(): void {
+  private setGalleryThumb(): void {
     if (this.isBrowser) {
       if (window.innerWidth < 1000) {
         this.showThumb = false;
@@ -78,7 +78,7 @@ export class LandingPageComponent implements OnInit {
     }
   }
 
-  comic(): void {
+  public comic(): void {
     const navigation = this.document.getElementById('navinav');
     const title = this.document.getElementById('titeli');
     if (navigation?.getAttribute('style') == 'font-family: "Comic Sans"') {

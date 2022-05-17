@@ -1,14 +1,16 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, Location } from '@angular/common';
 import {
   Component,
   ElementRef,
   HostListener,
   Inject,
-  Input,
   OnInit,
 } from '@angular/core';
+import { Router } from 'express';
+import * as path from 'path';
 import { map, Observable, shareReplay } from 'rxjs';
-import { MainItem, MainService } from 'src/app/services/main.service';
+
+import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,31 +19,43 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  globals$: Observable<MainItem> | undefined;
-  @Input() activeMenu?: string;
+  globals$: Observable<IMainItem> | undefined;
   public bgImage$: Observable<object> | undefined;
   public buttonColor$: Observable<object> | undefined;
+  private isMenuActive: boolean = false;
 
   constructor(
     private el: ElementRef,
     private mainService: MainService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private readonly location: Location
   ) {}
 
-  @HostListener('document:click', ['$event'])
-  clickout(event: Event) {
-    if (!this.el.nativeElement.contains(event.target)) {
-      this.hideMenu();
-    }
-  }
+  // @HostListener('document:click', ['$event'])
+  // clickout(event: Event) {
+  //   if (!this.el.nativeElement.contains(event.target)) {
+  //     if (this.isMenuActive) {
+  //       this.hideMenu();
+  //     }
+  //   }
+  // }
 
-  async ngOnInit() {
+  // @HostListener('document:click', ['$event'])
+  // click(event: Event) {
+  //   if (this.location.path() === '') {
+  //     // console.log(this.location.path());
+  //     const trailing = this.document.getElementsByClassName('addhoverActive');
+  //     // console.log(trailing);
+  //   }
+  // }
+
+  async ngOnInit(): Promise<void> {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res: MainItem[]) => res[0])
+      map((res: IMainItem[]) => res[0])
     );
     this.bgImage$ = this.globals$.pipe(
-      map((res: MainItem) => ({
+      map((res: IMainItem) => ({
         'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
           res?.buttonColor
         )}, 0.8) 80%), url("${environment.STRAPI_SECTION_URL_IMAGE}${
@@ -50,7 +64,7 @@ export class NavigationComponent implements OnInit {
       }))
     );
     this.buttonColor$ = this.globals$.pipe(
-      map((res: MainItem) => ({
+      map((res: IMainItem) => ({
         'background-color': `${this.getButtonColor(res?.buttonColor)})`,
       }))
     );
@@ -66,6 +80,7 @@ export class NavigationComponent implements OnInit {
     burger.classList.add('hidden');
     menu.classList.remove('hidden');
     menu.classList.add('vis');
+    // this.isMenuActive = true;
   }
 
   hideMenu(): void {
@@ -75,6 +90,7 @@ export class NavigationComponent implements OnInit {
     burger.classList.add('vis');
     menu.classList.remove('vis');
     menu.classList.add('hidden');
+    // this.isMenuActive = false;
   }
 
   showBubble(bubble: 1 | 2): void {

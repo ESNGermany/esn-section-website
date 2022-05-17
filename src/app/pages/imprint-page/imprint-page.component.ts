@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
-import { ImprintItem, ImprintService } from 'src/app/services/imprint.service';
+
+import { IImprintItem, ImprintService } from 'src/app/services/imprint.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./imprint-page.component.scss'],
 })
 export class ImprintPageComponent implements OnInit {
-  imprintItemList$: Observable<ImprintItem> | undefined;
+  imprintItemList$: Observable<IImprintItem> | undefined;
 
   constructor(
     private title: Title,
@@ -18,7 +19,7 @@ export class ImprintPageComponent implements OnInit {
     private mainService: MainService
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.imprintItemList$ = this.imprintService.fetchImprint().pipe(
       shareReplay(1),
       map((res: any) => res[0])

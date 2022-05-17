@@ -34,7 +34,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/pretix.css"
+              "src/assets/styles/pretix.css"
             ],
             "scripts": []
           },

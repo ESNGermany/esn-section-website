@@ -23,7 +23,7 @@
 .divider-bottom .shape-fill {
   fill: #fff;
 }
-.addhover:hover:before {
+.addhover:hover::before {
   position: absolute;
   content: "";
   left: 0;
@@ -41,12 +41,7 @@
   width: 48px;
   height: 3px;
   background: #fff;
-}
-
-.menu {
-  position: absolute;
-  top: 0;
-  right: 0;
+  clear: both;
 }
 
 .hov {
@@ -96,7 +91,7 @@
 }
 
 .mobile-li {
-  @apply p-4 pl-8 border-b border-white /*hover-zoom*/;
+  @apply p-4 pl-8 border-b border-white clear-both /*hover-zoom*/;
 }
 
 .mobile-but {

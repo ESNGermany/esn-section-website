@@ -5,7 +5,7 @@ import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-export interface MainItem {
+export interface IMainItem {
   id: string;
   sectionShortName: string;
   sectionLongName: string;
@@ -71,14 +71,14 @@ export class MainService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<MainItem[]>(this.url).pipe(
+    this.dataRequest = this.http.get<IMainItem[]>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched main information')),
-      catchError(this.handleError<MainItem[]>('fetchMainInformation'))
+      catchError(this.handleError<IMainItem[]>('fetchMainInformation'))
     );
   }
 
-  fetchMain(): Observable<MainItem[]> {
+  fetchMain(): Observable<IMainItem[]> {
     return this.dataRequest;
   }
 
