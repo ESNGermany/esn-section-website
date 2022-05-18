@@ -18,6 +18,10 @@ export class ContentItemComponent implements OnInit {
   constructor(private contentService: ContentService) {}
 
   async ngOnInit(): Promise<void> {
+    this.setContentInfo();
+  }
+
+  private setContentInfo(): void {
     this.contentInfo$ = this.contentService
       .fetchPageContent(this.page)
       .pipe(shareReplay(1));

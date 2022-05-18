@@ -41,12 +41,17 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
   }
 
   async ngAfterViewInit(): Promise<void> {
+    this.insertPretixLink();
+  }
+
+  private insertPretixLink(): void {
     this.el!.nativeElement.innerHTML = `<div
         class="pretix-widget-compat"
         event="${this.pretixLink}"
         style="calendar"
       ></div>`;
   }
+
   private loadCssFile(url: string): void {
     let node = this.document.createElement('link');
     node.rel = 'stylesheet';

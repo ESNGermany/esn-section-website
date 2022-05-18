@@ -20,6 +20,10 @@ export class FooterComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.setMainItem();
+  }
+
+  private setMainItem(): void {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res: any) => res[0])

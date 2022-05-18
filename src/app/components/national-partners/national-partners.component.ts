@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 
 import {
@@ -11,16 +11,21 @@ import {
   templateUrl: './national-partners.component.html',
   styleUrls: ['./national-partners.component.scss'],
 })
-export class NationalPartnersComponent implements OnInit {
+export class NationalPartnersComponent {
   nationalPartners$: Observable<INationalPartnerItem[]> | undefined;
 
-  constructor(private nationalPartnersService: NationalPartnersService) {}
+  constructor(private nationalPartnersService: NationalPartnersService) {
+    this.setNationalPartners();
+    this.toggleMoreButton();
+  }
 
-  async ngOnInit() {
+  private setNationalPartners(): void {
     this.nationalPartners$ = this.nationalPartnersService
       .fetchPageNationalPartner()
       .pipe(shareReplay(1));
+  }
 
+  private toggleMoreButton(): void {
     this.nationalPartnersService
       .fetchPageNationalPartner()
       .subscribe((listPartners) => {
@@ -30,7 +35,7 @@ export class NationalPartnersComponent implements OnInit {
       });
   }
 
-  toggleInfo(partner: INationalPartnerItem): void {
+  public toggleInfo(partner: INationalPartnerItem): void {
     partner.show = !partner.show;
 
     if (!partner.show) {

@@ -21,11 +21,20 @@ export class NavigationComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.setMainItem();
+    this.setNavBgImage();
+    this.setSocialMediaButtonColor();
+  }
+
+  private setMainItem(): void {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res: IMainItem[]) => res[0])
     );
-    this.bgImage$ = this.globals$.pipe(
+  }
+
+  private setNavBgImage(): void {
+    this.bgImage$ = this.globals$?.pipe(
       map((res: IMainItem) => ({
         'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
           res?.buttonColor
@@ -34,7 +43,10 @@ export class NavigationComponent implements OnInit {
         }")`,
       }))
     );
-    this.buttonColor$ = this.globals$.pipe(
+  }
+
+  private setSocialMediaButtonColor(): void {
+    this.buttonColor$ = this.globals$?.pipe(
       map((res: IMainItem) => ({
         'background-color': `${this.getButtonColor(res?.buttonColor)})`,
       }))
