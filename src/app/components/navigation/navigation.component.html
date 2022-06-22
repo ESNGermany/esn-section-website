@@ -13,19 +13,52 @@
     class="z-10 font-body text-white text-xl bg-gradient float-right w-3/5 hidden absolute right-0"
     id="menu"
   >
-    <a routerLink="/"><li class="mobile-li">Home</li></a>
-    <a routerLink="/esncard"><li class="mobile-li">ESNcard & Partners</li></a>
-    <a routerLink="/events"><li class="mobile-li">Events</li></a>
-    <a routerLink="/for-incomings"><li class="mobile-li">For Incomings</li></a>
-    <a routerLink="/for-members"><li class="mobile-li">For Members</li></a>
-    <a routerLink="/team"><li class="mobile-li">Our Team</li></a>
-    <a routerLink="/imprint"
+    <a
+      routerLink="/"
+      (click)="hideMenu()"
+      routerLinkActive="colorActiveLink"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ><li class="mobile-li hover-zoom">Home</li></a
+    >
+    <a routerLink="/esncard" (click)="hideMenu()"
+      ><li class="mobile-li hover-zoom" routerLinkActive="colorActiveLink">
+        ESNcard & Partners
+      </li></a
+    >
+    <a
+      routerLink="/events"
+      (click)="hideMenu()"
+      routerLinkActive="colorActiveLink"
+      ><li class="mobile-li hover-zoom">Events</li></a
+    >
+    <a
+      routerLink="/for-incomings"
+      (click)="hideMenu()"
+      routerLinkActive="colorActiveLink"
+      ><li class="mobile-li hover-zoom">For Incomings</li></a
+    >
+    <a
+      routerLink="/for-members"
+      (click)="hideMenu()"
+      routerLinkActive="colorActiveLink"
+      ><li class="mobile-li hover-zoom">For Members</li></a
+    >
+    <a
+      routerLink="/team"
+      (click)="hideMenu()"
+      routerLinkActive="colorActiveLink"
+      ><li class="mobile-li hover-zoom">Our Team</li></a
+    >
+    <a
+      routerLink="/imprint"
+      (click)="hideMenu()"
+      routerLinkActive="colorActiveLink"
       ><li class="p-4 pl-8 border-white hover-zoom">Imprint</li></a
     >
   </ul>
 </div>
 <!-- Logo and white top navigation -->
-<div class="w-full mb-16 bg" [ngStyle]="bgImage$ | async">
+<div class="w-full mb-16 bg clear-both" [ngStyle]="bgImage$ | async">
   <nav
     id="navinav"
     class="flex flex-nowrap items-center max-w-screen-2lg justify-between m-auto sm:px-16 pt-8 font-body"
@@ -39,30 +72,30 @@
       /></a>
     </div>
     <div
-      class="px-8 w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:visible"
+      class="px-8 w-full clear-both block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:visible"
     >
       <div class="text-2xl flex justify-between lg:flex-grow max-w-screen-xl">
-        <div class="relative">
+        <div class="relative addhover">
           <a routerLink="/esncard" routerLinkActive="addhoverActive">
             <button class="mobile-but">ESNcard & Partners</button></a
           >
         </div>
-        <div class="relative">
+        <div class="relative addhover">
           <a routerLink="/events" routerLinkActive="addhoverActive">
             <button class="mobile-but">Events</button></a
           >
         </div>
-        <div class="relative">
+        <div class="relative addhover">
           <a routerLink="/for-incomings" routerLinkActive="addhoverActive">
             <button class="mobile-but">For Incomings</button></a
           >
         </div>
-        <div class="relative">
+        <div class="relative addhover">
           <a routerLink="/for-members" routerLinkActive="addhoverActive"
             ><button class="mobile-but">For Members</button></a
           >
         </div>
-        <div class="relative">
+        <div class="relative addhover">
           <a routerLink="/team" routerLinkActive="addhoverActive">
             <button class="mobile-but">Our Team</button></a
           >
@@ -85,32 +118,36 @@
 <!-- Social Media buttons with hover-effect on the right side (bottom if mobile) -->
 <div class="max-w-screen-2xl m-auto" *ngIf="globals$ | async as globals">
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible">
-    <div *ngIf="globals?.instagramLink" class="mar">
-      <!-- <div id="bubble1" class="bubble you invisible font-body">
-        {{ globals?.instagramName }}
-      </div> -->
+    <div *ngIf="globals?.instagramLink" class="ml-8">
       <a href="{{ globals?.instagramLink }}" target="_blank" rel="noopener">
+        <div id="bubble1" class="bubble invisible font-body">
+          {{ globals?.instagramName }}
+        </div>
         <button
           class="p-2 rounded-full block my-2 hov"
+          (mouseenter)="showBubble(1)"
+          (mouseleave)="hideBubble(1)"
           [ngStyle]="buttonColor$ | async"
         >
           <img class="m-2 h-6" src="../../../assets/social/instagram.png" />
         </button>
       </a>
     </div>
-    <ng-container *ngIf="globals?.facebookLink">
-      <!-- <div id="bubble2" class="bubble you invisible font-body">
-        fb.com/{{ globals?.facebookName }}
-      </div> -->
+    <div *ngIf="globals?.facebookLink">
       <a href="{{ globals?.facebookLink }}" target="_blank" rel="noopener">
+        <div id="bubble2" class="bubble invisible font-body">
+          fb.com/{{ globals?.facebookName }}
+        </div>
         <button
           class="p-2 rounded-full block my-2 hov"
           [ngStyle]="buttonColor$ | async"
+          (mouseenter)="showBubble(2)"
+          (mouseleave)="hideBubble(2)"
         >
           <img class="m-2 h-6" src="../../../assets/social/facebook.png" />
         </button>
       </a>
-    </ng-container>
+    </div>
   </div>
   <ng-container class="m-auto" *ngIf="globals?.instagramLink">
     <div

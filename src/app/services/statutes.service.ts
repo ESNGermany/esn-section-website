@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-export interface StatutesItem {
+export interface IStatutesItem {
   id: string;
   Text: string;
 }
@@ -22,14 +23,14 @@ export class StatutesService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<StatutesItem>(this.url).pipe(
+    this.dataRequest = this.http.get<IStatutesItem>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched statutes')),
-      catchError(this.handleError<StatutesItem>('fetchStatutesList'))
+      catchError(this.handleError<IStatutesItem>('fetchStatutesList'))
     );
   }
 
-  fetchStatutes(): Observable<StatutesItem> {
+  fetchStatutes(): Observable<IStatutesItem> {
     return this.dataRequest;
   }
 

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { PartnerItem, PartnerService } from 'src/app/services/partner.service';
-import { environment } from 'src/environments/environment';
-import { MainItem, MainService } from 'src/app/services/main.service';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
+import { IPartnerItem, PartnerService } from 'src/app/services/partner.service';
+import { IMainItem, MainService } from 'src/app/services/main.service';
 import {
-  NationalPartnerItem,
+  INationalPartnerItem,
   NationalPartnersService,
 } from 'src/app/services/national-partners.service';
 
@@ -15,13 +16,12 @@ import {
   styleUrls: ['./esncard-page.component.scss'],
 })
 export class EsncardPageComponent implements OnInit {
-  partnerInfo$: Observable<PartnerItem[]>;
-  globals$: Observable<MainItem>;
-  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
-  cityName: string;
-  nationalPartner$: Observable<NationalPartnerItem[]>;
-
-  page: string = 'ESNcard_page';
+  partnerInfo$: Observable<IPartnerItem[]> | undefined;
+  globals$: Observable<IMainItem>;
+  nationalPartner$: Observable<INationalPartnerItem[]> | undefined;
+  public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  public cityName?: string;
+  public page: string = 'ESNcard_page';
 
   constructor(
     private title: Title,
@@ -31,11 +31,11 @@ export class EsncardPageComponent implements OnInit {
   ) {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.partnerInfo$ = this.partnerService
       .fetchPagePartner()
       .pipe(shareReplay(1));
@@ -55,9 +55,8 @@ export class EsncardPageComponent implements OnInit {
     });
   }
 
-  toggleInfo(partner): void {
+  public toggleInfo(partner: IPartnerItem): void {
     partner.show = !partner.show;
-
     if (!partner.show) {
       partner.buttonText = `Learn more ↓`;
     } else {

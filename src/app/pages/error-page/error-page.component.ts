@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 export class ErrorPageComponent implements OnInit {
   constructor(private title: Title) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.title.setTitle('Oopsie... Page not found');
   }
 }

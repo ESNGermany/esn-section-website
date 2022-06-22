@@ -1,4 +1,4 @@
-<div *ngIf="cocItem$ | async as cocItem" class="outer">
+<div *ngIf="cocItem$ | async as cocItem; else loading" class="outer">
   <div class="markdown-div">
     <div class="title-div">
       <p class="title-p">{{ cocItem.Title }}</p>
@@ -6,3 +6,6 @@
     <markdown [data]="cocItem.MarkdownText"></markdown>
   </div>
 </div>
+<ng-template #loading>
+  <img width="200px" class="m-auto" src="assets/social/ESN-star-spinner.gif"
+/></ng-template>

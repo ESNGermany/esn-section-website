@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-export interface MenuItem {
+export interface IMenuItem {
   id: string;
   MenuTab1: string;
   MenuTab2: string;
@@ -25,14 +26,14 @@ export class MenuService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<MenuItem[]>(this.url).pipe(
+    this.dataRequest = this.http.get<IMenuItem[]>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched menu')),
-      catchError(this.handleError<MenuItem[]>('fetchMenu'))
+      catchError(this.handleError<IMenuItem[]>('fetchMenu'))
     );
   }
 
-  fetchMenu(): Observable<MenuItem[]> {
+  fetchMenu(): Observable<IMenuItem[]> {
     return this.dataRequest;
   }
 

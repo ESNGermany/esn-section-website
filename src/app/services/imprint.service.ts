@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-export interface ImprintItem {
+export interface IImprintItem {
   id: string;
   Title: string;
   Text: string;
@@ -23,14 +24,14 @@ export class ImprintService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<ImprintItem>(this.url).pipe(
+    this.dataRequest = this.http.get<IImprintItem>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched imprint')),
-      catchError(this.handleError<ImprintItem>('fetchImprintList'))
+      catchError(this.handleError<IImprintItem>('fetchImprintList'))
     );
   }
 
-  fetchImprint(): Observable<ImprintItem> {
+  fetchImprint(): Observable<IImprintItem> {
     return this.dataRequest;
   }
 

@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MainItem, MainService } from 'src/app/services/main.service';
-import { DOCUMENT } from '@angular/common';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+
+import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-events-page',
@@ -10,37 +11,30 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./events-page.component.scss'],
 })
 export class EventsPageComponent implements OnInit {
-  globals$: Observable<MainItem>;
-  pretixLink;
+  globals$: Observable<IMainItem> | undefined;
+  pretixLink?: string;
+
+  public loadPretix: boolean;
 
   constructor(
     private title: Title,
     private mainService: MainService,
-    @Inject(DOCUMENT) private document: Document
-  ) {}
-
-  public loadCssFile(url) {
-    let node = this.document.createElement('link');
-    node.rel = 'stylesheet';
-    node.type = 'text/css';
-    node.href = url;
-    this.document.getElementsByTagName('head')[0].appendChild(node);
-  }
-  public loadJsFile(url) {
-    let node = this.document.createElement('script');
-    node.src = url;
-    node.type = 'text/javascript';
-    this.document.getElementsByTagName('head')[0].appendChild(node);
+    private cookieService: CookieService
+  ) {
+    this.loadPretix = this.cookieService.get('pretix') === 'true';
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
-    this.loadJsFile('https://pretix.eu/widget/v1.en.js');
-    this.loadCssFile('https://pretix.eu/demo/democon/widget/v1.css');
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Events | ' + mainInfo?.sectionLongName);
+  }
+
+  public setLoadPretix(): void {
+    this.loadPretix = !this.loadPretix;
+    this.cookieService.set('pretix', this.loadPretix.toString());
   }
 }

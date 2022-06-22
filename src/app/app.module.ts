@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NationalPartnersComponent } from './components/national-partners/national-partners.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PretixCalendarComponent } from './components/pretix-calendar/pretix-calendar.component';
+import { OlaContentItemComponent } from './components/ola-content-item/ola-content-item.component';
 
 import { CocPageComponent } from './pages/coc-page/coc-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
@@ -28,6 +29,7 @@ import { MembersPageComponent } from './pages/members-page/members-page.componen
 import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
 
+import { CookieService } from 'ngx-cookie-service';
 import { GalleryModule } from 'ng-gallery';
 import { HttpClientModule } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
@@ -59,6 +61,7 @@ FullCalendarModule.registerPlugins([
     FooterComponent,
     NationalPartnersComponent,
     NavigationComponent,
+    OlaContentItemComponent,
     PretixCalendarComponent,
     CocPageComponent,
     ErrorPageComponent,
@@ -73,14 +76,15 @@ FullCalendarModule.registerPlugins([
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    FullCalendarModule,
     GalleryModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     MarkdownModule.forRoot(),
+    FullCalendarModule,
   ],
   providers: [
+    FullCalendarModule,
     CocService,
     ContentService,
     EventsService,
@@ -92,6 +96,7 @@ FullCalendarModule.registerPlugins([
     NationalPartnersService,
     PartnerService,
     StatutesService,
+    CookieService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

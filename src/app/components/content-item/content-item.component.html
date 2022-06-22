@@ -1,4 +1,7 @@
-<div *ngIf="contentInfo$ | async as contentItemList" class="outer-imgbox">
+<div
+  *ngIf="contentInfo$ | async as contentItemList; else loading"
+  class="outer-imgbox"
+>
   <div *ngFor="let c of contentItemList" class="px-4 mb-20">
     <!-- text left img right -->
     <ng-container *ngIf="c.Layout === 'Text_left_img_right'">
@@ -42,6 +45,7 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
+        class="overflow-auto"
       >
         <div *ngIf="c.Image" class="m-auto mb-4">
           <figure class="float-left-fig">
@@ -73,7 +77,7 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col"
+        class="flex flex-col"
       >
         <div *ngIf="c.Image" class="px-4">
           <img
@@ -89,7 +93,9 @@
             alt="{{ c.Image.alternativeText }}"
           />
         </div>
-        <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+        <div *ngIf="c.Text">
+          <markdown [data]="c.Text"></markdown>
+        </div>
       </div>
     </ng-container>
     <!-- text above img below -->
@@ -102,7 +108,7 @@
           'font-body text-lg border border-graylight shadow-xl p-8':
             c.Wrap_in_shadow_box
         }"
-        class="flex items-center flex-col"
+        class="flex flex-col"
       >
         <ng-container *ngIf="c.Text"
           ><markdown [data]="c.Text"></markdown
@@ -125,3 +131,9 @@
     </ng-container>
   </div>
 </div>
+<ng-template #loading>
+  <img
+    width="200px"
+    class="m-auto mb-26"
+    src="assets/social/ESN-star-spinner.gif"
+/></ng-template>

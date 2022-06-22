@@ -1,4 +1,4 @@
-<div *ngIf="globals$ | async as globals">
+<div *ngIf="globals$ | async as globals; else loading">
   <div class="outer-div">
     <div class="px-8 mb-24">
       <div class="title-div">
@@ -12,7 +12,20 @@
           <app-custom-calendar></app-custom-calendar>
         </ng-container>
         <ng-template #pretixCalendar>
-          <app-pretix-calendar></app-pretix-calendar>
+          <div *ngIf="!loadPretix" class="relative w-full">
+            <img
+              src="../../../assets/pretix/pretix-blur.png"
+              alt="Blurred Pretix Calendar"
+              class="w-full h-auto"
+            />
+            <button
+              class="absolute top-1/2 left-1/2 blue transition ease-in-out duration-150 buttontransform border px-3 py-1 rounded bg-slate-200 hover:bg-slate-50"
+              (click)="setLoadPretix()"
+            >
+              Accept cookies & load calendar
+            </button>
+          </div>
+          <app-pretix-calendar *ngIf="loadPretix"></app-pretix-calendar>
         </ng-template>
         <markdown class="text-gray">
           If you can't see any calendar here, please switch to another tab on
@@ -24,3 +37,6 @@
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <img width="200px" class="m-auto" src="assets/social/ESN-star-spinner.gif"
+/></ng-template>

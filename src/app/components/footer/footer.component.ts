@@ -1,7 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
-import { MainItem, MainService } from 'src/app/services/main.service';
+
+import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,29 +11,33 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  globals$: Observable<MainItem>;
-  timestamp: string = environment.timeStamp;
+  globals$: Observable<IMainItem> | undefined;
+  public timestamp: string = environment.timeStamp;
 
   constructor(
     private mainService: MainService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
+    this.setMainItem();
+  }
+
+  private setMainItem(): void {
     this.globals$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
-      map((res) => res[0])
+      map((res: any) => res[0])
     );
   }
 
-  pink(): void {
+  public pink(): void {
     const footer = this.document.getElementById('foot');
     const footer2 = this.document.getElementById('foot2');
     const footer3 = this.document.getElementById('foot3');
     const strapiLink = this.document.getElementById('strapiLink');
-    footer.setAttribute('style', 'background-color: #ec008c');
-    footer2.setAttribute('style', 'fill: #ec008c');
-    footer3.setAttribute('style', 'fill: #ec008c');
-    strapiLink.setAttribute('style', 'color: #eaeaea !important');
+    footer!.setAttribute('style', 'background-color: #ec008c');
+    footer2!.setAttribute('style', 'fill: #ec008c');
+    footer3!.setAttribute('style', 'fill: #ec008c');
+    strapiLink!.setAttribute('style', 'color: #eaeaea !important');
   }
 }

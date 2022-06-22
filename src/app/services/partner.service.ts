@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-export interface PartnerItem {
+export interface IPartnerItem {
   id: string;
   Name: string;
   Deal: string;
@@ -37,14 +38,14 @@ export class PartnerService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<PartnerItem[]>(this.url).pipe(
+    this.dataRequest = this.http.get<IPartnerItem[]>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched partner')),
-      catchError(this.handleError<PartnerItem[]>('fetchPartnerList', []))
+      catchError(this.handleError<IPartnerItem[]>('fetchPartnerList', []))
     );
   }
 
-  fetchPagePartner(): Observable<PartnerItem[]> {
+  fetchPagePartner(): Observable<IPartnerItem[]> {
     return this.dataRequest;
   }
 
