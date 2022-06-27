@@ -10,7 +10,7 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./members-page.component.scss'],
 })
 export class MembersPageComponent implements OnInit {
-  public page: string = 'Members_page';
+  public readonly page: string = 'Members_page';
 
   constructor(private title: Title, private mainService: MainService) {}
 

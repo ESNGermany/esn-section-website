@@ -18,7 +18,7 @@ export class IncomingsPageComponent implements OnInit {
   faqEsncardItemList$: Observable<IFaqItem[]> | undefined;
   faqOtherItemList$: Observable<IFaqItem[]> | undefined;
 
-  public page: string = 'Incomings_page';
+  public readonly page: string = 'Incomings_page';
 
   constructor(
     private title: Title,

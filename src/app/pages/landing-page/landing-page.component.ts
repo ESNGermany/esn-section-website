@@ -27,7 +27,7 @@ export class LandingPageComponent implements OnInit {
   public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
   public showThumb: boolean = true;
   public isBrowser: boolean;
-  public page: string = 'Landing_page';
+  public readonly page: string = 'Landing_page';
 
   constructor(
     private title: Title,

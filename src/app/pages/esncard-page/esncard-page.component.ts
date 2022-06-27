@@ -21,7 +21,7 @@ export class EsncardPageComponent implements OnInit {
   nationalPartner$: Observable<INationalPartnerItem[]> | undefined;
   public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
   public cityName?: string;
-  public page: string = 'ESNcard_page';
+  public readonly page: string = 'ESNcard_page';
 
   constructor(
     private title: Title,

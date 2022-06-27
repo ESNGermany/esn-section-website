@@ -10,7 +10,7 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./team-page.component.scss'],
 })
 export class TeamPageComponent implements OnInit {
-  public page: string = 'Team_page';
+  public readonly page: string = 'Team_page';
 
   constructor(private title: Title, private mainService: MainService) {}
 
