@@ -45,6 +45,7 @@ import { MessageService } from './services/message.service';
 import { NationalPartnersService } from './services/national-partners.service';
 import { PartnerService } from './services/partner.service';
 import { StatutesService } from './services/statutes.service';
+import { ImprintEsnGerService } from './services/imprint-esnger.service';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -90,6 +91,7 @@ FullCalendarModule.registerPlugins([
     EventsService,
     FaqService,
     ImprintService,
+    ImprintEsnGerService,
     MainService,
     MenuService,
     MessageService,
