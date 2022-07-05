@@ -7,7 +7,7 @@ export const environment = {
   timeStamp: '2022-06-22 22:14:08',
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 2,
+  STRAPI_SECTION_ID: 19,
 };
 
 // STRAPI_SECTION_IDs:
@@ -20,7 +20,7 @@ export const environment = {
 //  7: TEST Heidelberg
 //  8: LIVE Saarbrücken
 //  9: LIVE Hannover
-// 10: TEST Dortmund
+// 10: LIVE Dortmund
 // 11: LIVE Frankfurt
 // 12: TEST Karlsruhe
 // 13: LIVE Berlin
