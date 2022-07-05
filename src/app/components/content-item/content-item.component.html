@@ -5,9 +5,11 @@
   <div *ngFor="let c of contentItemList" class="px-4 mb-20">
     <!-- text left img right -->
     <ng-container *ngIf="c.Layout === 'Text_left_img_right'">
-      <div class="title-div">
-        <p class="title-p">{{ c.Title }}</p>
-      </div>
+      <ng-container *ngIf="c.Title.trim().length > 0">
+        <div class="title-div">
+          <p class="title-p">{{ c.Title }}</p>
+        </div>
+      </ng-container>
       <div
         [ngClass]="{
           'font-body text-lg border border-graylight shadow-xl p-8':
@@ -37,9 +39,11 @@
     </ng-container>
     <!-- text right img left -->
     <div *ngIf="c.Layout === 'Text_right_img_left'" class="mb-2">
-      <div class="title-div">
-        <p class="title-p">{{ c.Title }}</p>
-      </div>
+      <ng-container *ngIf="c.Title.trim().length > 0">
+        <div class="title-div">
+          <p class="title-p">{{ c.Title }}</p>
+        </div>
+      </ng-container>
       <div
         [ngClass]="{
           'font-body text-lg border border-graylight shadow-xl p-8':
@@ -69,9 +73,11 @@
     </div>
     <!-- text below img above -->
     <ng-container *ngIf="c.Layout === 'Text_below_img_above'">
-      <div class="title-div">
-        <p class="title-p">{{ c.Title }}</p>
-      </div>
+      <ng-container *ngIf="c.Title.trim().length > 0">
+        <div class="title-div">
+          <p class="title-p">{{ c.Title }}</p>
+        </div>
+      </ng-container>
       <div
         [ngClass]="{
           'font-body text-lg border border-graylight shadow-xl p-8':
@@ -100,9 +106,11 @@
     </ng-container>
     <!-- text above img below -->
     <ng-container *ngIf="c.Layout === 'Text_above_img_below'">
-      <div class="title-div">
-        <p class="title-p">{{ c.Title }}</p>
-      </div>
+      <ng-container *ngIf="c.Title.trim().length > 0">
+        <div class="title-div">
+          <p class="title-p">{{ c.Title }}</p>
+        </div>
+      </ng-container>
       <div
         [ngClass]="{
           'font-body text-lg border border-graylight shadow-xl p-8':
