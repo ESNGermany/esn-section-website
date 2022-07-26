@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
-export interface ContentItem {
+export interface IContentItem {
   id: string;
   Title: string;
   Text: string;
@@ -42,19 +43,19 @@ export class ContentService {
     'contents?_created_by=' +
     environment.STRAPI_SECTION_ID +
     '&_sort=Order_on_page&Page_for_display=';
-  private fullUrl: string;
+  private fullUrl?: string;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) {}
 
-  fetchPageContent(page: string): Observable<ContentItem[]> {
+  fetchPageContent(page: string): Observable<IContentItem[]> {
     this.fullUrl = this.url + page;
-    return this.http.get<ContentItem[]>(this.fullUrl).pipe(
+    return this.http.get<IContentItem[]>(this.fullUrl).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched content')),
-      catchError(this.handleError<ContentItem[]>('fetchContentList'))
+      catchError(this.handleError<IContentItem[]>('fetchContentList'))
     );
   }
 

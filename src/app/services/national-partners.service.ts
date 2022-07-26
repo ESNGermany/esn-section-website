@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, shareReplay, tap } from 'rxjs';
+
 import { MessageService } from './message.service';
 
-export interface NationalPartnerItem {
+export interface INationalPartnerItem {
   id: string;
   Name: string;
   Description: string;
@@ -18,6 +19,8 @@ export interface NationalPartnerItem {
       };
     };
   };
+  show: boolean;
+  buttonText: string;
 }
 
 @Injectable({
@@ -31,16 +34,16 @@ export class NationalPartnersService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<NationalPartnerItem[]>(this.url).pipe(
+    this.dataRequest = this.http.get<INationalPartnerItem[]>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched partner')),
       catchError(
-        this.handleError<NationalPartnerItem[]>('fetchPartnerList', [])
+        this.handleError<INationalPartnerItem[]>('fetchPartnerList', [])
       )
     );
   }
 
-  fetchPageNationalPartner(): Observable<NationalPartnerItem[]> {
+  fetchPageNationalPartner(): Observable<INationalPartnerItem[]> {
     return this.dataRequest;
   }
 

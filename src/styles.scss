@@ -1,12 +1,40 @@
 @import "tailwindcss/base";
-
 @import "tailwindcss/components";
-
 @import "tailwindcss/utilities";
 
 @font-face {
   font-family: "Comic Sans";
   src: url("./assets/fonts/Comic\ Sans\ MS\ 400.ttf");
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./assets/fonts/Lato/Lato-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./assets/fonts/Lato/Lato-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./assets/fonts/Lato/Lato-Italic.ttf") format("truetype");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./assets/fonts/Lato/Lato-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("./assets/fonts/Oswald/Oswald-Regular.ttf");
 }
 
 :root {
@@ -33,7 +61,6 @@
   --whitebg: "#efefef";
   --footer: "#3a3a3a";
   --transparent: "#ffffffff";
-  // --right-buttoncolor-rgba: rgba(122, 193, 67, 0.8);
 }
 
 markdown {

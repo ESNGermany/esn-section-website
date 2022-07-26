@@ -10,41 +10,8 @@ import {
 
 @Component({
   selector: 'app-expandable',
-  template: `
-    <div
-      class="cursor-pointer flex flex-row justify-between font-md font-body exp"
-      (click)="toggleState()"
-    >
-      <ng-content select="[slot=header]"></ng-content>
-      <i [@indicatorRotate]="state$ | async" class="material-icons"
-        >expand_more</i
-      >
-    </div>
-    <div
-      [@openClose]="state$ | async"
-      class="overflow-hidden text-md font-body bgwhite"
-    >
-      <ng-content></ng-content>
-    </div>
-  `,
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-      .exp {
-        min-height: 48px;
-        align-items: center;
-        padding: 0 24px;
-      }
-      .bgwhite {
-        background: white;
-      }
-      .bgwhite:hover {
-        background: white;
-      }
-    `,
-  ],
+  templateUrl: 'expandable.component.html',
+  styleUrls: ['./expandable.component.scss'],
   animations: [
     trigger('openClose', [
       state('open', style({ height: '*', visibility: 'visible' })),
@@ -61,7 +28,9 @@ import {
 })
 export class ExpandableComponent {
   public state$ = new BehaviorSubject('closed');
+
   constructor() {}
+
   public toggleState(): void {
     if (this.state$.value === 'closed') {
       this.state$.next('open');

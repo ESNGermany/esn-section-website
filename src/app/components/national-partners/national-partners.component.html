@@ -1,0 +1,43 @@
+<ng-container *ngIf="nationalPartners$ | async as partners">
+  <div *ngIf="!partners" class="bg-white w-screen h-screen"></div>
+  <div
+    class="mx-8 flex flex-wrap justify-evenly font-body text-lg border border-graylight shadow-xl p-8 items-baseline"
+  >
+    <ng-container *ngFor="let partner of partners; let i = index">
+      <figure class="my-4 px-8 maxw">
+        <a
+          href="{{ partner.Link }}"
+          title="{{ partner.Logo.alternativeText }}"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            class="imgh m-auto zoom"
+            src="https://strapi.esn-germany.de{{
+              partner.Logo.formats.medium.url
+            }}"
+            alt="{{ partner.Logo.alternativeText }}"
+          />
+        </a>
+        <figcaption class="pt-4 text-center font-bold">
+          {{ partner.Name }}
+          <br />
+          <button
+            *ngIf="partner.Description"
+            (click)="toggleInfo(partner)"
+            class="text-esn-dark-blue hover:underline"
+          >
+            {{ partner.buttonText }}
+          </button>
+          <br />
+          <markdown
+            [hidden]="!partner.show"
+            [data]="partner.Description"
+            style="text-align: left"
+          >
+          </markdown>
+        </figcaption>
+      </figure>
+    </ng-container>
+  </div>
+</ng-container>

@@ -1,0 +1,17 @@
+<div
+  class="cursor-pointer flex flex-row justify-between font-md font-body exp"
+  (click)="toggleState()"
+>
+  <ng-content select="[slot=header]"></ng-content>
+  <img
+    [@indicatorRotate]="state$ | async"
+    src="assets/fonts/MaterialIcons/expand_more.png"
+    width="24px"
+  />
+</div>
+<div
+  [@openClose]="state$ | async"
+  class="overflow-hidden text-md font-body bgwhite"
+>
+  <ng-content></ng-content>
+</div>

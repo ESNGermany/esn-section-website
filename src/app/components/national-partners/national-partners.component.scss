@@ -1,0 +1,42 @@
+.zoom {
+  transition: transform 0.2s;
+  width: 256px;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.imgh {
+  max-height: 6rem;
+}
+
+.maxw {
+  max-width: 25%;
+}
+
+@media only screen and (max-width: 556px) {
+  // 1 element
+  .maxw {
+    max-width: 95%;
+  }
+}
+
+@media only screen and (min-width: 557px) and (max-width: 1089px) {
+  // 2 elements
+  .maxw {
+    max-width: 45%;
+  }
+}
+
+@media only screen and (min-width: 1090px) and (max-width: 1409px) {
+  // 3 elements
+  .maxw {
+    max-width: 28%;
+  }
+}
+@media only screen and (min-width: 1410px) {
+  // 4 elements
+  .maxw {
+    max-width: 22%;
+  }
+}

@@ -13,15 +13,7 @@
     </svg>
   </div>
   <div
-    class="
-      font-body
-      text-white
-      flex flex-wrap
-      max-w-screen-xl
-      m-auto
-      sm:px-16
-      pt-8
-    "
+    class="font-body text-white flex flex-wrap max-w-screen-xl m-auto sm:px-16 pt-8"
   >
     <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase pb-1 text-lg">Contact</p>
@@ -95,7 +87,7 @@
           >ErasmusIntern.org</a
         >
       </p>
-      <p class="pb-4">
+      <p>
         <a
           href="https://esn.org/"
           target="_blank"
@@ -104,8 +96,17 @@
           >ESN International</a
         >
       </p>
+      <p class="pb-4">
+        <a
+          href="https://learning-agreement.eu/"
+          target="_blank"
+          rel="noopener"
+          class="hover:underline"
+          >Learning-Agreement.eu</a
+        >
+      </p>
     </div>
-    <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
+    <div class="sm:w-full lg:w-1/2 xl:w-1/5 pl-8 pr-2">
       <p class="font-bold uppercase pb-1 text-lg">Social Media</p>
       <p *ngIf="globals?.facebookName" class="pb-4">
         <a
@@ -178,8 +179,14 @@
           class="hover:underline"
           target="_blank"
           rel="noopener"
-          >Enter Strapi here (for admins)</a
-        >
+          >Enter Strapi here (for admins)
+          <img
+            src="assets/social/open-icon.png"
+            width="20px"
+            alt="icon expand in new tab"
+            class="inline align-text-bottom" /></a
+        ><br />
+        Last built at {{ timestamp }}
       </p>
     </div>
   </div>

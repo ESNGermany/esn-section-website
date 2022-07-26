@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "d945788f-7402-42e5-ab90-baeee22efd92"
+    "analytics": "d945788f-7402-42e5-ab90-baeee22efd92",
+    "defaultCollection": "@angular-eslint/schematics"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -26,8 +27,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/_redirects", "src/assets"],
-            "styles": ["src/styles.scss", "src/pretix.css"],
+            "assets": [
+              "src/favicon.ico",
+              "src/_redirects",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "src/assets/styles/pretix.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -51,15 +59,6 @@
                   "maximumError": "10kb"
                 }
               ]
-            },
-            "freiburg": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.freiburg.ts"
-                }
-              ],
-              "outputHashing": "all"
             },
             "development": {
               "buildOptimizer": false,
@@ -97,8 +96,14 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/_redirects", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/_redirects",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         },
@@ -120,15 +125,6 @@
                 }
               ]
             },
-            "freiburg": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.freiburg.ts"
-                }
-              ]
-            },
             "development": {
               "optimization": false,
               "sourceMap": true,
@@ -144,10 +140,6 @@
               "browserTarget": "esn-sections-website:build:development",
               "serverTarget": "esn-sections-website:server:development"
             },
-            "freiburg": {
-              "browserTarget": "esn-sections-website:build:freiburg",
-              "serverTarget": "esn-sections-website:server:freiburg"
-            },
             "production": {
               "browserTarget": "esn-sections-website:build:production",
               "serverTarget": "esn-sections-website:server:production"
@@ -158,16 +150,14 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "routes": ["/"]
+            "routes": [
+              "/"
+            ]
           },
           "configurations": {
             "production": {
               "browserTarget": "esn-sections-website:build:production",
               "serverTarget": "esn-sections-website:server:production"
-            },
-            "freiburg": {
-              "browserTarget": "esn-sections-website:build:freiburg",
-              "serverTarget": "esn-sections-website:server:freiburg"
             },
             "development": {
               "browserTarget": "esn-sections-website:build:development",
@@ -175,6 +165,15 @@
             }
           },
           "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }

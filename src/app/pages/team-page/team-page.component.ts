@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ContentItem, ContentService } from 'src/app/services/content.service';
-import { environment } from 'src/environments/environment';
+import { firstValueFrom } from 'rxjs';
+
 import { MainService } from 'src/app/services/main.service';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-team-page',
@@ -11,20 +10,11 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./team-page.component.scss'],
 })
 export class TeamPageComponent implements OnInit {
-  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  public readonly page: string = 'Team_page';
 
-  contentInfo$: Observable<ContentItem[]>;
+  constructor(private title: Title, private mainService: MainService) {}
 
-  constructor(
-    private title: Title,
-    private contentService: ContentService,
-    private mainService: MainService
-  ) {}
-
-  async ngOnInit() {
-    this.contentInfo$ = this.contentService.fetchPageContent('Team_page').pipe(
-      shareReplay(1)
-    );
+  async ngOnInit(): Promise<void> {
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.title.setTitle('Our Team | ' + mainInfo?.sectionLongName);
   }

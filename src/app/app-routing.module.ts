@@ -19,42 +19,34 @@ const routes: Routes = [
   },
   {
     path: 'esncard',
-    pathMatch: 'full',
     component: EsncardPageComponent,
   },
   {
     path: 'events',
-    pathMatch: 'full',
     component: EventsPageComponent,
   },
   {
     path: 'for-members',
-    pathMatch: 'full',
     component: MembersPageComponent,
   },
   {
     path: 'team',
-    pathMatch: 'full',
     component: TeamPageComponent,
   },
   {
     path: 'for-incomings',
-    pathMatch: 'full',
     component: IncomingsPageComponent,
   },
   {
     path: 'imprint',
-    pathMatch: 'full',
     component: ImprintPageComponent,
   },
   {
     path: 'statutes',
-    pathMatch: 'full',
     component: StatutesPageComponent,
   },
   {
     path: 'coc',
-    pathMatch: 'full',
     component: CocPageComponent,
   },
   {
@@ -73,11 +65,11 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-    anchorScrolling: 'enabled',
-    onSameUrlNavigation: 'reload',
-    scrollPositionRestoration: 'enabled',
-    initialNavigation: 'enabled'
-}),
+      initialNavigation: 'enabledBlocking',
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
+      scrollPositionRestoration: 'enabled',
+    }),
   ],
   exports: [RouterModule],
 })

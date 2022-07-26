@@ -1,0 +1,10 @@
+.full-site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: space-between;
+}
+
+.site-content {
+  flex: 1;
+}

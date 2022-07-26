@@ -18,12 +18,11 @@
 }
 
 .cont {
-  // min-width: 400px;
   background-color: white;
-}
 
-.cont:hover {
-  background-color: #fafafa;
+  &:hover {
+    background-color: #fafafa;
+  }
 }
 
 .exp:hover {

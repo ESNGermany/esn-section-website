@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
+
 import { MessageService } from './message.service';
 
-export interface CocItem {
+export interface ICocItem {
   id: string;
   Title: string;
   MarkdownText: string;
@@ -19,14 +20,14 @@ export class CocService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<CocItem>(this.url).pipe(
+    this.dataRequest = this.http.get<ICocItem>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched coc')),
-      catchError(this.handleError<CocItem>('fetchCocList'))
+      catchError(this.handleError<ICocItem>('fetchCocList'))
     );
   }
 
-  fetchCoc(): Observable<CocItem> {
+  fetchCoc(): Observable<ICocItem> {
     return this.dataRequest;
   }
 

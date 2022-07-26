@@ -1,10 +1,4 @@
 .bg {
-  // background-image: linear-gradient(
-  //     69deg,
-  //     var(--esn-blue-rgba) 19%,
-  //     var(--right-buttoncolor-rgba) 80%
-  //   ),
-  //   url("../../../assets/header/header_image_black_white.png"); // replace strapi headerImage.formats.large.url, replace "--right-button-color-rgba" with "--esn-**-rgba" from mainInformation.buttonColor
   background-position: center;
   background-size: cover;
   padding-bottom: 101px;
@@ -23,13 +17,14 @@
   position: relative;
   display: block;
   width: calc(100% + 1.3px);
-  height: 105px; //99px;
+  height: 105px;
 }
 
 .divider-bottom .shape-fill {
   fill: #fff;
 }
-.addhover:hover:before {
+
+.addhover:hover::before {
   position: absolute;
   content: "";
   left: 0;
@@ -47,18 +42,20 @@
   width: 48px;
   height: 3px;
   background: #fff;
+  clear: both;
 }
-.menu {
-  position: absolute;
-  top: 0;
-  right: 0;
+
+.colorActiveLink {
+  color: #00aeef;
 }
+
 .hov {
   transition: transform 0.2s;
   float: right;
-}
-.hov:hover {
-  transform: scale(1.14);
+
+  &:hover {
+    transform: scale(1.14);
+  }
 }
 
 .bubble {
@@ -67,33 +64,24 @@
   padding: 10px 18px;
   position: relative;
   color: white;
-}
-
-.bubble::before {
-  background-color: #3a3a3a;
-  content: "\00a0";
-  display: block;
-  height: 16px;
-  position: absolute;
-  top: 13px;
-  transform: rotate(29deg) skew(-35deg);
-  -moz-transform: rotate(29deg) skew(-35deg);
-  -ms-transform: rotate(29deg) skew(-35deg);
-  -o-transform: rotate(29deg) skew(-35deg);
-  -webkit-transform: rotate(29deg) skew(-35deg);
-  width: 20px;
-}
-.you {
   float: left;
-  margin: 5px 20px 5px 45px;
-}
+  margin-top: 13px;
+  margin-right: 24px;
 
-.you::before {
-  right: -9px;
-}
-
-.mar {
-  margin-left: 32px;
+  &::before {
+    background-color: #3a3a3a;
+    content: "\00a0";
+    height: 16px;
+    position: absolute;
+    top: 14px;
+    transform: rotate(29deg) skew(-35deg);
+    -moz-transform: rotate(29deg) skew(-35deg);
+    -ms-transform: rotate(29deg) skew(-35deg);
+    -o-transform: rotate(29deg) skew(-35deg);
+    -webkit-transform: rotate(29deg) skew(-35deg);
+    width: 20px;
+    right: -9px;
+  }
 }
 
 .hover-zoom:hover {
@@ -109,7 +97,7 @@
 }
 
 .mobile-li {
-  @apply p-4 pl-8 border-b border-white /*hover-zoom*/;
+  @apply p-4 pl-8 border-b border-white clear-both /*hover-zoom*/;
 }
 
 .mobile-but {

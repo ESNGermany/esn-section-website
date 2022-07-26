@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     private title: Title
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     this.meta.addTags([
       { name: 'description', content: mainInfo?.sectionLongName },

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
-import { CocItem, CocService } from 'src/app/services/coc.service';
+
+import { ICocItem, CocService } from 'src/app/services/coc.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./coc-page.component.scss'],
 })
 export class CocPageComponent implements OnInit {
-  cocItem$: Observable<CocItem>;
+  cocItem$: Observable<ICocItem> | undefined;
 
   constructor(
     private title: Title,
@@ -18,7 +19,7 @@ export class CocPageComponent implements OnInit {
     private mainService: MainService
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.cocItem$ = this.cocService.fetchCoc().pipe(
       shareReplay(1),
       map((res) => res)
