@@ -1,0 +1,25 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 8 * * 3"
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          browser: firefox
+          record: true
+          start: yarn start
+          wait-on: "http://localhost:4200"
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
