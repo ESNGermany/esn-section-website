@@ -48,4 +48,5 @@ testem.log
 Thumbs.db
 section_information
 
-.angular
+cypress/downloads
+cypress/videos
