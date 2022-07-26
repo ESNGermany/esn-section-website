@@ -1,27 +1,31 @@
-# EsnSectionsWebsite
+# ESN Section Websites
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Clone this repo into a local folder. Navigate to the `src` folder in a command line and install packages using `yarn`. Then, you are ready to develop!
 
-## Code scaffolding
+## Development
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Build
+## Testing
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Some basic cypress tests automatically run every Wednesday at 8a.m. via a scheduled GitHub action (and on each push to main). In case of failure, there is a message posted to the [ESN Germany Slack Workspace](https://esn-germany.slack.com/) (#website_monitoring). You can at all times run the tests locally using `yarn cy:run`.
 
-## Running unit tests
+## Build (locally, not needed if you want to publish the website)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng build` to build the project. **You need to set the environment variables `REPLACE_STRAPI_USER_ID` and `STRAPI_SECTION_ID` in `src/environment.(prod.)ts` in order to make it work.**
+The build artifacts will be stored in the `dist/` directory. Use the `--configuration production` flag for a production build.
 
-## Running end-to-end tests
+## Publish a new version for ALL sections
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+1. Push the new version to the main branch of this repository.
+2. Connect to the server of ESN Germany.
+3. Start the script to build the new version for all websites. The timestamp is updated automatically.
+   > Everything else will happen automatically within few minutes.
 
-## Further help
+## Add a new section
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+// On ESN Germany server
