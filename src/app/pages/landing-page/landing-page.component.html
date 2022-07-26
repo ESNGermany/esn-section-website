@@ -3,7 +3,7 @@
     <div class="px-8 mb-16">
       <div class="title-div4">
         <ng-container *ngIf="globals$ | async as globals">
-          <p id="titeli" class="title-p-welcome">
+          <p id="titeli" data-testid="esn-title" class="title-p-welcome">
             {{ globals?.welcomeMessageFrontPage }}
           </p>
         </ng-container>

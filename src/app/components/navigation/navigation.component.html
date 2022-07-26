@@ -12,6 +12,7 @@
   <ul
     class="z-10 font-body text-white text-xl bg-gradient float-right w-3/5 hidden absolute right-0"
     id="menu"
+    data-testid="esn-mobile-menu"
   >
     <a
       routerLink="/"
@@ -104,6 +105,7 @@
     </div>
     <div class="block pr-8 sm:pr-16 lg:hidden" id="burger">
       <button
+      data-testid="esn-burger-menu"
         class="flex items-center px-3 py-2 border rounded text-white border-white"
         (click)="showMenu()"
       >

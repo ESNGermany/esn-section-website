@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  timeStamp: '2022-06-22 22:14:08',
+  timeStamp: '2022-07-26 14:20:38',
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 19,
+  STRAPI_SECTION_ID: 2,
 };
 
 // STRAPI_SECTION_IDs:

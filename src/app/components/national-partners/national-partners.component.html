@@ -4,7 +4,7 @@
     class="mx-8 flex flex-wrap justify-evenly font-body text-lg border border-graylight shadow-xl p-8 items-baseline"
   >
     <ng-container *ngFor="let partner of partners; let i = index">
-      <figure class="my-4 px-8 maxw">
+      <figure class="my-4 px-8 maxw" data-testid="esn-national-partner">
         <a
           href="{{ partner.Link }}"
           title="{{ partner.Logo.alternativeText }}"
