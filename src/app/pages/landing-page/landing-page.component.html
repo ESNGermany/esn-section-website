@@ -34,33 +34,81 @@
       *ngIf="globals$ | async as globals"
     >
       <div class="col-span-3">
-        <img
+        <img *ngIf="gridImageSize[0] === 'small'"
+          src="{{ strapiLink }}{{
+            globals!.imageGridFrontPage[0].formats.small.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+        <img *ngIf="gridImageSize[0] === 'medium'"
           src="{{ strapiLink }}{{
             globals!.imageGridFrontPage[0].formats.medium.url
           }}"
           class="object-cover h-full w-full"
         />
+        <img *ngIf="gridImageSize[0] === 'large'"
+          src="{{ strapiLink }}{{
+            globals!.imageGridFrontPage[0].formats.large.url
+          }}"
+          class="object-cover h-full w-full"
+        />
       </div>
       <div class="row-span-2">
-        <img
+        <img *ngIf="gridImageSize[1] === 'small'"
+          src="{{ strapiLink }}{{
+            globals!.imageGridFrontPage[1].formats.small.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+        <img *ngIf="gridImageSize[1] === 'medium'"
           src="{{ strapiLink }}{{
             globals!.imageGridFrontPage[1].formats.medium.url
           }}"
           class="object-cover h-full w-full"
         />
+        <img *ngIf="gridImageSize[1] === 'large'"
+          src="{{ strapiLink }}{{
+            globals!.imageGridFrontPage[1].formats.large.url
+          }}"
+          class="object-cover h-full w-full"
+        />
       </div>
       <div (click)="comic()">
-        <img
+        <img *ngIf="gridImageSize[2] === 'small'"
+          src="{{ strapiLink }}{{
+            globals!.imageGridFrontPage[2].formats.small.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+        <img *ngIf="gridImageSize[2] === 'medium'"
           src="{{ strapiLink }}{{
             globals!.imageGridFrontPage[2].formats.medium.url
           }}"
           class="object-cover h-full w-full"
         />
+        <img *ngIf="gridImageSize[2] === 'large'"
+          src="{{ strapiLink }}{{
+            globals!.imageGridFrontPage[2].formats.large.url
+          }}"
+          class="object-cover h-full w-full"
+        />
       </div>
       <div class="col-span-2">
-        <img
+        <img *ngIf="gridImageSize[3] === 'small'"
+          src="{{ strapiLink }}{{
+            globals!.imageGridFrontPage[3].formats.small.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+        <img *ngIf="gridImageSize[3] === 'medium'"
           src="{{ strapiLink }}{{
             globals!.imageGridFrontPage[3].formats.medium.url
+          }}"
+          class="object-cover h-full w-full"
+        />
+        <img *ngIf="gridImageSize[3] === 'large'"
+          src="{{ strapiLink }}{{
+            globals!.imageGridFrontPage[3].formats.large.url
           }}"
           class="object-cover h-full w-full"
         />
