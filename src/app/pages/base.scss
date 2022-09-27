@@ -2,6 +2,10 @@
   @apply max-w-screen-xl m-auto mb-16 sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4;
 }
 
+.outer-div {
+  @apply max-w-screen-xl m-auto sm:px-16 xl:mt-28 lg:mt-22 sm:mt-16;
+}
+
 .markdown-div {
   @apply m-auto block mb-24 px-16 font-body;
 }
@@ -23,4 +27,16 @@
   width: 73px;
   height: 5px;
   background: #2e3192;
+}
+
+.float-right-fig {
+  @apply pl-0 lg:pl-8 pb-2 pr-0 pt-0 top-0 lg:float-right w-4/5 lg:w-2/5 m-auto;
+}
+
+.float-left-fig {
+  @apply pr-0 lg:pr-8 pl-0 pt-0 lg:float-left w-4/5 lg:w-2/5 m-auto;
+}
+
+.outer-imgbox {
+  @apply max-w-screen-xl m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4;
 }

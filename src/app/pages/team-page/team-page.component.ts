@@ -7,7 +7,7 @@ import { MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'app-team-page',
   templateUrl: './team-page.component.html',
-  styleUrls: ['./team-page.component.scss'],
+  styleUrls: ['./../base.scss']
 })
 export class TeamPageComponent implements OnInit {
   public readonly page: string = 'Team_page';

@@ -8,7 +8,7 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'app-events-page',
   templateUrl: './events-page.component.html',
-  styleUrls: ['./events-page.component.scss'],
+  styleUrls: ['./events-page.component.scss', './../base.scss']
 })
 export class EventsPageComponent implements OnInit {
   globals$: Observable<IMainItem> | undefined;

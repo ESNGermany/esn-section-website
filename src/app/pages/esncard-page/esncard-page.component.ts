@@ -13,7 +13,7 @@ import {
 @Component({
   selector: 'app-esncard-page',
   templateUrl: './esncard-page.component.html',
-  styleUrls: ['./esncard-page.component.scss'],
+  styleUrls: ['./esncard-page.component.scss', './../base.scss'],
 })
 export class EsncardPageComponent implements OnInit {
   partnerInfo$: Observable<IPartnerItem[]> | undefined;

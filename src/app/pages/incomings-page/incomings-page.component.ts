@@ -8,7 +8,7 @@ import { MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'app-incomings-page',
   templateUrl: './incomings-page.component.html',
-  styleUrls: ['./incomings-page.component.scss'],
+  styleUrls: ['./incomings-page.component.scss', './../base.scss']
 })
 export class IncomingsPageComponent implements OnInit {
   faqTransportItemList$: Observable<IFaqItem[]> | undefined;

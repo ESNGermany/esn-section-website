@@ -11,7 +11,7 @@ import { MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'app-statutes-page',
   templateUrl: './statutes-page.component.html',
-  styleUrls: ['./statutes-page.component.scss'],
+  styleUrls: ['./../base.scss'],
 })
 export class StatutesPageComponent implements OnInit {
   statutesItemList$: Observable<IStatutesItem> | undefined;

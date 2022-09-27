@@ -7,7 +7,7 @@ import { MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'app-members-page',
   templateUrl: './members-page.component.html',
-  styleUrls: ['./members-page.component.scss'],
+  styleUrls: ['./../base.scss']
 })
 export class MembersPageComponent implements OnInit {
   public readonly page: string = 'Members_page';

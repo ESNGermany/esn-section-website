@@ -12,7 +12,7 @@ import { MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'app-imprint-page',
   templateUrl: './imprint-page.component.html',
-  styleUrls: ['./imprint-page.component.scss'],
+  styleUrls: ['./../base.scss'],
 })
 export class ImprintPageComponent implements OnInit {
   imprintItemList$: Observable<IImprintItem> | undefined;

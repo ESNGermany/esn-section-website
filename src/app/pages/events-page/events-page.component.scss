@@ -1,26 +1,3 @@
-.title-div {
-  @apply m-auto mb-8 relative;
-}
-
-.title-p {
-  @extend .title;
-  @apply font-heading text-esn-dark-blue font-bold text-4xl;
-}
-
-.outer-div {
-  @apply max-w-screen-xl m-auto sm:px-16 xl:mt-28 lg:mt-20 sm:mt-16;
-}
-
-.title::after {
-  position: absolute;
-  content: "";
-  left: 0;
-  bottom: -12px;
-  width: 73px;
-  height: 5px;
-  background: #2e3192;
-}
-
 .imgh {
   max-height: 12rem;
 }

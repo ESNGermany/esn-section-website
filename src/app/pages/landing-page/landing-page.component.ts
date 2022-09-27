@@ -17,7 +17,7 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss'],
+  styleUrls: ['./landing-page.component.scss', './../base.scss']
 })
 export class LandingPageComponent implements OnInit {
   contentInfo$: Observable<IContentItem[]> | undefined;

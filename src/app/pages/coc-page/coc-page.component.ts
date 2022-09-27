@@ -8,7 +8,7 @@ import { MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'app-coc-page',
   templateUrl: './coc-page.component.html',
-  styleUrls: ['./coc-page.component.scss'],
+  styleUrls: ['./../base.scss'],
 })
 export class CocPageComponent implements OnInit {
   cocItem$: Observable<ICocItem> | undefined;
