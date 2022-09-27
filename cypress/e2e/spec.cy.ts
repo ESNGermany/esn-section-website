@@ -41,7 +41,7 @@ describe('Can load contents', () => {
 
 describe('Calendars work', () => {
   it(`Should load pretix calendar only after accepting banner`, () => {
-    cy.clearCookies();
+    cy.clearCookie('pretix');
     cy.visit('/events');
     cy.get('[data-testid="esn-calendar-blur"]').should('be.visible');
     cy.getCookie('pretix').should('not.exist');
