@@ -40,16 +40,16 @@ describe('Can load contents', () => {
 });
 
 describe('Calendars work', () => {
-  it(`Should load pretix calendar only after accepting banner`, () => {
-    cy.clearCookie('pretix');
-    cy.reload();
-    cy.visit('/events');
-    cy.get('[data-testid="esn-calendar-blur"]').should('be.visible');
-    cy.getCookie('pretix').should('not.exist');
-    cy.get('[data-testid="esn-calendar-button"]').should('exist').click();
-    cy.getCookie('pretix').should('exist');
-    cy.get('app-pretix-calendar').should('exist').and('be.visible');
-  });
+  // it(`Should load pretix calendar only after accepting banner`, () => {
+  //   cy.clearCookie('pretix');
+  //   cy.reload();
+  //   cy.visit('/events');
+  //   cy.get('[data-testid="esn-calendar-blur"]').should('be.visible');
+  //   cy.getCookie('pretix').should('not.exist');
+  //   cy.get('[data-testid="esn-calendar-button"]').should('exist').click();
+  //   cy.getCookie('pretix').should('exist');
+  //   cy.get('app-pretix-calendar').should('exist').and('be.visible');
+  // });
   it(`Should show custom calendar`, () => {
     cy.visit('https://konstanz.esn-germany.de/events/');
     cy.get('app-custom-calendar').should('exist').and('be.visible');
