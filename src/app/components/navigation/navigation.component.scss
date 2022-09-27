@@ -34,7 +34,7 @@
   background: #fff;
 }
 
-.addhoverActive:before {
+.addhoverActive::before {
   position: absolute;
   content: "";
   left: 0;
