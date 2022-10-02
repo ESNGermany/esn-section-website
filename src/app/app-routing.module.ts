@@ -51,10 +51,8 @@ const routes: Routes = [
   },
   {
     path: 'error',
+    title: 'Oopsie - ESN Germany',
     component: ErrorPageComponent,
-    data: {
-      title: 'Oopsie - ESN Germany',
-    },
   },
   {
     path: '**',

@@ -1,19 +1,24 @@
 <div [ngClass]="grayBg ? 'bg-whitebg' : 'p-0'">
-    <div class="max-w-screen-xl m-auto sm:px-16 xl:mt-28 lg:mt-22 sm:mt-16">
-        <div [ngClass]="grayBg ? 'px-8 py-12 mb-16' : 'px-8 mb-16'">
-          <div class="m-auto mb-8 relative">
-            <p [ngClass]="title ? 'font-heading text-esn-dark-blue font-bold text-4xl title' : 'font-heading text-esn-dark-blue font-bold text-4xl'">
-              {{ title }}
-            </p>
-          </div>
-          <div class="m-auto block">
-            <div [ngClass]="grayBox ? 'border border-graylight shadow-xl p-8' : ''">
-              <p class="font-body text-lg">
-                <ng-content></ng-content>
-              </p>
-            </div>
-          </div>
+  <div class="max-w-screen-xl m-auto sm:px-16 xl:mt-28 lg:mt-22 sm:mt-16">
+    <div [ngClass]="grayBg ? 'px-8 py-12 mb-16' : 'px-8 mb-16'">
+      <div class="m-auto mb-8 relative">
+        <p
+          [ngClass]="
+            title
+              ? 'font-heading text-esn-dark-blue font-bold text-4xl title'
+              : 'font-heading text-esn-dark-blue font-bold text-4xl'
+          "
+        >
+          {{ title }}
+        </p>
+      </div>
+      <div class="m-auto block">
+        <div [ngClass]="grayBox ? 'border border-graylight shadow-xl p-8' : ''">
+          <p class="font-body text-lg">
+            <ng-content></ng-content>
+          </p>
         </div>
       </div>
     </div>
-    
+  </div>
+</div>
