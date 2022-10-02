@@ -1,4 +1,4 @@
-<div *ngIf="globals$ | async as globals; else loading">
+<ng-container *ngIf="globals$ | async as globals; else loading">
   <div class="outer-div">
     <div class="px-8 mb-24">
       <div class="title-div">
@@ -38,7 +38,7 @@
       </div>
     </div>
   </div>
-</div>
+</ng-container>
 <ng-template #loading>
   <img width="200px" class="m-auto" src="assets/social/ESN-star-spinner.gif"
 /></ng-template>

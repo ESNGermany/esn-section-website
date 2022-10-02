@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './ola-content-item.component.html',
   styleUrls: ['./ola-content-item.component.scss'],
 })
-export class OlaContentItemComponent {
-  constructor() {}
-}
+export class OlaContentItemComponent { }

@@ -5,8 +5,7 @@ import { MainService } from './services/main.service';
 
 @Component({
   selector: 'esn-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   constructor(

@@ -76,3 +76,14 @@ markdown {
   height: 5px;
   background: #2e3192;
 }
+
+.full-site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: space-between;
+}
+
+.site-content {
+  flex: 1;
+}

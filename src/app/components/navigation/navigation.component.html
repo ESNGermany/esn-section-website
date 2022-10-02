@@ -16,43 +16,43 @@
   >
     <a
       routerLink="/"
-      (click)="hideMenu()"
+      (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
       [routerLinkActiveOptions]="{ exact: true }"
       ><li class="mobile-li hover-zoom">Home</li></a
     >
-    <a routerLink="/esncard" (click)="hideMenu()"
+    <a routerLink="/esncard" (click)="toggleMenu()"
       ><li class="mobile-li hover-zoom" routerLinkActive="colorActiveLink">
         ESNcard & Partners
       </li></a
     >
     <a
       routerLink="/events"
-      (click)="hideMenu()"
+      (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
       ><li class="mobile-li hover-zoom">Events</li></a
     >
     <a
       routerLink="/for-incomings"
-      (click)="hideMenu()"
+      (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
       ><li class="mobile-li hover-zoom">For Incomings</li></a
     >
     <a
       routerLink="/for-members"
-      (click)="hideMenu()"
+      (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
       ><li class="mobile-li hover-zoom">For Members</li></a
     >
     <a
       routerLink="/team"
-      (click)="hideMenu()"
+      (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
       ><li class="mobile-li hover-zoom">Our Team</li></a
     >
     <a
       routerLink="/imprint"
-      (click)="hideMenu()"
+      (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
       ><li class="p-4 pl-8 border-white hover-zoom">Imprint</li></a
     >
@@ -107,7 +107,7 @@
       <button
       data-testid="esn-burger-menu"
         class="flex items-center px-3 py-2 border rounded text-white border-white"
-        (click)="showMenu()"
+        (click)="toggleMenu()"
       >
         <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
           <title>Menu</title>
@@ -127,8 +127,8 @@
         </div>
         <button
           class="p-2 rounded-full block my-2 hov"
-          (mouseenter)="showBubble(1)"
-          (mouseleave)="hideBubble(1)"
+          (mouseenter)="toggleBubble(1)"
+          (mouseleave)="toggleBubble(1)"
           [ngStyle]="buttonColor$ | async"
         >
           <img class="m-2 h-6" src="../../../assets/social/instagram.png" />
@@ -143,8 +143,8 @@
         <button
           class="p-2 rounded-full block my-2 hov"
           [ngStyle]="buttonColor$ | async"
-          (mouseenter)="showBubble(2)"
-          (mouseleave)="hideBubble(2)"
+          (mouseenter)="toggleBubble(2)"
+          (mouseleave)="toggleBubble(2)"
         >
           <img class="m-2 h-6" src="../../../assets/social/facebook.png" />
         </button>

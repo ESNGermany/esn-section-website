@@ -53,46 +53,22 @@ export class NavigationComponent implements OnInit {
     );
   }
 
-  public showMenu(): void {
+  public toggleMenu(): void {
     const burger = this.document.getElementById('burger') as HTMLUListElement;
     const menu = this.document.getElementById('menu') as HTMLUListElement;
-    burger.classList.add('hidden');
-    menu.classList.remove('hidden');
-    menu.classList.add('vis');
+    burger.classList.toggle('hidden');
+    menu.classList.toggle('hidden');
   }
 
-  public hideMenu(): void {
-    const burger = this.document.getElementById('burger') as HTMLUListElement;
-    const menu = this.document.getElementById('menu') as HTMLUListElement;
-    burger.classList.remove('hidden');
-    burger.classList.add('vis');
-    menu.classList.remove('vis');
-    menu.classList.add('hidden');
-  }
-
-  public showBubble(bubble: 1 | 2): void {
+  public toggleBubble(bubble: 1 | 2): void {
     const b1 = this.document.getElementById('bubble1') as HTMLDivElement;
     const b2 = this.document.getElementById('bubble2') as HTMLDivElement;
     if (bubble === 1) {
-      b1.classList.remove('invisible');
-      b1.classList.add('visible');
-    }
-    if (bubble === 2) {
-      b2.classList.remove('invisible');
-      b2.classList.add('visible');
-    }
-  }
-
-  public hideBubble(bubble: 1 | 2): void {
-    const b1 = this.document.getElementById('bubble1') as HTMLDivElement;
-    const b2 = this.document.getElementById('bubble2') as HTMLDivElement;
-    if (bubble === 1) {
-      b1.classList.remove('visible');
-      b1.classList.add('invisible');
-    }
-    if (bubble === 2) {
-      b2.classList.remove('visible');
-      b2.classList.add('invisible');
+      b1.classList.toggle('visible');
+      b1.classList.toggle('invisible');
+    } else if (bubble === 2) {
+      b2.classList.toggle('visible');
+      b2.classList.toggle('invisible');
     }
   }
 

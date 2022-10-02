@@ -30,7 +30,9 @@
               alt="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+          <ng-container *ngIf="c.Text"
+            ><markdown [data]="c.Text"></markdown
+          ></ng-container>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -64,7 +66,9 @@
               alt="{{ c.Image.alternativeText }}"
             />
           </figure>
-          <div *ngIf="c.Text"><markdown [data]="c.Text"></markdown></div>
+          <ng-container *ngIf="c.Text"
+            ><markdown [data]="c.Text"></markdown
+          ></ng-container>
         </div>
         <div *ngIf="!c.Image" class="m-auto font-body text-lg">
           <markdown [data]="c.Text"></markdown>
@@ -99,9 +103,9 @@
             alt="{{ c.Image.alternativeText }}"
           />
         </div>
-        <div *ngIf="c.Text">
-          <markdown [data]="c.Text"></markdown>
-        </div>
+        <ng-container *ngIf="c.Text"
+          ><markdown [data]="c.Text"></markdown
+        ></ng-container>
       </div>
     </ng-container>
     <!-- text above img below -->
