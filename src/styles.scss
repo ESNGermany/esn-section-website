@@ -66,3 +66,13 @@
 markdown {
   @apply prose;
 }
+
+.title::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -12px;
+  width: 73px;
+  height: 5px;
+  background: #2e3192;
+}

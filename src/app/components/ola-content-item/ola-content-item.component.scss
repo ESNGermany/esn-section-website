@@ -3,7 +3,7 @@
 }
 
 .title-p {
-  @extend .title;
+  @extend .title !optional;
   @apply font-heading text-esn-dark-blue font-bold text-4xl;
 }
 
@@ -17,14 +17,4 @@
 
 .outer-imgbox {
   @apply max-w-screen-xl m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4;
-}
-
-.title::after {
-  position: absolute;
-  content: "";
-  left: 0;
-  bottom: -12px;
-  width: 73px;
-  height: 5px;
-  background: #2e3192;
 }
