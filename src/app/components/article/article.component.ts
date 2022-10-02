@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./../../../styles.scss']
 })
 export class ArticleComponent{
-  @Input() title: string;
+  @Input() title: string = '';
   @Input() grayBg: boolean = false;
   @Input() grayBox: boolean = false;
 }
