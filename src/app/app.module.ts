@@ -46,6 +46,7 @@ import { NationalPartnersService } from './services/national-partners.service';
 import { PartnerService } from './services/partner.service';
 import { StatutesService } from './services/statutes.service';
 import { ImprintEsnGerService } from './services/imprint-esnger.service';
+import { ArticleComponent } from './components/article/article.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -74,6 +75,7 @@ FullCalendarModule.registerPlugins([
     MembersPageComponent,
     StatutesPageComponent,
     TeamPageComponent,
+    ArticleComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
