@@ -9,7 +9,7 @@ import {
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-statutes-page',
+  selector: 'esn-statutes-page',
   templateUrl: './statutes-page.component.html',
   styleUrls: ['./../base.scss'],
 })

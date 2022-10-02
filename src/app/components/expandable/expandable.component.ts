@@ -9,7 +9,7 @@ import {
 } from '@angular/animations';
 
 @Component({
-  selector: 'app-expandable',
+  selector: 'esn-expandable',
   templateUrl: 'expandable.component.html',
   styleUrls: ['./expandable.component.scss'],
   animations: [

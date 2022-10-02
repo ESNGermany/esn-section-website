@@ -12,7 +12,7 @@ describe('Each page contains navigation', () => {
   pages.forEach((page) => {
     it(`Should display navigation on ${page} page`, () => {
       cy.visit(page);
-      cy.get('app-navigation').should('be.visible');
+      cy.get('esn-navigation').should('be.visible');
     });
   });
   it(`Should open menu when click on burger menu`, () => {
@@ -48,11 +48,11 @@ describe('Calendars work', () => {
   //   cy.getCookie('pretix').should('not.exist');
   //   cy.get('[data-testid="esn-calendar-button"]').should('exist').click();
   //   cy.getCookie('pretix').should('exist');
-  //   cy.get('app-pretix-calendar').should('exist').and('be.visible');
+  //   cy.get('esn-pretix-calendar').should('exist').and('be.visible');
   // });
   it(`Should show custom calendar`, () => {
     cy.visit('https://konstanz.esn-germany.de/events/');
-    cy.get('app-custom-calendar').should('exist').and('be.visible');
+    cy.get('esn-custom-calendar').should('exist').and('be.visible');
     cy.get('h2')
       .should('exist')
       .then((month) => {

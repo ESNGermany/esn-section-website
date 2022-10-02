@@ -6,7 +6,7 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-navigation',
+  selector: 'esn-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
 })

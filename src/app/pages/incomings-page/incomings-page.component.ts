@@ -6,7 +6,7 @@ import { IFaqItem, FaqService } from 'src/app/services/faq.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-incomings-page',
+  selector: 'esn-incomings-page',
   templateUrl: './incomings-page.component.html',
   styleUrls: ['./incomings-page.component.scss', './../base.scss']
 })

@@ -5,7 +5,7 @@ import { IContentItem, ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-content-item',
+  selector: 'esn-content-item',
   templateUrl: './content-item.component.html',
   styleUrls: ['./content-item.component.scss'],
 })

@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-team-page',
+  selector: 'esn-team-page',
   templateUrl: './team-page.component.html',
   styleUrls: ['./../base.scss']
 })

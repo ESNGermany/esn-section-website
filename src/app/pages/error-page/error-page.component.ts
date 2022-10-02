@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-error-page',
+  selector: 'esn-error-page',
   templateUrl: './error-page.component.html',
   styleUrls: ['./../base.scss'],
 })

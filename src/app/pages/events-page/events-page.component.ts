@@ -6,7 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-events-page',
+  selector: 'esn-events-page',
   templateUrl: './events-page.component.html',
   styleUrls: ['./events-page.component.scss', './../base.scss']
 })

@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-members-page',
+  selector: 'esn-members-page',
   templateUrl: './members-page.component.html',
   styleUrls: ['./../base.scss']
 })

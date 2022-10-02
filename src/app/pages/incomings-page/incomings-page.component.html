@@ -1,4 +1,4 @@
-<app-content-item [page]="page"></app-content-item>
+<esn-content-item [page]="page"></esn-content-item>
 <ng-container
   *ngIf="
     (faqHousingItemList$ | async)?.length > 0 ||
@@ -24,14 +24,14 @@
           Housing
         </div>
         <div class="exp-shadow mb-6">
-          <app-expandable class="exp" *ngFor="let faq of faqHousingItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqHousingItemList">
             <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
             <div class="answer-div">
               <div class="answer-col">
                 <markdown [data]="faq.Answer"></markdown>
               </div>
             </div>
-          </app-expandable>
+          </esn-expandable>
         </div>
       </ng-container>
       <ng-template #loading>
@@ -50,14 +50,14 @@
           Transport
         </div>
         <div class="exp-shadow mb-6">
-          <app-expandable class="exp" *ngFor="let faq of faqTransportItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqTransportItemList">
             <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
             <div class="answer-div">
               <div class="answer-col">
                 <markdown [data]="faq.Answer"></markdown>
               </div>
             </div>
-          </app-expandable>
+          </esn-expandable>
         </div>
       </ng-container>
       <ng-container *ngIf="faqEsncardItemList$ | async as faqEsncardItemList">
@@ -68,14 +68,14 @@
           ESNcard
         </div>
         <div class="exp-shadow mb-6">
-          <app-expandable class="exp" *ngFor="let faq of faqEsncardItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqEsncardItemList">
             <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
             <div class="answer-div">
               <div class="answer-col">
                 <markdown [data]="faq.Answer"></markdown>
               </div>
             </div>
-          </app-expandable>
+          </esn-expandable>
         </div>
       </ng-container>
       <ng-container *ngIf="faqCoronaItemList$ | async as faqCoronaItemList">
@@ -86,14 +86,14 @@
           Corona
         </div>
         <div class="exp-shadow mb-6">
-          <app-expandable class="exp" *ngFor="let faq of faqCoronaItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqCoronaItemList">
             <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
             <div class="answer-div">
               <div class="answer-col">
                 <markdown [data]="faq.Answer"></markdown>
               </div>
             </div>
-          </app-expandable>
+          </esn-expandable>
         </div>
       </ng-container>
       <ng-container
@@ -106,14 +106,14 @@
           Uni/Erasmus
         </div>
         <div class="exp-shadow mb-6">
-          <app-expandable class="exp" *ngFor="let faq of faqUniErasmusItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqUniErasmusItemList">
             <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
             <div class="answer-div">
               <div class="answer-col">
                 <markdown [data]="faq.Answer"></markdown>
               </div>
             </div>
-          </app-expandable>
+          </esn-expandable>
         </div>
       </ng-container>
       <ng-container *ngIf="faqOtherItemList$ | async as faqOtherItemList">
@@ -124,14 +124,14 @@
           Other
         </div>
         <div class="exp-shadow mb-6">
-          <app-expandable class="exp" *ngFor="let faq of faqOtherItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqOtherItemList">
             <p slot="header" class="font-body text-md">{{ faq.Question }}</p>
             <div class="answer-div">
               <div class="answer-col">
                 <markdown [data]="faq.Answer"></markdown>
               </div>
             </div>
-          </app-expandable>
+          </esn-expandable>
         </div>
       </ng-container>
     </div>

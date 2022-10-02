@@ -10,7 +10,7 @@ import { IImprintItem, ImprintService } from 'src/app/services/imprint.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-imprint-page',
+  selector: 'esn-imprint-page',
   templateUrl: './imprint-page.component.html',
   styleUrls: ['./../base.scss'],
 })

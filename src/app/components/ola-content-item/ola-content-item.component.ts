@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-ola-content-item',
+  selector: 'esn-ola-content-item',
   templateUrl: './ola-content-item.component.html',
   styleUrls: ['./ola-content-item.component.scss'],
 })

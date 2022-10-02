@@ -6,7 +6,7 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'esn-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })

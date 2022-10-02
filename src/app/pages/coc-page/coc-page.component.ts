@@ -6,7 +6,7 @@ import { ICocItem, CocService } from 'src/app/services/coc.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-coc-page',
+  selector: 'esn-coc-page',
   templateUrl: './coc-page.component.html',
   styleUrls: ['./../base.scss'],
 })

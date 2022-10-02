@@ -9,7 +9,7 @@
           <markdown [data]="globals?.eventPageText"></markdown>
         </div>
         <ng-container *ngIf="!globals?.usePretixCalendar; else pretixCalendar">
-          <app-custom-calendar></app-custom-calendar>
+          <esn-custom-calendar></esn-custom-calendar>
         </ng-container>
         <ng-template #pretixCalendar>
           <div *ngIf="!loadPretix" class="relative w-full">
@@ -27,7 +27,7 @@
               Accept cookies & load calendar
             </button>
           </div>
-          <app-pretix-calendar *ngIf="loadPretix"></app-pretix-calendar>
+          <esn-pretix-calendar *ngIf="loadPretix"></esn-pretix-calendar>
         </ng-template>
         <markdown class="text-gray">
           If you can't see any calendar here, please switch to another tab on

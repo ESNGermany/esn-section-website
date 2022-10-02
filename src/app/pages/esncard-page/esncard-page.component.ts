@@ -11,7 +11,7 @@ import {
 } from 'src/app/services/national-partners.service';
 
 @Component({
-  selector: 'app-esncard-page',
+  selector: 'esn-esncard-page',
   templateUrl: './esncard-page.component.html',
   styleUrls: ['./esncard-page.component.scss', './../base.scss'],
 })

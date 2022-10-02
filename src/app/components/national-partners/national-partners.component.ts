@@ -7,7 +7,7 @@ import {
 } from 'src/app/services/national-partners.service';
 
 @Component({
-  selector: 'app-national-partners',
+  selector: 'esn-national-partners',
   templateUrl: './national-partners.component.html',
   styleUrls: ['./national-partners.component.scss'],
 })

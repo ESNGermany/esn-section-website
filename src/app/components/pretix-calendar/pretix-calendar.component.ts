@@ -12,7 +12,7 @@ import { DOCUMENT } from '@angular/common';
 import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-pretix-calendar',
+  selector: 'esn-pretix-calendar',
   templateUrl: './pretix-calendar.component.html',
 })
 export class PretixCalendarComponent implements OnInit, AfterViewInit {

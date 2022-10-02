@@ -15,7 +15,7 @@ import { IContentItem, ContentService } from 'src/app/services/content.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
-  selector: 'app-landing-page',
+  selector: 'esn-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss', './../base.scss']
 })

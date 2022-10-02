@@ -7,7 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-custom-calendar',
+  selector: 'esn-custom-calendar',
   templateUrl: './custom-calendar.component.html',
 })
 export class CustomCalendarComponent {

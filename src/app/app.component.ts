@@ -4,7 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { MainService } from './services/main.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'esn-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
