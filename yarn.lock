@@ -7868,10 +7868,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ng-gallery@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/ng-gallery/-/ng-gallery-7.0.0.tgz#13a5e430b4278c74f6064b2d387a8f8951fd8bc5"
-  integrity sha512-DMxC7zyueGjrqbQzzMRUUvE5lGD6cGCPlBqAdheQ64PGCahabyO6/CBCnTTa/8SwrOLwEyq4/GLu7hYk2htBeA==
+ng-gallery@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/ng-gallery/-/ng-gallery-7.1.2.tgz#145b3aa378a88bf873ae497a4d64600de447d310"
+  integrity sha512-RrGW8RQ6wDjk4VHWM9IBAkuf6I1xEbbM1yUUfVAbh5aboIzxGsGQo42F96OZ1oxftD1OgL7yEU3MpyJ8p+sRAg==
   dependencies:
     tslib "^2.0.0"
 
