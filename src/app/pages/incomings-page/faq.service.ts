@@ -4,35 +4,37 @@ import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { MessageService } from './message.service';
+import { MessageService } from '../../services/message.service';
 
-export interface IImprintItem {
+export interface IFaqItem {
   id: string;
-  Title: string;
-  Text: string;
+  Question: string;
+  Answer: string;
+  Category: string;
+  Order_within_category: number;
 }
 
 @Injectable()
-export class ImprintService {
+export class FaqService {
   private url =
     environment.STRAPI_SECTION_URL +
-    'imprints?_created_by=' +
-    environment.STRAPI_SECTION_ID;
-  private dataRequest;
+    'faqs?_created_by=' +
+    environment.STRAPI_SECTION_ID +
+    '&_sort=Order_within_category&Category=';
+  private fullUrl: string = '';
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {
-    this.dataRequest = this.http.get<IImprintItem>(this.url).pipe(
-      shareReplay(1),
-      tap((_) => this.log('fetched imprint')),
-      catchError(this.handleError<IImprintItem>('fetchImprintList'))
-    );
-  }
+  ) {}
 
-  fetchImprint(): Observable<IImprintItem> {
-    return this.dataRequest;
+  fetchFaq(category: string): Observable<IFaqItem[]> {
+    this.fullUrl = this.url + category;
+    return this.http.get<IFaqItem[]>(this.fullUrl).pipe(
+      shareReplay(1),
+      tap((_) => this.log('fetched faq')),
+      catchError(this.handleError<IFaqItem[]>('fetchFaqList', []))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -43,6 +45,6 @@ export class ImprintService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`ContentService: ${message}`);
+    this.messageService.add(`FaqService: ${message}`);
   }
 }

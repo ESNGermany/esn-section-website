@@ -5,7 +5,7 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 import {
   IStatutesItem,
   StatutesService,
-} from 'src/app/services/statutes.service';
+} from './statutes.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({

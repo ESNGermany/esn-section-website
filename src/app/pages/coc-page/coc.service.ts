@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
-import { MessageService } from './message.service';
+import { MessageService } from '../../services/message.service';
 
 export interface ICocItem {
   id: string;

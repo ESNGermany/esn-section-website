@@ -4,37 +4,34 @@ import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { MessageService } from './message.service';
+import { MessageService } from '../../services/message.service';
 
-export interface IFaqItem {
+export interface IStatutesItem {
   id: string;
-  Question: string;
-  Answer: string;
-  Category: string;
-  Order_within_category: number;
+  Text: string;
 }
 
 @Injectable()
-export class FaqService {
+export class StatutesService {
   private url =
     environment.STRAPI_SECTION_URL +
-    'faqs?_created_by=' +
-    environment.STRAPI_SECTION_ID +
-    '&_sort=Order_within_category&Category=';
-  private fullUrl: string = '';
+    'statutes?_created_by=' +
+    environment.STRAPI_SECTION_ID;
+  private dataRequest;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {}
-
-  fetchFaq(category: string): Observable<IFaqItem[]> {
-    this.fullUrl = this.url + category;
-    return this.http.get<IFaqItem[]>(this.fullUrl).pipe(
+  ) {
+    this.dataRequest = this.http.get<IStatutesItem>(this.url).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched faq')),
-      catchError(this.handleError<IFaqItem[]>('fetchFaqList', []))
+      tap((_) => this.log('fetched statutes')),
+      catchError(this.handleError<IStatutesItem>('fetchStatutesList'))
     );
+  }
+
+  fetchStatutes(): Observable<IStatutesItem> {
+    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -45,6 +42,6 @@ export class FaqService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`FaqService: ${message}`);
+    this.messageService.add(`ContentService: ${message}`);
   }
 }

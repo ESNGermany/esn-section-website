@@ -1,20 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, shareReplay, tap } from 'rxjs/operators';
+import { catchError, Observable, of, shareReplay, tap } from 'rxjs';
 
-import { environment } from 'src/environments/environment';
-import { MessageService } from './message.service';
+import { MessageService } from '../../services/message.service';
 
-export interface IPartnerItem {
+export interface INationalPartnerItem {
   id: string;
   Name: string;
+  Description: string;
   Deal: string;
   Link: string;
-  Main_image: {
-    id: string;
+  Logo: {
     alternativeText: string;
-    url: string;
+    caption: string;
     formats: {
       medium: {
         url: string;
@@ -25,27 +23,27 @@ export interface IPartnerItem {
   buttonText: string;
 }
 
-@Injectable()
-export class PartnerService {
-  private url =
-    environment.STRAPI_SECTION_URL +
-    'partners?_created_by=' +
-    environment.STRAPI_SECTION_ID +
-    '&_sort=Order';
+@Injectable({
+  providedIn: 'root',
+})
+export class NationalPartnersService {
+  private url = 'https://strapi.esn-germany.de/web-partner';
   private dataRequest;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<IPartnerItem[]>(this.url).pipe(
+    this.dataRequest = this.http.get<INationalPartnerItem[]>(this.url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched partner')),
-      catchError(this.handleError<IPartnerItem[]>('fetchPartnerList', []))
+      catchError(
+        this.handleError<INationalPartnerItem[]>('fetchPartnerList', [])
+      )
     );
   }
 
-  fetchPagePartner(): Observable<IPartnerItem[]> {
+  fetchPageNationalPartner(): Observable<INationalPartnerItem[]> {
     return this.dataRequest;
   }
 
@@ -57,6 +55,6 @@ export class PartnerService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`PartnerService: ${message}`);
+    this.messageService.add(`PartnersService: ${message}`);
   }
 }

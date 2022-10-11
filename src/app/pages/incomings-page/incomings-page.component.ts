@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { firstValueFrom, Observable, shareReplay } from 'rxjs';
 
-import { IFaqItem, FaqService } from 'src/app/services/faq.service';
+import { IFaqItem, FaqService } from './faq.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({

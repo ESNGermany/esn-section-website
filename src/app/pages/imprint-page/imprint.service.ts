@@ -4,18 +4,19 @@ import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { MessageService } from './message.service';
+import { MessageService } from '../../services/message.service';
 
-export interface IStatutesItem {
+export interface IImprintItem {
   id: string;
+  Title: string;
   Text: string;
 }
 
 @Injectable()
-export class StatutesService {
+export class ImprintService {
   private url =
     environment.STRAPI_SECTION_URL +
-    'statutes?_created_by=' +
+    'imprints?_created_by=' +
     environment.STRAPI_SECTION_ID;
   private dataRequest;
 
@@ -23,14 +24,14 @@ export class StatutesService {
     private http: HttpClient,
     private messageService: MessageService
   ) {
-    this.dataRequest = this.http.get<IStatutesItem>(this.url).pipe(
+    this.dataRequest = this.http.get<IImprintItem>(this.url).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched statutes')),
-      catchError(this.handleError<IStatutesItem>('fetchStatutesList'))
+      tap((_) => this.log('fetched imprint')),
+      catchError(this.handleError<IImprintItem>('fetchImprintList'))
     );
   }
 
-  fetchStatutes(): Observable<IStatutesItem> {
+  fetchImprint(): Observable<IImprintItem> {
     return this.dataRequest;
   }
 

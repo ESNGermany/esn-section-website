@@ -31,9 +31,9 @@ export class CustomCalendarComponent {
       aspectRatio: 1.8,
       eventTimeFormat: {
         hour: 'numeric',
-        minute: '2-digit',
-        meridiem: false,
-        hour12: false,
+        minute: 'numeric',
+        meridiem: "lowercase",
+        omitZeroMinute: true,
       },
       eventClick: (info: any) => {
         info.jsEvent.preventDefault();

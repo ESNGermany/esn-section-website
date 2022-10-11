@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
-import { ICocItem, CocService } from 'src/app/services/coc.service';
+import { ICocItem, CocService } from './coc.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({

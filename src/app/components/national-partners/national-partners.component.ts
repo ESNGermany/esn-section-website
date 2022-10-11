@@ -4,7 +4,7 @@ import { Observable, shareReplay } from 'rxjs';
 import {
   INationalPartnerItem,
   NationalPartnersService,
-} from 'src/app/services/national-partners.service';
+} from 'src/app/pages/esncard-page/national-partners.service';
 
 @Component({
   selector: 'esn-national-partners',

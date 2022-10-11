@@ -3,12 +3,12 @@ import { Title } from '@angular/platform-browser';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { IPartnerItem, PartnerService } from 'src/app/services/partner.service';
+import { IPartnerItem, PartnerService } from './partner.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import {
   INationalPartnerItem,
   NationalPartnersService,
-} from 'src/app/services/national-partners.service';
+} from './national-partners.service';
 
 @Component({
   selector: 'esn-esncard-page',

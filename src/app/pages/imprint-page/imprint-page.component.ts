@@ -4,9 +4,9 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 import {
   IImprintEsnGerItem,
   ImprintEsnGerService,
-} from 'src/app/services/imprint-esnger.service';
+} from './imprint-esnger.service';
 
-import { IImprintItem, ImprintService } from 'src/app/services/imprint.service';
+import { IImprintItem, ImprintService } from './imprint.service';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({

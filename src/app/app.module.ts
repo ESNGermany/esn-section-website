@@ -34,18 +34,18 @@ import { GalleryModule } from 'ng-gallery';
 import { HttpClientModule } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
 
-import { CocService } from './services/coc.service';
+import { CocService } from './pages/coc-page/coc.service';
 import { ContentService } from './services/content.service';
 import { EventsService } from './services/events.service';
-import { FaqService } from './services/faq.service';
-import { ImprintService } from './services/imprint.service';
+import { FaqService } from './pages/incomings-page/faq.service';
+import { ImprintService } from './pages/imprint-page/imprint.service';
 import { MainService } from './services/main.service';
 import { MenuService } from './services/menus.service';
 import { MessageService } from './services/message.service';
-import { NationalPartnersService } from './services/national-partners.service';
-import { PartnerService } from './services/partner.service';
-import { StatutesService } from './services/statutes.service';
-import { ImprintEsnGerService } from './services/imprint-esnger.service';
+import { NationalPartnersService } from './pages/esncard-page/national-partners.service';
+import { PartnerService } from './pages/esncard-page/partner.service';
+import { StatutesService } from './pages/statutes-page/statutes.service';
+import { ImprintEsnGerService } from './pages/imprint-page/imprint-esnger.service';
 import { ArticleComponent } from './components/article/article.component';
 
 FullCalendarModule.registerPlugins([
