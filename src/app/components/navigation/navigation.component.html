@@ -1,6 +1,7 @@
 <!-- White triangular shapes that form the top triangle -->
 <div class="divider-bottom">
   <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <title>white rectangular shape to make the navigation look more edgy</title>
     <path
       d="M892.25 114.72L0 0 0 120 1200 120 1200 0 892.25 114.72z"
       class="shape-fill"
@@ -110,7 +111,7 @@
         (click)="toggleMenu()"
       >
         <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
-          <title>Menu</title>
+          <title>menu</title>
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
         </svg>
       </button>
@@ -119,7 +120,7 @@
 </div>
 <!-- Social Media buttons with hover-effect on the right side (bottom if mobile) -->
 <div class="max-w-screen-2xl m-auto" *ngIf="globals$ | async as globals">
-  <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible">
+  <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible z-10">
     <div *ngIf="globals?.instagramLink" class="ml-8">
       <a href="{{ globals?.instagramLink }}" target="_blank" rel="noopener">
         <div id="bubble1" class="bubble invisible font-body">
