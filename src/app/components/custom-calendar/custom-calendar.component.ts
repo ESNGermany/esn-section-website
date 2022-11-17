@@ -4,6 +4,8 @@ import { CalendarOptions } from '@fullcalendar/angular';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 
+import listPlugin from '@fullcalendar/list';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -24,7 +26,8 @@ export class CustomCalendarComponent {
       this.isBrowser$.next(true);
     }
     this.calendarOptions = {
-      initialView: 'dayGridMonth',
+      plugins: [ listPlugin ],
+      initialView: 'listMonth',
       firstDay: 1,
       showNonCurrentDates: false,
       fixedWeekCount: false,
