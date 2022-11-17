@@ -10,10 +10,12 @@ import { map, Observable, shareReplay } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
+import { LoadJsService } from 'src/app/shared/load-js.service';
 
 @Component({
   selector: 'esn-pretix-calendar',
   templateUrl: './pretix-calendar.component.html',
+  styleUrls: ['./pretix-calendar.component.scss']
 })
 export class PretixCalendarComponent implements OnInit, AfterViewInit {
   public globals$: Observable<IMainItem>;
@@ -23,6 +25,7 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
 
   constructor(
     private mainService: MainService,
+    private loadJsService: LoadJsService,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.globals$ = this.mainService.fetchMain().pipe(
@@ -36,7 +39,7 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.loadJsFile('https://pretix.eu/widget/v1.en.js');
+    this.loadJsService.loadJsFile('https://pretix.eu/widget/v1.en.js');
     this.loadCssFile('https://pretix.eu/demo/democon/widget/v1.css');
   }
 
@@ -57,13 +60,6 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
     node.rel = 'stylesheet';
     node.type = 'text/css';
     node.href = url;
-    this.document.getElementsByTagName('head')[0].appendChild(node);
-  }
-
-  private loadJsFile(url: string): void {
-    let node = this.document.createElement('script');
-    node.src = url;
-    node.type = 'text/javascript';
     this.document.getElementsByTagName('head')[0].appendChild(node);
   }
 }

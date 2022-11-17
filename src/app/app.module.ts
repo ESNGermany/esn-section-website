@@ -47,6 +47,8 @@ import { PartnerService } from './pages/esncard-page/partner.service';
 import { StatutesService } from './pages/statutes-page/statutes.service';
 import { ImprintEsnGerService } from './pages/imprint-page/imprint-esnger.service';
 import { ArticleComponent } from './components/article/article.component';
+import { SharedModule } from './shared/shared.module';
+import { NgxImageMosaicModule } from 'ngx-image-mosaic';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -85,6 +87,8 @@ FullCalendarModule.registerPlugins([
     HttpClientModule,
     MarkdownModule.forRoot(),
     FullCalendarModule,
+    SharedModule,
+    NgxImageMosaicModule
   ],
   providers: [
     FullCalendarModule,

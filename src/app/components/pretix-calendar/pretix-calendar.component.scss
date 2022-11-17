@@ -1,0 +1,10 @@
+.margin-cal {
+    margin: 0 0.75rem;
+    z-index: 0;
+}
+
+@media only screen and (min-wdith: 992px) {
+    .margin-cal {
+        margin: 2rem;
+    }
+}
