@@ -13,11 +13,12 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IContentItem, ContentService } from 'src/app/services/content.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
+import { LoadJsService } from 'src/app/shared/load-js.service';
 
 @Component({
   selector: 'esn-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss', './../base.scss']
+  styleUrls: ['./landing-page.component.scss', './../base.scss'],
 })
 export class LandingPageComponent implements OnInit {
   contentInfo$: Observable<IContentItem[]> | undefined;
@@ -36,6 +37,7 @@ export class LandingPageComponent implements OnInit {
     private title: Title,
     private contentService: ContentService,
     private mainService: MainService,
+    private loadJsService: LoadJsService,
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) platformId: Object
   ) {

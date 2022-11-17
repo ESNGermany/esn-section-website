@@ -43,6 +43,11 @@
                 "bundleName": "calendar-common"
               },
               {
+                "input": "node_modules/@fullcalendar/list/main.css",
+                "inject": false,
+                "bundleName": "calendar-list"
+              },
+              {
                 "input": "node_modules/@fullcalendar/daygrid/main.css",
                 "inject": false,
                 "bundleName": "calendar-daygrid"
