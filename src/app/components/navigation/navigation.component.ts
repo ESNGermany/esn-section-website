@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
@@ -19,6 +19,19 @@ export class NavigationComponent implements OnInit {
     private mainService: MainService,
     @Inject(DOCUMENT) private document: Document
   ) {}
+
+  @HostListener('document:click', ['$event'])
+  documentClick(event: MouseEvent) {
+    if (
+      !this.document.getElementById('burger')?.contains(event.target as Node) &&
+      !this.document.getElementById('menu')?.contains(event.target as Node)
+    ) {
+      const menu = this.document.getElementById('menu') as HTMLUListElement;
+      if (menu) {
+        this.toggleMenu();
+      }
+    }
+  }
 
   async ngOnInit(): Promise<void> {
     this.setMainItem();
