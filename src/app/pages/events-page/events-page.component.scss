@@ -14,3 +14,20 @@
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
+
+.custom-calendar-p {
+  padding: 0 4rem;
+}
+
+.legend-p {
+  padding: 0 6rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .custom-calendar-p {
+    margin: 1rem;
+  }
+  .legend-p {
+    padding: 0 2rem;
+  }
+}
