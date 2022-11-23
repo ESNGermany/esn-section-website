@@ -106,7 +106,7 @@
     </div>
     <div class="block pr-8 sm:pr-16 lg:hidden" id="burger">
       <button
-      data-testid="esn-burger-menu"
+        data-testid="esn-burger-menu"
         class="flex items-center px-3 py-2 border rounded text-white border-white"
         (click)="toggleMenu()"
       >
@@ -152,10 +152,12 @@
       </a>
     </div>
   </div>
+  <!-- bottom bobbles -->
   <ng-container class="m-auto" *ngIf="globals?.instagramLink">
     <div
       *ngIf="globals?.facebookLink"
       class="fixed bottom-0 right-0 visible lg:invisible z-10 mr-8 mb-8"
+      [ngClass]="{ 'show-scrollTop-bubble': windowScrolled }"
     >
       <a
         href="{{ globals?.facebookLink }}"
@@ -182,6 +184,17 @@
             src="../../../assets/social/instagram.png"
           /></button
       ></a>
+    </div>
+    <div class="scroll-to-top z-20" [ngClass]="{ 'show-scrollTop': windowScrolled }">
+      <button (click)="scrollToTop()">
+        <div class="bg-footer p-2 rounded-lg opacity-90">
+          <img
+            src="../../../assets/fonts/MaterialIcons/expand_less.png"
+            class="m-2"
+            width="20px"
+          />
+        </div>
+      </button>
     </div>
   </ng-container>
 </div>

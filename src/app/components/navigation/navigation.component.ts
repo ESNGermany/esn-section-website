@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
+  windowScrolled: boolean = false;
   globals$: Observable<IMainItem> | undefined;
   public bgImage$: Observable<object> | undefined;
   public buttonColor$: Observable<object> | undefined;
@@ -31,6 +32,34 @@ export class NavigationComponent implements OnInit {
         this.toggleMenu();
       }
     }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop > 100
+    ) {
+      this.windowScrolled = true;
+    } else if (
+      (this.windowScrolled && window.pageYOffset) ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop < 10
+    ) {
+      this.windowScrolled = false;
+    }
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - currentScroll / 8);
+      }
+    })();
   }
 
   async ngOnInit(): Promise<void> {
