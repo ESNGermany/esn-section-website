@@ -27,7 +27,7 @@ export class NavigationComponent implements OnInit {
       !this.document.getElementById('menu')?.contains(event.target as Node)
     ) {
       const menu = this.document.getElementById('menu') as HTMLUListElement;
-      if (menu) {
+      if (!menu.classList.contains('hidden')) {
         this.toggleMenu();
       }
     }
