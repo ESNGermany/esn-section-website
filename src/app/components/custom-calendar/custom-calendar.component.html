@@ -1,4 +1,4 @@
-<div *ngIf="!pretixLink">
+<div *ngIf="!pretixLink" class="px-8">
   <full-calendar id="calendar" [options]="calendarOptions" *ngIf="isBrowser$ | async"></full-calendar>
   <div *ngIf="event$| async as event" class="
       bg-graylight

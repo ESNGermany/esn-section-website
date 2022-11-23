@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
+  windowScrolled: boolean = false;
   globals$: Observable<IMainItem> | undefined;
   public bgImage$: Observable<object> | undefined;
   public buttonColor$: Observable<object> | undefined;
@@ -19,6 +20,47 @@ export class NavigationComponent implements OnInit {
     private mainService: MainService,
     @Inject(DOCUMENT) private document: Document
   ) {}
+
+  @HostListener('document:click', ['$event'])
+  documentClick(event: MouseEvent) {
+    if (
+      !this.document.getElementById('burger')?.contains(event.target as Node) &&
+      !this.document.getElementById('menu')?.contains(event.target as Node)
+    ) {
+      const menu = this.document.getElementById('menu') as HTMLUListElement;
+      if (!menu.classList.contains('hidden')) {
+        this.toggleMenu();
+      }
+    }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop > 100
+    ) {
+      this.windowScrolled = true;
+    } else if (
+      (this.windowScrolled && window.pageYOffset) ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop < 10
+    ) {
+      this.windowScrolled = false;
+    }
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - currentScroll / 8);
+      }
+    })();
+  }
 
   async ngOnInit(): Promise<void> {
     this.setMainItem();

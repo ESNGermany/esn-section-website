@@ -103,3 +103,22 @@
 .mobile-but {
   @apply block mt-4 inline-block font-bold text-white focus:outline-none /*addhover*/;
 }
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 90px;
+  right: 50px;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.show-scrollTop {
+  bottom: 30px;
+  opacity: 0.9;
+  transition: all 0.2s ease-in-out;
+}
+
+.show-scrollTop-bubble {
+  margin-right: 7rem;
+  transition: all 0.2s ease-in-out;
+}
