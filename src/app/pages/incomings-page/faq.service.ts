@@ -7,20 +7,24 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface IFaqItem {
-  id: string;
-  Question: string;
-  Answer: string;
-  Category: string;
-  Order_within_category: number;
+  question: string;
+  answer: string;
+  order_within_category: number;
+  category: {
+    category: string;
+  };
 }
 
 @Injectable()
 export class FaqService {
   private url =
-    environment.STRAPI_SECTION_URL +
-    'faqs?_created_by=' +
-    environment.STRAPI_SECTION_ID +
-    '&_sort=Order_within_category&Category=';
+    environment.DIRECTUS_URL_W +
+    'faq' +
+    environment.DIRECTUS_SECTION_FILTER +
+    environment.SECTION_NAME + 
+    '&fields=question,answer,order_within_category,category.category' +
+    '&sort=order_within_category' + 
+    '&filter[category][category]=';
   private fullUrl: string = '';
 
   constructor(
@@ -28,8 +32,8 @@ export class FaqService {
     private messageService: MessageService
   ) {}
 
-  fetchFaq(category: string): Observable<IFaqItem[]> {
-    this.fullUrl = this.url + category;
+  fetchFaq(singleCategory: string): Observable<IFaqItem[]> {
+    this.fullUrl = this.url + singleCategory;
     return this.http.get<IFaqItem[]>(this.fullUrl).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched faq')),
