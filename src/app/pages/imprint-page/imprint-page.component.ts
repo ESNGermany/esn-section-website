@@ -28,7 +28,7 @@ export class ImprintPageComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.imprintItemList$ = this.imprintService.fetchImprint().pipe(
       shareReplay(1),
-      map((res: any) => res[0])
+      map((res: any) => res.data[0])
     );
 
     this.imprintEsnGer$ = this.imprintEsnGerService.fetchEsnGerImprint().pipe(

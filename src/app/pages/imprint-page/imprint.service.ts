@@ -7,17 +7,18 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface IImprintItem {
-  id: string;
-  Title: string;
-  Text: string;
+  title: string;
+  text: string;
 }
 
 @Injectable()
 export class ImprintService {
   private url =
-    environment.STRAPI_SECTION_URL +
-    'imprints?_created_by=' +
-    environment.STRAPI_SECTION_ID;
+    environment.DIRECTUS_URL_w +
+    'imprint' +
+    environment.DIRECTUS_SECTION_FILTER +
+    environment.SECTION_NAME +
+    '&fields=title,text';
   private dataRequest;
 
   constructor(
