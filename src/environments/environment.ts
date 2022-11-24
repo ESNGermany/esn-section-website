@@ -6,8 +6,12 @@ export const environment = {
   production: false,
   timeStamp: '2022-07-26 14:20:38',
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
+  DIRECTUS_URL_W: 'https://directus.esn-germany.de/items/Website_', // e.g. https://sections.esn-germany.de/esnfreiburg-
+  DIRECTUS_URL_w: 'https://directus.esn-germany.de/items/website_', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
   STRAPI_SECTION_ID: 20,
+  SECTION_NAME: 'ESN%20Koeln',
+  DIRECTUS_SECTION_FILTER: `?filter\\[section\\]\\[name\\]=`,
 };
 
 // STRAPI_SECTION_IDs:
