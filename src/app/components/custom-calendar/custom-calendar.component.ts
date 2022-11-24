@@ -26,7 +26,7 @@ export class CustomCalendarComponent {
       this.isBrowser$.next(true);
     }
     this.calendarOptions = {
-      plugins: [ listPlugin ],
+      plugins: [listPlugin],
       initialView: 'listMonth',
       firstDay: 1,
       showNonCurrentDates: false,
@@ -35,7 +35,7 @@ export class CustomCalendarComponent {
       eventTimeFormat: {
         hour: 'numeric',
         minute: 'numeric',
-        meridiem: "lowercase",
+        meridiem: 'lowercase',
         omitZeroMinute: true,
       },
       eventClick: (info: any) => {
@@ -44,57 +44,46 @@ export class CustomCalendarComponent {
       },
       events: async function () {
         const result_2 = await firstValueFrom(
-          http.get<
-            {
-              start: string;
-              end: string;
-              title: string;
-              url: string;
-              details: string;
-              causes: string;
-            }[]
-          >(
-            environment.STRAPI_SECTION_URL +
-              `events?_created_by=` +
-              environment.STRAPI_SECTION_ID
+          http.get<{
+            data: [
+              {
+                start: string;
+                end: string;
+                title: string;
+                url: string;
+                details: string;
+                causes: [
+                  {
+                    esn_causes_id: {
+                      name: string;
+                    };
+                  }
+                ];
+              }
+            ];
+          }>(
+            environment.DIRECTUS_URL_W +
+              'Events' +
+              environment.DIRECTUS_SECTION_FILTER +
+              environment.SECTION_NAME +
+              '&fields=*,' +
+              'causes.esn_causes_id.name'
           )
         );
         if (result_2) {
-          return result_2.map((r: any) => ({
-            start: new Date(r.start),
-            end: new Date(r.end),
-            title: r.title,
-            url: r.url,
+          return result_2.data.map((res: any) => ({
+            start: new Date(res.start),
+            end: new Date(res.end),
+            title: res.title,
+            url: res.url,
             extendedProps: {
-              details: r.details,
-              cause: 'Cause: ' + convertCause(r.causes),
+              details: res.details,
+              cause: 'Cause: ' + res.causes[0].esn_causes_id.name,
             },
           }));
         }
         return [];
       },
     };
-  }
-}
-
-function convertCause(cause: string) {
-  switch (cause) {
-    case 'Education_Youth':
-      return 'Education & Youth';
-
-    case 'Environmental_Sustainability':
-      return 'Environmental & Sustainability';
-
-    case 'Health_Wellbeing':
-      return 'Health & Wellbeing';
-
-    case 'Skills_Employability':
-      return 'Skills & Employability';
-
-    case 'Social_Inclusion':
-      return 'Social Inclusion';
-
-    default:
-      return 'Culture';
   }
 }

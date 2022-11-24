@@ -36,7 +36,6 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { CocService } from './pages/coc-page/coc.service';
 import { ContentService } from './services/content.service';
-import { EventsService } from './services/events.service';
 import { FaqService } from './pages/incomings-page/faq.service';
 import { ImprintService } from './pages/imprint-page/imprint.service';
 import { MainService } from './services/main.service';
@@ -94,7 +93,6 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     CocService,
     ContentService,
-    EventsService,
     FaqService,
     ImprintService,
     ImprintEsnGerService,
