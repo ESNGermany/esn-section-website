@@ -7,16 +7,17 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface IStatutesItem {
-  id: string;
-  Text: string;
+  text: string;
 }
 
 @Injectable()
 export class StatutesService {
   private url =
-    environment.STRAPI_SECTION_URL +
-    'statutes?_created_by=' +
-    environment.STRAPI_SECTION_ID;
+  environment.DIRECTUS_URL_W +
+  'statutes' +
+  environment.DIRECTUS_SECTION_FILTER +
+  environment.SECTION_NAME +
+  '&fields=text';
   private dataRequest;
 
   constructor(

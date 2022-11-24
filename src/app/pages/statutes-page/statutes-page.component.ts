@@ -25,7 +25,7 @@ export class StatutesPageComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.statutesItemList$ = this.statutesService.fetchStatutes().pipe(
       shareReplay(1),
-      map((res: any) => res[0])
+      map((res: any) => res.data[0])
     );
     const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
     const title = 'Statutes | ' + mainInfo?.sectionLongName;
