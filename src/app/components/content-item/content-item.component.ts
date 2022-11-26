@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, shareReplay } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 
 import { IContentItem, ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,7 @@ export class ContentItemComponent implements OnInit {
 
   contentInfo$: Observable<IContentItem[]> | undefined;
   strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
 
   constructor(private contentService: ContentService) {}
 
@@ -22,8 +23,9 @@ export class ContentItemComponent implements OnInit {
   }
 
   private setContentInfo(): void {
-    this.contentInfo$ = this.contentService
-      .fetchPageContent(this.page)
-      .pipe(shareReplay(1));
+    this.contentInfo$ = this.contentService.fetchPageContent(this.page).pipe(
+      shareReplay(1),
+      map((res: any) => res.data)
+    );
   }
 }

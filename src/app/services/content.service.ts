@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 export interface IContentItem {
-  id: string;
   Title: string;
   Text: string;
   Layout:
@@ -23,26 +22,24 @@ export interface IContentItem {
     | 'ESNcard_page'
     | 'Incomings_page';
   Order_on_page: number;
-  url: string;
   Image: {
     id: string;
-    alternativeText: string;
-    url: string;
-    formats: {
-      medium: {
-        url: string;
-      };
-    };
+    width: number;
+    height: number;
+    description: string;
   };
 }
 
 @Injectable()
 export class ContentService {
   private url =
-    environment.STRAPI_SECTION_URL +
-    'contents?_created_by=' +
-    environment.STRAPI_SECTION_ID +
-    '&_sort=Order_on_page&Page_for_display=';
+    environment.DIRECTUS_URL_W +
+    'Content' +
+    environment.DIRECTUS_SECTION_FILTER + 
+    environment.SECTION_NAME + 
+    '&fields=Title,Text,Image.*,Page_for_display,Order_on_page,Layout,Wrap_in_shadow_box' +
+    '&sort=Order_on_page' + 
+    '&filter[Page_for_display]=';
   private fullUrl?: string;
 
   constructor(

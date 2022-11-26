@@ -20,14 +20,18 @@
         <div *ngIf="c.Image" class="m-auto">
           <figure class="float-right-fig">
             <img
-              *ngIf="c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-              alt="{{ c.Image.alternativeText }}"
+              *ngIf="c.Image.width > 750 || c.Image.height > 750"
+              src="{{ directusImageLink }}{{ c.Image.id }}/{{
+                c.Title.replaceAll(' ', '_')
+              }}_image?width=700"
+              alt="{{ c.Image.description }}"
             />
             <img
-              *ngIf="!c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.url }}"
-              alt="{{ c.Image.alternativeText }}"
+              *ngIf="c.Image.width <= 750"
+              src="{{ directusImageLink }}{{ c.Image.id }}/{{
+                c.Title.replaceAll(' ', '_')
+              }}_image?width=400"
+              alt="{{ c.Image.description }}"
             />
           </figure>
           <ng-container *ngIf="c.Text"
@@ -56,14 +60,18 @@
         <div *ngIf="c.Image" class="m-auto mb-4">
           <figure class="float-left-fig">
             <img
-              *ngIf="c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-              alt="{{ c.Image.alternativeText }}"
+              *ngIf="c.Image.width > 750 || c.Image.height > 750"
+              src="{{ directusImageLink }}{{ c.Image.id }}/{{
+                c.Title.replaceAll(' ', '_')
+              }}_image?width=700"
+              alt="{{ c.Image.description }}"
             />
             <img
-              *ngIf="!c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.url }}"
-              alt="{{ c.Image.alternativeText }}"
+              *ngIf="c.Image.width <= 750"
+              src="{{ directusImageLink }}{{ c.Image.id }}/{{
+                c.Title.replaceAll(' ', '_')
+              }}_image?width=400"
+              alt="{{ c.Image.description }}"
             />
           </figure>
           <ng-container *ngIf="c.Text"
@@ -91,16 +99,20 @@
       >
         <div *ngIf="c.Image" class="px-4">
           <img
-            *ngIf="c.Image.formats?.medium"
+            *ngIf="c.Image.width > 750 || c.Image.height > 750"
             class="m-auto py-4"
-            src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-            alt="{{ c.Image.alternativeText }}"
+            src="{{ directusImageLink }}{{ c.Image.id }}/{{
+              c.Title.replaceAll(' ', '_')
+            }}_image?width=700"
+            alt="{{ c.Image.description }}"
           />
           <img
-            *ngIf="!c.Image.formats?.medium"
+            *ngIf="c.Image.width <= 750"
             class="m-auto py-4"
-            src="{{ strapiLink }}{{ c.Image.url }}"
-            alt="{{ c.Image.alternativeText }}"
+            src="{{ directusImageLink }}{{ c.Image.id }}/{{
+              c.Title.replaceAll(' ', '_')
+            }}_image?width=400"
+            alt="{{ c.Image.description }}"
           />
         </div>
         <ng-container *ngIf="c.Text"
@@ -127,16 +139,20 @@
         ></ng-container>
         <div *ngIf="c.Image" class="px-4">
           <img
-            *ngIf="c.Image.formats?.medium"
+            *ngIf="c.Image.width > 750 || c.Image.height > 750"
             class="m-auto py-4 w-3/5"
-            src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-            alt="{{ c.Image.alternativeText }}"
+            src="{{ directusImageLink }}{{ c.Image.id }}/{{
+              c.Title.replaceAll(' ', '_')
+            }}_image?width=700"
+            alt="{{ c.Image.description }}"
           />
           <img
-            *ngIf="!c.Image.formats?.medium"
+            *ngIf="c.Image.width <= 750"
             class="m-auto py-4 w-3/5"
-            src="{{ strapiLink }}{{ c.Image.url }}"
-            alt="{{ c.Image.alternativeText }}"
+            src="{{ directusImageLink }}{{ c.Image.id }}/{{
+              c.Title.replaceAll(' ', '_')
+            }}_image?width=400"
+            alt="{{ c.Image.description }}"
           />
         </div>
       </div>
