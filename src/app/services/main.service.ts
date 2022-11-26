@@ -6,55 +6,28 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 export interface IMainItem {
-  id: string;
-  sectionShortName: string;
-  sectionLongName: string;
-  facebookLink: string;
-  facebookName: string;
-  instagramLink: string;
-  instagramName: string;
-  pretixLink: string;
-  usePretixCalendar: boolean;
-  useImageSlideshow: boolean;
-  addressNameFirstLine: string;
-  addressStreetSecondLine: string;
-  addressCityThirdLine: string;
-  addressEmailFourthLine: string;
-  welcomeMessageFrontPage: string;
-  buttonColor: string;
-  eventPageText: string;
-  officialLogo: {
-    url: string;
-    alternativeText: string;
-    formats: {
-      thumbnail: {
-        url: string;
-      };
-    };
-  };
-  headerImage: {
-    alternativeText: string;
-    url: string;
-    formats: {
-      large: {
-        url: string;
-      };
-      medium: {
-        url: string;
-      };
-    };
-  };
-  imageGridFrontPage: [
+  section_short_name: string;
+  section_long_name: string;
+  facebook_link: string;
+  facebook_name: string;
+  instagram_link: string;
+  instagram_name: string;
+  pretix_link: string;
+  use_pretix_calendar: boolean;
+  use_image_slideshow: boolean;
+  address_name_first_line: string;
+  address_street_second_line: string;
+  address_city_third_line: string;
+  address_email_fourth_line: string;
+  welcome_message_front_page: string;
+  button_color: string;
+  eventpage_text: string;
+  header_image: string;
+  imagegrid_frontpage: [
     {
-      alternativeText: string;
-      formats: {
-        medium: {
-          url: string;
-        };
-        thumbnail: {
-          url: string;
-        };
-      };
+      id: string;
+      directus_files_id: string;
+      width: string;
     }
   ];
 }
@@ -62,9 +35,11 @@ export interface IMainItem {
 @Injectable()
 export class MainService {
   private url =
-    environment.STRAPI_SECTION_URL +
-    'main-informations?_created_by=' +
-    environment.STRAPI_SECTION_ID;
+    environment.DIRECTUS_URL_W +
+    'main_information' +
+    environment.DIRECTUS_SECTION_FILTER +
+    environment.SECTION_NAME +
+    '&fields=section_short_name,section_long_name,facebook_link,facebook_name,instagram_link,instagram_name,pretix_link,use_pretix_calendar,use_image_slideshow,address_name_first_line,address_street_second_line,address_city_third_line,address_email_fourth_line,welcome_message_front_page,button_color,eventpage_text,header_image.*,imagegrid_frontpage.*';
   private dataRequest;
 
   constructor(

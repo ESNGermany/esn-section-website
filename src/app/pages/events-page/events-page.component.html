@@ -1,4 +1,4 @@
-<ng-container *ngIf="globals$ | async as globals; else loading">
+<ng-container *ngIf="mainInfo; else loading">
   <div class="outer-div">
     <div class="px-8 mb-12">
       <div class="title-div">
@@ -6,7 +6,7 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="!globals?.usePretixCalendar; else pretixCalendar">
+  <ng-container *ngIf="!mainInfo?.use_pretix_calendar; else pretixCalendar">
     <!-- Custom calendar -->
     <div class="max-w-screen-xl m-auto custom-calendar-p">
       <esn-custom-calendar></esn-custom-calendar>
@@ -15,15 +15,30 @@
   <ng-template #pretixCalendar>
     <div class="max-w-screen-xl m-auto legend-p">
       <p>
-      <img src="../../../assets/pretix/pretix-green.png" alt="red tile" width="20" class="inline pb-1 mr-1" />
+        <img
+          src="../../../assets/pretix/pretix-green.png"
+          alt="red tile"
+          width="20"
+          class="inline pb-1 mr-1"
+        />
         The event has free tickets left.
       </p>
       <p>
-        <img src="../../../assets/pretix/pretix-orange.png" alt="red tile" width="20" class="inline pb-1 mr-1" />
+        <img
+          src="../../../assets/pretix/pretix-orange.png"
+          alt="red tile"
+          width="20"
+          class="inline pb-1 mr-1"
+        />
         Join the waiting list!
       </p>
       <p>
-        <img src="../../../assets/pretix/pretix-red.png" alt="red tile" width="20" class="inline pb-1 mr-1" />
+        <img
+          src="../../../assets/pretix/pretix-red.png"
+          alt="red tile"
+          width="20"
+          class="inline pb-1 mr-1"
+        />
         The event is sold out/already over.
       </p>
     </div>

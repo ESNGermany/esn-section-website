@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
-import { map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
@@ -12,9 +12,10 @@ import { environment } from 'src/environments/environment';
 })
 export class NavigationComponent implements OnInit {
   windowScrolled: boolean = false;
-  globals$: Observable<IMainItem> | undefined;
   public bgImage$: Observable<object> | undefined;
   public buttonColor$: Observable<object> | undefined;
+
+  mainInfo: IMainItem | undefined;
 
   constructor(
     private mainService: MainService,
@@ -63,34 +64,32 @@ export class NavigationComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.setMainItem();
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
+
     this.setNavBgImage();
     this.setSocialMediaButtonColor();
   }
 
-  private setMainItem(): void {
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res: IMainItem[]) => res[0])
-    );
-  }
-
   private setNavBgImage(): void {
-    this.bgImage$ = this.globals$?.pipe(
-      map((res: IMainItem) => ({
+    this.bgImage$ = this.mainService.fetchMain().pipe(
+      shareReplay(1),
+      map((res: any) => ({
         'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
-          res?.buttonColor
-        )}, 0.8) 80%), url("${environment.STRAPI_SECTION_URL_IMAGE}${
-          res?.headerImage.url
+          res.data[0].button_color
+        )}, 0.8) 80%), url("${environment.DIRECTUS_URL_IMAGE}${
+          res.data[0].header_image.filename_disk
         }")`,
       }))
     );
   }
 
   private setSocialMediaButtonColor(): void {
-    this.buttonColor$ = this.globals$?.pipe(
-      map((res: IMainItem) => ({
-        'background-color': `${this.getButtonColor(res?.buttonColor)})`,
+    this.buttonColor$ = this.mainService.fetchMain().pipe(
+      shareReplay(1),
+      map((res: any) => ({
+        'background-color': `${this.getButtonColor(res.data[0].button_color)})`,
       }))
     );
   }

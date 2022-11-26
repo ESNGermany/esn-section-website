@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 import { IFaqItem, FaqService } from './faq.service';
-import { MainService } from 'src/app/services/main.service';
+import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'esn-incomings-page',
@@ -18,6 +18,7 @@ export class IncomingsPageComponent implements OnInit {
   faqEsncardItemList$: Observable<IFaqItem[]> | undefined;
   faqOtherItemList$: Observable<IFaqItem[]> | undefined;
 
+  mainInfo: IMainItem | undefined;
   public readonly page: string = 'Incomings_page';
 
   constructor(
@@ -27,8 +28,11 @@ export class IncomingsPageComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
-    this.title.setTitle('For Incomings | ' + mainInfo?.sectionLongName);
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
+
+    this.title.setTitle('For Incomings | ' + this.mainInfo!.section_long_name);
 
     this.faqTransportItemList$ = this.faqService.fetchFaq('Transport').pipe(
       shareReplay(1),

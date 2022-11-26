@@ -1,7 +1,7 @@
 <esn-content-item [page]="page"></esn-content-item>
 <div
   class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
-  *ngIf="globals$ | async as globals"
+  *ngIf="mainInfo"
 >
   <ng-container *ngIf="partnerInfo$ | async as partnerItemList">
     <ng-container *ngIf="partnerItemList.length > 0">

@@ -13,8 +13,7 @@ export class ContentItemComponent implements OnInit {
   @Input() page!: string;
 
   contentInfo$: Observable<IContentItem[]> | undefined;
-  strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
-  directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
+  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
 
   constructor(private contentService: ContentService) {}
 

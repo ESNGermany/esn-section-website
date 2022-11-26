@@ -35,10 +35,10 @@ export class ContentService {
   private url =
     environment.DIRECTUS_URL_W +
     'Content' +
-    environment.DIRECTUS_SECTION_FILTER + 
-    environment.SECTION_NAME + 
+    environment.DIRECTUS_SECTION_FILTER +
+    environment.SECTION_NAME +
     '&fields=Title,Text,Image.*,Page_for_display,Order_on_page,Layout,Wrap_in_shadow_box' +
-    '&sort=Order_on_page' + 
+    '&sort=Order_on_page' +
     '&filter[Page_for_display]=';
   private fullUrl?: string;
 

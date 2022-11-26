@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
-import {
-  IStatutesItem,
-  StatutesService,
-} from './statutes.service';
-import { MainService } from 'src/app/services/main.service';
+import { IStatutesItem, StatutesService } from './statutes.service';
+import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'esn-statutes-page',
@@ -15,6 +12,7 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class StatutesPageComponent implements OnInit {
   statutesItemList$: Observable<IStatutesItem> | undefined;
+  mainInfo: IMainItem | undefined;
 
   constructor(
     private title: Title,
@@ -25,10 +23,12 @@ export class StatutesPageComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.statutesItemList$ = this.statutesService.fetchStatutes().pipe(
       shareReplay(1),
-      map((res: any) => res.data[0])
+      map((res: any) => res.data)
     );
-    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
-    const title = 'Statutes | ' + mainInfo?.sectionLongName;
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
+    const title = 'Statutes | ' + this.mainInfo!.section_long_name;
     this.title.setTitle(title);
   }
 }

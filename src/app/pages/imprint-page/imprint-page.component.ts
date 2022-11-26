@@ -7,7 +7,7 @@ import {
 } from './imprint-esnger.service';
 
 import { IImprintItem, ImprintService } from './imprint.service';
-import { MainService } from 'src/app/services/main.service';
+import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'esn-imprint-page',
@@ -15,6 +15,8 @@ import { MainService } from 'src/app/services/main.service';
   styleUrls: ['./../base.scss'],
 })
 export class ImprintPageComponent implements OnInit {
+  mainInfo: IMainItem | undefined;
+
   imprintItemList$: Observable<IImprintItem> | undefined;
   imprintEsnGer$: Observable<IImprintEsnGerItem> | undefined;
 
@@ -26,6 +28,9 @@ export class ImprintPageComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
     this.imprintItemList$ = this.imprintService.fetchImprint().pipe(
       shareReplay(1),
       map((res: any) => res.data[0])
@@ -33,11 +38,10 @@ export class ImprintPageComponent implements OnInit {
 
     this.imprintEsnGer$ = this.imprintEsnGerService.fetchEsnGerImprint().pipe(
       shareReplay(1),
-      map((res: any) => res[0])
+      map((res: any) => res.data[0])
     );
 
-    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
-    const title = 'Imprint | ' + mainInfo?.sectionLongName;
+    const title = 'Imprint | ' + this.mainInfo!.section_long_name;
     this.title.setTitle(title);
   }
 }

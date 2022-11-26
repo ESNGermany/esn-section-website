@@ -12,7 +12,7 @@ import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IContentItem, ContentService } from 'src/app/services/content.service';
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
 import { LoadJsService } from 'src/app/shared/load-js.service';
 
 @Component({
@@ -22,13 +22,13 @@ import { LoadJsService } from 'src/app/shared/load-js.service';
 })
 export class LandingPageComponent implements OnInit {
   contentInfo$: Observable<IContentItem[]> | undefined;
-  globals$: Observable<IMainItem> | undefined;
   public gridImageSize: string[] = ['small', 'small', 'small', 'small'];
 
-  mainInfo: any;
+  mainInfo: any | undefined;
 
   public images!: GalleryItem[];
   public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
   public showThumb: boolean = true;
   public isBrowser: boolean;
   public readonly page: string = 'Landing_page';
@@ -50,34 +50,34 @@ export class LandingPageComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res: any) => res[0])
-    );
     this.contentInfo$ = this.contentService
       .fetchPageContent(this.page)
       .pipe(shareReplay(1));
-    [this.mainInfo] = await firstValueFrom(this.mainService.fetchMain());
-    this.title.setTitle('Home | ' + this.mainInfo?.sectionLongName);
+
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
+
+    this.title.setTitle('Home | ' + this.mainInfo!.section_long_name);
 
     this.setGalleryThumb();
     this.setGridImageSize();
 
     this.images = [];
-    if (this.mainInfo?.imageGridFrontPage) {
-      for (let img of this.mainInfo.imageGridFrontPage) {
-        if (img.formats.medium) {
+    if (this.mainInfo?.imagegrid_frontpage) {
+      for (let img of this.mainInfo.imagegrid_frontpage) {
+        if (img.directus_files_id.width > 750) {
           this.images.unshift(
             new ImageItem({
-              src: `${environment.STRAPI_SECTION_URL_IMAGE}${img.formats.medium.url}`,
-              thumb: `${environment.STRAPI_SECTION_URL_IMAGE}${img.formats.thumbnail.url}`,
+              src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id}`,
+              thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id}?width=200`,
             })
           );
-        } else if (img.formats.small) {
+        } else if (img.directus_files_id.width <= 750) {
           this.images.unshift(
             new ImageItem({
-              src: `${environment.STRAPI_SECTION_URL_IMAGE}${img.formats.small.url}`,
-              thumb: `${environment.STRAPI_SECTION_URL_IMAGE}${img.formats.thumbnail.url}`,
+              src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id}`,
+              thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id}?width=200`,
             })
           );
         }
@@ -86,15 +86,15 @@ export class LandingPageComponent implements OnInit {
   }
 
   private setGridImageSize(): void {
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res: any) => res[0])
-    );
     for (let img in [0, 1, 2, 3]) {
-      if (this.mainInfo?.imageGridFrontPage[img]?.formats?.large) {
-        this.gridImageSize[img] = 'large';
-      } else if (this.mainInfo?.imageGridFrontPage[img]?.formats?.medium) {
+      if (
+        this.mainInfo?.imagegrid_frontpage[img].directus_files_id.width > 750
+      ) {
         this.gridImageSize[img] = 'medium';
+      } else if (
+        this.mainInfo?.imagegrid_frontpage[img].directus_files_id.width > 1000
+      ) {
+        this.gridImageSize[img] = 'large';
       } else {
         this.gridImageSize[img] = 'small';
       }

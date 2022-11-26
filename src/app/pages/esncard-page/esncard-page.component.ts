@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom, Observable, shareReplay } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IPartnerItem, PartnerService } from './partner.service';
@@ -17,9 +17,11 @@ import {
 })
 export class EsncardPageComponent implements OnInit {
   partnerInfo$: Observable<IPartnerItem[]> | undefined;
-  globals$: Observable<IMainItem>;
+  mainInfo: IMainItem | undefined;
+
   nationalPartner$: Observable<INationalPartnerItem[]> | undefined;
   public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
   public cityName?: string;
   public readonly page: string = 'ESNcard_page';
 
@@ -28,14 +30,13 @@ export class EsncardPageComponent implements OnInit {
     private partnerService: PartnerService,
     private nationalPartnerService: NationalPartnersService,
     private mainService: MainService
-  ) {
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res: any) => res[0])
-    );
-  }
+  ) {}
 
   async ngOnInit(): Promise<void> {
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
+
     this.partnerInfo$ = this.partnerService
       .fetchPagePartner()
       .pipe(shareReplay(1));
@@ -43,9 +44,11 @@ export class EsncardPageComponent implements OnInit {
     this.nationalPartner$ = this.nationalPartnerService
       .fetchPageNationalPartner()
       .pipe(shareReplay(1));
-    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
-    this.title.setTitle('ESNcard & Partners | ' + mainInfo?.sectionLongName);
-    this.cityName = mainInfo?.sectionShortName.split(' ')[1];
+
+    this.title.setTitle(
+      'ESNcard & Partners | ' + this.mainInfo!.section_long_name
+    );
+    this.cityName = this.mainInfo!.section_short_name.split(' ')[1];
 
     // initialize each buttontext
     this.partnerService.fetchPagePartner().subscribe((listPartners) => {
