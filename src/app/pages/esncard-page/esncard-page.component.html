@@ -6,7 +6,7 @@
   <ng-container *ngIf="partnerInfo$ | async as partnerItemList">
     <ng-container *ngIf="partnerItemList.length > 0">
       <div class="title-div">
-        <p class="title-p">Our Local Partners in {{ cityName }}</p>
+        <p class="title-p">Local Partners in {{ cityName }}</p>
       </div>
     </ng-container>
   </ng-container>
@@ -14,60 +14,31 @@
 <div class="max-w-screen-2xl m-auto mb-24">
   <ng-container *ngIf="partnerInfo$ | async as partnerItemList">
     <div
-      class="mx-8 flex flex-wrap items-end justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
+      class="mx-4 flex flex-wrap items-end justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
       *ngIf="partnerItemList.length > 0"
     >
       <div
         *ngFor="let partner of partnerItemList"
         class="flex flex-wrap items-end justify-evenly flexb3"
+        [ngClass]="{ flexb2: partnerItemList.length <= 2 }"
       >
         <figure class="m-2">
           <a
-            *ngIf="partner.Main_image.formats.medium"
-            href="{{ partner.Link }}"
+            *ngIf="partner.main_image.id"
+            href="toggleInfo(partner)"
             target="_blank"
             rel="noopener"
             class=""
             ><img
               class="imgh m-auto zoom"
-              src="{{ strapiLink }}{{ partner.Main_image.formats.medium.url }}"
-              alt="{{ partner.Main_image.alternativeText }}"
+              src="{{ directusImageLink }}{{ partner.main_image.id }}?width=300"
+              alt="{{ partner.name }}"
           /></a>
-          <a
-            *ngIf="
-              partner.Main_image.formats.thumbnail &&
-              !partner.Main_image.formats.medium
-            "
-            href="{{ partner.Link }}"
-            target="_blank"
-            rel="noopener"
-            class=""
-            ><img
-              class="imgh m-auto zoom"
-              src="{{ strapiLink }}{{
-                partner.Main_image.formats.thumbnail.url
-              }}"
-              alt="{{ partner.Main_image.alternativeText }}"
-          /></a>
-          <a
-            *ngIf="
-              partner.Main_image.url && !partner.Main_image.formats.thumbnail
-            "
-            href="{{ partner.Link }}"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              class="imgh m-auto zoom"
-              src="{{ strapiLink }}{{ partner.Main_image.url }}"
-              alt="{{ partner.Main_image.alternativeText }}"
-            />
-          </a>
           <figcaption class="pt-4 text-center font-bold">
-            {{ partner.Name }}
+            {{ partner.name }}
             <br />
             <button
-              *ngIf="partner.Deal"
+              *ngIf="partner.deal"
               (click)="toggleInfo(partner)"
               class="text-esn-dark-blue hover:underline"
             >
@@ -76,7 +47,7 @@
             <br />
             <markdown
               [hidden]="!partner.show"
-              [data]="partner.Deal"
+              [data]="partner.deal"
               style="text-align: left"
             >
             </markdown>
@@ -87,12 +58,12 @@
   </ng-container>
 </div>
 <div
-  class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
+  class="max-w-screen-xl p-4 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
 >
   <ng-container *ngIf="nationalPartner$ | async as partners">
     <ng-container *ngIf="partners.length > 0">
       <div class="title-div">
-        <p class="title-p">Our National Partners from ESN Germany</p>
+        <p class="title-p">National Partners from ESN Germany</p>
       </div>
     </ng-container>
   </ng-container>
@@ -100,8 +71,6 @@
 <div class="max-w-screen-2xl m-auto mb-24">
   <esn-national-partners></esn-national-partners>
 </div>
-<div
-  class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
->
+<div class="max-w-screen-xl sm:p-0 m-auto sm:px-8 xl:mt-16 lg:mt-8 sm:mt-4">
   <esn-ola-content-item></esn-ola-content-item>
 </div>

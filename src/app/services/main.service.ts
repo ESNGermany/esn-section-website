@@ -39,7 +39,10 @@ export class MainService {
     'main_information' +
     environment.DIRECTUS_SECTION_FILTER +
     environment.SECTION_NAME +
-    '&fields=section_short_name,section_long_name,facebook_link,facebook_name,instagram_link,instagram_name,pretix_link,use_pretix_calendar,use_image_slideshow,address_name_first_line,address_street_second_line,address_city_third_line,address_email_fourth_line,welcome_message_front_page,button_color,eventpage_text,header_image.*,imagegrid_frontpage.directus_files_id.*';
+    '&fields=section_short_name,section_long_name,facebook_link,facebook_name,instagram_link,' +
+    'instagram_name,pretix_link,use_pretix_calendar,use_image_slideshow,address_name_first_line,' +
+    'address_street_second_line,address_city_third_line,address_email_fourth_line,welcome_message_front_page,' +
+    'button_color,eventpage_text,header_image.*,imagegrid_frontpage.directus_files_id.*';
   private dataRequest;
 
   constructor(

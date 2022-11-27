@@ -22,3 +22,14 @@
 .flexb3 {
   flex-basis: 33.33333%;
 }
+
+.flexb2 {
+  flex-basis: 50%;
+}
+
+@media only screen and (max-width: 868px) {
+  .flexb2,
+  .flexb3 {
+    flex-basis: 100%;
+  }
+}

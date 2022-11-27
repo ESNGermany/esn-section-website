@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IPartnerItem, PartnerService } from './partner.service';
@@ -37,9 +37,10 @@ export class EsncardPageComponent implements OnInit {
       (res: any) => res.data[0]
     );
 
-    this.partnerInfo$ = this.partnerService
-      .fetchPagePartner()
-      .pipe(shareReplay(1));
+    this.partnerInfo$ = this.partnerService.fetchPagePartner().pipe(
+      shareReplay(1),
+      map((res: any) => res.data)
+    );
 
     this.nationalPartner$ = this.nationalPartnerService
       .fetchPageNationalPartner()
@@ -51,8 +52,8 @@ export class EsncardPageComponent implements OnInit {
     this.cityName = this.mainInfo!.section_short_name.split(' ')[1];
 
     // initialize each buttontext
-    this.partnerService.fetchPagePartner().subscribe((listPartners) => {
-      for (let p of listPartners) {
+    this.partnerService.fetchPagePartner().subscribe((listPartners: any) => {
+      for (let p of listPartners.data) {
         p.buttonText = 'Learn More ↓';
       }
     });

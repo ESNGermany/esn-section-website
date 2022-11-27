@@ -7,31 +7,26 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface IPartnerItem {
-  id: string;
-  Name: string;
-  Deal: string;
-  Link: string;
-  Main_image: {
+  name: string;
+  deal: string;
+  link: string;
+  order: number;
+  main_image: {
     id: string;
-    alternativeText: string;
-    url: string;
-    formats: {
-      medium: {
-        url: string;
-      };
-    };
   };
-  show: boolean;
   buttonText: string;
+  show: boolean;
 }
 
 @Injectable()
 export class PartnerService {
   private url =
-    environment.STRAPI_SECTION_URL +
-    'partners?_created_by=' +
-    environment.STRAPI_SECTION_ID +
-    '&_sort=Order';
+    environment.DIRECTUS_URL_W +
+    'partners' +
+    environment.DIRECTUS_SECTION_FILTER +
+    environment.SECTION_NAME +
+    '&fields=name,deal,link,order,main_image.*' +
+    '&sort=order';
   private dataRequest;
 
   constructor(
