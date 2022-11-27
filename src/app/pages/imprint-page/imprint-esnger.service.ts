@@ -38,6 +38,6 @@ export class ImprintEsnGerService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`ContentService: ${message}`);
+    this.messageService.add(`ImprintEsnGerService: ${message}`);
   }
 }

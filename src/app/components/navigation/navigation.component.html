@@ -1,7 +1,7 @@
 <!-- White triangular shapes that form the top triangle -->
 <div class="divider-bottom">
-  <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-    <title>white rectangular shape to make the navigation look more edgy</title>
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="shadow">
+    <title></title>
     <path
       d="M892.25 114.72L0 0 0 120 1200 120 1200 0 892.25 114.72z"
       class="shape-fill"
@@ -190,7 +190,7 @@
       [ngClass]="{ 'show-scrollTop': windowScrolled }"
     >
       <button (click)="scrollToTop()">
-        <div class="bg-footer p-2 rounded-lg opacity-90">
+        <div class="bg-footer p-2 rounded-lg">
           <img
             src="../../../assets/fonts/MaterialIcons/expand_less.png"
             class="m-2"

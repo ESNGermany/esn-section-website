@@ -44,6 +44,6 @@ export class ImprintService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`ContentService: ${message}`);
+    this.messageService.add(`ImprintService: ${message}`);
   }
 }

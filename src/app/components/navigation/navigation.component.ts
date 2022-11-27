@@ -73,14 +73,15 @@ export class NavigationComponent implements OnInit {
   }
 
   private setNavBgImage(): void {
+
     this.bgImage$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res: any) => ({
         'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
           res.data[0].button_color
         )}, 0.8) 80%), url("${environment.DIRECTUS_URL_IMAGE}${
-          res.data[0].header_image.filename_disk
-        }")`,
+          res.data[0].header_image.id
+        }/background_img?width=${window.innerWidth}")`,
       }))
     );
   }

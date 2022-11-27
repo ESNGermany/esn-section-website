@@ -39,6 +39,6 @@ export class CocService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`ContentService: ${message}`);
+    this.messageService.add(`CocService: ${message}`);
   }
 }

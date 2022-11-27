@@ -55,6 +55,6 @@ export class NationalPartnersService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`PartnersService: ${message}`);
+    this.messageService.add(`NationalPartnersService: ${message}`);
   }
 }

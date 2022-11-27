@@ -64,24 +64,24 @@ export class LandingPageComponent implements OnInit {
     this.setGridImageSize();
 
     this.images = [];
-    if (this.mainInfo?.imagegrid_frontpage) {
-      for (let img of this.mainInfo.imagegrid_frontpage) {
+    if (this.mainInfo!.imagegrid_frontpage) {
+      this.mainInfo.imagegrid_frontpage.forEach((img: any) => {
         if (img.directus_files_id.width > 750) {
           this.images.unshift(
             new ImageItem({
-              src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id}`,
-              thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id}?width=200`,
+              src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}`,
+              thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}?width=200`,
             })
-          );
-        } else if (img.directus_files_id.width <= 750) {
+            );
+          } else if (img.directus_files_id.id.width <= 750) {
           this.images.unshift(
             new ImageItem({
-              src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id}`,
-              thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id}?width=200`,
+              src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}`,
+              thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}?width=200`,
             })
           );
         }
-      }
+      });
     }
   }
 
