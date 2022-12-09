@@ -29,3 +29,17 @@
   background: #2e3192;
   clear: both;
 }
+
+.fade-in-element {
+  animation: fade-in 0.9s ease-in-out;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
