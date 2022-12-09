@@ -13,7 +13,7 @@ export const environment = {
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-',
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
   STRAPI_SECTION_ID: 20,
-  SECTION_NAME: 'ESN Frankfurt (Main)',
+  SECTION_NAME: 'ESN Freiburg',
 };
 
 // STRAPI_SECTION_IDs:
