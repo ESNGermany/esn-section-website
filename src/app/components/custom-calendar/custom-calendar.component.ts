@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-
-import listPlugin from '@fullcalendar/list';
 
 import { environment } from 'src/environments/environment';
 
@@ -26,7 +27,7 @@ export class CustomCalendarComponent {
       this.isBrowser$.next(true);
     }
     this.calendarOptions = {
-      plugins: [ listPlugin ],
+      plugins: [ listPlugin, dayGridPlugin, interactionPlugin ],
       initialView: 'listMonth',
       firstDay: 1,
       showNonCurrentDates: false,
