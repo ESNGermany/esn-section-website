@@ -3,8 +3,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,11 +46,6 @@ import { ArticleComponent } from './components/article/article.component';
 import { SharedModule } from './shared/shared.module';
 import { NgxImageMosaicModule } from 'ngx-image-mosaic';
 
-FullCalendarModule.registerPlugins([
-  // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin,
-]);
 
 @NgModule({
   declarations: [
