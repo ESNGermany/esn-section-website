@@ -13,22 +13,18 @@ export interface ICocItem {
 
 @Injectable()
 export class CocService {
-  private url = 'https://strapi.esn-germany.de/web-legal-documents/4';
-  private dataRequest;
-
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {
-    this.dataRequest = this.http.get<ICocItem>(this.url).pipe(
+  ) {}
+
+  fetchCoc(): Observable<ICocItem> {
+    const url = 'https://strapi.esn-germany.de/web-legal-documents/4';
+    return this.http.get<ICocItem>(url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched coc')),
       catchError(this.handleError<ICocItem>('fetchCocList'))
     );
-  }
-
-  fetchCoc(): Observable<ICocItem> {
-    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -29,102 +29,102 @@
   </ng-container>
 
   <ng-template #imageGrid>
-    <div
-      class="grid grid-cols-4 auto-rows-images gap-0.5 mb-24"
-      *ngIf="mainInfo"
-    >
-      <div class="col-span-3">
-        <img
-          *ngIf="gridImageSize[0] === 'small'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[0].directus_files_id.id
-          }}/grid_0?width=400"
-          class="object-cover h-full w-full"
-        />
-        <img
-          *ngIf="gridImageSize[0] === 'medium'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[0].directus_files_id.id
-          }}/grid_0?width=600"
-          class="object-cover h-full w-full"
-        />
-        <img
-          *ngIf="gridImageSize[0] === 'large'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[0].directus_files_id.id
-          }}/grid_0?width=800"
-          class="object-cover h-full w-full"
-        />
+    <div>
+      <div class="grid grid-cols-4 auto-rows-images gap-0.5" *ngIf="mainInfo">
+        <div class="col-span-3">
+          <img
+            *ngIf="gridImageSize[0] === 'small'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[0].directus_files_id.id
+            }}/grid_0?width=400"
+            class="object-cover h-full w-full"
+          />
+          <img
+            *ngIf="gridImageSize[0] === 'medium'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[0].directus_files_id.id
+            }}/grid_0?width=600"
+            class="object-cover h-full w-full"
+          />
+          <img
+            *ngIf="gridImageSize[0] === 'large'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[0].directus_files_id.id
+            }}/grid_0?width=800"
+            class="object-cover h-full w-full"
+          />
+        </div>
+        <div class="row-span-2">
+          <img
+            *ngIf="gridImageSize[1] === 'small'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
+            }}/grid_1?width=400"
+            class="object-cover h-full w-full"
+          />
+          <img
+            *ngIf="gridImageSize[1] === 'medium'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
+            }}/grid_1?width=600"
+            class="object-cover h-full w-full"
+          />
+          <img
+            *ngIf="gridImageSize[1] === 'large'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
+            }}/grid_1?width=800"
+            class="object-cover h-full w-full"
+          />
+        </div>
+        <div (click)="comic()">
+          <img
+            *ngIf="gridImageSize[2] === 'small'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
+            }}/grid_2?width=400"
+            class="object-cover h-full w-full"
+          />
+          <img
+            *ngIf="gridImageSize[2] === 'medium'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
+            }}/grid_2?width=600"
+            class="object-cover h-full w-full"
+          />
+          <img
+            *ngIf="gridImageSize[2] === 'large'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
+            }}/grid_2?width=800"
+            class="object-cover h-full w-full"
+          />
+        </div>
+        <div class="col-span-2">
+          <img
+            *ngIf="gridImageSize[3] === 'small'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
+            }}/grid_3?width=400"
+            class="object-cover h-full w-full"
+          />
+          <img
+            *ngIf="gridImageSize[3] === 'medium'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
+            }}/grid_3?width=600"
+            class="object-cover h-full w-full"
+          />
+          <img
+            *ngIf="gridImageSize[3] === 'large'"
+            src="{{ directusImageLink }}{{
+              mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
+            }}/grid_3?width=800"
+            class="object-cover h-full w-full"
+          />
+        </div>
       </div>
-      <div class="row-span-2">
-        <img
-          *ngIf="gridImageSize[1] === 'small'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
-          }}/grid_1?width=400"
-          class="object-cover h-full w-full"
-        />
-        <img
-          *ngIf="gridImageSize[1] === 'medium'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
-          }}/grid_1?width=600"
-          class="object-cover h-full w-full"
-        />
-        <img
-          *ngIf="gridImageSize[1] === 'large'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
-          }}/grid_1?width=800"
-          class="object-cover h-full w-full"
-        />
-      </div>
-      <div (click)="comic()">
-        <img
-          *ngIf="gridImageSize[2] === 'small'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
-          }}/grid_2?width=400"
-          class="object-cover h-full w-full"
-        />
-        <img
-          *ngIf="gridImageSize[2] === 'medium'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
-          }}/grid_2?width=600"
-          class="object-cover h-full w-full"
-        />
-        <img
-          *ngIf="gridImageSize[2] === 'large'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
-          }}/grid_2?width=800"
-          class="object-cover h-full w-full"
-        />
-      </div>
-      <div class="col-span-2">
-        <img
-          *ngIf="gridImageSize[3] === 'small'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
-          }}/grid_3?width=400"
-          class="object-cover h-full w-full"
-        />
-        <img
-          *ngIf="gridImageSize[3] === 'medium'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
-          }}/grid_3?width=600"
-          class="object-cover h-full w-full"
-        />
-        <img
-          *ngIf="gridImageSize[3] === 'large'"
-          src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
-          }}/grid_3?width=800"
-          class="object-cover h-full w-full"
-        />
-      </div>
+      <div class="esn-colors"></div>
     </div>
   </ng-template>
 </ng-container>

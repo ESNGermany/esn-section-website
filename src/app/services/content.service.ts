@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 export interface IContentItem {
@@ -32,15 +32,7 @@ export interface IContentItem {
 
 @Injectable()
 export class ContentService {
-  private url =
-    environment.DIRECTUS_URL_W +
-    'Content' +
-    environment.DIRECTUS_SECTION_FILTER +
-    environment.SECTION_NAME +
-    '&fields=Title,Text,Image.*,Page_for_display,Order_on_page,Layout,Wrap_in_shadow_box' +
-    '&sort=Order_on_page' +
-    '&filter[Page_for_display]=';
-  private fullUrl?: string;
+  private url = `${env.DIRECTUS_URL}content${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
   constructor(
     private http: HttpClient,
@@ -48,12 +40,22 @@ export class ContentService {
   ) {}
 
   fetchPageContent(page: string): Observable<IContentItem[]> {
-    this.fullUrl = this.url + page;
-    return this.http.get<IContentItem[]>(this.fullUrl).pipe(
-      shareReplay(1),
-      tap((_) => this.log('fetched content')),
-      catchError(this.handleError<IContentItem[]>('fetchContentList'))
-    );
+    const params = new HttpParams()
+      .set(
+        'fields',
+        'Title,Text,Image.*,Page_for_display,Order_on_page,Layout,Wrap_in_shadow_box'
+      )
+      .set('sort', 'Order_on_page');
+
+    return this.http
+      .get<IContentItem[]>(`${this.url}&filter[Page_for_display]=${page}`, {
+        params,
+      })
+      .pipe(
+        shareReplay(1),
+        tap((_) => this.log('fetched content')),
+        catchError(this.handleError<IContentItem[]>('fetchContentList'))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

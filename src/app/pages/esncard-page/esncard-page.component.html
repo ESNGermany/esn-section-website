@@ -40,17 +40,28 @@
             <button
               *ngIf="partner.deal"
               (click)="toggleInfo(partner)"
-              class="text-esn-dark-blue hover:underline"
+              class="text-neutral-500 bg-white hover:bg-neutral-500 hover:text-white text-base border-stone-300 border rounded-xl px-2"
             >
+            <!-- <button
+              *ngIf="partner.deal"
+              (click)="toggleInfo(partner)"
+              class="text-esn-dark-blue hover:underline text-sm"
+            > -->
               {{ partner.buttonText }}
             </button>
             <br />
-            <markdown
+            <p
+              class="text-left cursor-default text-base font-normal"
               [hidden]="!partner.show"
               [data]="partner.deal"
               style="text-align: left"
             >
-            </markdown>
+            {{ partner.deal }}
+            <br />
+            <a class="cursor-pointer text-esn-dark-blue text-base hover:underline mt-3" [hidden]="!partner.show" href="{{ partner.link }}" target="_blank" rel="noopener">
+              Website <img class="inline text-left" src="assets/social/open-icon-blue.png" width="18px" />
+            </a>
+          </p>
           </figcaption>
         </figure>
       </div>

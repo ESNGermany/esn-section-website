@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface IFaqItem {
@@ -17,15 +17,7 @@ export interface IFaqItem {
 
 @Injectable()
 export class FaqService {
-  private url =
-    environment.DIRECTUS_URL_W +
-    'faq' +
-    environment.DIRECTUS_SECTION_FILTER +
-    environment.SECTION_NAME + 
-    '&fields=question,answer,order_within_category,category.category' +
-    '&sort=order_within_category' + 
-    '&filter[category][category]=';
-  private fullUrl: string = '';
+  private url = `${env.DIRECTUS_URL}faq${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&filter[category][category]=`;
 
   constructor(
     private http: HttpClient,
@@ -33,12 +25,17 @@ export class FaqService {
   ) {}
 
   fetchFaq(singleCategory: string): Observable<IFaqItem[]> {
-    this.fullUrl = this.url + singleCategory;
-    return this.http.get<IFaqItem[]>(this.fullUrl).pipe(
-      shareReplay(1),
-      tap((_) => this.log('fetched faq')),
-      catchError(this.handleError<IFaqItem[]>('fetchFaqList', []))
-    );
+    const params = new HttpParams()
+      .set('fields', 'question,answer,order_within_category,category.category')
+      .set('sort', 'order_within_category');
+
+    return this.http
+      .get<IFaqItem[]>(`${this.url}${singleCategory}`, { params })
+      .pipe(
+        shareReplay(1),
+        tap((_) => this.log('fetched faq')),
+        catchError(this.handleError<IFaqItem[]>('fetchFaqList', []))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

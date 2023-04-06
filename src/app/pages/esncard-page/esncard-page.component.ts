@@ -62,9 +62,9 @@ export class EsncardPageComponent implements OnInit {
   public toggleInfo(partner: IPartnerItem): void {
     partner.show = !partner.show;
     if (!partner.show) {
-      partner.buttonText = `Learn more ↓`;
+      partner.buttonText = `More info ↓`;
     } else {
-      partner.buttonText = `Hide text ↑`;
+      partner.buttonText = `Less info ↑`;
     }
   }
 }

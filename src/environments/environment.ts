@@ -4,16 +4,14 @@
 
 export const environment = {
   production: false,
-  timeStamp: '2022-11-24 23:20:38',
-  DIRECTUS_URL_IMAGE: 'https://directus.esn-germany.de/assets/',
-  DIRECTUS_URL_FILES: 'https://directus.esn-germany.de/files/',
-  DIRECTUS_URL_W: 'https://directus.esn-germany.de/items/Website_',
-  DIRECTUS_URL_w: 'https://directus.esn-germany.de/items/website_',
-  DIRECTUS_SECTION_FILTER: `?filter[section][name]=`,
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-',
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 20,
   SECTION_NAME: 'ESN Freiburg',
+  DIRECTUS_URL_IMAGE: 'https://directus.esn-germany-testing.de/assets/',
+  DIRECTUS_URL_FILES: 'https://directus.esn-germany-testing.de/files/',
+  DIRECTUS_URL: 'https://directus.esn-germany-testing.de/items/website_',
+  DIRECTUS_SECTION_FILTER: `?filter[section][name]=`,
+  timeStamp: '2023-04-06 16:20:38',
 };
 
 // STRAPI_SECTION_IDs:
