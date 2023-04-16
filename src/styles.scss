@@ -65,6 +65,7 @@
 
 markdown {
   @apply prose;
+  max-width: 100%;
 }
 
 .title::after {
