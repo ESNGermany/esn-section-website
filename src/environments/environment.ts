@@ -7,36 +7,40 @@ export const environment = {
   timeStamp: '2022-07-26 14:20:38',
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 20,
+  STRAPI_SECTION_ID: 18,
 };
 
 // STRAPI_SECTION_IDs:
-//  1: (Webmaster)
-//  2: LIVE Freiburg
-//  3: LIVE Köln
-//  4: LIVE Braunschweig
-//  5: LIVE Bayreuth
-//  6: (Viki)
-//  7: TEST Heidelberg
-//  8: LIVE Saarbrücken
-//  9: LIVE Hannover
-// 10: LIVE Dortmund
-// 11: LIVE Frankfurt
-// 12: TEST Karlsruhe
-// 13: LIVE Berlin
-// 14: TEST Düsseldorf
-// 15: (doesn't exist)
-// 16: TEST TU Dresden
-// 17: LIVE Halle
-// 18: TEST Darmstadt
-// 19: LIVE Konstanz
-// 20: LIVE MESA München
-// 21: TEST Landau
-// 22: LIVE Hildesheim
-// 23: TEST Bochum
-// 24: TEST Augsburg
-// 25: LIVE Kiel
-// 26: TEST Mannheim
-// 27: TEST Frankfurt (Oder)
-// 28: TEST HTW Dresden
-// 29: TEST Koblenz
+// 24  Augsburg
+// 5   Bayreuth
+// 13  Berlin
+// 23  Bochum
+// 38  Bonn
+// 4   Braunschweig
+// 18  Darmstadt
+// 35  Deggendorf
+// 10  Dortmund
+// 11  Frankfurt Main
+// 27  Frankfurt Oder
+// 2   Freiburg
+// 28  HTW Dresden
+// 17  Halle
+// 30  Hamburg
+// 9   Hannover
+// 7   Heidelberg
+// 22  Hildesheim
+// 33  Ingolstadt
+// 12  Karlsruhe
+// 25  Kiel
+// 29  Koblenz
+// 3   Köln
+// 19  Konstanz
+// 21  Landau
+// 34  Lübeck/company/gesamtelternbeirat
+// 20  MESA München
+// 26  Visum Mannheim
+// 32  Pforzheim
+// 37  Potsdam
+// 8   Saarbrücken
+// 36  Stuttgart
+// 16  TU Dresden
