@@ -28,16 +28,17 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
     private loadJsService: LoadJsService,
     @Inject(DOCUMENT) private document: Document
   ) {
-    // this.mainService
-    //   .fetchMain()
-    //   .subscribe((res: any) => (this.pretix_link = res.data[0].pretix_link));
+    this.mainService
+      .fetchMain()
+      .subscribe((res: any) => (this.pretix_link = res.data[0].pretix_link));
   }
 
   async ngOnInit(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
       (res: any) => res.data[0]
     );
-    this.pretix_link = this.mainInfo!.pretix_link;
+    this.pretix_link = this.mainInfo?.pretix_link;
+    console.log(this.pretix_link);
 
     this.loadJsService.loadJsFile('https://pretix.eu/widget/v1.en.js');
     this.loadCssFile('https://pretix.eu/demo/democon/widget/v1.css');
