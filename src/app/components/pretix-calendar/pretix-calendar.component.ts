@@ -17,7 +17,7 @@ import { LoadJsService } from 'src/app/shared/load-js.service';
   templateUrl: './pretix-calendar.component.html',
   styleUrls: ['./pretix-calendar.component.scss'],
 })
-export class PretixCalendarComponent implements OnInit, AfterViewInit {
+export class PretixCalendarComponent implements  AfterViewInit {
   public pretix_link?: string;
   mainInfo: IMainItem | undefined;
 
@@ -30,22 +30,16 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
   ) {
     this.mainService
       .fetchMain()
-      .subscribe((res: any) => (this.pretix_link = res.data[0].pretix_link));
+      .subscribe((res: any) => {
+        this.pretix_link = res.data[0].pretix_link;
+        this.insertPretixLink();
+        this.loadJsService.loadJsFile('https://pretix.eu/widget/v1.en.js');
+      });
+
   }
-
-  async ngOnInit(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
-    );
-    this.pretix_link = this.mainInfo?.pretix_link;
-    console.log(this.pretix_link);
-
-    this.loadJsService.loadJsFile('https://pretix.eu/widget/v1.en.js');
-    this.loadCssFile('https://pretix.eu/demo/democon/widget/v1.css');
-  }
-
+  
   async ngAfterViewInit(): Promise<void> {
-    this.insertPretixLink();
+    this.loadCssFile('https://pretix.eu/demo/democon/widget/v1.css');
   }
 
   private insertPretixLink(): void {
