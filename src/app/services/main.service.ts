@@ -1,85 +1,61 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+
+import { environment as env } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 export interface IMainItem {
-  id: string;
-  sectionShortName: string;
-  sectionLongName: string;
-  facebookLink: string;
-  facebookName: string;
-  instagramLink: string;
-  instagramName: string;
-  pretixLink: string;
-  usePretixCalendar: boolean;
-  useImageSlideshow: boolean;
-  addressNameFirstLine: string;
-  addressStreetSecondLine: string;
-  addressCityThirdLine: string;
-  addressEmailFourthLine: string;
-  welcomeMessageFrontPage: string;
-  buttonColor: string;
-  eventPageText: string;
-  officialLogo: {
-    url: string;
-    alternativeText: string;
-    formats: {
-      thumbnail: {
-        url: string;
-      };
-    };
-  };
-  headerImage: {
-    alternativeText: string;
-    url: string;
-    formats: {
-      large: {
-        url: string;
-      };
-      medium: {
-        url: string;
-      };
-    };
-  };
-  imageGridFrontPage: [
+  section_short_name: string;
+  section_long_name: string;
+  facebook_link: string;
+  facebook_name: string;
+  instagram_link: string;
+  instagram_name: string;
+  pretix_link: string;
+  use_pretix_calendar: boolean;
+  use_image_slideshow: boolean;
+  address_name_first_line: string;
+  address_street_second_line: string;
+  address_city_third_line: string;
+  address_email_fourth_line: string;
+  welcome_message_front_page: string;
+  button_color: string;
+  eventpage_text: string;
+  header_image: string;
+  imagegrid_frontpage: [
     {
-      alternativeText: string;
-      formats: {
-        medium: {
-          url: string;
-        };
-        thumbnail: {
-          url: string;
-        };
-      };
+      id: string;
+      directus_files_id: string;
+      width: string;
     }
   ];
 }
 
 @Injectable()
 export class MainService {
-  private url =
-    environment.STRAPI_SECTION_URL +
-    'main-informations?_created_by=' +
-    environment.STRAPI_SECTION_ID;
-  private dataRequest;
+  private url = `${env.DIRECTUS_URL}main_information${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {
-    this.dataRequest = this.http.get<IMainItem[]>(this.url).pipe(
-      shareReplay(1),
-      tap((_) => this.log('fetched main information')),
-      catchError(this.handleError<IMainItem[]>('fetchMainInformation'))
-    );
-  }
+  ) {}
 
   fetchMain(): Observable<IMainItem[]> {
-    return this.dataRequest;
+    const fields =
+      'section_short_name,section_long_name,facebook_link,facebook_name,instagram_link,' +
+      'instagram_name,pretix_link,use_pretix_calendar,use_image_slideshow,address_name_first_line,' +
+      'address_street_second_line,address_city_third_line,address_email_fourth_line,welcome_message_front_page,' +
+      'button_color,eventpage_text,header_image.*,imagegrid_frontpage.directus_files_id.*';
+
+    const params = new HttpParams().set('fields', fields);
+
+    return this.http.get<IMainItem[]>(this.url, { params }).pipe(
+      shareReplay(1),
+      tap((_) => this.log('fetched mainInformation')),
+      catchError(this.handleError<IMainItem[]>('fetchMainInformation'))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -90,6 +66,6 @@ export class MainService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`ContentService: ${message}`);
+    this.messageService.add(`MainService: ${message}`);
   }
 }

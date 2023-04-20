@@ -12,22 +12,18 @@ export interface IImprintEsnGerItem {
 
 @Injectable()
 export class ImprintEsnGerService {
-  private url = 'https://strapi.esn-germany.de/website-imprints';
-  private dataRequest;
-
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {
-    this.dataRequest = this.http.get<IImprintEsnGerItem>(this.url).pipe(
+  ) {}
+
+  fetchEsnGerImprint(): Observable<IImprintEsnGerItem> {
+    const url = 'https://strapi.esn-germany.de/website-imprints';
+    return this.http.get<IImprintEsnGerItem>(url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched imprint')),
       catchError(this.handleError<IImprintEsnGerItem>('fetchImprintList'))
     );
-  }
-
-  fetchEsnGerImprint(): Observable<IImprintEsnGerItem> {
-    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -38,6 +34,6 @@ export class ImprintEsnGerService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`ContentService: ${message}`);
+    this.messageService.add(`ImprintEsnGerService: ${message}`);
   }
 }

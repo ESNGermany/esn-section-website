@@ -6,7 +6,7 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
@@ -15,11 +15,11 @@ import { LoadJsService } from 'src/app/shared/load-js.service';
 @Component({
   selector: 'esn-pretix-calendar',
   templateUrl: './pretix-calendar.component.html',
-  styleUrls: ['./pretix-calendar.component.scss']
+  styleUrls: ['./pretix-calendar.component.scss'],
 })
 export class PretixCalendarComponent implements OnInit, AfterViewInit {
-  public globals$: Observable<IMainItem>;
-  private pretixLink?: string;
+  public pretix_link?: string;
+  mainInfo: IMainItem | undefined;
 
   @ViewChild('pretixCal') el: ElementRef | undefined;
 
@@ -28,17 +28,17 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
     private loadJsService: LoadJsService,
     @Inject(DOCUMENT) private document: Document
   ) {
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res: any) => res[0])
-    );
-
     this.mainService
       .fetchMain()
-      .subscribe((value) => (this.pretixLink = value[0].pretixLink));
+      .subscribe((res: any) => (this.pretix_link = res.data[0].pretix_link));
   }
 
   async ngOnInit(): Promise<void> {
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
+    this.pretix_link = this.mainInfo!.pretix_link;
+
     this.loadJsService.loadJsFile('https://pretix.eu/widget/v1.en.js');
     this.loadCssFile('https://pretix.eu/demo/democon/widget/v1.css');
   }
@@ -50,7 +50,7 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
   private insertPretixLink(): void {
     this.el!.nativeElement.innerHTML = `<div
         class="pretix-widget-compat"
-        event="${this.pretixLink}"
+        event="${this.pretix_link}"
         style="calendar"
       ></div>`;
   }

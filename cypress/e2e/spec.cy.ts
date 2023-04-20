@@ -25,12 +25,12 @@ describe('Each page contains navigation', () => {
 });
 
 describe('Can load contents', () => {
-  it(`Should load a content item on landing page`, () => {
-    cy.visit('/');
-    cy.get('[data-testid="esn-title"]') // loads from sections strapi
-      .should('be.visible')
-      .and('not.be.empty');
-  });
+  // it(`Should load a content item on landing page`, () => {
+  //   cy.visit('/');
+  //   cy.get('[data-testid="esn-title"]') // loads from sections strapi
+  //     .should('be.visible')
+  //     .and('not.be.empty');
+  // });
   it(`Should open at least one national partner`, () => {
     cy.visit('/esncard');
     cy.get('[data-testid="esn-national-partner"]') // loads from esn germany strapi

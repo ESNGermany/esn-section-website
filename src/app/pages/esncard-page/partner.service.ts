@@ -1,52 +1,42 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface IPartnerItem {
-  id: string;
-  Name: string;
-  Deal: string;
-  Link: string;
-  Main_image: {
+  name: string;
+  deal: string;
+  link: string;
+  order: number;
+  main_image: {
     id: string;
-    alternativeText: string;
-    url: string;
-    formats: {
-      medium: {
-        url: string;
-      };
-    };
   };
-  show: boolean;
   buttonText: string;
+  show: boolean;
 }
 
 @Injectable()
 export class PartnerService {
-  private url =
-    environment.STRAPI_SECTION_URL +
-    'partners?_created_by=' +
-    environment.STRAPI_SECTION_ID +
-    '&_sort=Order';
-  private dataRequest;
+  private url = `${env.DIRECTUS_URL}partners${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {
-    this.dataRequest = this.http.get<IPartnerItem[]>(this.url).pipe(
+  ) {}
+
+  fetchPagePartner(): Observable<IPartnerItem[]> {
+    const params = new HttpParams()
+      .set('fields', 'name,deal,link,order,main_image.*')
+      .set('sort', 'order');
+
+    return this.http.get<IPartnerItem[]>(this.url, { params }).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched partner')),
       catchError(this.handleError<IPartnerItem[]>('fetchPartnerList', []))
     );
-  }
-
-  fetchPagePartner(): Observable<IPartnerItem[]> {
-    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

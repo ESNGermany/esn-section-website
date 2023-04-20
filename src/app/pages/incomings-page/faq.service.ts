@@ -1,40 +1,41 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface IFaqItem {
-  id: string;
-  Question: string;
-  Answer: string;
-  Category: string;
-  Order_within_category: number;
+  question: string;
+  answer: string;
+  order_within_category: number;
+  category: {
+    category: string;
+  };
 }
 
 @Injectable()
 export class FaqService {
-  private url =
-    environment.STRAPI_SECTION_URL +
-    'faqs?_created_by=' +
-    environment.STRAPI_SECTION_ID +
-    '&_sort=Order_within_category&Category=';
-  private fullUrl: string = '';
+  private url = `${env.DIRECTUS_URL}faq${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&filter[category][category]=`;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) {}
 
-  fetchFaq(category: string): Observable<IFaqItem[]> {
-    this.fullUrl = this.url + category;
-    return this.http.get<IFaqItem[]>(this.fullUrl).pipe(
-      shareReplay(1),
-      tap((_) => this.log('fetched faq')),
-      catchError(this.handleError<IFaqItem[]>('fetchFaqList', []))
-    );
+  fetchFaq(singleCategory: string): Observable<IFaqItem[]> {
+    const params = new HttpParams()
+      .set('fields', 'question,answer,order_within_category,category.category')
+      .set('sort', 'order_within_category');
+
+    return this.http
+      .get<IFaqItem[]>(`${this.url}${singleCategory}`, { params })
+      .pipe(
+        shareReplay(1),
+        tap((_) => this.log('fetched faq')),
+        catchError(this.handleError<IFaqItem[]>('fetchFaqList', []))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

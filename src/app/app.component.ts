@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
-import { MainService } from './services/main.service';
+import { IMainItem, MainService } from './services/main.service';
 
 @Component({
   selector: 'esn-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  mainInfo: IMainItem | undefined;
+
   constructor(
     private mainService: MainService,
     private meta: Meta,
@@ -15,10 +17,12 @@ export class AppComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
     this.meta.addTags([
-      { name: 'description', content: mainInfo?.sectionLongName },
+      { name: 'description', content: this.mainInfo!.section_long_name },
     ]);
-    this.title.setTitle('Home | ' + mainInfo?.sectionLongName);
+    this.title.setTitle('Home | ' + this.mainInfo!.section_long_name);
   }
 }

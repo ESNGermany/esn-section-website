@@ -27,24 +27,20 @@ export interface INationalPartnerItem {
   providedIn: 'root',
 })
 export class NationalPartnersService {
-  private url = 'https://strapi.esn-germany.de/web-partner';
-  private dataRequest;
-
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {
-    this.dataRequest = this.http.get<INationalPartnerItem[]>(this.url).pipe(
+  ) {}
+
+  fetchPageNationalPartner(): Observable<INationalPartnerItem[]> {
+    const url = 'https://strapi.esn-germany.de/web-partner';
+    return this.http.get<INationalPartnerItem[]>(url).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched partner')),
       catchError(
         this.handleError<INationalPartnerItem[]>('fetchPartnerList', [])
       )
     );
-  }
-
-  fetchPageNationalPartner(): Observable<INationalPartnerItem[]> {
-    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -55,6 +51,6 @@ export class NationalPartnersService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`PartnersService: ${message}`);
+    this.messageService.add(`NationalPartnersService: ${message}`);
   }
 }

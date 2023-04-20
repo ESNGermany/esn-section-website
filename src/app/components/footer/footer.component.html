@@ -1,8 +1,4 @@
-<footer
-  *ngIf="globals$ | async as globals"
-  id="foot"
-  class="bg-footer relative"
->
+<footer *ngIf="mainInfo" id="foot" class="bg-footer relative">
   <div id="foot2" class="divider-top">
     <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
       <title>dark grey rectangular shape for footer</title>
@@ -19,83 +15,80 @@
     <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase py-1 text-lg">Contact</p>
       <p class="font-bold">
-        {{ globals?.addressNameFirstLine }}
+        {{ mainInfo.address_name_first_line }}
       </p>
       <p>
-        {{ globals?.addressStreetSecondLine }}
+        {{ mainInfo.address_street_second_line }}
       </p>
       <p>
-        {{ globals?.addressCityThirdLine }}
+        {{ mainInfo.address_city_third_line }}
       </p>
       <p class="pt-1 pb-4">
         <a
-          href="mailto:{{ globals?.addressEmailFourthLine }}"
+          href="mailto:{{ mainInfo.address_email_fourth_line }}"
           rel="noopener"
           class="hover:underline"
-          >{{ globals?.addressEmailFourthLine }}</a
+          >{{ mainInfo.address_email_fourth_line }}</a
         >
       </p>
     </div>
     <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase py-1 text-lg">Links</p>
-        <a
-          routerLink="/imprint"
-          routerLinkActive="active"
-          class="hover:underline"
-          >Imprint</a
-        ><br />
-        <a routerLink="/coc" routerLinkActive="active" class="hover:underline"
-          >Code of Conduct</a
-        ><br />
-        <a
-          routerLink="/statutes"
-          routerLinkActive="active"
-          class="hover:underline"
-          >Statutes</a
-        ><br />
-        <a
-          routerLink="/for-incomings"
-          routerLinkActive="active"
-          class="hover:underline"
-          >FAQ</a
-        >
+      <a routerLink="/imprint" routerLinkActive="active" class="hover:underline"
+        >Imprint</a
+      ><br />
+      <a routerLink="/coc" routerLinkActive="active" class="hover:underline"
+        >Code of Conduct</a
+      ><br />
+      <a
+        routerLink="/statutes"
+        routerLinkActive="active"
+        class="hover:underline"
+        >Statutes</a
+      ><br />
+      <a
+        routerLink="/for-incomings"
+        routerLinkActive="active"
+        class="hover:underline"
+        >FAQ</a
+      >
     </div>
     <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase py-1 text-lg">External Links</p>
-        <a
-          href="https://esncard.org/"
-          target="_blank"
-          rel="noopener"
-          class="hover:underline"
-          >ESNcard.org</a
-        ><br />
-        <a
-          href="https://erasmusintern.org/"
-          target="_blank"
-          rel="noopener"
-          class="hover:underline"
-          >ErasmusIntern.org</a
-        ><br />
-        <a
-          href="https://esn.org/"
-          target="_blank"
-          rel="noopener"
-          class="hover:underline"
-          >ESN International</a
-        ><br />
-        <a
-          href="https://learning-agreement.eu/"
-          target="_blank"
-          rel="noopener"
-          class="hover:underline"
-          >Learning-Agreement.eu</a
-        >
+      <a
+        href="https://esncard.org/"
+        target="_blank"
+        rel="noopener"
+        class="hover:underline"
+        >ESNcard.org</a
+      ><br />
+      <a
+        href="https://erasmusintern.org/"
+        target="_blank"
+        rel="noopener"
+        class="hover:underline"
+        >ErasmusIntern.org</a
+      ><br />
+      <a
+        href="https://esn.org/"
+        target="_blank"
+        rel="noopener"
+        class="hover:underline"
+        >ESN International</a
+      ><br />
+      <a
+        href="https://learning-agreement.eu/"
+        target="_blank"
+        rel="noopener"
+        class="hover:underline"
+        >Learning-Agreement.eu</a
+      >
     </div>
     <div class="sm:w-full lg:w-1/2 xl:w-1/5 pl-8 pr-2">
       <p class="font-bold uppercase py-1 text-lg">Social Media</p>
-      <p *ngIf="globals?.facebookName" class="pb-4">
+      <p *ngIf="mainInfo.facebook_name" class="pb-4">
         <a
-          href="{{ globals?.facebookLink }}"
+          href="{{ mainInfo.facebook_link }}"
           target="_blank"
           rel="noopener"
           class="hover:underline"
@@ -104,12 +97,15 @@
             alt="Facebook"
             src="../../../assets/social/facebook.png"
             class="h-6 float-left pr-2"
-          />{{ globals?.facebookName }}
+          />{{ mainInfo.facebook_name }}
         </a>
       </p>
-      <p *ngIf="globals?.instagramLink && globals?.instagramName" class="pb-4">
+      <p
+        *ngIf="mainInfo.instagram_link && mainInfo.instagram_name"
+        class="pb-4"
+      >
         <a
-          href="{{ globals?.instagramLink }}"
+          href="{{ mainInfo.instagram_link }}"
           target="_blank"
           rel="noopener"
           class="hover:underline"
@@ -118,7 +114,7 @@
             src="../../../assets/social/instagram.png"
             class="h-6 float-left pr-2"
           />
-          {{ globals?.instagramName }}
+          {{ mainInfo.instagram_name }}
         </a>
       </p>
     </div>

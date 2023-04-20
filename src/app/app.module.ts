@@ -34,11 +34,9 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { CocService } from './pages/coc-page/coc.service';
 import { ContentService } from './services/content.service';
-import { EventsService } from './services/events.service';
 import { FaqService } from './pages/incomings-page/faq.service';
 import { ImprintService } from './pages/imprint-page/imprint.service';
 import { MainService } from './services/main.service';
-import { MenuService } from './services/menus.service';
 import { MessageService } from './services/message.service';
 import { NationalPartnersService } from './pages/esncard-page/national-partners.service';
 import { PartnerService } from './pages/esncard-page/partner.service';
@@ -87,12 +85,10 @@ import { NgxImageMosaicModule } from 'ngx-image-mosaic';
     FullCalendarModule,
     CocService,
     ContentService,
-    EventsService,
     FaqService,
     ImprintService,
     ImprintEsnGerService,
     MainService,
-    MenuService,
     MessageService,
     NationalPartnersService,
     PartnerService,

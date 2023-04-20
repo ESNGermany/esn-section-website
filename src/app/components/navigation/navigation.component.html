@@ -1,7 +1,7 @@
 <!-- White triangular shapes that form the top triangle -->
 <div class="divider-bottom">
-  <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-    <title>white rectangular shape to make the navigation look more edgy</title>
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="shadow">
+    <title></title>
     <path
       d="M892.25 114.72L0 0 0 120 1200 120 1200 0 892.25 114.72z"
       class="shape-fill"
@@ -119,12 +119,12 @@
   </nav>
 </div>
 <!-- Social Media buttons with hover-effect on the right side (bottom if mobile) -->
-<div class="max-w-screen-2xl m-auto" *ngIf="globals$ | async as globals">
+<div class="max-w-screen-2xl m-auto" *ngIf="mainInfo">
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible z-10">
-    <div *ngIf="globals?.instagramLink" class="ml-8">
-      <a href="{{ globals?.instagramLink }}" target="_blank" rel="noopener">
+    <div *ngIf="mainInfo.instagram_link" class="ml-8">
+      <a href="{{ mainInfo.instagram_link }}" target="_blank" rel="noopener">
         <div id="bubble1" class="bubble invisible font-body">
-          {{ globals?.instagramName }}
+          {{ mainInfo.instagram_name }}
         </div>
         <button
           class="p-2 rounded-full block my-2 hov"
@@ -136,10 +136,10 @@
         </button>
       </a>
     </div>
-    <div *ngIf="globals?.facebookLink">
-      <a href="{{ globals?.facebookLink }}" target="_blank" rel="noopener">
+    <div *ngIf="mainInfo.facebook_link">
+      <a href="{{ mainInfo.facebook_link }}" target="_blank" rel="noopener">
         <div id="bubble2" class="bubble invisible font-body">
-          fb.com/{{ globals?.facebookName }}
+          fb.com/{{ mainInfo.facebook_name }}
         </div>
         <button
           class="p-2 rounded-full block my-2 hov"
@@ -153,14 +153,14 @@
     </div>
   </div>
   <!-- bottom bobbles -->
-  <ng-container class="m-auto" *ngIf="globals?.instagramLink">
+  <ng-container class="m-auto" *ngIf="mainInfo.instagram_link">
     <div
-      *ngIf="globals?.facebookLink"
+      *ngIf="mainInfo.facebook_link"
       class="fixed bottom-0 right-0 visible lg:invisible z-10 mr-8 mb-8"
       [ngClass]="{ 'show-scrollTop-bubble': windowScrolled }"
     >
       <a
-        href="{{ globals?.facebookLink }}"
+        href="{{ mainInfo.facebook_link }}"
         target="_blank"
         rel="noopener"
         title="Facebook"
@@ -174,7 +174,7 @@
           /></button
       ></a>
       <a
-        href="{{ globals?.instagramLink }}"
+        href="{{ mainInfo.instagram_link }}"
         target="_blank"
         rel="noopener"
         title="Instagram"
@@ -185,9 +185,12 @@
           /></button
       ></a>
     </div>
-    <div class="scroll-to-top z-20" [ngClass]="{ 'show-scrollTop': windowScrolled }">
+    <div
+      class="scroll-to-top z-20"
+      [ngClass]="{ 'show-scrollTop': windowScrolled }"
+    >
       <button (click)="scrollToTop()">
-        <div class="bg-footer p-2 rounded-lg opacity-90">
+        <div class="bg-footer p-2 rounded-lg">
           <img
             src="../../../assets/fonts/MaterialIcons/expand_less.png"
             class="m-2"

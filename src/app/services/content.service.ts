@@ -1,13 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 export interface IContentItem {
-  id: string;
   Title: string;
   Text: string;
   Layout:
@@ -23,27 +22,17 @@ export interface IContentItem {
     | 'ESNcard_page'
     | 'Incomings_page';
   Order_on_page: number;
-  url: string;
   Image: {
     id: string;
-    alternativeText: string;
-    url: string;
-    formats: {
-      medium: {
-        url: string;
-      };
-    };
+    width: number;
+    height: number;
+    description: string;
   };
 }
 
 @Injectable()
 export class ContentService {
-  private url =
-    environment.STRAPI_SECTION_URL +
-    'contents?_created_by=' +
-    environment.STRAPI_SECTION_ID +
-    '&_sort=Order_on_page&Page_for_display=';
-  private fullUrl?: string;
+  private url = `${env.DIRECTUS_URL}content${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
   constructor(
     private http: HttpClient,
@@ -51,12 +40,22 @@ export class ContentService {
   ) {}
 
   fetchPageContent(page: string): Observable<IContentItem[]> {
-    this.fullUrl = this.url + page;
-    return this.http.get<IContentItem[]>(this.fullUrl).pipe(
-      shareReplay(1),
-      tap((_) => this.log('fetched content')),
-      catchError(this.handleError<IContentItem[]>('fetchContentList'))
-    );
+    const params = new HttpParams()
+      .set(
+        'fields',
+        'Title,Text,Image.*,Page_for_display,Order_on_page,Layout,Wrap_in_shadow_box'
+      )
+      .set('sort', 'Order_on_page');
+
+    return this.http
+      .get<IContentItem[]>(`${this.url}&filter[Page_for_display]=${page}`, {
+        params,
+      })
+      .pipe(
+        shareReplay(1),
+        tap((_) => this.log('fetched content')),
+        catchError(this.handleError<IContentItem[]>('fetchContentList'))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

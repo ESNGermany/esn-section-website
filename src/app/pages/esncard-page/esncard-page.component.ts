@@ -17,9 +17,11 @@ import {
 })
 export class EsncardPageComponent implements OnInit {
   partnerInfo$: Observable<IPartnerItem[]> | undefined;
-  globals$: Observable<IMainItem>;
+  mainInfo: IMainItem | undefined;
+
   nationalPartner$: Observable<INationalPartnerItem[]> | undefined;
   public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
+  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
   public cityName?: string;
   public readonly page: string = 'ESNcard_page';
 
@@ -28,28 +30,30 @@ export class EsncardPageComponent implements OnInit {
     private partnerService: PartnerService,
     private nationalPartnerService: NationalPartnersService,
     private mainService: MainService
-  ) {
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res: any) => res[0])
-    );
-  }
+  ) {}
 
   async ngOnInit(): Promise<void> {
-    this.partnerInfo$ = this.partnerService
-      .fetchPagePartner()
-      .pipe(shareReplay(1));
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
+    );
+
+    this.partnerInfo$ = this.partnerService.fetchPagePartner().pipe(
+      shareReplay(1),
+      map((res: any) => res.data)
+    );
 
     this.nationalPartner$ = this.nationalPartnerService
       .fetchPageNationalPartner()
       .pipe(shareReplay(1));
-    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
-    this.title.setTitle('ESNcard & Partners | ' + mainInfo?.sectionLongName);
-    this.cityName = mainInfo?.sectionShortName.split(' ')[1];
+
+    this.title.setTitle(
+      'ESNcard & Partners | ' + this.mainInfo!.section_long_name
+    );
+    this.cityName = this.mainInfo!.section_short_name.split(' ')[1];
 
     // initialize each buttontext
-    this.partnerService.fetchPagePartner().subscribe((listPartners) => {
-      for (let p of listPartners) {
+    this.partnerService.fetchPagePartner().subscribe((listPartners: any) => {
+      for (let p of listPartners.data) {
         p.buttonText = 'Learn More ↓';
       }
     });
@@ -58,9 +62,9 @@ export class EsncardPageComponent implements OnInit {
   public toggleInfo(partner: IPartnerItem): void {
     partner.show = !partner.show;
     if (!partner.show) {
-      partner.buttonText = `Learn more ↓`;
+      partner.buttonText = `More info ↓`;
     } else {
-      partner.buttonText = `Hide text ↑`;
+      partner.buttonText = `Less info ↑`;
     }
   }
 }

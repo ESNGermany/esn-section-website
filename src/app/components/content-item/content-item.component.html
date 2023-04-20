@@ -2,9 +2,9 @@
   *ngIf="contentInfo$ | async as contentItemList; else loading"
   class="outer-imgbox"
 >
-  <div *ngFor="let c of contentItemList" class="px-4 mb-20">
+  <div *ngFor="let c of contentItemList; let idx = index" class="px-4 mb-20">
     <!-- text left img right -->
-    <ng-container *ngIf="c.Layout === 'Text_left_img_right'">
+    <div *ngIf="c.Layout === 'Text_left_img_right'" class="fade-in-element box box{{idx}}">
       <ng-container *ngIf="c.Title.trim().length > 0">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
@@ -20,14 +20,18 @@
         <div *ngIf="c.Image" class="m-auto">
           <figure class="float-right-fig">
             <img
-              *ngIf="c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-              alt="{{ c.Image.alternativeText }}"
+              *ngIf="c.Image.width > 750 || c.Image.height > 750"
+              src="{{ directusImageLink }}{{ c.Image.id }}/{{
+                c.Title.replaceAll(' ', '_')
+              }}_image?width=700"
+              alt="{{ c.Image.description }}"
             />
             <img
-              *ngIf="!c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.url }}"
-              alt="{{ c.Image.alternativeText }}"
+              *ngIf="c.Image.width <= 750"
+              src="{{ directusImageLink }}{{ c.Image.id }}/{{
+                c.Title.replaceAll(' ', '_')
+              }}_image?width=400"
+              alt="{{ c.Image.description }}"
             />
           </figure>
           <ng-container *ngIf="c.Text"
@@ -38,9 +42,9 @@
           <markdown [data]="c.Text"></markdown>
         </div>
       </div>
-    </ng-container>
+    </div>
     <!-- text right img left -->
-    <div *ngIf="c.Layout === 'Text_right_img_left'" class="mb-2">
+    <div *ngIf="c.Layout === 'Text_right_img_left'" class="fade-in-element mb-2 box box{{idx}}">
       <ng-container *ngIf="c.Title.trim().length > 0">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
@@ -56,14 +60,18 @@
         <div *ngIf="c.Image" class="m-auto mb-4">
           <figure class="float-left-fig">
             <img
-              *ngIf="c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-              alt="{{ c.Image.alternativeText }}"
+              *ngIf="c.Image.width > 750 || c.Image.height > 750"
+              src="{{ directusImageLink }}{{ c.Image.id }}/{{
+                c.Title.replaceAll(' ', '_')
+              }}_image?width=700"
+              alt="{{ c.Image.description }}"
             />
             <img
-              *ngIf="!c.Image.formats?.medium"
-              src="{{ strapiLink }}{{ c.Image.url }}"
-              alt="{{ c.Image.alternativeText }}"
+              *ngIf="c.Image.width <= 750"
+              src="{{ directusImageLink }}{{ c.Image.id }}/{{
+                c.Title.replaceAll(' ', '_')
+              }}_image?width=400"
+              alt="{{ c.Image.description }}"
             />
           </figure>
           <ng-container *ngIf="c.Text"
@@ -76,7 +84,7 @@
       </div>
     </div>
     <!-- text below img above -->
-    <ng-container *ngIf="c.Layout === 'Text_below_img_above'">
+    <div *ngIf="c.Layout === 'Text_below_img_above'" class="fade-in-element box box{{idx}}">
       <ng-container *ngIf="c.Title.trim().length > 0">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
@@ -91,25 +99,29 @@
       >
         <div *ngIf="c.Image" class="px-4">
           <img
-            *ngIf="c.Image.formats?.medium"
+            *ngIf="c.Image.width > 750 || c.Image.height > 750"
             class="m-auto py-4"
-            src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-            alt="{{ c.Image.alternativeText }}"
+            src="{{ directusImageLink }}{{ c.Image.id }}/{{
+              c.Title.replaceAll(' ', '_')
+            }}_image?width=700"
+            alt="{{ c.Image.description }}"
           />
           <img
-            *ngIf="!c.Image.formats?.medium"
+            *ngIf="c.Image.width <= 750"
             class="m-auto py-4"
-            src="{{ strapiLink }}{{ c.Image.url }}"
-            alt="{{ c.Image.alternativeText }}"
+            src="{{ directusImageLink }}{{ c.Image.id }}/{{
+              c.Title.replaceAll(' ', '_')
+            }}_image?width=400"
+            alt="{{ c.Image.description }}"
           />
         </div>
         <ng-container *ngIf="c.Text"
           ><markdown [data]="c.Text"></markdown
         ></ng-container>
       </div>
-    </ng-container>
+    </div>
     <!-- text above img below -->
-    <ng-container *ngIf="c.Layout === 'Text_above_img_below'">
+    <div *ngIf="c.Layout === 'Text_above_img_below'" class="fade-in-element box box{{idx}}">
       <ng-container *ngIf="c.Title.trim().length > 0">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
@@ -127,20 +139,24 @@
         ></ng-container>
         <div *ngIf="c.Image" class="px-4">
           <img
-            *ngIf="c.Image.formats?.medium"
+            *ngIf="c.Image.width > 750 || c.Image.height > 750"
             class="m-auto py-4 w-3/5"
-            src="{{ strapiLink }}{{ c.Image.formats.medium.url }}"
-            alt="{{ c.Image.alternativeText }}"
+            src="{{ directusImageLink }}{{ c.Image.id }}/{{
+              c.Title.replaceAll(' ', '_')
+            }}_image?width=700"
+            alt="{{ c.Image.description }}"
           />
           <img
-            *ngIf="!c.Image.formats?.medium"
+            *ngIf="c.Image.width <= 750"
             class="m-auto py-4 w-3/5"
-            src="{{ strapiLink }}{{ c.Image.url }}"
-            alt="{{ c.Image.alternativeText }}"
+            src="{{ directusImageLink }}{{ c.Image.id }}/{{
+              c.Title.replaceAll(' ', '_')
+            }}_image?width=400"
+            alt="{{ c.Image.description }}"
           />
         </div>
       </div>
-    </ng-container>
+    </div>
   </div>
 </div>
 <ng-template #loading>

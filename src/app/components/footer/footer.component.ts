@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  globals$: Observable<IMainItem> | undefined;
+  mainInfo: IMainItem | undefined;
   public timestamp: string = environment.timeStamp;
 
   constructor(
@@ -20,13 +20,8 @@ export class FooterComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.setMainItem();
-  }
-
-  private setMainItem(): void {
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res: any) => res[0])
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
     );
   }
 

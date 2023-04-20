@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
@@ -8,11 +8,11 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
 @Component({
   selector: 'esn-events-page',
   templateUrl: './events-page.component.html',
-  styleUrls: ['./events-page.component.scss', './../base.scss']
+  styleUrls: ['./events-page.component.scss', './../base.scss'],
 })
 export class EventsPageComponent implements OnInit {
-  globals$: Observable<IMainItem> | undefined;
   pretixLink?: string;
+  mainInfo: IMainItem | undefined;
 
   public loadPretix: boolean;
 
@@ -25,12 +25,10 @@ export class EventsPageComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.globals$ = this.mainService.fetchMain().pipe(
-      shareReplay(1),
-      map((res: any) => res[0])
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
+      (res: any) => res.data[0]
     );
-    const [mainInfo] = await firstValueFrom(this.mainService.fetchMain());
-    this.title.setTitle('Events | ' + mainInfo?.sectionLongName);
+    this.title.setTitle('Events | ' + this.mainInfo!.section_long_name);
   }
 
   public setLoadPretix(): void {

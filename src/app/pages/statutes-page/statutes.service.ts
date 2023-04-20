@@ -1,37 +1,32 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, shareReplay, tap } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface IStatutesItem {
-  id: string;
-  Text: string;
+  text: string;
 }
 
 @Injectable()
 export class StatutesService {
-  private url =
-    environment.STRAPI_SECTION_URL +
-    'statutes?_created_by=' +
-    environment.STRAPI_SECTION_ID;
-  private dataRequest;
+  private url = `${env.DIRECTUS_URL}statutes${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-  ) {
-    this.dataRequest = this.http.get<IStatutesItem>(this.url).pipe(
+  ) {}
+
+  fetchStatutes(): Observable<IStatutesItem> {
+    const params = new HttpParams().set('fields', 'text');
+
+    return this.http.get<IStatutesItem>(this.url, { params }).pipe(
       shareReplay(1),
       tap((_) => this.log('fetched statutes')),
       catchError(this.handleError<IStatutesItem>('fetchStatutesList'))
     );
-  }
-
-  fetchStatutes(): Observable<IStatutesItem> {
-    return this.dataRequest;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -42,6 +37,6 @@ export class StatutesService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`ContentService: ${message}`);
+    this.messageService.add(`StatutesService: ${message}`);
   }
 }

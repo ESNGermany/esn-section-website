@@ -4,12 +4,15 @@
 
 export const environment = {
   production: false,
-  timeStamp: '2022-07-26 14:20:38',
-  STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-', // e.g. https://sections.esn-germany.de/esnfreiburg-
+  STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-',
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  STRAPI_SECTION_ID: 18,
+  SECTION_NAME: 'ESN Freiburg',
+  DIRECTUS_URL_IMAGE: 'https://directus.esn-germany.de/assets/',
+  DIRECTUS_URL_FILES: 'https://directus.esn-germany.de/files/',
+  DIRECTUS_URL: 'https://directus.esn-germany.de/items/website_',
+  DIRECTUS_SECTION_FILTER: `?filter[section][name]=`,
+  timeStamp: '2023-04-06 16:20:38',
 };
-
 // STRAPI_SECTION_IDs:
 // 24  Augsburg
 // 5   Bayreuth
