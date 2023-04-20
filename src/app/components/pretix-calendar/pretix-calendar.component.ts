@@ -28,9 +28,9 @@ export class PretixCalendarComponent implements OnInit, AfterViewInit {
     private loadJsService: LoadJsService,
     @Inject(DOCUMENT) private document: Document
   ) {
-    this.mainService
-      .fetchMain()
-      .subscribe((res: any) => (this.pretix_link = res.data[0].pretix_link));
+    // this.mainService
+    //   .fetchMain()
+    //   .subscribe((res: any) => (this.pretix_link = res.data[0].pretix_link));
   }
 
   async ngOnInit(): Promise<void> {
