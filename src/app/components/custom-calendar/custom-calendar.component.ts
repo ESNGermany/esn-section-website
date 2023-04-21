@@ -26,6 +26,10 @@ export class CustomCalendarComponent {
     if (isPlatformBrowser(platformId)) {
       this.isBrowser$.next(true);
     }
+    const date = new Date();
+    date.setDate(date.getDate() - 90); // Show the last 90 days and future events
+    const beginevents = date.toISOString();
+
     this.calendarOptions = {
       plugins: [ listPlugin, dayGridPlugin, interactionPlugin ],
       initialView: 'listMonth',
@@ -68,11 +72,19 @@ export class CustomCalendarComponent {
               environment.DIRECTUS_SECTION_FILTER +
               environment.SECTION_NAME +
               '&fields=*,' +
-              'causes.esn_causes_id.name'
+              'causes.esn_causes_id.name' +
+              '&filter[start][_gt]=' + beginevents
           )
         );
         if (result_2) {
-          return result_2.data.map((res: any) => ({
+          console.log(result_2);
+          return result_2.data.map((res: any) => {
+            if (res.title.indexOf("Weekend") > -1) {
+              console.log(res.title);
+              console.log(res.url);
+            }
+
+            return{
             start: new Date(res.start),
             end: new Date(res.end),
             title: res.title,
@@ -81,7 +93,7 @@ export class CustomCalendarComponent {
               details: res.details,
               cause: 'Cause: ' + res.causes[0].esn_causes_id.name,
             },
-          }));
+          }});
         }
         return [];
       },
