@@ -8,7 +8,7 @@ import {
 import { Title } from '@angular/platform-browser';
 import { GalleryItem, ImageItem } from 'ng-gallery';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom, Observable, shareReplay } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IContentItem, ContentService } from 'src/app/services/content.service';
@@ -61,10 +61,9 @@ export class LandingPageComponent implements OnInit {
     this.title.setTitle('Home | ' + this.mainInfo!.section_long_name);
 
     this.setGalleryThumb();
-    this.setGridImageSize();
-
+    
     this.images = [];
-    if (this.mainInfo!.imagegrid_frontpage) {
+    if (this.mainInfo!.use_image_slideshow) {
       this.mainInfo.imagegrid_frontpage.forEach((img: any) => {
         if (img.directus_files_id.width > 750) {
           this.images.unshift(
@@ -82,6 +81,8 @@ export class LandingPageComponent implements OnInit {
           );
         }
       });
+    } else {
+      this.setGridImageSize();
     }
   }
 

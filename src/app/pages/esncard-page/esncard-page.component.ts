@@ -20,7 +20,6 @@ export class EsncardPageComponent implements OnInit {
   mainInfo: IMainItem | undefined;
 
   nationalPartner$: Observable<INationalPartnerItem[]> | undefined;
-  public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
   public cityName?: string;
   public readonly page: string = 'ESNcard_page';
@@ -49,14 +48,7 @@ export class EsncardPageComponent implements OnInit {
     this.title.setTitle(
       'ESNcard & Partners | ' + this.mainInfo!.section_long_name
     );
-    this.cityName = this.mainInfo!.section_short_name.split(' ')[1];
-
-    // initialize each buttontext
-    this.partnerService.fetchPagePartner().subscribe((listPartners: any) => {
-      for (let p of listPartners.data) {
-        p.buttonText = 'Learn More ↓';
-      }
-    });
+    this.cityName = this.mainInfo!.section_short_name;
   }
 
   public toggleInfo(partner: IPartnerItem): void {

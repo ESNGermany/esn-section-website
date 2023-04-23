@@ -6,7 +6,7 @@
   <ng-container *ngIf="partnerInfo$ | async as partnerItemList">
     <ng-container *ngIf="partnerItemList.length > 0">
       <div class="title-div">
-        <p class="title-p">Local Partners in {{ cityName }}</p>
+        <p class="title-p">Local Partners of {{ cityName }}</p>
       </div>
     </ng-container>
   </ng-container>
@@ -14,7 +14,7 @@
 <div class="max-w-screen-2xl m-auto mb-24">
   <ng-container *ngIf="partnerInfo$ | async as partnerItemList">
     <div
-      class="mx-4 flex flex-wrap items-end justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
+      class="mx-4 flex flex-wrap items-center justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
       *ngIf="partnerItemList.length > 0"
     >
       <div
@@ -25,13 +25,12 @@
         <figure class="m-2">
           <a
             *ngIf="partner.main_image.id"
-            href="toggleInfo(partner)"
+            href="{{ partner.link }}"
             target="_blank"
             rel="noopener"
-            class=""
             ><img
               class="imgh m-auto zoom"
-              src="{{ directusImageLink }}{{ partner.main_image.id }}?width=300"
+              src="{{ directusImageLink }}{{ partner.main_image.id }}?height=300"
               alt="{{ partner.name }}"
           /></a>
           <figcaption class="pt-4 text-center font-bold">
@@ -47,7 +46,7 @@
               (click)="toggleInfo(partner)"
               class="text-esn-dark-blue hover:underline text-sm"
             > -->
-              {{ partner.buttonText }}
+              {{ partner.buttonText || "Learn more ↓"}}
             </button>
             <br />
             <p
