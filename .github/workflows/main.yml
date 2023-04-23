@@ -19,7 +19,7 @@ jobs:
           browser: firefox
           record: true
           start: yarn start
-          wait-on: "http://localhost:4200"
+          wait-on: "http://[::1]:4200"
           config-file: cypress.config.ts
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
