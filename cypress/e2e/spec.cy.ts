@@ -87,6 +87,6 @@ describe(`If no imprint given, fall back to ESN Germany's imprint`, () => {
   });
   it(`Should load ESN Germany's imprint if none provided`, () => {
     cy.visit('https://konstanz.esn-germany.de/imprint');
-    cy.get('.title-p').contains('Imprint (ESN Germany e.V.)');
+    cy.get('.title-p').contains('Imprint ESN Germany e.V.');
   });
 });

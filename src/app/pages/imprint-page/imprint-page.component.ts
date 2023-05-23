@@ -17,8 +17,8 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
 export class ImprintPageComponent implements OnInit {
   mainInfo: IMainItem | undefined;
 
-  imprintItemList$: Observable<IImprintItem> | undefined;
-  imprintEsnGer$: Observable<IImprintEsnGerItem> | undefined;
+  public imprintSection$: Observable<IImprintItem> | undefined;
+  public imprintEsnGermany$: Observable<IImprintEsnGerItem> | undefined;
 
   constructor(
     private title: Title,
@@ -31,17 +31,17 @@ export class ImprintPageComponent implements OnInit {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
       (res: any) => res.data[0]
     );
-    this.imprintItemList$ = this.imprintService.fetchImprint().pipe(
+    this.imprintSection$ = this.imprintService.fetchImprint().pipe(
       shareReplay(1),
       map((res: any) => res.data[0])
     );
 
-    this.imprintEsnGer$ = this.imprintEsnGerService.fetchEsnGerImprint().pipe(
+    this.imprintEsnGermany$ = this.imprintEsnGerService.fetchEsnGerImprint().pipe(
       shareReplay(1),
-      map((res: any) => res.data[0])
+      map((res: any) => res[0])
     );
 
-    const title = 'Imprint | ' + this.mainInfo!.section_long_name;
+    const title = 'Imprint | ' + this.mainInfo?.section_long_name;
     this.title.setTitle(title);
   }
 }
