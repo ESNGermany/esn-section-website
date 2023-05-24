@@ -44,7 +44,6 @@ import { StatutesService } from './pages/statutes-page/statutes.service';
 import { ImprintEsnGerService } from './pages/imprint-page/imprint-esnger.service';
 import { ArticleComponent } from './components/article/article.component';
 import { SharedModule } from './shared/shared.module';
-import { NgxImageMosaicModule } from 'ngx-image-mosaic';
 
 
 @NgModule({
@@ -79,7 +78,6 @@ import { NgxImageMosaicModule } from 'ngx-image-mosaic';
     MarkdownModule.forRoot(),
     FullCalendarModule,
     SharedModule,
-    NgxImageMosaicModule
   ],
   providers: [
     FullCalendarModule,

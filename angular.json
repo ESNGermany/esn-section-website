@@ -29,6 +29,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "bezier-easing"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/_redirects",
@@ -38,7 +41,9 @@
               "src/styles.scss",
               "src/assets/styles/pretix.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/marked/marked.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -106,7 +111,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/marked/marked.min.js"
+            ]
           }
         },
         "server": {
