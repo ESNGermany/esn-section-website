@@ -10,6 +10,7 @@ export interface IContentItem {
   Title: string;
   Text: string;
   Layout:
+    | 'Text_only'
     | 'Text_above_img_below'
     | 'Text_below_img_above'
     | 'Text_left_img_right'

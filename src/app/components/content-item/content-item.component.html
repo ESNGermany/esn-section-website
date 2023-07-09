@@ -3,8 +3,33 @@
   class="outer-imgbox"
 >
   <div *ngFor="let c of contentItemList; let idx = index" class="px-4 mb-20">
+    <!-- text only -->
+    <div
+      *ngIf="c.Layout === 'Text_only'"
+      class="fade-in-element box box{{ idx }}"
+    >
+      <ng-container *ngIf="c.Title.trim().length > 0">
+        <div class="title-div">
+          <p class="title-p">{{ c.Title }}</p>
+        </div>
+      </ng-container>
+      <div
+        [ngClass]="{
+          'font-body text-lg border border-graylight shadow-xl p-8':
+            c.Wrap_in_shadow_box
+        }"
+        class="overflow-auto"
+      >
+        <div class="m-auto font-body text-lg">
+          <markdown [data]="c.Text"></markdown>
+        </div>
+      </div>
+    </div>
     <!-- text left img right -->
-    <div *ngIf="c.Layout === 'Text_left_img_right'" class="fade-in-element box box{{idx}}">
+    <div
+      *ngIf="c.Layout === 'Text_left_img_right'"
+      class="fade-in-element box box{{ idx }}"
+    >
       <ng-container *ngIf="c.Title.trim().length > 0">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
@@ -44,7 +69,10 @@
       </div>
     </div>
     <!-- text right img left -->
-    <div *ngIf="c.Layout === 'Text_right_img_left'" class="fade-in-element mb-2 box box{{idx}}">
+    <div
+      *ngIf="c.Layout === 'Text_right_img_left'"
+      class="fade-in-element mb-2 box box{{ idx }}"
+    >
       <ng-container *ngIf="c.Title.trim().length > 0">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
@@ -84,7 +112,10 @@
       </div>
     </div>
     <!-- text below img above -->
-    <div *ngIf="c.Layout === 'Text_below_img_above'" class="fade-in-element box box{{idx}}">
+    <div
+      *ngIf="c.Layout === 'Text_below_img_above'"
+      class="fade-in-element box box{{ idx }}"
+    >
       <ng-container *ngIf="c.Title.trim().length > 0">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
@@ -121,7 +152,10 @@
       </div>
     </div>
     <!-- text above img below -->
-    <div *ngIf="c.Layout === 'Text_above_img_below'" class="fade-in-element box box{{idx}}">
+    <div
+      *ngIf="c.Layout === 'Text_above_img_below'"
+      class="fade-in-element box box{{ idx }}"
+    >
       <ng-container *ngIf="c.Title.trim().length > 0">
         <div class="title-div">
           <p class="title-p">{{ c.Title }}</p>
