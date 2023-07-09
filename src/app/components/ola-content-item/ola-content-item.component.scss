@@ -4,7 +4,7 @@
 
 .title-p {
   @extend .title !optional;
-  @apply font-heading text-esn-dark-blue font-bold text-4xl;
+  @apply font-heading text-esn-dark-blue font-medium text-4xl;
 }
 
 .float-right-fig {

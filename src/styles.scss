@@ -33,8 +33,8 @@
 }
 
 @font-face {
-  font-family: "Oswald";
-  src: url("./assets/fonts/Oswald/Oswald-Regular.ttf");
+  font-family: "Oswald", sans-serif;
+  src: url("./assets/fonts/Oswald/Oswald-Regular.ttf") format("truetype");
 }
 
 :root {
