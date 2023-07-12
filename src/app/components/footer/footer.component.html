@@ -40,12 +40,14 @@
       <a routerLink="/coc" routerLinkActive="active" class="hover:underline"
         >Code of Conduct</a
       ><br />
-      <a
+      <ng-container *ngIf="statutesExist">
+        <a
         routerLink="/statutes"
         routerLinkActive="active"
         class="hover:underline"
         >Statutes</a
-      ><br />
+        ><br />
+      </ng-container>
       <a
         routerLink="/for-incomings"
         routerLinkActive="active"

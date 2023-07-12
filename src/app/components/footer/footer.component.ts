@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { IStatutesItem, StatutesService } from 'src/app/pages/statutes-page/statutes.service';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
@@ -13,9 +14,11 @@ import { environment } from 'src/environments/environment';
 export class FooterComponent implements OnInit {
   mainInfo: IMainItem | undefined;
   public timestamp: string = environment.timeStamp;
+  public statutesExist: boolean = false;
 
   constructor(
     private mainService: MainService,
+    private statutesService: StatutesService,
     @Inject(DOCUMENT) private document: Document
   ) {}
 
@@ -23,6 +26,10 @@ export class FooterComponent implements OnInit {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
       (res: any) => res.data[0]
     );
+    const statutes = await firstValueFrom(this.statutesService.fetchStatutes()).then(
+      (res: any) => res?.data[0]
+    );
+    this.statutesExist = !! statutes;
   }
 
   public pink(): void {

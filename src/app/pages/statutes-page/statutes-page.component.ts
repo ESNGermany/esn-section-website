@@ -26,7 +26,7 @@ export class StatutesPageComponent implements OnInit {
       map((res: any) => res.data)
     );
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
+      (res: any) => res?.data[0]
     );
     const title = 'Statutes | ' + this.mainInfo!.section_long_name;
     this.title.setTitle(title);
