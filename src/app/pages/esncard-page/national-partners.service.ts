@@ -29,22 +29,22 @@ export interface INationalPartnerItem {
 export class NationalPartnersService {
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   fetchPageNationalPartner(): Observable<INationalPartnerItem[]> {
     const url = 'https://strapi.esn-germany.de/web-partner';
     return this.http.get<INationalPartnerItem[]>(url).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched partner')),
+      tap(() => this.log('fetched partner')),
       catchError(
-        this.handleError<INationalPartnerItem[]>('fetchPartnerList', [])
-      )
+        this.handleError<INationalPartnerItem[]>('fetchPartnerList', []),
+      ),
     );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: Error): Observable<T> => {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);

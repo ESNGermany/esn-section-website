@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  TransferState,
+  makeStateKey,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { IStatutesItem, StatutesService } from './statutes.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'esn-statutes-page',
@@ -11,24 +19,62 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
   styleUrls: ['./../base.scss'],
 })
 export class StatutesPageComponent implements OnInit {
-  statutesItemList$: Observable<IStatutesItem> | undefined;
-  mainInfo: IMainItem | undefined;
+  public statutesItemList: any;
+  private mainInfo: any;
 
   constructor(
     private title: Title,
     private statutesService: StatutesService,
-    private mainService: MainService
+    private mainService: MainService,
+    private transferState: TransferState,
+    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
-  async ngOnInit(): Promise<void> {
-    this.statutesItemList$ = this.statutesService.fetchStatutes().pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
+  ngOnInit(): void {
+    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+    this.statutesItemList = this.transferState.get(
+      makeStateKey('statutesItemList'),
+      undefined,
     );
+
+    if (!this.mainInfo) {
+      this.fetchMainInfo();
+    } else {
+      this.setTitle();
+    }
+
+    if (!this.statutesItemList) {
+      this.fetchStatutes();
+    }
+  }
+
+  async fetchStatutes(): Promise<void> {
+    this.statutesItemList = await firstValueFrom(
+      this.statutesService.fetchStatutes(),
+    ).then((res: any) => res.data);
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IStatutesItem>(
+        makeStateKey('statutesItemList'),
+        this.statutesItemList,
+      );
+    }
+  }
+
+  async fetchMainInfo(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res?.data[0]
+      (res: any) => res.data[0],
     );
-    const title = 'Statutes | ' + this.mainInfo!.section_long_name;
-    this.title.setTitle(title);
+
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IMainItem>(
+        makeStateKey('mainInfo'),
+        this.mainInfo,
+      );
+    }
+    this.setTitle();
+  }
+
+  private setTitle(): void {
+    this.title.setTitle('Our Team | ' + this.mainInfo.section_long_name);
   }
 }

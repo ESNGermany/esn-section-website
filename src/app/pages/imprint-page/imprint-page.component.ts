@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  TransferState,
+  makeStateKey,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import {
   IImprintEsnGerItem,
   ImprintEsnGerService,
@@ -8,6 +15,7 @@ import {
 
 import { IImprintItem, ImprintService } from './imprint.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'esn-imprint-page',
@@ -15,33 +23,86 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
   styleUrls: ['./../base.scss'],
 })
 export class ImprintPageComponent implements OnInit {
-  mainInfo: IMainItem | undefined;
-
-  public imprintSection$: Observable<IImprintItem> | undefined;
-  public imprintEsnGermany$: Observable<IImprintEsnGerItem> | undefined;
+  private mainInfo: any;
+  public imprintSection: any;
+  public imprintEsnGermany: any;
 
   constructor(
     private title: Title,
     private imprintService: ImprintService,
     private imprintEsnGerService: ImprintEsnGerService,
-    private mainService: MainService
+    private mainService: MainService,
+    private transferState: TransferState,
+    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+    this.imprintSection = this.transferState.get(
+      makeStateKey('imprintSection'),
+      undefined,
+    );
+    this.imprintEsnGermany = this.transferState.get(
+      makeStateKey('imprintEsnGermany'),
+      undefined,
+    );
+
+    if (!this.mainInfo) {
+      this.fetchMainInfo();
+    } else {
+      this.setTitle();
+    }
+
+    if (!this.imprintSection) {
+      this.fetchImprintSection();
+    }
+
+    if (!this.imprintEsnGermany) {
+      this.fetchImprintEsnGermany();
+    }
+  }
+
+  async fetchMainInfo(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
-    );
-    this.imprintSection$ = this.imprintService.fetchImprint().pipe(
-      shareReplay(1),
-      map((res: any) => res.data[0])
+      (res: any) => res.data[0],
     );
 
-    this.imprintEsnGermany$ = this.imprintEsnGerService.fetchEsnGerImprint().pipe(
-      shareReplay(1),
-      map((res: any) => res[0])
-    );
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IMainItem>(
+        makeStateKey('mainInfo'),
+        this.mainInfo,
+      );
+    }
+    this.setTitle();
+  }
 
-    const title = 'Imprint | ' + this.mainInfo?.section_long_name;
-    this.title.setTitle(title);
+  async fetchImprintSection(): Promise<void> {
+    this.imprintSection = await firstValueFrom(
+      this.imprintService.fetchImprint(),
+    ).then((res: any) => res.data[0]);
+
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IImprintItem>(
+        makeStateKey('imprintSection'),
+        this.imprintSection,
+      );
+    }
+  }
+
+  async fetchImprintEsnGermany(): Promise<void> {
+    this.imprintEsnGermany = await firstValueFrom(
+      this.imprintEsnGerService.fetchEsnGerImprint(),
+    ).then((res: any) => res[0]);
+
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IImprintEsnGerItem>(
+        makeStateKey('imprintEsnGermany'),
+        this.imprintEsnGermany,
+      );
+    }
+  }
+
+  private setTitle(): void {
+    this.title.setTitle('Imprint | ' + this.mainInfo.section_long_name);
   }
 }

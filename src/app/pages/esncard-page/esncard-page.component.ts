@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  TransferState,
+  makeStateKey,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IPartnerItem, PartnerService } from './partner.service';
@@ -9,6 +16,7 @@ import {
   INationalPartnerItem,
   NationalPartnersService,
 } from './national-partners.service';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'esn-esncard-page',
@@ -16,10 +24,10 @@ import {
   styleUrls: ['./esncard-page.component.scss', './../base.scss'],
 })
 export class EsncardPageComponent implements OnInit {
-  partnerInfo$: Observable<IPartnerItem[]> | undefined;
-  mainInfo: IMainItem | undefined;
+  public partnerInfo: any;
+  public nationalPartner: any;
+  private mainInfo: any;
 
-  nationalPartner$: Observable<INationalPartnerItem[]> | undefined;
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
   public cityName?: string;
   public readonly page: string = 'ESNcard_page';
@@ -28,27 +36,72 @@ export class EsncardPageComponent implements OnInit {
     private title: Title,
     private partnerService: PartnerService,
     private nationalPartnerService: NationalPartnersService,
-    private mainService: MainService
+    private mainService: MainService,
+    private transferState: TransferState,
+    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+    this.partnerInfo = this.transferState.get(
+      makeStateKey('partnerInfo'),
+      undefined,
+    );
+    this.nationalPartner = this.transferState.get(
+      makeStateKey('nationalPartner'),
+      undefined,
+    );
+
+    if (!this.mainInfo) {
+      this.fetchMainInfo();
+    } else {
+      this.setTitle();
+    }
+    if (!this.partnerInfo) {
+      this.fetchPartnerInfo();
+    }
+    if (!this.nationalPartner) {
+      this.fetchNationalPartner();
+    }
+  }
+
+  async fetchMainInfo(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
+      (res: any) => res.data[0],
     );
 
-    this.partnerInfo$ = this.partnerService.fetchPagePartner().pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
-    );
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IMainItem>(
+        makeStateKey('mainInfo'),
+        this.mainInfo,
+      );
+    }
+    this.setTitle();
+    this.cityName = this.mainInfo.section_short_name;
+  }
 
-    this.nationalPartner$ = this.nationalPartnerService
-      .fetchPageNationalPartner()
-      .pipe(shareReplay(1));
+  async fetchPartnerInfo(): Promise<void> {
+    this.partnerInfo = await firstValueFrom(
+      this.partnerService.fetchPagePartner(),
+    ).then((res: any) => res.data);
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IPartnerItem[]>(
+        makeStateKey('partnerInfo'),
+        this.partnerInfo,
+      );
+    }
+  }
 
-    this.title.setTitle(
-      'ESNcard & Partners | ' + this.mainInfo!.section_long_name
-    );
-    this.cityName = this.mainInfo!.section_short_name;
+  async fetchNationalPartner(): Promise<void> {
+    this.nationalPartner = await firstValueFrom(
+      this.nationalPartnerService.fetchPageNationalPartner(),
+    ).then((res: any) => res.data);
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<INationalPartnerItem[]>(
+        makeStateKey('nationalPartner'),
+        this.nationalPartner,
+      );
+    }
   }
 
   public toggleInfo(partner: IPartnerItem): void {
@@ -58,5 +111,11 @@ export class EsncardPageComponent implements OnInit {
     } else {
       partner.buttonText = `Less info ↑`;
     }
+  }
+
+  private setTitle(): void {
+    this.title.setTitle(
+      'ESNcard & Partners | ' + this.mainInfo.section_long_name,
+    );
   }
 }

@@ -14,15 +14,15 @@ export interface IImprintEsnGerItem {
 export class ImprintEsnGerService {
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   fetchEsnGerImprint(): Observable<IImprintEsnGerItem> {
     const url = 'https://strapi.esn-germany.de/website-imprints';
     return this.http.get<IImprintEsnGerItem>(url).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched imprint')),
-      catchError(this.handleError<IImprintEsnGerItem>('fetchImprintList'))
+      tap(() => this.log('fetched imprint')),
+      catchError(this.handleError<IImprintEsnGerItem>('fetchImprintList')),
     );
   }
 

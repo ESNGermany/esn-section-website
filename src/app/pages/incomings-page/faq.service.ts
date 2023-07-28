@@ -21,7 +21,7 @@ export class FaqService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   fetchFaq(singleCategory: string): Observable<IFaqItem[]> {
@@ -33,8 +33,8 @@ export class FaqService {
       .get<IFaqItem[]>(`${this.url}${singleCategory}`, { params })
       .pipe(
         shareReplay(1),
-        tap((_) => this.log('fetched faq')),
-        catchError(this.handleError<IFaqItem[]>('fetchFaqList', []))
+        tap(() => this.log('fetched faq')),
+        catchError(this.handleError<IFaqItem[]>('fetchFaqList', [])),
       );
   }
 

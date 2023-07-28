@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  TransferState,
+  makeStateKey,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { ICocItem, CocService } from './coc.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'esn-coc-page',
@@ -11,24 +19,54 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
   styleUrls: ['./../base.scss'],
 })
 export class CocPageComponent implements OnInit {
-  cocItem$: Observable<ICocItem> | undefined;
-  mainInfo: IMainItem | undefined;
+  public cocItem: any;
+  private mainInfo: any;
 
   constructor(
     private title: Title,
     private cocService: CocService,
-    private mainService: MainService
+    private mainService: MainService,
+    private transferState: TransferState,
+    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
-  async ngOnInit(): Promise<void> {
-    this.cocItem$ = this.cocService.fetchCoc().pipe(
-      shareReplay(1),
-      map((res) => res)
+  ngOnInit(): void {
+    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+    this.cocItem = this.transferState.get(makeStateKey('cocItem'), undefined);
+
+    if (!this.mainInfo) {
+      this.fetchMainInfo();
+    } else {
+      this.setTitle();
+    }
+    if (!this.cocItem) {
+      this.fetchCocInfo();
+    }
+  }
+
+  async fetchCocInfo(): Promise<void> {
+    this.cocItem = await firstValueFrom(this.cocService.fetchCoc()).then(
+      (res: any) => res,
     );
+
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<ICocItem>(makeStateKey('cocItem'), this.cocItem);
+    }
+  }
+
+  async fetchMainInfo(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
+      (res: any) => res.data[0],
     );
-    const title = 'Code of Conduct | ' + this.mainInfo!.section_long_name;
-    this.title.setTitle(title);
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IMainItem>(
+        makeStateKey('mainInfo'),
+        this.mainInfo,
+      );
+    }
+  }
+
+  private setTitle(): void {
+    this.title.setTitle('Code of Conduct | ' + this.mainInfo.section_long_name);
   }
 }

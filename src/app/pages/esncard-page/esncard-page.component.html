@@ -1,9 +1,8 @@
 <esn-content-item [page]="page"></esn-content-item>
 <div
   class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
-  *ngIf="mainInfo"
 >
-  <ng-container *ngIf="partnerInfo$ | async as partnerItemList">
+  <ng-container *ngIf="partnerInfo as partnerItemList">
     <ng-container *ngIf="partnerItemList.length > 0">
       <div class="title-div">
         <p class="title-p">Local Partners of {{ cityName }}</p>
@@ -12,7 +11,7 @@
   </ng-container>
 </div>
 <div class="max-w-screen-2xl m-auto mb-24">
-  <ng-container *ngIf="partnerInfo$ | async as partnerItemList">
+  <ng-container *ngIf="partnerInfo as partnerItemList">
     <div
       class="mx-4 flex flex-wrap items-center justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
       *ngIf="partnerItemList.length > 0"
@@ -30,7 +29,9 @@
             rel="noopener"
             ><img
               class="imgh m-auto zoom"
-              src="{{ directusImageLink }}{{ partner.main_image.id }}?height=300"
+              src="{{ directusImageLink }}{{
+                partner.main_image.id
+              }}?height=300"
               alt="{{ partner.name }}"
           /></a>
           <figcaption class="pt-4 text-center font-bold">
@@ -41,12 +42,12 @@
               (click)="toggleInfo(partner)"
               class="text-neutral-500 bg-white hover:bg-neutral-500 hover:text-white text-base border-stone-300 border rounded-xl px-2"
             >
-            <!-- <button
+              <!-- <button
               *ngIf="partner.deal"
               (click)="toggleInfo(partner)"
               class="text-esn-dark-blue hover:underline text-sm"
             > -->
-              {{ partner.buttonText || "Learn more ↓"}}
+              {{ partner.buttonText || "Learn more ↓" }}
             </button>
             <br />
             <p
@@ -55,12 +56,24 @@
               [data]="partner.deal"
               style="text-align: left"
             >
-            {{ partner.deal }}
-            <br />
-            <a class="cursor-pointer text-esn-dark-blue text-base hover:underline mt-3" [hidden]="!partner.show" href="{{ partner.link }}" target="_blank" rel="noopener">
-              Website <img class="inline text-left" src="assets/social/open-icon-blue.png" width="18px" />
-            </a>
-          </p>
+              {{ partner.deal }}
+              <br />
+              <a
+                class="cursor-pointer text-esn-dark-blue text-base hover:underline mt-3"
+                [hidden]="!partner.show"
+                href="{{ partner.link }}"
+                target="_blank"
+                rel="noopener"
+              >
+                Website
+                <img
+                  class="inline text-left"
+                  src="assets/social/open-icon-blue.png"
+                  width="18px"
+                  alt="open"
+                />
+              </a>
+            </p>
           </figcaption>
         </figure>
       </div>
@@ -70,8 +83,8 @@
 <div
   class="max-w-screen-xl p-4 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
 >
-  <ng-container *ngIf="nationalPartner$ | async as partners">
-    <ng-container *ngIf="partners.length > 0">
+  <ng-container *ngIf="nationalPartner">
+    <ng-container *ngIf="nationalPartner.length > 0">
       <div class="title-div">
         <p class="title-p">National Partners from ESN Germany</p>
       </div>

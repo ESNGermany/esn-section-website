@@ -15,20 +15,20 @@ export interface ICocItem {
 export class CocService {
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   fetchCoc(): Observable<ICocItem> {
     const url = 'https://strapi.esn-germany.de/web-legal-documents/4';
     return this.http.get<ICocItem>(url).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched coc')),
-      catchError(this.handleError<ICocItem>('fetchCocList'))
+      tap(() => this.log('fetched coc')),
+      catchError(this.handleError<ICocItem>('fetchCocList')),
     );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: Error): Observable<T> => {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);

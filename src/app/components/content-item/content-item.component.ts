@@ -1,6 +1,14 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { map, Observable, shareReplay } from 'rxjs';
+import { DOCUMENT, isPlatformServer } from '@angular/common';
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  PLATFORM_ID,
+  TransferState,
+  makeStateKey,
+} from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 import { IContentItem, ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
@@ -12,28 +20,29 @@ import { environment } from 'src/environments/environment';
 })
 export class ContentItemComponent implements OnInit {
   @Input() page!: string;
-
-  contentInfo$: Observable<IContentItem[]> | undefined;
+  public contentInfo: any;
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
 
   constructor(
     private contentService: ContentService,
-    @Inject(DOCUMENT) private document: Document
+    private transferState: TransferState,
+    @Inject(PLATFORM_ID) private platformId: object,
+    @Inject(DOCUMENT) private document: Document,
   ) {
-    window.addEventListener('scroll', (event) => {
+    window.addEventListener('scroll', () => {
       const box0 = this.document.querySelector('.box0');
       if (box0 != null) {
-        if (window.pageYOffset < box0!.clientHeight) {
+        if (window.scrollY < box0!.clientHeight) {
           box0!.classList.add('fade-in-element');
         } else {
           box0!.classList.remove('fade-in-element');
         }
       }
     });
-    window.addEventListener('scroll', (event) => {
+    window.addEventListener('scroll', () => {
       const box1 = this.document.querySelector('.box1');
       if (box1 != null) {
-        if (window.pageYOffset < box1!.clientHeight) {
+        if (window.scrollY < box1!.clientHeight) {
           box1!.classList.add('fade-in-element');
         } else {
           box1!.classList.remove('fade-in-element');
@@ -42,14 +51,27 @@ export class ContentItemComponent implements OnInit {
     });
   }
 
-  async ngOnInit(): Promise<void> {
-    this.setContentInfo();
+  ngOnInit(): void {
+    this.contentInfo = this.transferState.get<IContentItem | undefined>(
+      makeStateKey('contentInfo'),
+      undefined,
+    );
+
+    if (!this.contentInfo) {
+      this.fetchContent();
+    }
   }
 
-  private setContentInfo(): void {
-    this.contentInfo$ = this.contentService.fetchPageContent(this.page).pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
-    );
+  async fetchContent(): Promise<void> {
+    this.contentInfo = await firstValueFrom(
+      this.contentService.fetchPageContent(this.page),
+    ).then((res: any) => res.data);
+
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IContentItem[]>(
+        makeStateKey('contentInfo'),
+        this.contentInfo,
+      );
+    }
   }
 }

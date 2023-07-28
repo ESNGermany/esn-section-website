@@ -37,14 +37,14 @@ export class ContentService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   fetchPageContent(page: string): Observable<IContentItem[]> {
     const params = new HttpParams()
       .set(
         'fields',
-        'Title,Text,Image.*,Page_for_display,Order_on_page,Layout,Wrap_in_shadow_box'
+        'Title,Text,Image.*,Page_for_display,Order_on_page,Layout,Wrap_in_shadow_box',
       )
       .set('sort', 'Order_on_page');
 
@@ -54,13 +54,13 @@ export class ContentService {
       })
       .pipe(
         shareReplay(1),
-        tap((_) => this.log('fetched content')),
-        catchError(this.handleError<IContentItem[]>('fetchContentList'))
+        tap(() => this.log('fetched content')),
+        catchError(this.handleError<IContentItem[]>('fetchContentList')),
       );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: Error): Observable<T> => {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);

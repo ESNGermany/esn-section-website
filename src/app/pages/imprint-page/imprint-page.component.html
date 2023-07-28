@@ -1,27 +1,30 @@
 <div class="outer">
-  <div
-  *ngIf="imprintSection$ | async as imprintSection; else esnGerImprint"
-  >
-  <div class="markdown-div">
-    <div class="title-div">
-      <p class="title-p">{{ imprintSection.title }}</p>
-    </div>
-    <markdown data-testid="esn-section-imprint" [data]="imprintSection.text"></markdown>
-  </div>
-</div>
-<ng-template #esnGerImprint>
-  <ng-container
-  *ngIf="imprintEsnGermany$ | async as imprintEsnGermany; else loading"
-  >
+  <div *ngIf="imprintSection; else esnGerImprint">
     <div class="markdown-div">
       <div class="title-div">
-        <p class="title-p">Imprint ESN Germany e.V.</p>
+        <p class="title-p">{{ imprintSection.title }}</p>
       </div>
-      <markdown [data]="imprintEsnGermany.Content"></markdown>
+      <markdown
+        data-testid="esn-section-imprint"
+        [data]="imprintSection.text"
+      ></markdown>
     </div>
-  </ng-container>
-</ng-template>
-<ng-template #loading>
-  <img width="200px" class="m-auto" src="assets/social/ESN-star-spinner.gif"
+  </div>
+  <ng-template #esnGerImprint>
+    <ng-container *ngIf="imprintEsnGermany; else loading">
+      <div class="markdown-div">
+        <div class="title-div">
+          <p class="title-p">Imprint ESN Germany e.V.</p>
+        </div>
+        <markdown [data]="imprintEsnGermany.Content"></markdown>
+      </div>
+    </ng-container>
+  </ng-template>
+  <ng-template #loading>
+    <img
+      width="200px"
+      class="m-auto"
+      src="assets/social/ESN-star-spinner.gif"
+      alt="loading"
   /></ng-template>
 </div>

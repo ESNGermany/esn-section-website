@@ -12,7 +12,7 @@ import {
   styleUrls: ['./national-partners.component.scss'],
 })
 export class NationalPartnersComponent {
-  nationalPartners$: Observable<INationalPartnerItem[]> | undefined;
+  public nationalPartners$: Observable<INationalPartnerItem[]> | undefined;
 
   constructor(private nationalPartnersService: NationalPartnersService) {
     this.setNationalPartners();
@@ -29,7 +29,7 @@ export class NationalPartnersComponent {
     this.nationalPartnersService
       .fetchPageNationalPartner()
       .subscribe((listPartners) => {
-        for (let p of listPartners) {
+        for (const p of listPartners) {
           p.buttonText = 'Learn More ↓';
         }
       });

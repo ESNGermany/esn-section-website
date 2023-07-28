@@ -1,12 +1,12 @@
 <esn-content-item [page]="page"></esn-content-item>
 <ng-container
   *ngIf="
-    (faqHousingItemList$ | async)?.length > 0 ||
-    (faqTransportItemList$ | async)?.length > 0 ||
-    (faqCoronaItemList$ | async)?.length > 0 ||
-    (faqUniErasmusItemList$ | async)?.length > 0 ||
-    (faqOtherItemList$ | async)?.length > 0 ||
-    (faqEsncardItemList$ | async)?.length > 0
+    faqHousingItemList?.length > 0 ||
+    faqTransportItemList?.length > 0 ||
+    faqCoronaItemList?.length > 0 ||
+    faqUniErasmusItemList?.length > 0 ||
+    faqOtherItemList?.length > 0 ||
+    faqEsncardItemList?.length > 0
   "
 >
   <div class="outer-div-incoming">
@@ -14,9 +14,7 @@
       <div class="title-div">
         <p class="title-p">Frequently Asked Questions</p>
       </div>
-      <ng-container
-        *ngIf="faqHousingItemList$ | async as faqHousingItemList; else loading"
-      >
+      <ng-container *ngIf="faqHousingItemList; else loading">
         <div
           *ngIf="faqHousingItemList.length > 0"
           class="font-body text-xl font-bold pb-2"
@@ -39,10 +37,9 @@
           width="200px"
           class="m-auto"
           src="assets/social/ESN-star-spinner.gif"
+          alt="loading"
       /></ng-template>
-      <ng-container
-        *ngIf="faqTransportItemList$ | async as faqTransportItemList"
-      >
+      <ng-container *ngIf="faqTransportItemList">
         <div
           *ngIf="faqTransportItemList.length > 0"
           class="font-body text-xl font-bold pb-2"
@@ -60,7 +57,7 @@
           </esn-expandable>
         </div>
       </ng-container>
-      <ng-container *ngIf="faqEsncardItemList$ | async as faqEsncardItemList">
+      <ng-container *ngIf="faqEsncardItemList">
         <div
           *ngIf="faqEsncardItemList.length > 0"
           class="font-body text-xl font-bold pb-2"
@@ -78,7 +75,7 @@
           </esn-expandable>
         </div>
       </ng-container>
-      <ng-container *ngIf="faqCoronaItemList$ | async as faqCoronaItemList">
+      <ng-container *ngIf="faqCoronaItemList">
         <div
           *ngIf="faqCoronaItemList.length > 0"
           class="font-body text-xl font-bold pb-2"
@@ -96,9 +93,7 @@
           </esn-expandable>
         </div>
       </ng-container>
-      <ng-container
-        *ngIf="faqUniErasmusItemList$ | async as faqUniErasmusItemList"
-      >
+      <ng-container *ngIf="faqUniErasmusItemList">
         <div
           *ngIf="faqUniErasmusItemList.length > 0"
           class="font-body text-xl font-bold pb-2"
@@ -116,7 +111,7 @@
           </esn-expandable>
         </div>
       </ng-container>
-      <ng-container *ngIf="faqOtherItemList$ | async as faqOtherItemList">
+      <ng-container *ngIf="faqOtherItemList">
         <div
           *ngIf="faqOtherItemList.length > 0"
           class="font-body text-xl font-bold pb-2"

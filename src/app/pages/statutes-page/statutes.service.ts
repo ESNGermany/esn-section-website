@@ -16,7 +16,7 @@ export class StatutesService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   fetchStatutes(): Observable<IStatutesItem> {
@@ -24,8 +24,8 @@ export class StatutesService {
 
     return this.http.get<IStatutesItem>(this.url, { params }).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched statutes')),
-      catchError(this.handleError<IStatutesItem>('fetchStatutesList'))
+      tap(() => this.log('fetched statutes')),
+      catchError(this.handleError<IStatutesItem>('fetchStatutesList')),
     );
   }
 

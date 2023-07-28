@@ -17,15 +17,14 @@ export class ImprintService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
-  ) {
-  }
+    private messageService: MessageService,
+  ) {}
 
   fetchImprint(): Observable<IImprintItem> {
     return this.http.get<IImprintItem>(this.url).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched imprint')),
-      catchError(this.handleError<IImprintItem>('fetchImprintList'))
+      tap(() => this.log('fetched imprint')),
+      catchError(this.handleError<IImprintItem>('fetchImprintList')),
     );
   }
 

@@ -1,7 +1,4 @@
-<div
-  *ngIf="contentInfo$ | async as contentItemList; else loading"
-  class="outer-imgbox"
->
+<div *ngIf="contentInfo as contentItemList; else loading" class="outer-imgbox">
   <div *ngFor="let c of contentItemList; let idx = index" class="px-4 mb-20">
     <!-- text only -->
     <div
@@ -198,4 +195,5 @@
     width="200px"
     class="m-auto mb-26"
     src="assets/social/ESN-star-spinner.gif"
+    alt="loading"
 /></ng-template>

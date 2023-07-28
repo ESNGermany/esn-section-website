@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  TransferState,
+  makeStateKey,
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { IFaqItem, FaqService } from './faq.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'esn-incomings-page',
@@ -11,57 +19,108 @@ import { IMainItem, MainService } from 'src/app/services/main.service';
   styleUrls: ['./incomings-page.component.scss', './../base.scss'],
 })
 export class IncomingsPageComponent implements OnInit {
-  faqTransportItemList$: Observable<IFaqItem[]> | undefined;
-  faqHousingItemList$: Observable<IFaqItem[]> | undefined;
-  faqUniErasmusItemList$: Observable<IFaqItem[]> | undefined;
-  faqCoronaItemList$: Observable<IFaqItem[]> | undefined;
-  faqEsncardItemList$: Observable<IFaqItem[]> | undefined;
-  faqOtherItemList$: Observable<IFaqItem[]> | undefined;
+  public faqTransportItemList: any;
+  public faqHousingItemList: any;
+  public faqUniErasmusItemList: any;
+  public faqCoronaItemList: any;
+  public faqEsncardItemList: any;
+  public faqOtherItemList: any;
 
-  mainInfo: IMainItem | undefined;
   public readonly page: string = 'Incomings_page';
+  private mainInfo: any;
 
   constructor(
     private title: Title,
     private faqService: FaqService,
-    private mainService: MainService
+    private mainService: MainService,
+    private transferState: TransferState,
+    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+
+    if (!this.mainInfo) {
+      this.fetchMainInfo();
+    } else {
+      this.setTitle();
+    }
+
+    if (
+      !this.faqTransportItemList ||
+      !this.faqHousingItemList ||
+      !this.faqUniErasmusItemList ||
+      !this.faqCoronaItemList ||
+      !this.faqEsncardItemList ||
+      !this.faqOtherItemList
+    ) {
+      this.fetchFaq();
+    }
+  }
+
+  async fetchFaq(): Promise<void> {
+    this.faqTransportItemList = await firstValueFrom(
+      this.faqService.fetchFaq('Transport'),
+    ).then((res: any) => res.data);
+    this.faqHousingItemList = await firstValueFrom(
+      this.faqService.fetchFaq('Housing'),
+    ).then((res: any) => res.data);
+    this.faqUniErasmusItemList = await firstValueFrom(
+      this.faqService.fetchFaq('Uni_Erasmus'),
+    ).then((res: any) => res.data);
+    this.faqCoronaItemList = await firstValueFrom(
+      this.faqService.fetchFaq('Corona'),
+    ).then((res: any) => res.data);
+    this.faqEsncardItemList = await firstValueFrom(
+      this.faqService.fetchFaq('ESNcard'),
+    ).then((res: any) => res.data);
+    this.faqOtherItemList = await firstValueFrom(
+      this.faqService.fetchFaq('Other'),
+    ).then((res: any) => res.data);
+
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IFaqItem[]>(
+        makeStateKey('faqTransportItemList'),
+        this.faqTransportItemList,
+      );
+      this.transferState.set<IFaqItem[]>(
+        makeStateKey('faqHousingItemList'),
+        this.faqHousingItemList,
+      );
+      this.transferState.set<IFaqItem[]>(
+        makeStateKey('faqUniErasmusItemList'),
+        this.faqUniErasmusItemList,
+      );
+      this.transferState.set<IFaqItem[]>(
+        makeStateKey('faqCoronaItemList'),
+        this.faqCoronaItemList,
+      );
+      this.transferState.set<IFaqItem[]>(
+        makeStateKey('faqEsncardItemList'),
+        this.faqEsncardItemList,
+      );
+      this.transferState.set<IFaqItem[]>(
+        makeStateKey('faqOtherItemList'),
+        this.faqOtherItemList,
+      );
+    }
+  }
+
+  async fetchMainInfo(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
+      (res: any) => res.data[0],
     );
 
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IMainItem>(
+        makeStateKey('mainInfo'),
+        this.mainInfo,
+      );
+    }
+    this.setTitle();
+  }
+
+  private setTitle(): void {
     this.title.setTitle('For Incomings | ' + this.mainInfo!.section_long_name);
-
-    this.faqTransportItemList$ = this.faqService.fetchFaq('Transport').pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
-    );
-
-    this.faqHousingItemList$ = this.faqService.fetchFaq('Housing').pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
-    );
-
-    this.faqUniErasmusItemList$ = this.faqService.fetchFaq('Uni_Erasmus').pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
-    );
-
-    this.faqCoronaItemList$ = this.faqService.fetchFaq('Corona').pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
-    );
-
-    this.faqEsncardItemList$ = this.faqService.fetchFaq('ESNcard').pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
-    );
-
-    this.faqOtherItemList$ = this.faqService.fetchFaq('Other').pipe(
-      shareReplay(1),
-      map((res: any) => res.data)
-    );
   }
 }

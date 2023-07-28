@@ -29,7 +29,7 @@ export interface IMainItem {
       id: string;
       directus_files_id: string;
       width: string;
-    }
+    },
   ];
 }
 
@@ -39,7 +39,7 @@ export class MainService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   fetchMain(): Observable<IMainItem[]> {
@@ -53,13 +53,13 @@ export class MainService {
 
     return this.http.get<IMainItem[]>(this.url, { params }).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched mainInformation')),
-      catchError(this.handleError<IMainItem[]>('fetchMainInformation'))
+      tap(() => this.log('fetched mainInformation')),
+      catchError(this.handleError<IMainItem[]>('fetchMainInformation')),
     );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: Error): Observable<T> => {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);

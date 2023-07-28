@@ -1,7 +1,17 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { DOCUMENT, isPlatformServer } from '@angular/common';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  TransferState,
+  makeStateKey,
+} from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { IStatutesItem, StatutesService } from 'src/app/pages/statutes-page/statutes.service';
+import {
+  IStatutesItem,
+  StatutesService,
+} from 'src/app/pages/statutes-page/statutes.service';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
@@ -12,24 +22,61 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  mainInfo: IMainItem | undefined;
+  public mainInfo: any;
+  public statutes: any;
   public timestamp: string = environment.timeStamp;
-  public statutesExist: boolean = false;
+  public statutesExist = false;
 
   constructor(
     private mainService: MainService,
     private statutesService: StatutesService,
-    @Inject(DOCUMENT) private document: Document
+    private transferState: TransferState,
+    @Inject(PLATFORM_ID) private platformId: object,
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.mainInfo = this.transferState.get<IMainItem | undefined>(
+      makeStateKey('mainInfo'),
+      undefined,
+    );
+    if (!this.mainInfo) {
+      this.fetchMainInfo();
+    }
+
+    this.statutes = this.transferState.get<IStatutesItem | undefined>(
+      makeStateKey('statutes'),
+      undefined,
+    );
+    if (!this.statutes) {
+      this.fetchStatutes();
+    }
+  }
+
+  async fetchStatutes(): Promise<void> {
+    const statutes = await firstValueFrom(
+      this.statutesService.fetchStatutes(),
+    ).then((res: any) => res.data[0]);
+    this.statutesExist = !!statutes;
+
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IStatutesItem>(
+        makeStateKey('statutes'),
+        this.statutes,
+      );
+    }
+  }
+
+  async fetchMainInfo(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
+      (res: any) => res.data[0],
     );
-    const statutes = await firstValueFrom(this.statutesService.fetchStatutes()).then(
-      (res: any) => res?.data[0]
-    );
-    this.statutesExist = !! statutes;
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IMainItem>(
+        makeStateKey('mainInfo'),
+        this.mainInfo,
+      );
+    }
   }
 
   public pink(): void {

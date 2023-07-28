@@ -1,12 +1,15 @@
 <div
   class="cursor-pointer flex flex-row justify-between font-md font-body exp"
   (click)="toggleState()"
+  (keydown)="toggleState()"
+  tabindex="0"
 >
   <ng-content select="[slot=header]"></ng-content>
   <img
     [@indicatorRotate]="state$ | async"
     src="assets/fonts/MaterialIcons/expand_more.png"
     width="24px"
+    alt="expand more"
   />
 </div>
 <div

@@ -14,24 +14,24 @@ import { environment } from 'src/environments/environment';
   templateUrl: './custom-calendar.component.html',
 })
 export class CustomCalendarComponent {
-  pretixLink?: string;
-  calendarOptions: CalendarOptions;
-  isBrowser$ = new BehaviorSubject(false);
-  event$ = new BehaviorSubject(null);
+  public pretixLink?: string;
+  public calendarOptions: CalendarOptions;
+  public isBrowser$ = new BehaviorSubject(false);
+  public event$ = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: object
+    @Inject(PLATFORM_ID) private platformId: object,
   ) {
     if (isPlatformBrowser(platformId)) {
       this.isBrowser$.next(true);
     }
     const date = new Date();
     date.setDate(date.getDate() - 90); // Show the last 90 days and future events
-    const beginevents = date.toISOString();
+    const beginEvents = date.toISOString();
 
     this.calendarOptions = {
-      plugins: [ listPlugin, dayGridPlugin, interactionPlugin ],
+      plugins: [listPlugin, dayGridPlugin, interactionPlugin],
       initialView: 'listMonth',
       firstDay: 1,
       showNonCurrentDates: false,
@@ -48,7 +48,7 @@ export class CustomCalendarComponent {
         this.event$.next(info.event);
       },
       events: async function () {
-        const result_2 = await firstValueFrom(
+        const events = await firstValueFrom(
           http.get<{
             data: [
               {
@@ -62,9 +62,9 @@ export class CustomCalendarComponent {
                     esn_causes_id: {
                       name: string;
                     };
-                  }
+                  },
                 ];
-              }
+              },
             ];
           }>(
             environment.DIRECTUS_URL +
@@ -73,27 +73,23 @@ export class CustomCalendarComponent {
               environment.SECTION_NAME +
               '&fields=*,' +
               'causes.esn_causes_id.name' +
-              '&filter[start][_gt]=' + beginevents
-          )
+              '&filter[start][_gt]=' +
+              beginEvents,
+          ),
         );
-        if (result_2) {
-          console.log(result_2);
-          return result_2.data.map((res: any) => {
-            if (res.title.indexOf("Weekend") > -1) {
-              console.log(res.title);
-              console.log(res.url);
-            }
-
-            return{
-            start: new Date(res.start),
-            end: new Date(res.end),
-            title: res.title,
-            url: res.url,
-            extendedProps: {
-              details: res.details,
-              cause: 'Cause: ' + res.causes[0].esn_causes_id.name,
-            },
-          }});
+        if (events) {
+          return events.data.map((res: any) => {
+            return {
+              start: new Date(res.start),
+              end: new Date(res.end),
+              title: res.title,
+              url: res.url,
+              extendedProps: {
+                details: res.details,
+                cause: 'Cause: ' + res.causes[0].esn_causes_id.name,
+              },
+            };
+          });
         }
         return [];
       },

@@ -24,7 +24,7 @@ export class PartnerService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   fetchPagePartner(): Observable<IPartnerItem[]> {
@@ -34,13 +34,13 @@ export class PartnerService {
 
     return this.http.get<IPartnerItem[]>(this.url, { params }).pipe(
       shareReplay(1),
-      tap((_) => this.log('fetched partner')),
-      catchError(this.handleError<IPartnerItem[]>('fetchPartnerList', []))
+      tap(() => this.log('fetched partner')),
+      catchError(this.handleError<IPartnerItem[]>('fetchPartnerList', [])),
     );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: Error): Observable<T> => {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);

@@ -4,16 +4,16 @@ import {
   Inject,
   OnInit,
   PLATFORM_ID,
+  TransferState,
+  makeStateKey,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { GalleryItem, ImageItem } from 'ng-gallery';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { firstValueFrom, Observable, shareReplay } from 'rxjs';
+import { DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { IContentItem, ContentService } from 'src/app/services/content.service';
-import { MainService } from 'src/app/services/main.service';
-import { LoadJsService } from 'src/app/shared/load-js.service';
+import { IMainItem, MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'esn-landing-page',
@@ -21,25 +21,22 @@ import { LoadJsService } from 'src/app/shared/load-js.service';
   styleUrls: ['./landing-page.component.scss', './../base.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  contentInfo$: Observable<IContentItem[]> | undefined;
   public gridImageSize: string[] = ['small', 'small', 'small', 'small'];
-
-  mainInfo: any | undefined;
+  public mainInfo: any;
 
   public images!: GalleryItem[];
   public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
-  public showThumb: boolean = true;
+  public showThumb = true;
   public isBrowser: boolean;
   public readonly page: string = 'Landing_page';
 
   constructor(
     private title: Title,
-    private contentService: ContentService,
     private mainService: MainService,
-    private loadJsService: LoadJsService,
+    private transferState: TransferState,
     @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) platformId: Object
+    @Inject(PLATFORM_ID) private platformId: object,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -49,19 +46,33 @@ export class LandingPageComponent implements OnInit {
     this.setGalleryThumb();
   }
 
-  async ngOnInit(): Promise<void> {
-    this.contentInfo$ = this.contentService
-      .fetchPageContent(this.page)
-      .pipe(shareReplay(1));
+  ngOnInit(): void {
+    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
 
+    if (!this.mainInfo) {
+      this.fetchMainInfo();
+    } else {
+      this.setTitle();
+      this.setImages();
+    }
+    this.setGalleryThumb();
+  }
+
+  async fetchMainInfo(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
+      (res: any) => res.data[0],
     );
 
-    this.title.setTitle('Home | ' + this.mainInfo!.section_long_name);
+    if (isPlatformServer(this.platformId)) {
+      this.transferState.set<IMainItem>(
+        makeStateKey('mainInfo'),
+        this.mainInfo,
+      );
+    }
+    this.setTitle();
+  }
 
-    this.setGalleryThumb();
-    
+  private setImages(): void {
     this.images = [];
     if (this.mainInfo!.use_image_slideshow) {
       this.mainInfo.imagegrid_frontpage.forEach((img: any) => {
@@ -70,14 +81,14 @@ export class LandingPageComponent implements OnInit {
             new ImageItem({
               src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}`,
               thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}?width=200`,
-            })
-            );
-          } else if (img.directus_files_id.id.width <= 750) {
+            }),
+          );
+        } else if (img.directus_files_id.id.width <= 750) {
           this.images.unshift(
             new ImageItem({
               src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}`,
               thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}?width=200`,
-            })
+            }),
           );
         }
       });
@@ -86,8 +97,12 @@ export class LandingPageComponent implements OnInit {
     }
   }
 
+  private setTitle(): void {
+    this.title.setTitle('Home | ' + this.mainInfo.section_long_name);
+  }
+
   private setGridImageSize(): void {
-    for (let img in [0, 1, 2, 3]) {
+    for (const img in [0, 1, 2, 3]) {
       if (
         this.mainInfo?.imagegrid_frontpage[img].directus_files_id.width > 750
       ) {

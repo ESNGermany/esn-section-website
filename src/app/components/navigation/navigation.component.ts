@@ -11,15 +11,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  windowScrolled: boolean = false;
+  public windowScrolled = false;
   public bgImage$: Observable<object> | undefined;
   public buttonColor$: Observable<object> | undefined;
-
-  mainInfo: IMainItem | undefined;
+  public mainInfo: IMainItem | undefined;
 
   constructor(
     private mainService: MainService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -38,7 +37,7 @@ export class NavigationComponent implements OnInit {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     if (
-      window.pageYOffset ||
+      window.scrollY ||
       document.documentElement.scrollTop ||
       document.body.scrollTop > 100
     ) {
@@ -54,7 +53,7 @@ export class NavigationComponent implements OnInit {
 
   scrollToTop() {
     (function smoothscroll() {
-      var currentScroll =
+      const currentScroll =
         document.documentElement.scrollTop || document.body.scrollTop;
       if (currentScroll > 0) {
         window.requestAnimationFrame(smoothscroll);
@@ -65,24 +64,22 @@ export class NavigationComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0]
+      (res: any) => res.data[0],
     );
-
     this.setNavBgImage();
     this.setSocialMediaButtonColor();
   }
 
   private setNavBgImage(): void {
-
     this.bgImage$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res: any) => ({
         'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
-          res.data[0].button_color
+          res.data[0].button_color,
         )}, 0.8) 80%), url("${environment.DIRECTUS_URL_IMAGE}${
           res.data[0].header_image.id
         }/background_img?width=${window.innerWidth}")`,
-      }))
+      })),
     );
   }
 
@@ -91,7 +88,7 @@ export class NavigationComponent implements OnInit {
       shareReplay(1),
       map((res: any) => ({
         'background-color': `${this.getButtonColor(res.data[0].button_color)})`,
-      }))
+      })),
     );
   }
 

@@ -11,7 +11,7 @@ export const environment = {
   DIRECTUS_URL_FILES: 'https://directus.esn-germany.de/files/',
   DIRECTUS_URL: 'https://directus.esn-germany.de/items/website_',
   DIRECTUS_SECTION_FILTER: `?filter[section][name]=`,
-  timeStamp: '2023-04-06 16:20:38',
+  timeStamp: '2023-07-28 13:02:16',
 };
 // STRAPI_SECTION_IDs:
 // 24  Augsburg
@@ -33,6 +33,7 @@ export const environment = {
 // 7   Heidelberg
 // 22  Hildesheim
 // 33  Ingolstadt
+//     Kaiserslautern
 // 12  Karlsruhe
 // 25  Kiel
 // 29  Koblenz

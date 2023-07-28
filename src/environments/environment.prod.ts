@@ -8,5 +8,5 @@ export const environment = {
   DIRECTUS_URL_FILES: 'https://directus.esn-germany.de/files/',
   DIRECTUS_URL: 'https://directus.esn-germany.de/items/website_',
   DIRECTUS_SECTION_FILTER: `?filter[section][name]=`,
-  timeStamp: '2023-04-06 16:20:38',
+  timeStamp: '2023-07-28 13:02:16',
 };
