@@ -8,17 +8,25 @@ import {
   makeStateKey,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { GalleryItem, ImageItem } from 'ng-gallery';
-import { DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { GalleryItem, ImageItem, GalleryComponent } from 'ng-gallery';
+import {
+  DOCUMENT,
+  isPlatformBrowser,
+  isPlatformServer,
+  NgIf,
+} from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IMainItem, MainService } from 'src/app/services/main.service';
+import { ContentItemComponent } from '../../components/content-item/content-item.component';
 
 @Component({
   selector: 'esn-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss', './../base.scss'],
+  standalone: true,
+  imports: [NgIf, GalleryComponent, ContentItemComponent],
 })
 export class LandingPageComponent implements OnInit {
   public gridImageSize: string[] = ['small', 'small', 'small', 'small'];

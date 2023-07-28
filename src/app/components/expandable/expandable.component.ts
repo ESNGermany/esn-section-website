@@ -7,6 +7,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'esn-expandable',
@@ -25,6 +26,8 @@ import {
     ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [AsyncPipe],
 })
 export class ExpandableComponent {
   public state$ = new BehaviorSubject('closed');

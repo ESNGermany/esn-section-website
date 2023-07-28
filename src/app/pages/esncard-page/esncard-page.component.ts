@@ -16,12 +16,24 @@ import {
   INationalPartnerItem,
   NationalPartnersService,
 } from './national-partners.service';
-import { isPlatformServer } from '@angular/common';
+import { isPlatformServer, NgIf, NgFor, NgClass } from '@angular/common';
+import { OlaContentItemComponent } from '../../components/ola-content-item/ola-content-item.component';
+import { NationalPartnersComponent } from '../../components/national-partners/national-partners.component';
+import { ContentItemComponent } from '../../components/content-item/content-item.component';
 
 @Component({
   selector: 'esn-esncard-page',
   templateUrl: './esncard-page.component.html',
   styleUrls: ['./esncard-page.component.scss', './../base.scss'],
+  standalone: true,
+  imports: [
+    ContentItemComponent,
+    NgIf,
+    NgFor,
+    NgClass,
+    NationalPartnersComponent,
+    OlaContentItemComponent,
+  ],
 })
 export class EsncardPageComponent implements OnInit {
   public partnerInfo: any;

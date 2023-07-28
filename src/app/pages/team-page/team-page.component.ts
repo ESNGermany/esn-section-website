@@ -11,11 +11,14 @@ import { Title } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
+import { ContentItemComponent } from '../../components/content-item/content-item.component';
 
 @Component({
   selector: 'esn-team-page',
   templateUrl: './team-page.component.html',
   styleUrls: ['./../base.scss'],
+  standalone: true,
+  imports: [ContentItemComponent],
 })
 export class TeamPageComponent implements OnInit {
   public readonly page: string = 'Team_page';

@@ -11,12 +11,16 @@ import { firstValueFrom } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
-import { isPlatformServer } from '@angular/common';
+import { isPlatformServer, NgIf } from '@angular/common';
+import { PretixCalendarComponent } from '../../components/pretix-calendar/pretix-calendar.component';
+import { CustomCalendarComponent } from '../../components/custom-calendar/custom-calendar.component';
 
 @Component({
   selector: 'esn-events-page',
   templateUrl: './events-page.component.html',
   styleUrls: ['./events-page.component.scss', './../base.scss'],
+  standalone: true,
+  imports: [NgIf, CustomCalendarComponent, PretixCalendarComponent],
 })
 export class EventsPageComponent implements OnInit {
   public mainInfo: any;

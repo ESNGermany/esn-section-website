@@ -15,12 +15,15 @@ import {
 
 import { IImprintItem, ImprintService } from './imprint.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
-import { isPlatformServer } from '@angular/common';
+import { isPlatformServer, NgIf } from '@angular/common';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'esn-imprint-page',
   templateUrl: './imprint-page.component.html',
   styleUrls: ['./../base.scss'],
+  standalone: true,
+  imports: [NgIf, MarkdownModule],
 })
 export class ImprintPageComponent implements OnInit {
   private mainInfo: any;

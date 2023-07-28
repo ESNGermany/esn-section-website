@@ -1,14 +1,17 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgStyle, NgIf, NgClass, AsyncPipe } from '@angular/common';
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'esn-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, NgStyle, NgIf, NgClass, AsyncPipe],
 })
 export class NavigationComponent implements OnInit {
   public windowScrolled = false;

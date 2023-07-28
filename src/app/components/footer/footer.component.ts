@@ -1,4 +1,4 @@
-import { DOCUMENT, isPlatformServer } from '@angular/common';
+import { DOCUMENT, isPlatformServer, NgIf } from '@angular/common';
 import {
   Component,
   Inject,
@@ -15,11 +15,14 @@ import {
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'esn-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
+  standalone: true,
+  imports: [NgIf, RouterLink, RouterLinkActive],
 })
 export class FooterComponent implements OnInit {
   public mainInfo: any;

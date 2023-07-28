@@ -5,13 +5,17 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgIf, AsyncPipe, DatePipe } from '@angular/common';
 
 import { environment } from 'src/environments/environment';
+import { MarkdownModule } from 'ngx-markdown';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @Component({
   selector: 'esn-custom-calendar',
   templateUrl: './custom-calendar.component.html',
+  standalone: true,
+  imports: [NgIf, FullCalendarModule, MarkdownModule, AsyncPipe, DatePipe],
 })
 export class CustomCalendarComponent {
   public pretixLink?: string;

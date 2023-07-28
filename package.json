@@ -77,6 +77,8 @@
     "karma-jasmine-html-reporter": "^2.1.0",
     "lint-staged": "^13.2.3",
     "marked": "^5.1.0",
+    "marked-gfm-heading-id": "^3.0.4",
+    "marked-mangle": "^1.1.0",
     "moment-timezone": "^0.5.43",
     "ngx-markdown": "^16.0.0",
     "postcss": "^8.4.25",

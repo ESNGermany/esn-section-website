@@ -9,11 +9,16 @@ import {
 import { Meta, Title } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
 import { IMainItem, MainService } from './services/main.service';
-import { isPlatformServer } from '@angular/common';
+import { isPlatformServer, NgClass } from '@angular/common';
+import { FooterComponent } from './components/footer/footer.component';
+import { RouterOutlet } from '@angular/router';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @Component({
   selector: 'esn-root',
   templateUrl: './app.component.html',
+  standalone: true,
+  imports: [NgClass, NavigationComponent, RouterOutlet, FooterComponent],
 })
 export class AppComponent implements OnInit {
   public mainInfo: any;

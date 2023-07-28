@@ -1,4 +1,10 @@
-import { DOCUMENT, isPlatformServer } from '@angular/common';
+import {
+  DOCUMENT,
+  isPlatformServer,
+  NgIf,
+  NgFor,
+  NgClass,
+} from '@angular/common';
 import {
   Component,
   Inject,
@@ -9,14 +15,16 @@ import {
   makeStateKey,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-
 import { IContentItem, ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'esn-content-item',
   templateUrl: './content-item.component.html',
   styleUrls: ['./content-item.component.scss'],
+  standalone: true,
+  imports: [NgIf, NgFor, NgClass, MarkdownModule],
 })
 export class ContentItemComponent implements OnInit {
   @Input() page!: string;

@@ -11,12 +11,15 @@ import { firstValueFrom } from 'rxjs';
 
 import { IStatutesItem, StatutesService } from './statutes.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
-import { isPlatformServer } from '@angular/common';
+import { isPlatformServer, NgIf } from '@angular/common';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'esn-statutes-page',
   templateUrl: './statutes-page.component.html',
   styleUrls: ['./../base.scss'],
+  standalone: true,
+  imports: [NgIf, MarkdownModule],
 })
 export class StatutesPageComponent implements OnInit {
   public statutesItemList: any;

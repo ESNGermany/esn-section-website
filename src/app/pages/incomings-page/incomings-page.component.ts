@@ -11,12 +11,23 @@ import { firstValueFrom } from 'rxjs';
 
 import { IFaqItem, FaqService } from './faq.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
-import { isPlatformServer } from '@angular/common';
+import { isPlatformServer, NgIf, NgFor } from '@angular/common';
+import { MarkdownModule } from 'ngx-markdown';
+import { ExpandableComponent } from '../../components/expandable/expandable.component';
+import { ContentItemComponent } from '../../components/content-item/content-item.component';
 
 @Component({
   selector: 'esn-incomings-page',
   templateUrl: './incomings-page.component.html',
   styleUrls: ['./incomings-page.component.scss', './../base.scss'],
+  standalone: true,
+  imports: [
+    ContentItemComponent,
+    NgIf,
+    NgFor,
+    ExpandableComponent,
+    MarkdownModule,
+  ],
 })
 export class IncomingsPageComponent implements OnInit {
   public faqTransportItemList: any;

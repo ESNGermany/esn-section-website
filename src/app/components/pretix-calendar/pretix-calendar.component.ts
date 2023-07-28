@@ -14,6 +14,7 @@ import { LoadJsService } from 'src/app/shared/load-js.service';
   selector: 'esn-pretix-calendar',
   templateUrl: './pretix-calendar.component.html',
   styleUrls: ['./pretix-calendar.component.scss'],
+  standalone: true,
 })
 export class PretixCalendarComponent implements AfterViewInit {
   public pretix_link?: string;

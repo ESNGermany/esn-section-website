@@ -5,11 +5,15 @@ import {
   INationalPartnerItem,
   NationalPartnersService,
 } from 'src/app/pages/esncard-page/national-partners.service';
+import { MarkdownModule } from 'ngx-markdown';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'esn-national-partners',
   templateUrl: './national-partners.component.html',
   styleUrls: ['./national-partners.component.scss'],
+  standalone: true,
+  imports: [NgIf, NgFor, MarkdownModule, AsyncPipe],
 })
 export class NationalPartnersComponent {
   public nationalPartners$: Observable<INationalPartnerItem[]> | undefined;

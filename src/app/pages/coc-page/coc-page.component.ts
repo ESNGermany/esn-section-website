@@ -11,12 +11,15 @@ import { firstValueFrom } from 'rxjs';
 
 import { ICocItem, CocService } from './coc.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
-import { isPlatformServer } from '@angular/common';
+import { isPlatformServer, NgIf } from '@angular/common';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'esn-coc-page',
   templateUrl: './coc-page.component.html',
   styleUrls: ['./../base.scss'],
+  standalone: true,
+  imports: [NgIf, MarkdownModule],
 })
 export class CocPageComponent implements OnInit {
   public cocItem: any;
