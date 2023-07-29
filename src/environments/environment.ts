@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   STRAPI_SECTION_URL: 'https://sections.esn-germany.de/website-',
   STRAPI_SECTION_URL_IMAGE: 'https://sections.esn-germany.de',
-  SECTION_NAME: 'ESN Freiburg',
+  SECTION_NAME: REPLACE_SECTION_NAME,
   DIRECTUS_URL_IMAGE: 'https://directus.esn-germany.de/assets/',
   DIRECTUS_URL_FILES: 'https://directus.esn-germany.de/files/',
   DIRECTUS_URL: 'https://directus.esn-germany.de/items/website_',
