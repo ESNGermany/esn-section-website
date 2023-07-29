@@ -13,7 +13,10 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": ["scss", "css"]
+          "style": [
+            "scss",
+            "css"
+          ]
         }
       },
       "root": "",
@@ -35,7 +38,9 @@
             "assets": [
               "src/favicon.ico",
               "src/_redirects",
-              "src/assets"
+              "src/assets",
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.scss",
