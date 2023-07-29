@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://REPLACE_SECTION_URL/sitemap.xml</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/team</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/esncard</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/events</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/for-members</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/for-incomings</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/imprint</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/error</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/statutes</loc>
+    </url>
+    <url>
+        <loc>https://REPLACE_SECTION_URL/coc</loc>
+    </url>
+</urlset>

@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: 
+Sitemap: https://REPLACE_SECTION_URL/sitemap.xml
