@@ -47,9 +47,7 @@ export class AppComponent implements OnInit {
     this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
       (res: any) => res.data[0],
     );
-    this.meta.addTags([
-      { name: 'description', content: this.mainInfo.section_long_name },
-    ]);
+    this.meta.addTags([{ rel: 'canonical', href: REPLACE_SECTION_URL }]);
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
