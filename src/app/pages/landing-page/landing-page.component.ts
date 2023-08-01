@@ -77,6 +77,7 @@ export class LandingPageComponent implements OnInit {
         this.mainInfo,
       );
     }
+    this.setImages();
     this.setTitle();
   }
 
