@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Replace URL so build works
         run: |
           sed -i "s@REPLACE_SECTION_URL@https://freiburg.esn-germany.de@g" src/app/app.component.ts
 
