@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        run: |
+          sed -i "s@REPLACE_SECTION_URL@https://freiburg.esn-germany.de@g" src/app/app.component.ts
 
       - name: Cypress run
         uses: cypress-io/github-action@v4

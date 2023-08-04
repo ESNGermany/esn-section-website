@@ -44,10 +44,8 @@ export class AppComponent implements OnInit {
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
-    this.meta.addTags([{ rel: 'canonical', href: REPLACE_SECTION_URL }]);
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
+    this.meta.addTags([{ rel: 'canonical', href: 'REPLACE_SECTION_URL' }]);
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
