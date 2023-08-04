@@ -14,7 +14,7 @@ import { IPartnerItem, PartnerService } from './partner.service';
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import {
   INationalPartnerItem,
-  NationalPartnersService,
+  NationalPartnerService,
 } from './national-partners.service';
 import { isPlatformServer, NgIf, NgFor, NgClass } from '@angular/common';
 import { OlaContentItemComponent } from '../../components/ola-content-item/ola-content-item.component';
@@ -36,18 +36,18 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   ],
 })
 export class EsncardPageComponent implements OnInit {
-  public partnerInfo: any;
-  public nationalPartner: any;
-  private mainInfo: any;
-
+  public partnerInfo: IPartnerItem[] | undefined;
+  public nationalPartner: INationalPartnerItem[] | undefined;
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
   public cityName?: string;
   public readonly page: string = 'ESNcard_page';
 
+  private mainInfo: IMainItem | undefined;
+
   constructor(
     private title: Title,
     private partnerService: PartnerService,
-    private nationalPartnerService: NationalPartnersService,
+    private nationalPartnerService: NationalPartnerService,
     private mainService: MainService,
     private transferState: TransferState,
     @Inject(PLATFORM_ID) private platformId: object,
@@ -78,9 +78,7 @@ export class EsncardPageComponent implements OnInit {
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
@@ -95,7 +93,7 @@ export class EsncardPageComponent implements OnInit {
   async fetchPartnerInfo(): Promise<void> {
     this.partnerInfo = await firstValueFrom(
       this.partnerService.fetchPagePartner(),
-    ).then((res: any) => res.data);
+    );
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IPartnerItem[]>(
         makeStateKey('partnerInfo'),
@@ -107,7 +105,7 @@ export class EsncardPageComponent implements OnInit {
   async fetchNationalPartner(): Promise<void> {
     this.nationalPartner = await firstValueFrom(
       this.nationalPartnerService.fetchPageNationalPartner(),
-    ).then((res: any) => res.data);
+    );
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<INationalPartnerItem[]>(
         makeStateKey('nationalPartner'),
@@ -119,15 +117,15 @@ export class EsncardPageComponent implements OnInit {
   public toggleInfo(partner: IPartnerItem): void {
     partner.show = !partner.show;
     if (!partner.show) {
-      partner.buttonText = `More info ↓`;
+      partner.buttonText = `More info`;
     } else {
-      partner.buttonText = `Less info ↑`;
+      partner.buttonText = `Less info`;
     }
   }
 
   private setTitle(): void {
     this.title.setTitle(
-      'ESNcard & Partners | ' + this.mainInfo.section_long_name,
+      'ESNcard & Partners | ' + this.mainInfo!.section_long_name,
     );
   }
 }

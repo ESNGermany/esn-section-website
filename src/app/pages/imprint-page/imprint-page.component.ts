@@ -26,9 +26,9 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class ImprintPageComponent implements OnInit {
-  private mainInfo: any;
-  public imprintSection: any;
-  public imprintEsnGermany: any;
+  private mainInfo: IMainItem | undefined;
+  public imprintSection: IImprintItem | undefined;
+  public imprintEsnGermany: IImprintEsnGerItem | undefined;
 
   constructor(
     private title: Title,
@@ -66,9 +66,7 @@ export class ImprintPageComponent implements OnInit {
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
@@ -82,7 +80,7 @@ export class ImprintPageComponent implements OnInit {
   async fetchImprintSection(): Promise<void> {
     this.imprintSection = await firstValueFrom(
       this.imprintService.fetchImprint(),
-    ).then((res: any) => res.data[0]);
+    );
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IImprintItem>(
@@ -98,7 +96,7 @@ export class ImprintPageComponent implements OnInit {
     ).then((res: any) => res[0]);
 
     if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IImprintEsnGerItem>(
+      this.transferState.set<IImprintEsnGerItem | undefined>(
         makeStateKey('imprintEsnGermany'),
         this.imprintEsnGermany,
       );
@@ -106,6 +104,6 @@ export class ImprintPageComponent implements OnInit {
   }
 
   private setTitle(): void {
-    this.title.setTitle('Imprint | ' + this.mainInfo.section_long_name);
+    this.title.setTitle('Imprint | ' + this.mainInfo!.section_long_name);
   }
 }

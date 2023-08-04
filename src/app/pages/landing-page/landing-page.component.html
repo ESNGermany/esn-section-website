@@ -2,7 +2,7 @@
   <div class="px-8 mb-16">
     <div class="title-div4">
       <ng-container *ngIf="mainInfo">
-        <p id="titeli" data-testid="esn-title" class="title-p-welcome">
+        <p id="title" #title data-testid="esn-title" class="title-p-welcome">
           {{ mainInfo.welcome_message_front_page }}
         </p>
       </ng-container>
@@ -32,7 +32,7 @@
         <img
           *ngIf="gridImageSize[0] === 'small'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[0].directus_files_id.id
+            mainInfo.imagegrid_frontpage[0]?.directus_files_id
           }}/grid_0?width=400"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -40,7 +40,7 @@
         <img
           *ngIf="gridImageSize[0] === 'medium'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[0].directus_files_id.id
+            mainInfo.imagegrid_frontpage[0]?.directus_files_id
           }}/grid_0?width=600"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -48,7 +48,7 @@
         <img
           *ngIf="gridImageSize[0] === 'large'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[0].directus_files_id.id
+            mainInfo.imagegrid_frontpage[0]?.directus_files_id
           }}/grid_0?width=800"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -58,7 +58,7 @@
         <img
           *ngIf="gridImageSize[1] === 'small'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[1]?.directus_files_id
           }}/grid_1?width=400"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -66,7 +66,7 @@
         <img
           *ngIf="gridImageSize[1] === 'medium'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[1]?.directus_files_id
           }}/grid_1?width=600"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -74,7 +74,7 @@
         <img
           *ngIf="gridImageSize[1] === 'large'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[1]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[1]?.directus_files_id
           }}/grid_1?width=800"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -84,7 +84,7 @@
         <img
           *ngIf="gridImageSize[2] === 'small'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[2]?.directus_files_id
           }}/grid_2?width=400"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -92,7 +92,7 @@
         <img
           *ngIf="gridImageSize[2] === 'medium'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[2]?.directus_files_id
           }}/grid_2?width=600"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -100,7 +100,7 @@
         <img
           *ngIf="gridImageSize[2] === 'large'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[2]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[2]?.directus_files_id
           }}/grid_2?width=800"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -110,7 +110,7 @@
         <img
           *ngIf="gridImageSize[3] === 'small'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[3]?.directus_files_id
           }}/grid_3?width=400"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -118,7 +118,7 @@
         <img
           *ngIf="gridImageSize[3] === 'medium'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[3]?.directus_files_id
           }}/grid_3?width=600"
           class="object-cover h-full w-full"
           alt="fun ESN image"
@@ -126,7 +126,7 @@
         <img
           *ngIf="gridImageSize[3] === 'large'"
           src="{{ directusImageLink }}{{
-            mainInfo.imagegrid_frontpage[3]?.directus_files_id.id
+            mainInfo.imagegrid_frontpage[3]?.directus_files_id
           }}/grid_3?width=800"
           class="object-cover h-full w-full"
           alt="fun ESN image"

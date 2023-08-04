@@ -6,33 +6,31 @@
     <ng-container *ngFor="let partner of partners; let i = index">
       <figure class="my-4 px-8 maxw" data-testid="esn-national-partner">
         <a
-          href="{{ partner.Link }}"
-          title="{{ partner.Logo.alternativeText }}"
+          href="{{ partner.link }}"
+          title="{{ partner.name }}"
           target="_blank"
           rel="noopener"
         >
           <img
             class="imgh m-auto zoom"
-            src="https://strapi.esn-germany.de{{
-              partner.Logo.formats.medium.url
-            }}"
-            alt="{{ partner.Logo.alternativeText }}"
+            src="{{ directusImageLink }}{{ partner.logo.id }}"
+            alt="{{ partner.name }}"
           />
         </a>
         <figcaption class="pt-4 text-center font-bold">
-          {{ partner.Name }}
+          {{ partner.name }}
           <br />
           <button
-            *ngIf="partner.Description"
+            *ngIf="partner.description"
             (click)="toggleInfo(partner)"
-            class="text-esn-dark-blue hover:underline"
+            class="text-neutral-500 bg-white hover:bg-neutral-500 hover:text-white text-base border-stone-300 border rounded-xl px-2"
           >
             {{ partner.buttonText }}
           </button>
           <br />
           <markdown
             [hidden]="!partner.show"
-            [data]="partner.Description"
+            [data]="partner.description"
             style="text-align: left"
           >
           </markdown>

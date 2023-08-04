@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, shareReplay, tap } from 'rxjs/operators';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 import { environment as env } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
@@ -28,12 +28,11 @@ export class PartnerService {
   ) {}
 
   fetchPagePartner(): Observable<IPartnerItem[]> {
-    const params = new HttpParams()
-      .set('fields', 'name,deal,link,order,main_image.*')
-      .set('sort', 'order');
+    const params = new HttpParams().set('fields', '*.*').set('sort', 'order');
 
     return this.http.get<IPartnerItem[]>(this.url, { params }).pipe(
       shareReplay(1),
+      map((res: any) => res.data),
       tap(() => this.log('fetched partner')),
       catchError(this.handleError<IPartnerItem[]>('fetchPartnerList', [])),
     );

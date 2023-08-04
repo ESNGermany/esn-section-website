@@ -28,7 +28,7 @@ export class PretixCalendarComponent implements AfterViewInit {
     @Inject(DOCUMENT) private document: Document,
   ) {
     this.mainService.fetchMain().subscribe((res: any) => {
-      this.pretix_link = res.data[0].pretix_link;
+      this.pretix_link = res.pretix_link;
       this.insertPretixLink();
       this.loadJsService.loadJsFile('https://pretix.eu/widget/v1.en.js');
     });

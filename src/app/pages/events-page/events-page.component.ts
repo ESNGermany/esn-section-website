@@ -23,7 +23,7 @@ import { CustomCalendarComponent } from '../../components/custom-calendar/custom
   imports: [NgIf, CustomCalendarComponent, PretixCalendarComponent],
 })
 export class EventsPageComponent implements OnInit {
-  public mainInfo: any;
+  public mainInfo: IMainItem | undefined;
   public loadPretix: boolean;
 
   constructor(
@@ -47,9 +47,7 @@ export class EventsPageComponent implements OnInit {
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
@@ -66,6 +64,6 @@ export class EventsPageComponent implements OnInit {
   }
 
   private setTitle(): void {
-    this.title.setTitle('Events | ' + this.mainInfo.section_long_name);
+    this.title.setTitle('Events | ' + this.mainInfo!.section_long_name);
   }
 }

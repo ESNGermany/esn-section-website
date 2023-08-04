@@ -17,7 +17,7 @@ import {
 } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 
-import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import { ContentItemComponent } from '../../components/content-item/content-item.component';
 
@@ -33,8 +33,8 @@ export class LandingPageComponent implements OnInit {
   public mainInfo: any;
 
   public images!: GalleryItem[];
-  public strapiLink: string = environment.STRAPI_SECTION_URL_IMAGE;
-  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
+  public strapiLink: string = env.STRAPI_SECTION_URL_IMAGE;
+  public directusImageLink: string = env.DIRECTUS_URL_IMAGE;
   public showThumb = true;
   public isBrowser: boolean;
   public readonly page: string = 'Landing_page';
@@ -67,9 +67,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
@@ -77,29 +75,20 @@ export class LandingPageComponent implements OnInit {
         this.mainInfo,
       );
     }
-    this.setImages();
     this.setTitle();
+    this.setImages();
   }
 
   private setImages(): void {
     this.images = [];
-    if (this.mainInfo!.use_image_slideshow) {
+    if (this.mainInfo.use_image_slideshow) {
       this.mainInfo.imagegrid_frontpage.forEach((img: any) => {
-        if (img.directus_files_id.width > 750) {
-          this.images.unshift(
-            new ImageItem({
-              src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}`,
-              thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}?width=200`,
-            }),
-          );
-        } else if (img.directus_files_id.id.width <= 750) {
-          this.images.unshift(
-            new ImageItem({
-              src: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}`,
-              thumb: `${environment.DIRECTUS_URL_IMAGE}${img.directus_files_id.id}?width=200`,
-            }),
-          );
-        }
+        this.images.unshift(
+          new ImageItem({
+            src: `${env.DIRECTUS_URL_IMAGE}${img.directus_files_id}`,
+            thumb: `${env.DIRECTUS_URL_IMAGE}${img.directus_files_id}?width=200`,
+          }),
+        );
       });
     } else {
       this.setGridImageSize();

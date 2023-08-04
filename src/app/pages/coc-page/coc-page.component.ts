@@ -22,8 +22,8 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class CocPageComponent implements OnInit {
-  public cocItem: any;
-  private mainInfo: any;
+  public cocItem: ICocItem | undefined;
+  private mainInfo: IMainItem | undefined;
 
   constructor(
     private title: Title,
@@ -53,14 +53,15 @@ export class CocPageComponent implements OnInit {
     );
 
     if (isPlatformServer(this.platformId)) {
-      this.transferState.set<ICocItem>(makeStateKey('cocItem'), this.cocItem);
+      this.transferState.set<ICocItem | undefined>(
+        makeStateKey('cocItem'),
+        this.cocItem,
+      );
     }
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
         makeStateKey('mainInfo'),
@@ -70,6 +71,8 @@ export class CocPageComponent implements OnInit {
   }
 
   private setTitle(): void {
-    this.title.setTitle('Code of Conduct | ' + this.mainInfo.section_long_name);
+    this.title.setTitle(
+      'Code of Conduct | ' + this.mainInfo!.section_long_name,
+    );
   }
 }

@@ -3,10 +3,11 @@ import { Observable, shareReplay } from 'rxjs';
 
 import {
   INationalPartnerItem,
-  NationalPartnersService,
+  NationalPartnerService,
 } from 'src/app/pages/esncard-page/national-partners.service';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { environment as env } from 'src/environments/environment';
 
 @Component({
   selector: 'esn-national-partners',
@@ -16,36 +17,26 @@ import { NgIf, NgFor, AsyncPipe } from '@angular/common';
   imports: [NgIf, NgFor, MarkdownModule, AsyncPipe],
 })
 export class NationalPartnersComponent {
+  public directusImageLink = env.DIRECTUS_URL_IMAGE;
   public nationalPartners$: Observable<INationalPartnerItem[]> | undefined;
 
-  constructor(private nationalPartnersService: NationalPartnersService) {
+  constructor(private nationalPartnerService: NationalPartnerService) {
     this.setNationalPartners();
-    this.toggleMoreButton();
   }
 
   private setNationalPartners(): void {
-    this.nationalPartners$ = this.nationalPartnersService
+    this.nationalPartners$ = this.nationalPartnerService
       .fetchPageNationalPartner()
       .pipe(shareReplay(1));
-  }
-
-  private toggleMoreButton(): void {
-    this.nationalPartnersService
-      .fetchPageNationalPartner()
-      .subscribe((listPartners) => {
-        for (const p of listPartners) {
-          p.buttonText = 'Learn More ↓';
-        }
-      });
   }
 
   public toggleInfo(partner: INationalPartnerItem): void {
     partner.show = !partner.show;
 
     if (!partner.show) {
-      partner.buttonText = `Learn more ↓`;
+      partner.buttonText = `More info`;
     } else {
-      partner.buttonText = `Hide text ↑`;
+      partner.buttonText = `Less info`;
     }
   }
 }

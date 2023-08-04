@@ -1,5 +1,12 @@
 import { DOCUMENT, NgStyle, NgIf, NgClass, AsyncPipe } from '@angular/common';
-import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
@@ -14,6 +21,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [RouterLink, RouterLinkActive, NgStyle, NgIf, NgClass, AsyncPipe],
 })
 export class NavigationComponent implements OnInit {
+  @ViewChild('menu') menuElement!: ElementRef<HTMLUListElement>;
+  @ViewChild('burger') burgerElement!: ElementRef<HTMLDivElement>;
+  @ViewChild('bubble1') bubble1Element!: ElementRef<HTMLDivElement>;
+  @ViewChild('bubble2') bubble2Element!: ElementRef<HTMLDivElement>;
+
   public windowScrolled = false;
   public bgImage$: Observable<object> | undefined;
   public buttonColor$: Observable<object> | undefined;
@@ -26,11 +38,12 @@ export class NavigationComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   documentClick(event: MouseEvent) {
+    const burger = this.burgerElement.nativeElement;
+    const menu = this.menuElement.nativeElement;
     if (
-      !this.document.getElementById('burger')?.contains(event.target as Node) &&
-      !this.document.getElementById('menu')?.contains(event.target as Node)
+      !burger.contains(event.target as Node) &&
+      !menu.contains(event.target as Node)
     ) {
-      const menu = this.document.getElementById('menu') as HTMLUListElement;
       if (!menu.classList.contains('hidden')) {
         this.toggleMenu();
       }
@@ -39,19 +52,7 @@ export class NavigationComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    if (
-      window.scrollY ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop > 100
-    ) {
-      this.windowScrolled = true;
-    } else if (
-      (this.windowScrolled && window.pageYOffset) ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop < 10
-    ) {
-      this.windowScrolled = false;
-    }
+    this.windowScrolled = window.scrollY > 100;
   }
 
   scrollToTop() {
@@ -66,9 +67,7 @@ export class NavigationComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
     this.setNavBgImage();
     this.setSocialMediaButtonColor();
   }
@@ -78,9 +77,9 @@ export class NavigationComponent implements OnInit {
       shareReplay(1),
       map((res: any) => ({
         'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
-          res.data[0].button_color,
+          res.button_color,
         )}, 0.8) 80%), url("${environment.DIRECTUS_URL_IMAGE}${
-          res.data[0].header_image.id
+          res.header_image.id
         }/background_img?width=${window.innerWidth}")`,
       })),
     );
@@ -90,27 +89,28 @@ export class NavigationComponent implements OnInit {
     this.buttonColor$ = this.mainService.fetchMain().pipe(
       shareReplay(1),
       map((res: any) => ({
-        'background-color': `${this.getButtonColor(res.data[0].button_color)})`,
+        'background-color': `${this.getButtonColor(res.button_color)})`,
       })),
     );
   }
 
   public toggleMenu(): void {
-    const burger = this.document.getElementById('burger') as HTMLUListElement;
-    const menu = this.document.getElementById('menu') as HTMLUListElement;
+    const menu = this.menuElement.nativeElement;
+    const burger = this.burgerElement.nativeElement;
     burger.classList.toggle('hidden');
     menu.classList.toggle('hidden');
   }
 
   public toggleBubble(bubble: 1 | 2): void {
-    const b1 = this.document.getElementById('bubble1') as HTMLDivElement;
-    const b2 = this.document.getElementById('bubble2') as HTMLDivElement;
+    const bubble1 = this.bubble1Element.nativeElement;
+    const bubble2 = this.bubble2Element.nativeElement;
+
     if (bubble === 1) {
-      b1.classList.toggle('visible');
-      b1.classList.toggle('invisible');
+      bubble1.classList.toggle('visible');
+      bubble1.classList.toggle('invisible');
     } else if (bubble === 2) {
-      b2.classList.toggle('visible');
-      b2.classList.toggle('invisible');
+      bubble2.classList.toggle('visible');
+      bubble2.classList.toggle('invisible');
     }
   }
 

@@ -22,7 +22,7 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class StatutesPageComponent implements OnInit {
-  public statutesItemList: any;
+  public statutesItem: IStatutesItem | undefined;
   private mainInfo: any;
 
   constructor(
@@ -35,7 +35,7 @@ export class StatutesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
-    this.statutesItemList = this.transferState.get(
+    this.statutesItem = this.transferState.get(
       makeStateKey('statutesItemList'),
       undefined,
     );
@@ -46,27 +46,25 @@ export class StatutesPageComponent implements OnInit {
       this.setTitle();
     }
 
-    if (!this.statutesItemList) {
+    if (!this.statutesItem) {
       this.fetchStatutes();
     }
   }
 
   async fetchStatutes(): Promise<void> {
-    this.statutesItemList = await firstValueFrom(
+    this.statutesItem = await firstValueFrom(
       this.statutesService.fetchStatutes(),
-    ).then((res: any) => res.data);
+    );
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IStatutesItem>(
         makeStateKey('statutesItemList'),
-        this.statutesItemList,
+        this.statutesItem,
       );
     }
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(

@@ -1,9 +1,9 @@
-<div *ngIf="statutesItemList; else loading" class="outer">
+<div *ngIf="statutesItem; else loading" class="outer">
   <div class="markdown-div">
     <div class="title-div">
       <p class="title-p">Satzung</p>
     </div>
-    <markdown [data]="statutesItemList[0].text"></markdown>
+    <markdown [data]="statutesItem.text"></markdown>
   </div>
 </div>
 <ng-template #loading>

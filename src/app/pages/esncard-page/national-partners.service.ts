@@ -1,23 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, shareReplay, tap } from 'rxjs';
-
+import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
+import { environment as env } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
 
 export interface INationalPartnerItem {
   id: string;
-  Name: string;
-  Description: string;
-  Deal: string;
-  Link: string;
-  Logo: {
-    alternativeText: string;
-    caption: string;
-    formats: {
-      medium: {
-        url: string;
-      };
-    };
+  name: string;
+  description: string;
+  // Deal: string;
+  link: string;
+  logo: {
+    id: string;
   };
   show: boolean;
   buttonText: string;
@@ -26,16 +20,27 @@ export interface INationalPartnerItem {
 @Injectable({
   providedIn: 'root',
 })
-export class NationalPartnersService {
+export class NationalPartnerService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
   ) {}
 
   fetchPageNationalPartner(): Observable<INationalPartnerItem[]> {
-    const url = 'https://strapi.esn-germany.de/web-partner';
-    return this.http.get<INationalPartnerItem[]>(url).pipe(
+    const url = `${env.DIRECTUS_URL_ITEMS}national_website_partners`;
+    const params = new HttpParams().set('fields', '*.*');
+    return this.http.get<INationalPartnerItem[]>(url, { params }).pipe(
       shareReplay(1),
+      // map res on res.data and add the buttonText to each item of the list
+      map((res: any) => res.data),
+      map((res: any) => {
+        return res.map((item: any) => {
+          return {
+            ...item,
+            buttonText: 'More info',
+          };
+        });
+      }),
       tap(() => this.log('fetched partner')),
       catchError(
         this.handleError<INationalPartnerItem[]>('fetchPartnerList', []),
@@ -51,6 +56,6 @@ export class NationalPartnersService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`NationalPartnersService: ${message}`);
+    this.messageService.add(`NationalPartnerService: ${message}`);
   }
 }

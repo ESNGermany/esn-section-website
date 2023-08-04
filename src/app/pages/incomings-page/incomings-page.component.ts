@@ -30,15 +30,15 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   ],
 })
 export class IncomingsPageComponent implements OnInit {
-  public faqTransportItemList: any;
-  public faqHousingItemList: any;
-  public faqUniErasmusItemList: any;
-  public faqCoronaItemList: any;
-  public faqEsncardItemList: any;
-  public faqOtherItemList: any;
+  public faqTransportItemList: IFaqItem[] | undefined;
+  public faqHousingItemList: IFaqItem[] | undefined;
+  public faqUniErasmusItemList: IFaqItem[] | undefined;
+  public faqCoronaItemList: IFaqItem[] | undefined;
+  public faqEsncardItemList: IFaqItem[] | undefined;
+  public faqOtherItemList: IFaqItem[] | undefined;
 
   public readonly page: string = 'Incomings_page';
-  private mainInfo: any;
+  private mainInfo: IMainItem | undefined;
 
   constructor(
     private title: Title,
@@ -72,22 +72,22 @@ export class IncomingsPageComponent implements OnInit {
   async fetchFaq(): Promise<void> {
     this.faqTransportItemList = await firstValueFrom(
       this.faqService.fetchFaq('Transport'),
-    ).then((res: any) => res.data);
+    );
     this.faqHousingItemList = await firstValueFrom(
       this.faqService.fetchFaq('Housing'),
-    ).then((res: any) => res.data);
+    );
     this.faqUniErasmusItemList = await firstValueFrom(
       this.faqService.fetchFaq('Uni_Erasmus'),
-    ).then((res: any) => res.data);
+    );
     this.faqCoronaItemList = await firstValueFrom(
       this.faqService.fetchFaq('Corona'),
-    ).then((res: any) => res.data);
+    );
     this.faqEsncardItemList = await firstValueFrom(
       this.faqService.fetchFaq('ESNcard'),
-    ).then((res: any) => res.data);
+    );
     this.faqOtherItemList = await firstValueFrom(
       this.faqService.fetchFaq('Other'),
-    ).then((res: any) => res.data);
+    );
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IFaqItem[]>(
@@ -118,9 +118,7 @@ export class IncomingsPageComponent implements OnInit {
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(

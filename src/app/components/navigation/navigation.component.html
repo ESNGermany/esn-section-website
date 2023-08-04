@@ -13,6 +13,7 @@
   <ul
     class="z-10 font-body text-white text-xl bg-gradient float-right w-3/5 hidden absolute right-0"
     id="menu"
+    #menu
     data-testid="esn-mobile-menu"
   >
     <a
@@ -60,9 +61,13 @@
   </ul>
 </div>
 <!-- Logo and white top navigation -->
-<div class="w-full mb-16 bg clear-both" [ngStyle]="bgImage$ | async">
+<div
+  id="navbar"
+  #navbar
+  class="w-full mb-16 bg clear-both"
+  [ngStyle]="bgImage$ | async"
+>
   <nav
-    id="navinav"
     class="flex flex-nowrap items-center max-w-screen-2lg justify-between m-auto sm:px-16 pt-8 font-body"
   >
     <div class="flex items-center flex-shrink-0 text-2xl pr-8">
@@ -104,7 +109,7 @@
         </div>
       </div>
     </div>
-    <div class="block pr-8 sm:pr-16 lg:hidden" id="burger">
+    <div class="block pr-8 sm:pr-16 lg:hidden" id="burger" #burger>
       <button
         data-testid="esn-burger-menu"
         class="flex items-center px-3 py-2 border rounded text-white border-white"
@@ -123,7 +128,7 @@
   <div class="fixed top-56 right-0 xl:mr-12 lg:mr-1 invisible lg:visible z-10">
     <div *ngIf="mainInfo.instagram_link" class="ml-8">
       <a href="{{ mainInfo.instagram_link }}" target="_blank" rel="noopener">
-        <div id="bubble1" class="bubble invisible font-body">
+        <div id="bubble1" #bubble1 class="bubble invisible font-body">
           {{ mainInfo.instagram_name }}
         </div>
         <button
@@ -142,7 +147,7 @@
     </div>
     <div *ngIf="mainInfo.facebook_link">
       <a href="{{ mainInfo.facebook_link }}" target="_blank" rel="noopener">
-        <div id="bubble2" class="bubble invisible font-body">
+        <div id="bubble2" #bubble2 class="bubble invisible font-body">
           fb.com/{{ mainInfo.facebook_name }}
         </div>
         <button
@@ -200,7 +205,9 @@
       [ngClass]="{ 'show-scrollTop': windowScrolled }"
     >
       <button (click)="scrollToTop()">
-        <div class="bg-footer p-2 rounded-lg">
+        <div
+          class="bg-footer p-2 rounded-lg outline outline-1 outline-graylight hover:bg-graymap"
+        >
           <img
             src="../../../assets/fonts/MaterialIcons/expand_less.png"
             class="m-2"

@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, shareReplay, tap } from 'rxjs/operators';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 import { environment as env } from 'src/environments/environment';
 import { MessageService } from './message.service';
@@ -42,10 +42,7 @@ export class ContentService {
 
   fetchPageContent(page: string): Observable<IContentItem[]> {
     const params = new HttpParams()
-      .set(
-        'fields',
-        'Title,Text,Image.*,Page_for_display,Order_on_page,Layout,Wrap_in_shadow_box',
-      )
+      .set('fields', '*.*')
       .set('sort', 'Order_on_page');
 
     return this.http
@@ -54,6 +51,7 @@ export class ContentService {
       })
       .pipe(
         shareReplay(1),
+        map((res: any) => res.data),
         tap(() => this.log('fetched content')),
         catchError(this.handleError<IContentItem[]>('fetchContentList')),
       );

@@ -22,7 +22,7 @@ import { ContentItemComponent } from '../../components/content-item/content-item
 })
 export class MembersPageComponent implements OnInit {
   public readonly page: string = 'Members_page';
-  public mainInfo: any;
+  public mainInfo: IMainItem | undefined;
 
   constructor(
     private title: Title,
@@ -42,9 +42,7 @@ export class MembersPageComponent implements OnInit {
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
@@ -56,6 +54,6 @@ export class MembersPageComponent implements OnInit {
   }
 
   private setTitle(): void {
-    this.title.setTitle('For Members | ' + this.mainInfo.section_long_name);
+    this.title.setTitle('For Members | ' + this.mainInfo!.section_long_name);
   }
 }

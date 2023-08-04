@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, shareReplay, tap } from 'rxjs/operators';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 import { environment as env } from 'src/environments/environment';
 import { MessageService } from '../../services/message.service';
@@ -33,6 +33,7 @@ export class FaqService {
       .get<IFaqItem[]>(`${this.url}${singleCategory}`, { params })
       .pipe(
         shareReplay(1),
+        map((res: any) => res.data),
         tap(() => this.log('fetched faq')),
         catchError(this.handleError<IFaqItem[]>('fetchFaqList', [])),
       );

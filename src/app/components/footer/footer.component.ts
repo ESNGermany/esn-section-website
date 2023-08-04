@@ -25,8 +25,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [NgIf, RouterLink, RouterLinkActive],
 })
 export class FooterComponent implements OnInit {
-  public mainInfo: any;
-  public statutes: any;
+  public mainInfo: IMainItem | undefined;
+  public statutes: IStatutesItem | undefined;
   public timestamp: string = environment.timeStamp;
   public statutesExist = false;
 
@@ -57,13 +57,11 @@ export class FooterComponent implements OnInit {
   }
 
   async fetchStatutes(): Promise<void> {
-    const statutes = await firstValueFrom(
-      this.statutesService.fetchStatutes(),
-    ).then((res: any) => res.data[0]);
+    const statutes = await firstValueFrom(this.statutesService.fetchStatutes());
     this.statutesExist = !!statutes;
 
     if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IStatutesItem>(
+      this.transferState.set<IStatutesItem | undefined>(
         makeStateKey('statutes'),
         this.statutes,
       );
@@ -71,9 +69,7 @@ export class FooterComponent implements OnInit {
   }
 
   async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain()).then(
-      (res: any) => res.data[0],
-    );
+    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IMainItem>(
         makeStateKey('mainInfo'),

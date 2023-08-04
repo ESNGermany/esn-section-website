@@ -14,7 +14,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { StatutesService } from './app/pages/statutes-page/statutes.service';
 import { PartnerService } from './app/pages/esncard-page/partner.service';
-import { NationalPartnersService } from './app/pages/esncard-page/national-partners.service';
+import { NationalPartnerService } from './app/pages/esncard-page/national-partners.service';
 import { MessageService } from './app/services/message.service';
 import { MainService } from './app/services/main.service';
 import { ImprintEsnGerService } from './app/pages/imprint-page/imprint-esnger.service';
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ImprintEsnGerService,
       MainService,
       MessageService,
-      NationalPartnersService,
+      NationalPartnerService,
       PartnerService,
       StatutesService,
       CookieService,

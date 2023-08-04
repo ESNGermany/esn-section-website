@@ -28,7 +28,7 @@ import { MarkdownModule } from 'ngx-markdown';
 })
 export class ContentItemComponent implements OnInit {
   @Input() page!: string;
-  public contentInfo: any;
+  public contentInfo: IContentItem[] | undefined;
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
 
   constructor(
@@ -60,7 +60,7 @@ export class ContentItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contentInfo = this.transferState.get<IContentItem | undefined>(
+    this.contentInfo = this.transferState.get<IContentItem[] | undefined>(
       makeStateKey('contentInfo'),
       undefined,
     );
@@ -73,7 +73,7 @@ export class ContentItemComponent implements OnInit {
   async fetchContent(): Promise<void> {
     this.contentInfo = await firstValueFrom(
       this.contentService.fetchPageContent(this.page),
-    ).then((res: any) => res.data);
+    );
 
     if (isPlatformServer(this.platformId)) {
       this.transferState.set<IContentItem[]>(
