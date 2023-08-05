@@ -5,7 +5,7 @@
         <p class="title-p">{{ imprintSection.title }}</p>
       </div>
       <markdown
-        data-testid="esn-section-imprint"
+        data-testid="esn-section-legal"
         [data]="imprintSection.text"
       ></markdown>
     </div>
@@ -14,7 +14,7 @@
     <ng-container *ngIf="imprintEsnGermany; else loading">
       <div class="markdown-div">
         <div class="title-div">
-          <p class="title-p">Imprint ESN Germany e.V.</p>
+          <p class="title-p">Legal Notice ESN Germany e.V.</p>
         </div>
         <markdown [data]="imprintEsnGermany.Content"></markdown>
       </div>

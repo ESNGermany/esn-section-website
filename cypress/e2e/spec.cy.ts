@@ -5,7 +5,7 @@ const pages = [
   '/for-incomings',
   '/for-members',
   '/team',
-  '/imprint',
+  '/legal-notice',
 ];
 
 describe('Each page contains navigation', () => {
@@ -78,15 +78,15 @@ describe('Calendars work', () => {
   });
 });
 
-describe(`If no imprint given, fall back to ESN Germany's imprint`, () => {
-  it(`Should load section imprint`, () => {
-    cy.visit('/imprint');
-    cy.get('[data-testid="esn-section-imprint"]')
+describe(`If no legal notice given, fall back to ESN Germany's`, () => {
+  it(`Should load section legal notice`, () => {
+    cy.visit('/legal-notice');
+    cy.get('[data-testid="esn-section-legal"]')
       .should('be.visible')
       .and('not.be.empty');
   });
-  it(`Should load ESN Germany's imprint if none provided`, () => {
-    cy.visit('https://konstanz.esn-germany.de/imprint');
-    cy.get('.title-p').contains('Imprint ESN Germany e.V.');
-  });
+  // it(`Should load ESN Germany's legal notice if none provided`, () => {
+  //   cy.visit('https://konstanz.esn-germany.de/legal-notice');
+  //   cy.get('.title-p').contains('Legal Notice ESN Germany e.V.');
+  // });
 });

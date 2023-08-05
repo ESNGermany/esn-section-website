@@ -34,18 +34,21 @@
     </div>
     <div class="sm:w-full lg:w-1/2 xl:w-1/5 px-8">
       <p class="font-bold uppercase py-1 text-lg">Links</p>
-      <a routerLink="/imprint" routerLinkActive="active" class="hover:underline"
-        >Imprint</a
+      <a
+        routerLink="/legal-notice"
+        routerLinkActive="active"
+        class="hover:underline"
+        >Legal Notice</a
       ><br />
       <a routerLink="/coc" routerLinkActive="active" class="hover:underline"
         >Code of Conduct</a
       ><br />
       <ng-container *ngIf="statutesExist">
         <a
-        routerLink="/statutes"
-        routerLinkActive="active"
-        class="hover:underline"
-        >Statutes</a
+          routerLink="/statutes"
+          routerLinkActive="active"
+          class="hover:underline"
+          >Statutes</a
         ><br />
       </ng-container>
       <a

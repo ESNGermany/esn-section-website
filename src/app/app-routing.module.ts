@@ -38,8 +38,12 @@ const routes: Routes = [
     component: IncomingsPageComponent,
   },
   {
-    path: 'imprint',
+    path: 'legal-notice',
     component: ImprintPageComponent,
+  },
+  {
+    path: 'imprint',
+    redirectTo: '/legal-notice',
   },
   {
     path: 'statutes',

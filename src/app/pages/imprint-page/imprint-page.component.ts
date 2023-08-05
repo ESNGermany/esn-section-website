@@ -104,6 +104,6 @@ export class ImprintPageComponent implements OnInit {
   }
 
   private setTitle(): void {
-    this.title.setTitle('Imprint | ' + this.mainInfo!.section_long_name);
+    this.title.setTitle('Legal Notice | ' + this.mainInfo!.section_long_name);
   }
 }
