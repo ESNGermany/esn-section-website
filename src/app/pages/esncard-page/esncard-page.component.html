@@ -31,7 +31,7 @@
               class="imgh m-auto zoom"
               src="{{ directusImageLink }}{{
                 partner.main_image.id
-              }}?height=300"
+              }}?height=300&format=auto"
               alt="{{ partner.name }}"
           /></a>
           <figcaption class="pt-4 text-center font-bold">
@@ -81,7 +81,7 @@
   <ng-container *ngIf="nationalPartner">
     <ng-container *ngIf="nationalPartner.length > 0">
       <div class="title-div">
-        <p class="title-p">National Partners from ESN Germany</p>
+        <p class="title-p">National Partners of ESN Germany</p>
       </div>
     </ng-container>
   </ng-container>

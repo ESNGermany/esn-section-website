@@ -80,7 +80,7 @@ export class NavigationComponent implements OnInit {
           res.button_color,
         )}, 0.8) 80%), url("${environment.DIRECTUS_URL_IMAGE}${
           res.header_image.id
-        }/background_img?width=${window.innerWidth}")`,
+        }/background_img?format=auto&width=${window.innerWidth}")`,
       })),
     );
   }

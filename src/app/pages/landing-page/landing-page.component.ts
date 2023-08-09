@@ -84,8 +84,8 @@ export class LandingPageComponent implements OnInit {
       this.mainInfo.imagegrid_frontpage.forEach((img: any) => {
         this.images.unshift(
           new ImageItem({
-            src: `${env.DIRECTUS_URL_IMAGE}${img.directus_files_id}`,
-            thumb: `${env.DIRECTUS_URL_IMAGE}${img.directus_files_id}?width=200`,
+            src: `${env.DIRECTUS_URL_IMAGE}${img.directus_files_id}&format=auto`,
+            thumb: `${env.DIRECTUS_URL_IMAGE}${img.directus_files_id}?width=200&format=auto`,
           }),
         );
       });
