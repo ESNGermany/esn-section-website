@@ -34,7 +34,14 @@
 
 @font-face {
   font-family: "Oswald", sans-serif;
-  src: url("./assets/fonts/Oswald/Oswald-Regular.ttf") format("truetype");
+  src: url("./assets/fonts/Oswald/Oswald-Regular.eot");
+  src:
+    url("https://directus.esn-germany.de/assets/d409a98e-851b-4817-a5d9-18b4bac8157e")
+      format("truetype"),
+    url("https://directus.esn-germany.de/assets/dab46c54-fc8a-44b8-adcb-e06b8c3f3800")
+      format("woff");
+  font-weight: normal;
+  // src: url("./assets/fonts/Oswald/Oswald-Regular.ttf") format("truetype");
 }
 
 :root {
