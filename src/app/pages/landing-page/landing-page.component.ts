@@ -29,7 +29,6 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   imports: [NgIf, GalleryComponent, ContentItemComponent],
 })
 export class LandingPageComponent implements OnInit {
-  public gridImageSize: string[] = ['small', 'small', 'small', 'small'];
   public mainInfo: any;
 
   public images!: GalleryItem[];
@@ -90,29 +89,11 @@ export class LandingPageComponent implements OnInit {
           }),
         );
       });
-    } else {
-      this.setGridImageSize();
     }
   }
 
   private setTitle(): void {
     this.title.setTitle('Home | ' + this.mainInfo.section_long_name);
-  }
-
-  private setGridImageSize(): void {
-    for (const img in [0, 1, 2, 3]) {
-      if (
-        this.mainInfo?.imagegrid_frontpage[img].directus_files_id.width > 750
-      ) {
-        this.gridImageSize[img] = 'medium';
-      } else if (
-        this.mainInfo?.imagegrid_frontpage[img].directus_files_id.width > 1000
-      ) {
-        this.gridImageSize[img] = 'large';
-      } else {
-        this.gridImageSize[img] = 'small';
-      }
-    }
   }
 
   private setGalleryThumb(): void {
