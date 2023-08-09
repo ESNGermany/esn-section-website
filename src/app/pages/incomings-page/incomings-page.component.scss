@@ -12,7 +12,9 @@
 
 .exp-shadow {
   border-radius: 4px;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+  box-shadow:
+    0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
@@ -35,4 +37,18 @@
 
 .outer-div-incoming {
   @apply max-w-screen-xl m-auto p-0 sm:px-16 xl:mt-12 lg:mt-4 sm:mt-4;
+}
+
+.fade-in-element {
+  animation: fade-in 0.9s ease-in-out;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
