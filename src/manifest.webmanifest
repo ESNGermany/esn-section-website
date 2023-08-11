@@ -1,0 +1,9 @@
+{
+  "name": "esn-sections-website",
+  "short_name": "esn-sections-website",
+  "theme_color": "#2e3192",
+  "background_color": "#fff",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./"
+}

@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { enableProdMode, importProvidersFrom, isDevMode } from '@angular/core';
 import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
 import { SharedModule } from './app/shared/shared.module';
@@ -23,6 +23,7 @@ import { FaqService } from './app/pages/incomings-page/faq.service';
 import { ContentService } from './app/services/content.service';
 import { CocService } from './app/pages/coc-page/coc.service';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { provideServiceWorker } from '@angular/service-worker';
 
 if (environment.production) {
   enableProdMode();
@@ -31,27 +32,25 @@ if (environment.production) {
 document.addEventListener('DOMContentLoaded', () => {
   bootstrapApplication(AppComponent, {
     providers: [
-      importProvidersFrom(
-        GalleryModule,
-        AppRoutingModule,
-        MarkdownModule.forRoot(),
-        FullCalendarModule,
-        SharedModule,
-      ),
-      FullCalendarModule,
-      CocService,
-      ContentService,
-      FaqService,
-      ImprintService,
-      ImprintEsnGerService,
-      MainService,
-      MessageService,
-      NationalPartnerService,
-      PartnerService,
-      StatutesService,
-      CookieService,
-      provideAnimations(),
-      provideHttpClient(withInterceptorsFromDi()),
-    ],
+    importProvidersFrom(GalleryModule, AppRoutingModule, MarkdownModule.forRoot(), FullCalendarModule, SharedModule),
+    FullCalendarModule,
+    CocService,
+    ContentService,
+    FaqService,
+    ImprintService,
+    ImprintEsnGerService,
+    MainService,
+    MessageService,
+    NationalPartnerService,
+    PartnerService,
+    StatutesService,
+    CookieService,
+    provideAnimations(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    })
+],
   }).catch((err) => console.error(err));
 });
