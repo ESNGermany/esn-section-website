@@ -4,18 +4,10 @@ import {
   Inject,
   OnInit,
   PLATFORM_ID,
-  TransferState,
-  makeStateKey,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { GalleryItem, ImageItem, GalleryComponent } from 'ng-gallery';
-import {
-  DOCUMENT,
-  isPlatformBrowser,
-  isPlatformServer,
-  NgIf,
-} from '@angular/common';
-import { firstValueFrom } from 'rxjs';
+import { DOCUMENT, isPlatformBrowser, NgIf } from '@angular/common';
 
 import { environment as env } from 'src/environments/environment';
 import { IMainItem, MainService } from 'src/app/services/main.service';
@@ -41,7 +33,6 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private title: Title,
     private mainService: MainService,
-    private transferState: TransferState,
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: object,
   ) {
@@ -54,28 +45,16 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
 
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    } else {
+    if (this.mainInfo) {
       this.setTitle();
       this.setImages();
     }
-    this.setGalleryThumb();
-  }
-
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
-      );
-    }
-    this.setTitle();
-    this.setImages();
   }
 
   private setImages(): void {
@@ -93,7 +72,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   private setTitle(): void {
-    this.title.setTitle('Home | ' + this.mainInfo.section_long_name);
+    this.title.setTitle('Home | ' + this.mainInfo?.section_long_name);
   }
 
   private setGalleryThumb(): void {

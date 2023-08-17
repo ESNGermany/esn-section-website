@@ -1,17 +1,9 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
-import { isPlatformServer, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { PretixCalendarComponent } from '../../components/pretix-calendar/pretix-calendar.component';
 import { CustomCalendarComponent } from '../../components/custom-calendar/custom-calendar.component';
 
@@ -30,32 +22,20 @@ export class EventsPageComponent implements OnInit {
     private title: Title,
     private mainService: MainService,
     private cookieService: CookieService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
   ) {
     this.loadPretix = this.cookieService.get('pretix') === 'true';
   }
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
 
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    } else {
+    if (this.mainInfo) {
       this.setTitle();
     }
-  }
-
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
-      );
-    }
-    this.setTitle();
   }
 
   public setLoadPretix(): void {
@@ -64,6 +44,6 @@ export class EventsPageComponent implements OnInit {
   }
 
   private setTitle(): void {
-    this.title.setTitle('Events | ' + this.mainInfo!.section_long_name);
+    this.title.setTitle('Events | ' + this.mainInfo?.section_long_name);
   }
 }

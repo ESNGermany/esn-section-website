@@ -1,14 +1,5 @@
-import { isPlatformServer } from '@angular/common';
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
 
 import { IMainItem, MainService } from 'src/app/services/main.service';
 import { ContentItemComponent } from '../../components/content-item/content-item.component';
@@ -22,38 +13,26 @@ import { ContentItemComponent } from '../../components/content-item/content-item
 })
 export class TeamPageComponent implements OnInit {
   public readonly page: string = 'Team_page';
-  public mainInfo: IMainItem | undefined;
+  public mainInfo!: IMainItem;
 
   constructor(
     private title: Title,
     private mainService: MainService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
 
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    } else {
+    if (this.mainInfo) {
       this.setTitle();
     }
   }
 
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
-      );
-    }
-    this.setTitle();
-  }
-
   private setTitle(): void {
-    this.title.setTitle('Our Team | ' + this.mainInfo!.section_long_name);
+    this.title.setTitle('Our Team | ' + this.mainInfo?.section_long_name);
   }
 }

@@ -54,40 +54,17 @@ export class EsncardPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
-    this.partnerInfo = this.transferState.get(
-      makeStateKey('partnerInfo'),
-      undefined,
-    );
-    this.nationalPartner = this.transferState.get(
-      makeStateKey('nationalPartner'),
-      undefined,
-    );
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
 
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    } else {
+    if (this.mainInfo) {
       this.setTitle();
     }
-    if (!this.partnerInfo) {
-      this.fetchPartnerInfo();
-    }
-    if (!this.nationalPartner) {
-      this.fetchNationalPartner();
-    }
-  }
-
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
-      );
-    }
-    this.setTitle();
-    this.cityName = this.mainInfo.section_short_name;
+    this.fetchPartnerInfo();
+    this.fetchNationalPartner();
   }
 
   async fetchPartnerInfo(): Promise<void> {
@@ -125,7 +102,7 @@ export class EsncardPageComponent implements OnInit {
 
   private setTitle(): void {
     this.title.setTitle(
-      'ESNcard & Partners | ' + this.mainInfo!.section_long_name,
+      'ESNcard & Partners | ' + this.mainInfo?.section_long_name,
     );
   }
 }

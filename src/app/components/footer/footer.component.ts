@@ -39,21 +39,12 @@ export class FooterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get<IMainItem | undefined>(
-      makeStateKey('mainInfo'),
-      undefined,
-    );
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    }
-
-    this.statutes = this.transferState.get<IStatutesItem | undefined>(
-      makeStateKey('statutes'),
-      undefined,
-    );
-    if (!this.statutes) {
-      this.fetchStatutes();
-    }
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
+    this.fetchStatutes();
   }
 
   async fetchStatutes(): Promise<void> {
@@ -64,16 +55,6 @@ export class FooterComponent implements OnInit {
       this.transferState.set<IStatutesItem | undefined>(
         makeStateKey('statutes'),
         this.statutes,
-      );
-    }
-  }
-
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
       );
     }
   }

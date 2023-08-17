@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
 
 import { environment as env } from 'src/environments/environment';
 import { MessageService } from './message.service';
@@ -23,7 +22,9 @@ export interface IMainItem {
   welcome_message_front_page: string;
   button_color: string;
   eventpage_text: string;
-  header_image: string;
+  header_image: {
+    id: string;
+  };
   imagegrid_frontpage: [
     {
       id: string;
@@ -33,24 +34,32 @@ export interface IMainItem {
   ];
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class MainService {
   private url = `${env.DIRECTUS_URL}main_information${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
+  private mainInformationSubject = new BehaviorSubject<IMainItem | null>(null);
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
-  ) {}
+  ) {
+    this.fetchMain();
+  }
 
-  fetchMain(): Observable<IMainItem> {
+  public getMainInformation(): Observable<IMainItem | null> {
+    return this.mainInformationSubject.asObservable();
+  }
+
+  private fetchMain(): void {
     const params = new HttpParams().set('fields', '*.*');
-
-    return this.http.get<IMainItem>(this.url, { params }).pipe(
-      shareReplay(1),
-      map((res: any) => res.data[0]),
-      tap(() => this.log('fetched mainInformation')),
-      catchError(this.handleError<IMainItem>('fetchMainInformation')),
-    );
+    this.http
+      .get<any>(this.url, { params })
+      .pipe(catchError(this.handleError('getMainInformation', null)))
+      .subscribe((main) => {
+        this.mainInformationSubject.next(main?.data[0]);
+      });
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

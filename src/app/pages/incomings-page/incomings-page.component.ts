@@ -49,14 +49,15 @@ export class IncomingsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
 
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    } else {
+    if (this.mainInfo) {
       this.setTitle();
     }
-
     if (
       !this.faqTransportItemList ||
       !this.faqHousingItemList ||
@@ -117,19 +118,7 @@ export class IncomingsPageComponent implements OnInit {
     }
   }
 
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
-      );
-    }
-    this.setTitle();
-  }
-
   private setTitle(): void {
-    this.title.setTitle('For Incomings | ' + this.mainInfo!.section_long_name);
+    this.title.setTitle('For Incomings | ' + this.mainInfo?.section_long_name);
   }
 }

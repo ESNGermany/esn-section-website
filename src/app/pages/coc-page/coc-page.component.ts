@@ -34,17 +34,16 @@ export class CocPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
-    this.cocItem = this.transferState.get(makeStateKey('cocItem'), undefined);
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
 
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    } else {
+    if (this.mainInfo) {
       this.setTitle();
     }
-    if (!this.cocItem) {
-      this.fetchCocInfo();
-    }
+    this.fetchCocInfo();
   }
 
   async fetchCocInfo(): Promise<void> {
@@ -60,19 +59,9 @@ export class CocPageComponent implements OnInit {
     }
   }
 
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
-      );
-    }
-  }
-
   private setTitle(): void {
     this.title.setTitle(
-      'Code of Conduct | ' + this.mainInfo!.section_long_name,
+      'Code of Conduct | ' + this.mainInfo?.section_long_name,
     );
   }
 }

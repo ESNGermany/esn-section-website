@@ -40,41 +40,17 @@ export class ImprintPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get(makeStateKey('mainInfo'), undefined);
-    this.imprintSection = this.transferState.get(
-      makeStateKey('imprintSection'),
-      undefined,
-    );
-    this.imprintEsnGermany = this.transferState.get(
-      makeStateKey('imprintEsnGermany'),
-      undefined,
-    );
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
 
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    } else {
+    if (this.mainInfo) {
       this.setTitle();
     }
-
-    if (!this.imprintSection) {
-      this.fetchImprintSection();
-    }
-
-    if (!this.imprintEsnGermany) {
-      this.fetchImprintEsnGermany();
-    }
-  }
-
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
-      );
-    }
-    this.setTitle();
+    this.fetchImprintEsnGermany();
+    this.fetchImprintSection();
   }
 
   async fetchImprintSection(): Promise<void> {
@@ -104,6 +80,6 @@ export class ImprintPageComponent implements OnInit {
   }
 
   private setTitle(): void {
-    this.title.setTitle('Legal Notice | ' + this.mainInfo!.section_long_name);
+    this.title.setTitle('Legal Notice | ' + this.mainInfo?.section_long_name);
   }
 }

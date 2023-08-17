@@ -1,15 +1,7 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { IMainItem, MainService } from './services/main.service';
-import { isPlatformServer, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -25,38 +17,22 @@ export class AppComponent implements OnInit {
 
   constructor(
     private mainService: MainService,
-    private transferState: TransferState,
-    private meta: Meta,
     private title: Title,
-    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
   ngOnInit(): void {
-    this.mainInfo = this.transferState.get<IMainItem | undefined>(
-      makeStateKey('mainInfo'),
-      undefined,
-    );
-    if (!this.mainInfo) {
-      this.fetchMainInfo();
-    } else {
+    this.mainService
+      .getMainInformation()
+      .subscribe((mainInfo: IMainItem | null) => {
+        this.mainInfo = mainInfo!;
+      });
+
+    if (this.mainInfo) {
       this.setTitle();
     }
   }
 
-  async fetchMainInfo(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-    this.meta.addTags([{ rel: 'canonical', href: 'REPLACE_SECTION_URL' }]);
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IMainItem>(
-        makeStateKey('mainInfo'),
-        this.mainInfo,
-      );
-    }
-    this.setTitle();
-  }
-
   private setTitle(): void {
-    this.title.setTitle('Home | ' + this.mainInfo.section_long_name);
+    this.title.setTitle('Home | ' + this.mainInfo?.section_long_name);
   }
 }

@@ -7,11 +7,11 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Observable, map, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'esn-navigation',
@@ -27,9 +27,9 @@ export class NavigationComponent implements OnInit {
   @ViewChild('bubble2') bubble2Element!: ElementRef<HTMLDivElement>;
 
   public windowScrolled = false;
-  public bgImage$: Observable<object> | undefined;
-  public buttonColor$: Observable<object> | undefined;
-  public mainInfo: IMainItem | undefined;
+  public bgImage$: Observable<any> | undefined;
+  public buttonColor$: Observable<any> | undefined;
+  public mainInfo!: any; //IMainItem | null | undefined;
 
   constructor(
     private mainService: MainService,
@@ -67,29 +67,41 @@ export class NavigationComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.mainInfo = await firstValueFrom(this.mainService.fetchMain());
-    this.setNavBgImage();
-    this.setSocialMediaButtonColor();
+    this.mainService.getMainInformation().subscribe({
+      next: (mainInfo) => {
+        this.mainInfo = mainInfo;
+        this.setNavBgImage();
+        this.setSocialMediaButtonColor();
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   private setNavBgImage(): void {
-    this.bgImage$ = this.mainService.fetchMain().pipe(
+    this.bgImage$ = this.mainService.getMainInformation().pipe(
       shareReplay(1),
-      map((res: any) => ({
-        'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
-          res.button_color,
-        )}, 0.8) 80%), url("${environment.DIRECTUS_URL_IMAGE}${
-          res.header_image.id
-        }/background_img?format=auto&width=${window.innerWidth}")`,
-      })),
+      map((res: any) => {
+        if (res?.header_image.id) {
+          return {
+            'background-image': `linear-gradient(69deg,rgba(46, 49, 146, 0.8) 19%, ${this.getButtonColor(
+              res?.button_color,
+            )}, 0.8) 80%), url("${environment.DIRECTUS_URL_IMAGE}${res
+              ?.header_image?.id}/background_img?format=auto&width=${
+              window.innerWidth
+            }")`,
+          };
+        }
+      }),
     );
   }
 
   private setSocialMediaButtonColor(): void {
-    this.buttonColor$ = this.mainService.fetchMain().pipe(
+    this.buttonColor$ = this.mainService.getMainInformation().pipe(
       shareReplay(1),
       map((res: any) => ({
-        'background-color': `${this.getButtonColor(res.button_color)})`,
+        'background-color': `${this.getButtonColor(res?.button_color)})`,
       })),
     );
   }
@@ -114,7 +126,7 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  private getButtonColor(colorString: string): string {
+  private getButtonColor(colorString: string | undefined): string {
     switch (colorString) {
       case 'esnGreen':
         return 'rgb(122, 193, 67';
