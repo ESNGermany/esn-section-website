@@ -1,18 +1,11 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
 
-import { IStatutesItem, StatutesService } from './statutes.service';
+import { StatutesService } from './statutes.service';
+import { StatutesItem } from './statutes-item';
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
-import { isPlatformServer, NgIf } from '@angular/common';
+import { MainItem } from 'src/app/services/main-item';
+import { NgIf } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
@@ -23,38 +16,26 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class StatutesPageComponent implements OnInit {
-  public statutesItem?: IStatutesItem;
+  public statutes?: StatutesItem;
   private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
     private statutesService: StatutesService,
     private mainService: MainService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
   ngOnInit(): void {
     this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
       this.mainInfo = mainInfo!;
     });
-
     if (this.mainInfo) {
       this.setTitle();
     }
-    this.fetchStatutes();
-  }
 
-  async fetchStatutes(): Promise<void> {
-    this.statutesItem = await firstValueFrom(
-      this.statutesService.fetchStatutes(),
-    );
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IStatutesItem>(
-        makeStateKey('statutesItemList'),
-        this.statutesItem,
-      );
-    }
+    this.statutesService.getStatutes().subscribe((statutes?: StatutesItem) => {
+      this.statutes = statutes!;
+    });
   }
 
   private setTitle(): void {

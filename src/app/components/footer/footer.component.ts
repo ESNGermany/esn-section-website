@@ -1,20 +1,10 @@
-import { DOCUMENT, isPlatformServer, NgIf } from '@angular/common';
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
-import { firstValueFrom } from 'rxjs';
-import {
-  IStatutesItem,
-  StatutesService,
-} from 'src/app/pages/statutes-page/statutes.service';
+import { DOCUMENT, NgIf } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { StatutesService } from 'src/app/pages/statutes-page/statutes.service';
+import { StatutesItem } from 'src/app/pages/statutes-page/statutes-item';
 
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
+import { MainItem } from 'src/app/services/main-item';
 import { environment } from 'src/environments/environment';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -27,15 +17,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class FooterComponent implements OnInit {
   public mainInfo?: MainItem;
-  public statutes?: IStatutesItem;
+  public statutes?: StatutesItem;
   public timestamp: string = environment.timeStamp;
   public statutesExist = false;
 
   constructor(
     private mainService: MainService,
     private statutesService: StatutesService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
     @Inject(DOCUMENT) private document: Document,
   ) {}
 
@@ -43,19 +31,10 @@ export class FooterComponent implements OnInit {
     this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
       this.mainInfo = mainInfo!;
     });
-    this.fetchStatutes();
-  }
-
-  async fetchStatutes(): Promise<void> {
-    const statutes = await firstValueFrom(this.statutesService.fetchStatutes());
-    this.statutesExist = !!statutes;
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IStatutesItem | undefined>(
-        makeStateKey('statutes'),
-        this.statutes,
-      );
-    }
+    this.statutesService.getStatutes().subscribe((statutes?: StatutesItem) => {
+      this.statutes = statutes!;
+      this.statutesExist = !!statutes;
+    });
   }
 
   public pink(): void {
