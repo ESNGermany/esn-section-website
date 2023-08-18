@@ -5,30 +5,10 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 import { environment as env } from 'src/environments/environment';
 import { MessageService } from './message.service';
+import { ContentItem } from './content-item';
 
 export interface IContentItem {
-  Title: string;
-  Text: string;
-  Layout:
-    | 'Text_only'
-    | 'Text_above_img_below'
-    | 'Text_below_img_above'
-    | 'Text_left_img_right'
-    | 'Text_right_img_left';
-  Wrap_in_shadow_box: boolean;
-  Page_for_display:
-    | 'Landing_page'
-    | 'Members_page'
-    | 'Team_page'
-    | 'ESNcard_page'
-    | 'Incomings_page';
-  Order_on_page: number;
-  Image: {
-    id: string;
-    width: number;
-    height: number;
-    description: string;
-  };
+  data: ContentItem[];
 }
 
 @Injectable()
@@ -40,20 +20,20 @@ export class ContentService {
     private messageService: MessageService,
   ) {}
 
-  fetchPageContent(page: string): Observable<IContentItem[]> {
+  fetchPageContent(page: string): Observable<ContentItem[]> {
     const params = new HttpParams()
       .set('fields', '*.*')
       .set('sort', 'Order_on_page');
 
     return this.http
-      .get<IContentItem[]>(`${this.url}&filter[Page_for_display]=${page}`, {
+      .get<ContentItem[]>(`${this.url}&filter[Page_for_display]=${page}`, {
         params,
       })
       .pipe(
         shareReplay(1),
         map((res: any) => res.data),
         tap(() => this.log('fetched content')),
-        catchError(this.handleError<IContentItem[]>('fetchContentList')),
+        catchError(this.handleError<ContentItem[]>('fetchContentList')),
       );
   }
 

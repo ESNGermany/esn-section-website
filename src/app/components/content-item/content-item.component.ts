@@ -15,9 +15,10 @@ import {
   makeStateKey,
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { IContentItem, ContentService } from 'src/app/services/content.service';
+import { ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
+import { ContentItem } from 'src/app/services/content-item';
 
 @Component({
   selector: 'esn-content-item',
@@ -28,7 +29,7 @@ import { MarkdownModule } from 'ngx-markdown';
 })
 export class ContentItemComponent implements OnInit {
   @Input() page!: string;
-  public contentInfo: IContentItem[] | undefined;
+  public contentInfo?: ContentItem[];
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
 
   constructor(
@@ -60,7 +61,7 @@ export class ContentItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contentInfo = this.transferState.get<IContentItem[] | undefined>(
+    this.contentInfo = this.transferState.get<ContentItem[] | undefined>(
       makeStateKey('contentInfo'),
       undefined,
     );
@@ -76,7 +77,7 @@ export class ContentItemComponent implements OnInit {
     );
 
     if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IContentItem[]>(
+      this.transferState.set<ContentItem[]>(
         makeStateKey('contentInfo'),
         this.contentInfo,
       );
