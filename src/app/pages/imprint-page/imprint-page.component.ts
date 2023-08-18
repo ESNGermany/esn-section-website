@@ -1,23 +1,12 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
-import {
-  IImprintEsnGerItem,
-  ImprintEsnGerService,
-} from './imprint-esnger.service';
-
+import { ImprintESNGermanyService } from './imprint-esn-germany.service';
+import { ImprintESNGermanyItem } from './imprint-esn-germany-item';
 import { ImprintService } from './imprint.service';
 import { ImprintItem } from './imprint-item';
 import { MainService } from 'src/app/services/main.service';
 import { MainItem } from 'src/app/services/main-item';
-import { isPlatformServer, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
@@ -29,16 +18,14 @@ import { MarkdownModule } from 'ngx-markdown';
 })
 export class ImprintPageComponent implements OnInit {
   public imprintSection?: ImprintItem;
-  public imprintEsnGermany?: IImprintEsnGerItem;
+  public imprintESNGermany?: ImprintESNGermanyItem;
   private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
     private imprintService: ImprintService,
-    private imprintEsnGerService: ImprintEsnGerService,
+    private imprintESNGermanyService: ImprintESNGermanyService,
     private mainService: MainService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
   ngOnInit(): void {
@@ -63,20 +50,15 @@ export class ImprintPageComponent implements OnInit {
         console.error(error);
       },
     });
-    this.fetchImprintEsnGermany();
-  }
 
-  async fetchImprintEsnGermany(): Promise<void> {
-    this.imprintEsnGermany = await firstValueFrom(
-      this.imprintEsnGerService.fetchEsnGerImprint(),
-    ).then((res: any) => res[0]);
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IImprintEsnGerItem | undefined>(
-        makeStateKey('imprintEsnGermany'),
-        this.imprintEsnGermany,
-      );
-    }
+    this.imprintESNGermanyService.getImprint().subscribe({
+      next: (imprintESNGermany?: ImprintESNGermanyItem) => {
+        this.imprintESNGermany = imprintESNGermany;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   private setTitle(): void {

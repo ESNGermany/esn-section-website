@@ -11,12 +11,12 @@
     </div>
   </div>
   <ng-template #esnGerImprint>
-    <ng-container *ngIf="imprintEsnGermany; else loading">
+    <ng-container *ngIf="imprintESNGermany; else loading">
       <div class="markdown-div">
         <div class="title-div">
           <p class="title-p">Legal Notice ESN Germany e.V.</p>
         </div>
-        <markdown [data]="imprintEsnGermany.Content"></markdown>
+        <markdown [data]="imprintESNGermany.Content"></markdown>
       </div>
     </ng-container>
   </ng-template>

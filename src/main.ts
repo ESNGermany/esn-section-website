@@ -17,7 +17,7 @@ import { PartnerService } from './app/pages/esncard-page/partner.service';
 import { NationalPartnerService } from './app/pages/esncard-page/national-partners.service';
 import { MessageService } from './app/services/message.service';
 import { MainService } from './app/services/main.service';
-import { ImprintEsnGerService } from './app/pages/imprint-page/imprint-esnger.service';
+import { ImprintESNGermanyService } from './app/pages/imprint-page/imprint-esn-germany.service';
 import { ImprintService } from './app/pages/imprint-page/imprint.service';
 import { FaqService } from './app/pages/incomings-page/faq.service';
 import { ContentService } from './app/services/content.service';
@@ -32,25 +32,31 @@ if (environment.production) {
 document.addEventListener('DOMContentLoaded', () => {
   bootstrapApplication(AppComponent, {
     providers: [
-    importProvidersFrom(GalleryModule, AppRoutingModule, MarkdownModule.forRoot(), FullCalendarModule, SharedModule),
-    FullCalendarModule,
-    CocService,
-    ContentService,
-    FaqService,
-    ImprintService,
-    ImprintEsnGerService,
-    MainService,
-    MessageService,
-    NationalPartnerService,
-    PartnerService,
-    StatutesService,
-    CookieService,
-    provideAnimations(),
-    provideHttpClient(withInterceptorsFromDi()),
-    provideServiceWorker('ngsw-worker.js', {
+      importProvidersFrom(
+        GalleryModule,
+        AppRoutingModule,
+        MarkdownModule.forRoot(),
+        FullCalendarModule,
+        SharedModule,
+      ),
+      FullCalendarModule,
+      CocService,
+      ContentService,
+      FaqService,
+      ImprintService,
+      ImprintESNGermanyService,
+      MainService,
+      MessageService,
+      NationalPartnerService,
+      PartnerService,
+      StatutesService,
+      CookieService,
+      provideAnimations(),
+      provideHttpClient(withInterceptorsFromDi()),
+      provideServiceWorker('ngsw-worker.js', {
         enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
-    })
-],
+        registrationStrategy: 'registerWhenStable:30000',
+      }),
+    ],
   }).catch((err) => console.error(err));
 });
