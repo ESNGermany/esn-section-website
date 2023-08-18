@@ -1,26 +1,16 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { IPartnerItem, PartnerService } from './partner.service';
+import { PartnerService } from './partner.service';
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
-import {
-  INationalPartnerItem,
-  NationalPartnerService,
-} from './national-partners.service';
-import { isPlatformServer, NgIf, NgFor, NgClass } from '@angular/common';
-import { OlaContentItemComponent } from '../../components/ola-content-item/ola-content-item.component';
-import { NationalPartnersComponent } from '../../components/national-partners/national-partners.component';
-import { ContentItemComponent } from '../../components/content-item/content-item.component';
+import { MainItem } from 'src/app/services/main-item';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { OlaContentItemComponent } from 'src/app/components/ola-content-item/ola-content-item.component';
+import { NationalPartnersComponent } from 'src/app/components/national-partners/national-partners.component';
+import { ContentItemComponent } from 'src/app/components/content-item/content-item.component';
+import { PartnerItem } from './partner-item';
+import { NationalPartnerItem } from './national-partner-item';
 
 @Component({
   selector: 'esn-esncard-page',
@@ -39,18 +29,15 @@ import { ContentItemComponent } from '../../components/content-item/content-item
 export class EsncardPageComponent implements OnInit {
   public readonly page: string = 'ESNcard_page';
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
-  public partnerInfo?: IPartnerItem[];
-  public nationalPartner?: INationalPartnerItem[];
+  public sectionPartners?: PartnerItem[];
+  public nationalPartners?: NationalPartnerItem[];
   public cityName?: string;
   private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
     private partnerService: PartnerService,
-    private nationalPartnerService: NationalPartnerService,
     private mainService: MainService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
   ngOnInit(): void {
@@ -66,35 +53,26 @@ export class EsncardPageComponent implements OnInit {
     if (this.mainInfo) {
       this.setTitle();
     }
-    this.fetchPartnerInfo();
-    this.fetchNationalPartner();
+
+    this.partnerService.getSectionPartners().subscribe({
+      next: (sectionPartners: PartnerItem[]) => {
+        this.sectionPartners = sectionPartners;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+    this.partnerService.getNationalPartners().subscribe({
+      next: (nationalPartners: NationalPartnerItem[]) => {
+        this.nationalPartners = nationalPartners;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
-  async fetchPartnerInfo(): Promise<void> {
-    this.partnerInfo = await firstValueFrom(
-      this.partnerService.fetchPagePartner(),
-    );
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IPartnerItem[]>(
-        makeStateKey('partnerInfo'),
-        this.partnerInfo,
-      );
-    }
-  }
-
-  async fetchNationalPartner(): Promise<void> {
-    this.nationalPartner = await firstValueFrom(
-      this.nationalPartnerService.fetchPageNationalPartner(),
-    );
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<INationalPartnerItem[]>(
-        makeStateKey('nationalPartner'),
-        this.nationalPartner,
-      );
-    }
-  }
-
-  public toggleInfo(partner: IPartnerItem): void {
+  public toggleInfo(partner: PartnerItem): void {
     partner.show = !partner.show;
     if (!partner.show) {
       partner.buttonText = `More info`;

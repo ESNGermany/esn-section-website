@@ -1,9 +1,9 @@
-<ng-container *ngIf="nationalPartners$ | async as partners">
-  <div *ngIf="!partners" class="bg-white w-screen h-screen"></div>
+<ng-container *ngIf="nationalPartners">
+  <div *ngIf="!nationalPartners" class="bg-white w-screen h-screen"></div>
   <div
     class="mx-4 flex flex-wrap justify-evenly font-body text-lg border border-graylight shadow-xl p-8 items-baseline"
   >
-    <ng-container *ngFor="let partner of partners; let i = index">
+    <ng-container *ngFor="let partner of nationalPartners; let i = index">
       <figure class="my-4 px-8 maxw" data-testid="esn-national-partner">
         <a
           href="{{ partner.link }}"

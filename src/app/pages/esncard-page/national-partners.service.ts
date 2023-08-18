@@ -2,19 +2,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
-import { MessageService } from '../../services/message.service';
+import { MessageService } from 'src/app/services/message.service';
+import { NationalPartnerItem } from './national-partner-item';
 
 export interface INationalPartnerItem {
-  id: string;
-  name: string;
-  description: string;
-  // Deal: string;
-  link: string;
-  logo: {
-    id: string;
-  };
-  show: boolean;
-  buttonText: string;
+  data: NationalPartnerItem[];
 }
 
 @Injectable({

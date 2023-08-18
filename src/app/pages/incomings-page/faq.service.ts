@@ -14,24 +14,12 @@ export interface IFaqItem {
 @Injectable()
 export class FaqService {
   private url = `${env.DIRECTUS_URL}faq${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&filter[category][category]=`;
-  private faqSubjectTransport = new BehaviorSubject<FaqItem[] | undefined>(
-    undefined,
-  );
-  private faqSubjectHousing = new BehaviorSubject<FaqItem[] | undefined>(
-    undefined,
-  );
-  private faqSubjectErasmus = new BehaviorSubject<FaqItem[] | undefined>(
-    undefined,
-  );
-  private faqSubjectCorona = new BehaviorSubject<FaqItem[] | undefined>(
-    undefined,
-  );
-  private faqSubjectESNcard = new BehaviorSubject<FaqItem[] | undefined>(
-    undefined,
-  );
-  private faqSubjectOther = new BehaviorSubject<FaqItem[] | undefined>(
-    undefined,
-  );
+  private faqSubjectTransport = new BehaviorSubject<FaqItem[]>([]);
+  private faqSubjectHousing = new BehaviorSubject<FaqItem[]>([]);
+  private faqSubjectErasmus = new BehaviorSubject<FaqItem[]>([]);
+  private faqSubjectCorona = new BehaviorSubject<FaqItem[]>([]);
+  private faqSubjectESNcard = new BehaviorSubject<FaqItem[]>([]);
+  private faqSubjectOther = new BehaviorSubject<FaqItem[]>([]);
 
   constructor(
     private http: HttpClient,
@@ -45,27 +33,27 @@ export class FaqService {
     this.fetchFaq('Other');
   }
 
-  public getFaqTransport(): Observable<FaqItem[] | undefined> {
+  public getFaqTransport(): Observable<FaqItem[]> {
     return this.faqSubjectTransport.asObservable();
   }
 
-  public getFaqHousing(): Observable<FaqItem[] | undefined> {
+  public getFaqHousing(): Observable<FaqItem[]> {
     return this.faqSubjectHousing.asObservable();
   }
 
-  public getFaqErasmus(): Observable<FaqItem[] | undefined> {
+  public getFaqErasmus(): Observable<FaqItem[]> {
     return this.faqSubjectErasmus.asObservable();
   }
 
-  public getFaqCorona(): Observable<FaqItem[] | undefined> {
+  public getFaqCorona(): Observable<FaqItem[]> {
     return this.faqSubjectCorona.asObservable();
   }
 
-  public getFaqESNcard(): Observable<FaqItem[] | undefined> {
+  public getFaqESNcard(): Observable<FaqItem[]> {
     return this.faqSubjectESNcard.asObservable();
   }
 
-  public getFaqOther(): Observable<FaqItem[] | undefined> {
+  public getFaqOther(): Observable<FaqItem[]> {
     return this.faqSubjectOther.asObservable();
   }
 

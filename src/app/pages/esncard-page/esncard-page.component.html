@@ -2,8 +2,8 @@
 <div
   class="max-w-screen-xl p-8 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
 >
-  <ng-container *ngIf="partnerInfo as partnerItemList">
-    <ng-container *ngIf="partnerItemList.length > 0">
+  <ng-container *ngIf="sectionPartners">
+    <ng-container *ngIf="sectionPartners.length > 0">
       <div class="title-div">
         <p class="title-p">Local Partners of {{ cityName }}</p>
       </div>
@@ -11,15 +11,15 @@
   </ng-container>
 </div>
 <div class="max-w-screen-2xl m-auto mb-24">
-  <ng-container *ngIf="partnerInfo as partnerItemList">
+  <ng-container *ngIf="sectionPartners">
     <div
       class="mx-4 flex flex-wrap items-center justify-evenly font-body text-lg border border-graylight shadow-xl p-8"
-      *ngIf="partnerItemList.length > 0"
+      *ngIf="sectionPartners.length > 0"
     >
       <div
-        *ngFor="let partner of partnerItemList"
+        *ngFor="let partner of sectionPartners"
         class="flex flex-wrap items-end justify-evenly flexb3"
-        [ngClass]="{ flexb2: partnerItemList.length <= 2 }"
+        [ngClass]="{ flexb2: sectionPartners.length <= 2 }"
       >
         <figure class="m-2">
           <a
@@ -78,8 +78,8 @@
 <div
   class="max-w-screen-xl p-4 sm:p-0 m-auto sm:px-16 xl:mt-16 lg:mt-8 sm:mt-4"
 >
-  <ng-container *ngIf="nationalPartner">
-    <ng-container *ngIf="nationalPartner.length > 0">
+  <ng-container *ngIf="nationalPartners">
+    <ng-container *ngIf="nationalPartners.length > 0">
       <div class="title-div">
         <p class="title-p">National Partners of ESN Germany</p>
       </div>
