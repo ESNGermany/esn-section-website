@@ -19,9 +19,9 @@ import { LoadJsService } from 'src/app/shared/load-js.service';
 })
 export class PretixCalendarComponent implements AfterViewInit {
   public pretix_link?: string;
-  public mainInfo: MainItem | undefined;
+  public mainInfo?: MainItem;
 
-  @ViewChild('pretixCal') el: ElementRef | undefined;
+  @ViewChild('pretixCal') el?: ElementRef;
 
   constructor(
     private mainService: MainService,

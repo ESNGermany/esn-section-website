@@ -23,8 +23,8 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class CocPageComponent implements OnInit {
-  public cocItem: ICocItem | undefined;
-  private mainInfo: MainItem | undefined;
+  public cocItem?: ICocItem;
+  private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
@@ -35,11 +35,9 @@ export class CocPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
 
     if (this.mainInfo) {
       this.setTitle();

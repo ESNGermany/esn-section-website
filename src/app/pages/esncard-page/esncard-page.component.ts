@@ -37,13 +37,12 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   ],
 })
 export class EsncardPageComponent implements OnInit {
-  public partnerInfo: IPartnerItem[] | undefined;
-  public nationalPartner: INationalPartnerItem[] | undefined;
-  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
-  public cityName?: string;
   public readonly page: string = 'ESNcard_page';
-
-  private mainInfo: MainItem | undefined;
+  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
+  public partnerInfo?: IPartnerItem[];
+  public nationalPartner?: INationalPartnerItem[];
+  public cityName?: string;
+  private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
@@ -55,11 +54,9 @@ export class EsncardPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
 
     if (this.mainInfo) {
       this.setTitle();

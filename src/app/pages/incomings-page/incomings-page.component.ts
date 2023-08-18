@@ -31,15 +31,15 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   ],
 })
 export class IncomingsPageComponent implements OnInit {
-  public faqTransportItemList: IFaqItem[] | undefined;
-  public faqHousingItemList: IFaqItem[] | undefined;
-  public faqUniErasmusItemList: IFaqItem[] | undefined;
-  public faqCoronaItemList: IFaqItem[] | undefined;
-  public faqEsncardItemList: IFaqItem[] | undefined;
-  public faqOtherItemList: IFaqItem[] | undefined;
+  public faqTransportItemList?: IFaqItem[];
+  public faqHousingItemList?: IFaqItem[];
+  public faqUniErasmusItemList?: IFaqItem[];
+  public faqCoronaItemList?: IFaqItem[];
+  public faqEsncardItemList?: IFaqItem[];
+  public faqOtherItemList?: IFaqItem[];
 
   public readonly page: string = 'Incomings_page';
-  private mainInfo: MainItem | undefined;
+  private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
@@ -50,11 +50,9 @@ export class IncomingsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
 
     if (this.mainInfo) {
       this.setTitle();

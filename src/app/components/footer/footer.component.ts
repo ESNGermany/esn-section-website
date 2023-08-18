@@ -26,8 +26,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [NgIf, RouterLink, RouterLinkActive],
 })
 export class FooterComponent implements OnInit {
-  public mainInfo: MainItem | undefined;
-  public statutes: IStatutesItem | undefined;
+  public mainInfo?: MainItem;
+  public statutes?: IStatutesItem;
   public timestamp: string = environment.timeStamp;
   public statutesExist = false;
 
@@ -40,11 +40,9 @@ export class FooterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
     this.fetchStatutes();
   }
 

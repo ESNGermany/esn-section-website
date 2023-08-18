@@ -16,7 +16,7 @@ import { CustomCalendarComponent } from '../../components/custom-calendar/custom
   imports: [NgIf, CustomCalendarComponent, PretixCalendarComponent],
 })
 export class EventsPageComponent implements OnInit {
-  public mainInfo: MainItem | undefined;
+  public mainInfo?: MainItem;
   public loadPretix: boolean;
 
   constructor(
@@ -28,11 +28,9 @@ export class EventsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
 
     if (this.mainInfo) {
       this.setTitle();

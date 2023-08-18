@@ -12,6 +12,7 @@ import { MainService } from 'src/app/services/main.service';
 import { environment } from 'src/environments/environment';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Observable, map, shareReplay } from 'rxjs';
+import { MainItem } from 'src/app/services/main-item';
 
 @Component({
   selector: 'esn-navigation',
@@ -27,9 +28,9 @@ export class NavigationComponent implements OnInit {
   @ViewChild('bubble2') bubble2Element!: ElementRef<HTMLDivElement>;
 
   public windowScrolled = false;
-  public bgImage$: Observable<any> | undefined;
-  public buttonColor$: Observable<any> | undefined;
-  public mainInfo!: any; //IMainItem | null | undefined;
+  public bgImage$?: Observable<any>;
+  public buttonColor$?: Observable<any>;
+  public mainInfo?: MainItem;
 
   constructor(
     private mainService: MainService,

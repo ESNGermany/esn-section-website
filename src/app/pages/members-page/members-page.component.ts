@@ -14,7 +14,7 @@ import { ContentItemComponent } from '../../components/content-item/content-item
 })
 export class MembersPageComponent implements OnInit {
   public readonly page: string = 'Members_page';
-  public mainInfo: MainItem | undefined;
+  public mainInfo?: MainItem;
 
   constructor(
     private title: Title,
@@ -22,11 +22,9 @@ export class MembersPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
 
     if (this.mainInfo) {
       this.setTitle();

@@ -22,8 +22,7 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   imports: [NgIf, GalleryComponent, ContentItemComponent],
 })
 export class LandingPageComponent implements OnInit {
-  public mainInfo: any;
-
+  public mainInfo?: MainItem;
   public images!: GalleryItem[];
   public strapiLink: string = env.STRAPI_SECTION_URL_IMAGE;
   public directusImageLink: string = env.DIRECTUS_URL_IMAGE;
@@ -46,11 +45,9 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
 
     if (this.mainInfo) {
       this.setTitle();
@@ -60,7 +57,7 @@ export class LandingPageComponent implements OnInit {
 
   private setImages(): void {
     this.images = [];
-    if (this.mainInfo.use_image_slideshow) {
+    if (this.mainInfo?.use_image_slideshow) {
       this.mainInfo.imagegrid_frontpage.forEach((img: any) => {
         this.images.unshift(
           new ImageItem({

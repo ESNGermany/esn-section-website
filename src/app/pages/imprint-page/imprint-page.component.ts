@@ -27,9 +27,9 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class ImprintPageComponent implements OnInit {
-  private mainInfo: MainItem | undefined;
-  public imprintSection: IImprintItem | undefined;
-  public imprintEsnGermany: IImprintEsnGerItem | undefined;
+  private mainInfo?: MainItem;
+  public imprintSection?: IImprintItem;
+  public imprintEsnGermany?: IImprintEsnGerItem;
 
   constructor(
     private title: Title,
@@ -41,11 +41,9 @@ export class ImprintPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
 
     if (this.mainInfo) {
       this.setTitle();

@@ -18,7 +18,7 @@ import { environment as env } from 'src/environments/environment';
 })
 export class NationalPartnersComponent {
   public directusImageLink = env.DIRECTUS_URL_IMAGE;
-  public nationalPartners$: Observable<INationalPartnerItem[]> | undefined;
+  public nationalPartners$?: Observable<INationalPartnerItem[]>;
 
   constructor(private nationalPartnerService: NationalPartnerService) {
     this.setNationalPartners();

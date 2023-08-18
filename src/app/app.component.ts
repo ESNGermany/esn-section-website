@@ -14,7 +14,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
   imports: [NgClass, NavigationComponent, RouterOutlet, FooterComponent],
 })
 export class AppComponent implements OnInit {
-  public mainInfo: any;
+  public mainInfo?: MainItem;
 
   constructor(
     private mainService: MainService,
@@ -22,11 +22,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainService
-      .getMainInformation()
-      .subscribe((mainInfo: MainItem | undefined) => {
-        this.mainInfo = mainInfo!;
-      });
+    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
+      this.mainInfo = mainInfo!;
+    });
 
     if (this.mainInfo) {
       this.setTitle();
