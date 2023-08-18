@@ -1,20 +1,5 @@
-import {
-  DOCUMENT,
-  isPlatformServer,
-  NgIf,
-  NgFor,
-  NgClass,
-} from '@angular/common';
-import {
-  Component,
-  Inject,
-  Input,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { DOCUMENT, NgIf, NgFor, NgClass } from '@angular/common';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ContentService } from 'src/app/services/content.service';
 import { environment } from 'src/environments/environment';
 import { MarkdownModule } from 'ngx-markdown';
@@ -34,8 +19,6 @@ export class ContentItemComponent implements OnInit {
 
   constructor(
     private contentService: ContentService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
     @Inject(DOCUMENT) private document: Document,
   ) {
     window.addEventListener('scroll', () => {
@@ -61,26 +44,13 @@ export class ContentItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contentInfo = this.transferState.get<ContentItem[] | undefined>(
-      makeStateKey('contentInfo'),
-      undefined,
-    );
-
-    if (!this.contentInfo) {
-      this.fetchContent();
-    }
-  }
-
-  async fetchContent(): Promise<void> {
-    this.contentInfo = await firstValueFrom(
-      this.contentService.fetchPageContent(this.page),
-    );
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<ContentItem[]>(
-        makeStateKey('contentInfo'),
-        this.contentInfo,
-      );
-    }
+    this.contentService.getContent(this.page).subscribe({
+      next: (contentInfo?: ContentItem[]) => {
+        this.contentInfo = contentInfo!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }

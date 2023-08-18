@@ -77,7 +77,7 @@ export class FaqService {
     this.http
       .get<IFaqItem>(`${this.url}${singleCategory}`, { params })
       .pipe(catchError(this.handleError<IFaqItem>('fetchFaqList')))
-      .subscribe((faq) => {
+      .subscribe((faq: IFaqItem) => {
         switch (singleCategory) {
           case 'Transport':
             this.faqSubjectTransport.next(faq?.data);
@@ -94,8 +94,9 @@ export class FaqService {
           case 'ESNcard':
             this.faqSubjectESNcard.next(faq?.data);
             break;
-          default: // Other
+          case 'Other':
             this.faqSubjectOther.next(faq?.data);
+            break;
         }
       });
   }
