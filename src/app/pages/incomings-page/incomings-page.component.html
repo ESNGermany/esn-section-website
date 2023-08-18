@@ -1,12 +1,12 @@
 <esn-content-item [page]="page"></esn-content-item>
 <ng-container
   *ngIf="
-    faqHousingItemList?.length > 0 ||
-    faqTransportItemList?.length > 0 ||
-    faqCoronaItemList?.length > 0 ||
-    faqUniErasmusItemList?.length > 0 ||
-    faqOtherItemList?.length > 0 ||
-    faqEsncardItemList?.length > 0
+    faqsHousing?.length > 0 ||
+    faqsTransport?.length > 0 ||
+    faqsCorona?.length > 0 ||
+    faqsUniErasmus?.length > 0 ||
+    faqsOther?.length > 0 ||
+    faqsESNcard?.length > 0
   "
 >
   <div class="outer-div-incoming fade-in-element">
@@ -14,15 +14,15 @@
       <div class="title-div">
         <p class="title-p">Frequently Asked Questions</p>
       </div>
-      <ng-container *ngIf="faqHousingItemList; else loading">
+      <ng-container *ngIf="faqsHousing; else loading">
         <div
-          *ngIf="faqHousingItemList.length > 0"
+          *ngIf="faqsHousing.length > 0"
           class="font-body text-xl font-bold pb-2"
         >
           Housing
         </div>
         <div class="exp-shadow mb-6">
-          <esn-expandable class="exp" *ngFor="let faq of faqHousingItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqsHousing">
             <p slot="header" class="font-body text-md">{{ faq.question }}</p>
             <div class="answer-div">
               <div class="answer-col">
@@ -39,15 +39,15 @@
           src="assets/social/ESN-star-spinner.gif"
           alt="loading"
       /></ng-template>
-      <ng-container *ngIf="faqTransportItemList">
+      <ng-container *ngIf="faqsTransport">
         <div
-          *ngIf="faqTransportItemList.length > 0"
+          *ngIf="faqsTransport.length > 0"
           class="font-body text-xl font-bold pb-2"
         >
           Transport
         </div>
         <div class="exp-shadow mb-6">
-          <esn-expandable class="exp" *ngFor="let faq of faqTransportItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqsTransport">
             <p slot="header" class="font-body text-md">{{ faq.question }}</p>
             <div class="answer-div">
               <div class="answer-col">
@@ -57,15 +57,15 @@
           </esn-expandable>
         </div>
       </ng-container>
-      <ng-container *ngIf="faqEsncardItemList">
+      <ng-container *ngIf="faqsESNcard">
         <div
-          *ngIf="faqEsncardItemList.length > 0"
+          *ngIf="faqsESNcard.length > 0"
           class="font-body text-xl font-bold pb-2"
         >
           ESNcard
         </div>
         <div class="exp-shadow mb-6">
-          <esn-expandable class="exp" *ngFor="let faq of faqEsncardItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqsESNcard">
             <p slot="header" class="font-body text-md">{{ faq.question }}</p>
             <div class="answer-div">
               <div class="answer-col">
@@ -75,15 +75,15 @@
           </esn-expandable>
         </div>
       </ng-container>
-      <ng-container *ngIf="faqCoronaItemList">
+      <ng-container *ngIf="faqsCorona">
         <div
-          *ngIf="faqCoronaItemList.length > 0"
+          *ngIf="faqsCorona.length > 0"
           class="font-body text-xl font-bold pb-2"
         >
           Corona
         </div>
         <div class="exp-shadow mb-6">
-          <esn-expandable class="exp" *ngFor="let faq of faqCoronaItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqsCorona">
             <p slot="header" class="font-body text-md">{{ faq.question }}</p>
             <div class="answer-div">
               <div class="answer-col">
@@ -93,15 +93,15 @@
           </esn-expandable>
         </div>
       </ng-container>
-      <ng-container *ngIf="faqUniErasmusItemList">
+      <ng-container *ngIf="faqsUniErasmus">
         <div
-          *ngIf="faqUniErasmusItemList.length > 0"
+          *ngIf="faqsUniErasmus.length > 0"
           class="font-body text-xl font-bold pb-2"
         >
           Uni/Erasmus
         </div>
         <div class="exp-shadow mb-6">
-          <esn-expandable class="exp" *ngFor="let faq of faqUniErasmusItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqsUniErasmus">
             <p slot="header" class="font-body text-md">{{ faq.question }}</p>
             <div class="answer-div">
               <div class="answer-col">
@@ -111,15 +111,15 @@
           </esn-expandable>
         </div>
       </ng-container>
-      <ng-container *ngIf="faqOtherItemList">
+      <ng-container *ngIf="faqsOther">
         <div
-          *ngIf="faqOtherItemList.length > 0"
+          *ngIf="faqsOther.length > 0"
           class="font-body text-xl font-bold pb-2"
         >
           Other
         </div>
         <div class="exp-shadow mb-6">
-          <esn-expandable class="exp" *ngFor="let faq of faqOtherItemList">
+          <esn-expandable class="exp" *ngFor="let faq of faqsOther">
             <p slot="header" class="font-body text-md">{{ faq.question }}</p>
             <div class="answer-div">
               <div class="answer-col">

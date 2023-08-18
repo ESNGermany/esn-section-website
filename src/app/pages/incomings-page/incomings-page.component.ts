@@ -1,21 +1,14 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
 
-import { IFaqItem, FaqService } from './faq.service';
+import { FaqService } from './faq.service';
+import { FaqItem } from './faq-item';
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
-import { isPlatformServer, NgIf, NgFor } from '@angular/common';
+import { MainItem } from 'src/app/services/main-item';
+import { NgIf, NgFor } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
-import { ExpandableComponent } from '../../components/expandable/expandable.component';
-import { ContentItemComponent } from '../../components/content-item/content-item.component';
+import { ExpandableComponent } from 'src/app/components/expandable/expandable.component';
+import { ContentItemComponent } from 'src/app/components/content-item/content-item.component';
 
 @Component({
   selector: 'esn-incomings-page',
@@ -31,90 +24,84 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   ],
 })
 export class IncomingsPageComponent implements OnInit {
-  public faqTransportItemList?: IFaqItem[];
-  public faqHousingItemList?: IFaqItem[];
-  public faqUniErasmusItemList?: IFaqItem[];
-  public faqCoronaItemList?: IFaqItem[];
-  public faqEsncardItemList?: IFaqItem[];
-  public faqOtherItemList?: IFaqItem[];
-
   public readonly page: string = 'Incomings_page';
+  public faqsTransport?: FaqItem[];
+  public faqsHousing?: FaqItem[];
+  public faqsUniErasmus?: FaqItem[];
+  public faqsCorona?: FaqItem[];
+  public faqsESNcard?: FaqItem[];
+  public faqsOther?: FaqItem[];
+
   private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
     private faqService: FaqService,
     private mainService: MainService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
   ngOnInit(): void {
-    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
-      this.mainInfo = mainInfo!;
+    this.mainService.getMainInformation().subscribe({
+      next: (mainInfo?: MainItem) => {
+        this.mainInfo = mainInfo!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
 
     if (this.mainInfo) {
       this.setTitle();
     }
-    if (
-      !this.faqTransportItemList ||
-      !this.faqHousingItemList ||
-      !this.faqUniErasmusItemList ||
-      !this.faqCoronaItemList ||
-      !this.faqEsncardItemList ||
-      !this.faqOtherItemList
-    ) {
-      this.fetchFaq();
-    }
-  }
 
-  async fetchFaq(): Promise<void> {
-    this.faqTransportItemList = await firstValueFrom(
-      this.faqService.fetchFaq('Transport'),
-    );
-    this.faqHousingItemList = await firstValueFrom(
-      this.faqService.fetchFaq('Housing'),
-    );
-    this.faqUniErasmusItemList = await firstValueFrom(
-      this.faqService.fetchFaq('Uni_Erasmus'),
-    );
-    this.faqCoronaItemList = await firstValueFrom(
-      this.faqService.fetchFaq('Corona'),
-    );
-    this.faqEsncardItemList = await firstValueFrom(
-      this.faqService.fetchFaq('ESNcard'),
-    );
-    this.faqOtherItemList = await firstValueFrom(
-      this.faqService.fetchFaq('Other'),
-    );
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IFaqItem[]>(
-        makeStateKey('faqTransportItemList'),
-        this.faqTransportItemList,
-      );
-      this.transferState.set<IFaqItem[]>(
-        makeStateKey('faqHousingItemList'),
-        this.faqHousingItemList,
-      );
-      this.transferState.set<IFaqItem[]>(
-        makeStateKey('faqUniErasmusItemList'),
-        this.faqUniErasmusItemList,
-      );
-      this.transferState.set<IFaqItem[]>(
-        makeStateKey('faqCoronaItemList'),
-        this.faqCoronaItemList,
-      );
-      this.transferState.set<IFaqItem[]>(
-        makeStateKey('faqEsncardItemList'),
-        this.faqEsncardItemList,
-      );
-      this.transferState.set<IFaqItem[]>(
-        makeStateKey('faqOtherItemList'),
-        this.faqOtherItemList,
-      );
-    }
+    this.faqService.getFaqTransport().subscribe({
+      next: (faqsTransport?: FaqItem[]) => {
+        this.faqsTransport = faqsTransport!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+    this.faqService.getFaqHousing().subscribe({
+      next: (faqsHousing?: FaqItem[]) => {
+        this.faqsHousing = faqsHousing!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+    this.faqService.getFaqCorona().subscribe({
+      next: (faqsCorona?: FaqItem[]) => {
+        this.faqsCorona = faqsCorona!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+    this.faqService.getFaqErasmus().subscribe({
+      next: (faqsUniErasmus?: FaqItem[]) => {
+        this.faqsUniErasmus = faqsUniErasmus!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+    this.faqService.getFaqESNcard().subscribe({
+      next: (faqsESNcard?: FaqItem[]) => {
+        this.faqsESNcard = faqsESNcard!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+    this.faqService.getFaqOther().subscribe({
+      next: (faqsOther?: FaqItem[]) => {
+        this.faqsOther = faqsOther!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   private setTitle(): void {

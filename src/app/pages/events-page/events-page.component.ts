@@ -28,8 +28,13 @@ export class EventsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
-      this.mainInfo = mainInfo!;
+    this.mainService.getMainInformation().subscribe({
+      next: (mainInfo?: MainItem) => {
+        this.mainInfo = mainInfo;
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
 
     if (this.mainInfo) {

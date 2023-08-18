@@ -67,9 +67,9 @@ export class NavigationComponent implements OnInit {
     })();
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.mainService.getMainInformation().subscribe({
-      next: (mainInfo) => {
+      next: (mainInfo?: MainItem) => {
         this.mainInfo = mainInfo;
         this.setNavBgImage();
         this.setSocialMediaButtonColor();

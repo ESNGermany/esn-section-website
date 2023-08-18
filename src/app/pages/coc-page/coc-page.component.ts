@@ -26,15 +26,25 @@ export class CocPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
-      this.mainInfo = mainInfo!;
+    this.mainService.getMainInformation().subscribe({
+      next: (mainInfo?: MainItem) => {
+        this.mainInfo = mainInfo;
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
     if (this.mainInfo) {
       this.setTitle();
     }
 
-    this.cocService.getCoc().subscribe((cocItem?: CocItem) => {
-      this.cocItem = cocItem!;
+    this.cocService.getCoc().subscribe({
+      next: (cocItem?: CocItem) => {
+        this.cocItem = cocItem!;
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   }
 
