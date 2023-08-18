@@ -10,7 +10,8 @@ import { Title } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
 
 import { IStatutesItem, StatutesService } from './statutes.service';
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from '../../services/main-item';
 import { isPlatformServer, NgIf } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -36,7 +37,7 @@ export class StatutesPageComponent implements OnInit {
   ngOnInit(): void {
     this.mainService
       .getMainInformation()
-      .subscribe((mainInfo: IMainItem | null) => {
+      .subscribe((mainInfo: MainItem | undefined) => {
         this.mainInfo = mainInfo!;
       });
 

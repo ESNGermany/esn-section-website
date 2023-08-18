@@ -11,7 +11,8 @@ import { firstValueFrom } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { IPartnerItem, PartnerService } from './partner.service';
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from '../../services/main-item';
 import {
   INationalPartnerItem,
   NationalPartnerService,
@@ -42,7 +43,7 @@ export class EsncardPageComponent implements OnInit {
   public cityName?: string;
   public readonly page: string = 'ESNcard_page';
 
-  private mainInfo: IMainItem | undefined;
+  private mainInfo: MainItem | undefined;
 
   constructor(
     private title: Title,
@@ -56,7 +57,7 @@ export class EsncardPageComponent implements OnInit {
   ngOnInit(): void {
     this.mainService
       .getMainInformation()
-      .subscribe((mainInfo: IMainItem | null) => {
+      .subscribe((mainInfo: MainItem | undefined) => {
         this.mainInfo = mainInfo!;
       });
 

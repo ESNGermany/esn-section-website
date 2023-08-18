@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from '../../services/main-item';
 import { ContentItemComponent } from '../../components/content-item/content-item.component';
 
 @Component({
@@ -13,7 +14,7 @@ import { ContentItemComponent } from '../../components/content-item/content-item
 })
 export class MembersPageComponent implements OnInit {
   public readonly page: string = 'Members_page';
-  public mainInfo: IMainItem | undefined;
+  public mainInfo: MainItem | undefined;
 
   constructor(
     private title: Title,
@@ -23,7 +24,7 @@ export class MembersPageComponent implements OnInit {
   ngOnInit(): void {
     this.mainService
       .getMainInformation()
-      .subscribe((mainInfo: IMainItem | null) => {
+      .subscribe((mainInfo: MainItem | undefined) => {
         this.mainInfo = mainInfo!;
       });
 

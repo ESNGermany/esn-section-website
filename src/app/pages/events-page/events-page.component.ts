@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from '../../services/main-item';
 import { NgIf } from '@angular/common';
 import { PretixCalendarComponent } from '../../components/pretix-calendar/pretix-calendar.component';
 import { CustomCalendarComponent } from '../../components/custom-calendar/custom-calendar.component';
@@ -15,7 +16,7 @@ import { CustomCalendarComponent } from '../../components/custom-calendar/custom
   imports: [NgIf, CustomCalendarComponent, PretixCalendarComponent],
 })
 export class EventsPageComponent implements OnInit {
-  public mainInfo: IMainItem | undefined;
+  public mainInfo: MainItem | undefined;
   public loadPretix: boolean;
 
   constructor(
@@ -29,7 +30,7 @@ export class EventsPageComponent implements OnInit {
   ngOnInit(): void {
     this.mainService
       .getMainInformation()
-      .subscribe((mainInfo: IMainItem | null) => {
+      .subscribe((mainInfo: MainItem | undefined) => {
         this.mainInfo = mainInfo!;
       });
 

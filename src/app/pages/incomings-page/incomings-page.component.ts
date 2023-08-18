@@ -10,7 +10,8 @@ import { Title } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
 
 import { IFaqItem, FaqService } from './faq.service';
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from '../../services/main-item';
 import { isPlatformServer, NgIf, NgFor } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 import { ExpandableComponent } from '../../components/expandable/expandable.component';
@@ -38,7 +39,7 @@ export class IncomingsPageComponent implements OnInit {
   public faqOtherItemList: IFaqItem[] | undefined;
 
   public readonly page: string = 'Incomings_page';
-  private mainInfo: IMainItem | undefined;
+  private mainInfo: MainItem | undefined;
 
   constructor(
     private title: Title,
@@ -51,7 +52,7 @@ export class IncomingsPageComponent implements OnInit {
   ngOnInit(): void {
     this.mainService
       .getMainInformation()
-      .subscribe((mainInfo: IMainItem | null) => {
+      .subscribe((mainInfo: MainItem | undefined) => {
         this.mainInfo = mainInfo!;
       });
 

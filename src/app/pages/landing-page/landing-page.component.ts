@@ -10,7 +10,8 @@ import { GalleryItem, ImageItem, GalleryComponent } from 'ng-gallery';
 import { DOCUMENT, isPlatformBrowser, NgIf } from '@angular/common';
 
 import { environment as env } from 'src/environments/environment';
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from '../../services/main-item';
 import { ContentItemComponent } from '../../components/content-item/content-item.component';
 
 @Component({
@@ -47,7 +48,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     this.mainService
       .getMainInformation()
-      .subscribe((mainInfo: IMainItem | null) => {
+      .subscribe((mainInfo: MainItem | undefined) => {
         this.mainInfo = mainInfo!;
       });
 

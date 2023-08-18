@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { IMainItem, MainService } from './services/main.service';
+import { MainService } from './services/main.service';
+import { MainItem } from './services/main-item';
 import { NgClass } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.mainService
       .getMainInformation()
-      .subscribe((mainInfo: IMainItem | null) => {
+      .subscribe((mainInfo: MainItem | undefined) => {
         this.mainInfo = mainInfo!;
       });
 

@@ -13,7 +13,8 @@ import {
   StatutesService,
 } from 'src/app/pages/statutes-page/statutes.service';
 
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from '../../services/main-item';
 import { environment } from 'src/environments/environment';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -25,7 +26,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [NgIf, RouterLink, RouterLinkActive],
 })
 export class FooterComponent implements OnInit {
-  public mainInfo: IMainItem | undefined;
+  public mainInfo: MainItem | undefined;
   public statutes: IStatutesItem | undefined;
   public timestamp: string = environment.timeStamp;
   public statutesExist = false;
@@ -41,7 +42,7 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
     this.mainService
       .getMainInformation()
-      .subscribe((mainInfo: IMainItem | null) => {
+      .subscribe((mainInfo: MainItem | undefined) => {
         this.mainInfo = mainInfo!;
       });
     this.fetchStatutes();

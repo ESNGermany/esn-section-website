@@ -7,7 +7,8 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
-import { IMainItem, MainService } from 'src/app/services/main.service';
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from '../../services/main-item';
 import { LoadJsService } from 'src/app/shared/load-js.service';
 
 @Component({
@@ -18,7 +19,7 @@ import { LoadJsService } from 'src/app/shared/load-js.service';
 })
 export class PretixCalendarComponent implements AfterViewInit {
   public pretix_link?: string;
-  public mainInfo: IMainItem | undefined;
+  public mainInfo: MainItem | undefined;
 
   @ViewChild('pretixCal') el: ElementRef | undefined;
 
