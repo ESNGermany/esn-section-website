@@ -13,9 +13,10 @@ import {
   ImprintEsnGerService,
 } from './imprint-esnger.service';
 
-import { IImprintItem, ImprintService } from './imprint.service';
+import { ImprintService } from './imprint.service';
+import { ImprintItem } from './imprint-item';
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
+import { MainItem } from 'src/app/services/main-item';
 import { isPlatformServer, NgIf } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -27,9 +28,9 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class ImprintPageComponent implements OnInit {
-  private mainInfo?: MainItem;
-  public imprintSection?: IImprintItem;
+  public imprintSection?: ImprintItem;
   public imprintEsnGermany?: IImprintEsnGerItem;
+  private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
@@ -53,21 +54,16 @@ export class ImprintPageComponent implements OnInit {
     if (this.mainInfo) {
       this.setTitle();
     }
+
+    this.imprintService.getImprint().subscribe({
+      next: (imprintSection?: ImprintItem) => {
+        this.imprintSection = imprintSection;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
     this.fetchImprintEsnGermany();
-    this.fetchImprintSection();
-  }
-
-  async fetchImprintSection(): Promise<void> {
-    this.imprintSection = await firstValueFrom(
-      this.imprintService.fetchImprint(),
-    );
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<IImprintItem>(
-        makeStateKey('imprintSection'),
-        this.imprintSection,
-      );
-    }
   }
 
   async fetchImprintEsnGermany(): Promise<void> {

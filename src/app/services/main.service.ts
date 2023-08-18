@@ -36,7 +36,7 @@ export class MainService {
     this.http
       .get<IMainItem>(this.url, { params })
       .pipe(catchError(this.handleError<IMainItem>('getMainInformation')))
-      .subscribe((main) => {
+      .subscribe((main: IMainItem) => {
         this.mainInformationSubject.next(main?.data[0]);
       });
   }

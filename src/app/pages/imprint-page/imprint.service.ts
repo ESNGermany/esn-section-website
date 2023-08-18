@@ -1,32 +1,41 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { environment as env } from 'src/environments/environment';
-import { MessageService } from '../../services/message.service';
+import { MessageService } from 'src/app/services/message.service';
+import { ImprintItem } from './imprint-item';
 
 export interface IImprintItem {
-  title: string;
-  text: string;
+  data: ImprintItem[];
 }
 
 @Injectable()
 export class ImprintService {
   private url = `${env.DIRECTUS_URL}imprint${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&fields=title,text`;
+  private imprintSubject = new BehaviorSubject<ImprintItem | undefined>(
+    undefined,
+  );
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
-  ) {}
+  ) {
+    this.fetchImprint();
+  }
 
-  fetchImprint(): Observable<IImprintItem> {
-    return this.http.get<IImprintItem>(this.url).pipe(
-      shareReplay(1),
-      map((res: any) => res.data[0]),
-      tap(() => this.log('fetched imprint')),
-      catchError(this.handleError<IImprintItem>('fetchImprintList')),
-    );
+  public getImprint(): Observable<ImprintItem | undefined> {
+    return this.imprintSubject.asObservable();
+  }
+
+  private fetchImprint(): void {
+    this.http
+      .get<IImprintItem>(this.url)
+      .pipe(catchError(this.handleError<IImprintItem>('fetchImprintList')))
+      .subscribe((imprint: IImprintItem) => {
+        this.imprintSubject.next(imprint?.data[0]);
+      });
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
