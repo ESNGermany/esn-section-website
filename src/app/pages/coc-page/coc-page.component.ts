@@ -1,18 +1,11 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  TransferState,
-  makeStateKey,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
 
-import { ICocItem, CocService } from './coc.service';
+import { CocService } from './coc.service';
+import { CocItem } from './coc-item';
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
-import { isPlatformServer, NgIf } from '@angular/common';
+import { MainItem } from 'src/app/services/main-item';
+import { NgIf } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
@@ -23,39 +16,26 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class CocPageComponent implements OnInit {
-  public cocItem?: ICocItem;
+  public cocItem?: CocItem;
   private mainInfo?: MainItem;
 
   constructor(
     private title: Title,
     private cocService: CocService,
     private mainService: MainService,
-    private transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: object,
   ) {}
 
   ngOnInit(): void {
     this.mainService.getMainInformation().subscribe((mainInfo?: MainItem) => {
       this.mainInfo = mainInfo!;
     });
-
     if (this.mainInfo) {
       this.setTitle();
     }
-    this.fetchCocInfo();
-  }
 
-  async fetchCocInfo(): Promise<void> {
-    this.cocItem = await firstValueFrom(this.cocService.fetchCoc()).then(
-      (res: any) => res,
-    );
-
-    if (isPlatformServer(this.platformId)) {
-      this.transferState.set<ICocItem | undefined>(
-        makeStateKey('cocItem'),
-        this.cocItem,
-      );
-    }
+    this.cocService.getCoc().subscribe((cocItem?: CocItem) => {
+      this.cocItem = cocItem!;
+    });
   }
 
   private setTitle(): void {
