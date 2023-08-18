@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ArticleComponent } from '../../components/article/article.component';
+
+import { ArticleComponent } from 'src/app/components/article/article.component';
 
 @Component({
   selector: 'esn-error-page',

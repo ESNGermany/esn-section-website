@@ -1,9 +1,11 @@
-import { DOCUMENT, NgIf, NgFor, NgClass } from '@angular/common';
+import { DOCUMENT, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { ContentService } from 'src/app/services/content.service';
-import { environment } from 'src/environments/environment';
+
 import { MarkdownModule } from 'ngx-markdown';
+
+import { ContentService } from 'src/app/services/content.service';
 import { ContentItem } from 'src/app/services/content-item';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'esn-content-item',
@@ -18,8 +20,8 @@ export class ContentItemComponent implements OnInit {
   public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
 
   constructor(
-    private contentService: ContentService,
     @Inject(DOCUMENT) private document: Document,
+    private contentService: ContentService,
   ) {
     window.addEventListener('scroll', () => {
       const box0 = this.document.querySelector('.box0');

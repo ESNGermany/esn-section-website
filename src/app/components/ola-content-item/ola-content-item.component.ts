@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ArticleComponent } from '../article/article.component';
+
+import { ArticleComponent } from 'src/app/components/article/article.component';
 
 @Component({
   selector: 'esn-ola-content-item',

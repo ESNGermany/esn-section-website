@@ -1,13 +1,16 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ImprintESNGermanyService } from './imprint-esn-germany.service';
-import { ImprintESNGermanyItem } from './imprint-esn-germany-item';
-import { ImprintService } from './imprint.service';
-import { ImprintItem } from './imprint-item';
+
+import { MarkdownModule } from 'ngx-markdown';
+
 import { MainService } from 'src/app/services/main.service';
 import { MainItem } from 'src/app/services/main-item';
-import { NgIf } from '@angular/common';
-import { MarkdownModule } from 'ngx-markdown';
+
+import { ImprintService } from './imprint.service';
+import { ImprintItem } from './imprint-item';
+import { ImprintESNGermanyService } from './imprint-esn-germany.service';
+import { ImprintESNGermanyItem } from './imprint-esn-germany-item';
 
 @Component({
   selector: 'esn-imprint-page',
@@ -22,10 +25,10 @@ export class ImprintPageComponent implements OnInit {
   private mainInfo?: MainItem;
 
   constructor(
-    private title: Title,
-    private imprintService: ImprintService,
     private imprintESNGermanyService: ImprintESNGermanyService,
+    private imprintService: ImprintService,
     private mainService: MainService,
+    private title: Title,
   ) {}
 
   ngOnInit(): void {

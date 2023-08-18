@@ -1,10 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { ErrorService } from 'src/app/services/error.service';
 import { environment as env } from 'src/environments/environment';
-import { MessageService } from 'src/app/services/message.service';
+
 import { FaqItem } from './faq-item';
 
 export interface IFaqItem {
@@ -13,17 +14,17 @@ export interface IFaqItem {
 
 @Injectable()
 export class FaqService {
-  private url = `${env.DIRECTUS_URL}faq${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&filter[category][category]=`;
   private faqSubjectTransport = new BehaviorSubject<FaqItem[]>([]);
   private faqSubjectHousing = new BehaviorSubject<FaqItem[]>([]);
   private faqSubjectErasmus = new BehaviorSubject<FaqItem[]>([]);
   private faqSubjectCorona = new BehaviorSubject<FaqItem[]>([]);
   private faqSubjectESNcard = new BehaviorSubject<FaqItem[]>([]);
   private faqSubjectOther = new BehaviorSubject<FaqItem[]>([]);
+  private url = `${env.DIRECTUS_URL}faq${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&filter[category][category]=`;
 
   constructor(
+    private errorService: ErrorService,
     private http: HttpClient,
-    private messageService: MessageService,
   ) {
     this.fetchFaq('Transport');
     this.fetchFaq('Housing');
@@ -64,7 +65,7 @@ export class FaqService {
 
     this.http
       .get<IFaqItem>(`${this.url}${singleCategory}`, { params })
-      .pipe(catchError(this.handleError<IFaqItem>('fetchFaqList')))
+      .pipe(catchError(this.errorService.handleError<IFaqItem>('fetchFaqList')))
       .subscribe((faq: IFaqItem) => {
         switch (singleCategory) {
           case 'Transport':
@@ -87,16 +88,5 @@ export class FaqService {
             break;
         }
       });
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-  private log(message: string) {
-    this.messageService.add(`FaqService: ${message}`);
   }
 }

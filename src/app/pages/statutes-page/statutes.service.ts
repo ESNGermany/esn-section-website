@@ -1,10 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment as env } from 'src/environments/environment';
-import { MessageService } from 'src/app/services/message.service';
+import { ErrorService } from 'src/app/services/error.service';
+
 import { StatutesItem } from './statutes-item';
 
 export interface IStatutesItem {
@@ -13,14 +14,14 @@ export interface IStatutesItem {
 
 @Injectable()
 export class StatutesService {
-  private url = `${env.DIRECTUS_URL}statutes${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
   private statutesSubject = new BehaviorSubject<StatutesItem | undefined>(
     undefined,
   );
+  private url = `${env.DIRECTUS_URL}statutes${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
   constructor(
+    private errorService: ErrorService,
     private http: HttpClient,
-    private messageService: MessageService,
   ) {
     this.fetchStatutes();
   }
@@ -34,20 +35,13 @@ export class StatutesService {
 
     this.http
       .get<IStatutesItem>(this.url, { params })
-      .pipe(catchError(this.handleError<IStatutesItem>('fetchStatutesList')))
+      .pipe(
+        catchError(
+          this.errorService.handleError<IStatutesItem>('fetchStatutesList'),
+        ),
+      )
       .subscribe((res) => {
         this.statutesSubject.next(res?.data[0]);
       });
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-  private log(message: string) {
-    this.messageService.add(`StatutesService: ${message}`);
   }
 }

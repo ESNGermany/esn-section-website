@@ -1,14 +1,14 @@
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
-  Inject,
   Component,
   ElementRef,
+  Inject,
   ViewChild,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
+import { MainItem } from 'src/app/services/main-item';
 import { LoadJsService } from 'src/app/shared/load-js.service';
 
 @Component({
@@ -18,15 +18,14 @@ import { LoadJsService } from 'src/app/shared/load-js.service';
   standalone: true,
 })
 export class PretixCalendarComponent implements AfterViewInit {
-  public pretix_link?: string;
-  public mainInfo?: MainItem;
-
   @ViewChild('pretixCal') el?: ElementRef;
+  public mainInfo?: MainItem;
+  public pretix_link?: string;
 
   constructor(
-    private mainService: MainService,
-    private loadJsService: LoadJsService,
     @Inject(DOCUMENT) private document: Document,
+    private loadJsService: LoadJsService,
+    private mainService: MainService,
   ) {
     this.mainService.getMainInformation().subscribe({
       next: (main?: MainItem) => {
@@ -41,10 +40,6 @@ export class PretixCalendarComponent implements AfterViewInit {
 
   async ngAfterViewInit(): Promise<void> {
     this.loadCssFile('https://pretix.eu/demo/democon/widget/v1.css');
-    this.insertPretixLink();
-  }
-
-  private insertPretixLink(): void {
     this.el!.nativeElement.innerHTML = `<div
         class="pretix-widget-compat"
         event="${this.pretix_link}"

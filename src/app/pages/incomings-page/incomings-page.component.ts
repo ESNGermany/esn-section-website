@@ -1,14 +1,16 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { FaqService } from './faq.service';
-import { FaqItem } from './faq-item';
+import { MarkdownModule } from 'ngx-markdown';
+
+import { ContentItemComponent } from 'src/app/components/content-item/content-item.component';
+import { ExpandableComponent } from 'src/app/components/expandable/expandable.component';
 import { MainService } from 'src/app/services/main.service';
 import { MainItem } from 'src/app/services/main-item';
-import { NgIf, NgFor } from '@angular/common';
-import { MarkdownModule } from 'ngx-markdown';
-import { ExpandableComponent } from 'src/app/components/expandable/expandable.component';
-import { ContentItemComponent } from 'src/app/components/content-item/content-item.component';
+
+import { FaqService } from './faq.service';
+import { FaqItem } from './faq-item';
 
 @Component({
   selector: 'esn-incomings-page',
@@ -24,20 +26,19 @@ import { ContentItemComponent } from 'src/app/components/content-item/content-it
   ],
 })
 export class IncomingsPageComponent implements OnInit {
-  public readonly page: string = 'Incomings_page';
   public faqsTransport?: FaqItem[];
   public faqsHousing?: FaqItem[];
   public faqsUniErasmus?: FaqItem[];
   public faqsCorona?: FaqItem[];
   public faqsESNcard?: FaqItem[];
   public faqsOther?: FaqItem[];
-
+  public readonly page: string = 'Incomings_page';
   private mainInfo?: MainItem;
 
   constructor(
-    private title: Title,
     private faqService: FaqService,
     private mainService: MainService,
+    private title: Title,
   ) {}
 
   ngOnInit(): void {

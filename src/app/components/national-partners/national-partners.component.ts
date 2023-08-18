@@ -1,11 +1,11 @@
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import {} from 'src/app/pages/esncard-page/national-partners.service';
 import { MarkdownModule } from 'ngx-markdown';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { environment as env } from 'src/environments/environment';
+
 import { NationalPartnerItem } from 'src/app/pages/esncard-page/national-partner-item';
 import { PartnerService } from 'src/app/pages/esncard-page/partner.service';
+import { environment as env } from 'src/environments/environment';
 
 @Component({
   selector: 'esn-national-partners',

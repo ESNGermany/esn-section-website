@@ -1,12 +1,13 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { MarkdownModule } from 'ngx-markdown';
+
+import { MainService } from 'src/app/services/main.service';
+import { MainItem } from 'src/app/services/main-item';
 
 import { StatutesService } from './statutes.service';
 import { StatutesItem } from './statutes-item';
-import { MainService } from 'src/app/services/main.service';
-import { MainItem } from 'src/app/services/main-item';
-import { NgIf } from '@angular/common';
-import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'esn-statutes-page',
@@ -16,13 +17,13 @@ import { MarkdownModule } from 'ngx-markdown';
   imports: [NgIf, MarkdownModule],
 })
 export class StatutesPageComponent implements OnInit {
-  public statutes?: StatutesItem;
   private mainInfo?: MainItem;
+  public statutes?: StatutesItem;
 
   constructor(
-    private title: Title,
-    private statutesService: StatutesService,
     private mainService: MainService,
+    private statutesService: StatutesService,
+    private title: Title,
   ) {}
 
   ngOnInit(): void {

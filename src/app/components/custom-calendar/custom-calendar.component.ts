@@ -1,15 +1,16 @@
+import { AsyncPipe, DatePipe, NgIf, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
+
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import { MarkdownModule } from 'ngx-markdown';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
-import { isPlatformBrowser, NgIf, AsyncPipe, DatePipe } from '@angular/common';
 
 import { environment } from 'src/environments/environment';
-import { MarkdownModule } from 'ngx-markdown';
-import { FullCalendarModule } from '@fullcalendar/angular';
 
 @Component({
   selector: 'esn-custom-calendar',
@@ -18,14 +19,14 @@ import { FullCalendarModule } from '@fullcalendar/angular';
   imports: [NgIf, FullCalendarModule, MarkdownModule, AsyncPipe, DatePipe],
 })
 export class CustomCalendarComponent {
-  public pretixLink?: string;
   public calendarOptions: CalendarOptions;
-  public isBrowser$ = new BehaviorSubject(false);
   public event$ = new BehaviorSubject(null);
+  public isBrowser$ = new BehaviorSubject(false);
+  public pretixLink?: string;
 
   constructor(
-    private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: object,
+    private http: HttpClient,
   ) {
     if (isPlatformBrowser(platformId)) {
       this.isBrowser$.next(true);

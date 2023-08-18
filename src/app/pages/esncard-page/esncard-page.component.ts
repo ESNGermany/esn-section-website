@@ -1,14 +1,15 @@
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { environment } from 'src/environments/environment';
-import { PartnerService } from './partner.service';
+import { ContentItemComponent } from 'src/app/components/content-item/content-item.component';
+import { NationalPartnersComponent } from 'src/app/components/national-partners/national-partners.component';
+import { OlaContentItemComponent } from 'src/app/components/ola-content-item/ola-content-item.component';
 import { MainService } from 'src/app/services/main.service';
 import { MainItem } from 'src/app/services/main-item';
-import { NgIf, NgFor, NgClass } from '@angular/common';
-import { OlaContentItemComponent } from 'src/app/components/ola-content-item/ola-content-item.component';
-import { NationalPartnersComponent } from 'src/app/components/national-partners/national-partners.component';
-import { ContentItemComponent } from 'src/app/components/content-item/content-item.component';
+import { environment } from 'src/environments/environment';
+
+import { PartnerService } from './partner.service';
 import { PartnerItem } from './partner-item';
 import { NationalPartnerItem } from './national-partner-item';
 
@@ -27,17 +28,17 @@ import { NationalPartnerItem } from './national-partner-item';
   ],
 })
 export class EsncardPageComponent implements OnInit {
-  public readonly page: string = 'ESNcard_page';
-  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
-  public sectionPartners?: PartnerItem[];
-  public nationalPartners?: NationalPartnerItem[];
   public cityName?: string;
+  public directusImageLink: string = environment.DIRECTUS_URL_IMAGE;
   private mainInfo?: MainItem;
+  public nationalPartners?: NationalPartnerItem[];
+  public readonly page: string = 'ESNcard_page';
+  public sectionPartners?: PartnerItem[];
 
   constructor(
-    private title: Title,
-    private partnerService: PartnerService,
     private mainService: MainService,
+    private partnerService: PartnerService,
+    private title: Title,
   ) {}
 
   ngOnInit(): void {

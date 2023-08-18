@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
+import { BehaviorSubject, catchError, Observable } from 'rxjs';
 
 import { environment as env } from 'src/environments/environment';
-import { MessageService } from './message.service';
+
+import { ErrorService } from './error.service';
 import { MainItem } from './main-item';
 
 export interface IMainItem {
@@ -14,14 +15,14 @@ export interface IMainItem {
   providedIn: 'root',
 })
 export class MainService {
-  private url = `${env.DIRECTUS_URL}main_information${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
   private mainInformationSubject = new BehaviorSubject<MainItem | undefined>(
     undefined,
   );
+  private url = `${env.DIRECTUS_URL}main_information${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
   constructor(
+    private errorService: ErrorService,
     private http: HttpClient,
-    private messageService: MessageService,
   ) {
     this.fetchMain();
   }
@@ -35,20 +36,13 @@ export class MainService {
 
     this.http
       .get<IMainItem>(this.url, { params })
-      .pipe(catchError(this.handleError<IMainItem>('getMainInformation')))
+      .pipe(
+        catchError(
+          this.errorService.handleError<IMainItem>('getMainInformation'),
+        ),
+      )
       .subscribe((main: IMainItem) => {
         this.mainInformationSubject.next(main?.data[0]);
       });
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: Error): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-  private log(message: string) {
-    this.messageService.add(`MainService: ${message}`);
   }
 }

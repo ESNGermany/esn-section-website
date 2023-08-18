@@ -1,12 +1,14 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { CocService } from './coc.service';
-import { CocItem } from './coc-item';
+import { MarkdownModule } from 'ngx-markdown';
+
 import { MainService } from 'src/app/services/main.service';
 import { MainItem } from 'src/app/services/main-item';
-import { NgIf } from '@angular/common';
-import { MarkdownModule } from 'ngx-markdown';
+
+import { CocService } from './coc.service';
+import { CocItem } from './coc-item';
 
 @Component({
   selector: 'esn-coc-page',
@@ -20,9 +22,9 @@ export class CocPageComponent implements OnInit {
   private mainInfo?: MainItem;
 
   constructor(
-    private title: Title,
     private cocService: CocService,
     private mainService: MainService,
+    private title: Title,
   ) {}
 
   ngOnInit(): void {

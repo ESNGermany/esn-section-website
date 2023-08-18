@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
+import { ContentItemComponent } from 'src/app/components/content-item/content-item.component';
+import { MainItem } from 'src/app/services/main-item';
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
-import { ContentItemComponent } from '../../components/content-item/content-item.component';
 
 @Component({
   selector: 'esn-members-page',
@@ -13,12 +13,12 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   imports: [ContentItemComponent],
 })
 export class MembersPageComponent implements OnInit {
-  public readonly page: string = 'Members_page';
   public mainInfo?: MainItem;
+  public readonly page: string = 'Members_page';
 
   constructor(
-    private title: Title,
     private mainService: MainService,
+    private title: Title,
   ) {}
 
   ngOnInit(): void {

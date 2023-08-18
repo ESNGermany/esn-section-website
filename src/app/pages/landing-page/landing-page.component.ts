@@ -1,3 +1,4 @@
+import { DOCUMENT, NgIf, isPlatformBrowser } from '@angular/common';
 import {
   Component,
   HostListener,
@@ -6,13 +7,13 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { GalleryItem, ImageItem, GalleryComponent } from 'ng-gallery';
-import { DOCUMENT, isPlatformBrowser, NgIf } from '@angular/common';
 
-import { environment as env } from 'src/environments/environment';
+import { GalleryComponent, GalleryItem, ImageItem } from 'ng-gallery';
+
+import { ContentItemComponent } from 'src/app/components/content-item/content-item.component';
+import { MainItem } from 'src/app/services/main-item';
 import { MainService } from 'src/app/services/main.service';
-import { MainItem } from '../../services/main-item';
-import { ContentItemComponent } from '../../components/content-item/content-item.component';
+import { environment as env } from 'src/environments/environment';
 
 @Component({
   selector: 'esn-landing-page',
@@ -22,17 +23,17 @@ import { ContentItemComponent } from '../../components/content-item/content-item
   imports: [NgIf, GalleryComponent, ContentItemComponent],
 })
 export class LandingPageComponent implements OnInit {
-  public mainInfo?: MainItem;
-  public images!: GalleryItem[];
-  public strapiLink: string = env.STRAPI_SECTION_URL_IMAGE;
   public directusImageLink: string = env.DIRECTUS_URL_IMAGE;
-  public showThumb = true;
+  public images!: GalleryItem[];
   public isBrowser: boolean;
+  public mainInfo?: MainItem;
   public readonly page: string = 'Landing_page';
+  public strapiLink: string = env.STRAPI_SECTION_URL_IMAGE;
+  public showThumb = true;
 
   constructor(
-    private title: Title,
     private mainService: MainService,
+    private title: Title,
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: object,
   ) {

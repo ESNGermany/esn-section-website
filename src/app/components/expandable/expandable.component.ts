@@ -1,5 +1,3 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import {
   animate,
   state,
@@ -8,6 +6,9 @@ import {
   trigger,
 } from '@angular/animations';
 import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'esn-expandable',

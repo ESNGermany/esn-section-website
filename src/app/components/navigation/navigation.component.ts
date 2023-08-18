@@ -1,4 +1,4 @@
-import { DOCUMENT, NgStyle, NgIf, NgClass, AsyncPipe } from '@angular/common';
+import { AsyncPipe, DOCUMENT, NgClass, NgIf, NgStyle } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -7,12 +7,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
+import { Observable, map, shareReplay } from 'rxjs';
 
 import { MainService } from 'src/app/services/main.service';
-import { environment } from 'src/environments/environment';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Observable, map, shareReplay } from 'rxjs';
 import { MainItem } from 'src/app/services/main-item';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'esn-navigation',
@@ -27,14 +28,14 @@ export class NavigationComponent implements OnInit {
   @ViewChild('bubble1') bubble1Element!: ElementRef<HTMLDivElement>;
   @ViewChild('bubble2') bubble2Element!: ElementRef<HTMLDivElement>;
 
-  public windowScrolled = false;
   public bgImage$?: Observable<any>;
   public buttonColor$?: Observable<any>;
   public mainInfo?: MainItem;
+  public windowScrolled = false;
 
   constructor(
-    private mainService: MainService,
     @Inject(DOCUMENT) private document: Document,
+    private mainService: MainService,
   ) {}
 
   @HostListener('document:click', ['$event'])

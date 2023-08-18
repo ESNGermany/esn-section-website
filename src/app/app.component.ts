@@ -1,11 +1,12 @@
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MainService } from './services/main.service';
-import { MainItem } from './services/main-item';
-import { NgClass } from '@angular/common';
-import { FooterComponent } from './components/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
+
+import { FooterComponent } from './components/footer/footer.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { MainItem } from './services/main-item';
+import { MainService } from './services/main.service';
 
 @Component({
   selector: 'esn-root',

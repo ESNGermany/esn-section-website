@@ -1,7 +1,8 @@
-import { NgModule } from "@angular/core";
-import { LoadJsService } from "./load-js.service";
+import { NgModule } from '@angular/core';
+
+import { LoadJsService } from './load-js.service';
 
 @NgModule({
-    providers: [LoadJsService],
+  providers: [LoadJsService],
 })
 export class SharedModule {}

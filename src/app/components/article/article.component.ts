@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'esn-article',
@@ -8,7 +8,7 @@ import { NgClass } from '@angular/common';
   imports: [NgClass],
 })
 export class ArticleComponent {
-  @Input() title = '';
   @Input() grayBg = false;
   @Input() grayBox = false;
+  @Input() title = '';
 }

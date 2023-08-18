@@ -1,11 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment as env } from 'src/environments/environment';
-import { MessageService } from './message.service';
+
 import { ContentItem } from './content-item';
+import { ErrorService } from './error.service';
 
 export interface IContentItem {
   data: ContentItem[];
@@ -13,27 +15,17 @@ export interface IContentItem {
 
 @Injectable()
 export class ContentService {
+  private contentLandingPageSubject = new BehaviorSubject<ContentItem[]>([]);
+  private contentMembersPageSubject = new BehaviorSubject<ContentItem[]>([]);
+  private contentTeamPageSubject = new BehaviorSubject<ContentItem[]>([]);
+  private contentESNcardPageSubject = new BehaviorSubject<ContentItem[]>([]);
+  private contentIncomingsPageSubject = new BehaviorSubject<ContentItem[]>([]);
+
   private url = `${env.DIRECTUS_URL}content${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
-  private contentLandingPageSubject = new BehaviorSubject<
-    ContentItem[] | undefined
-  >(undefined);
-  private contentMembersPageSubject = new BehaviorSubject<
-    ContentItem[] | undefined
-  >(undefined);
-  private contentTeamPageSubject = new BehaviorSubject<
-    ContentItem[] | undefined
-  >(undefined);
-  private contentESNcardPageSubject = new BehaviorSubject<
-    ContentItem[] | undefined
-  >(undefined);
-  private contentIncomingsPageSubject = new BehaviorSubject<
-    ContentItem[] | undefined
-  >(undefined);
-
   constructor(
+    private errorService: ErrorService,
     private http: HttpClient,
-    private messageService: MessageService,
   ) {
     this.fetchPageContent('Landing_page');
     this.fetchPageContent('Members_page');
@@ -42,7 +34,7 @@ export class ContentService {
     this.fetchPageContent('Incomings_page');
   }
 
-  public getContent(page: string): Observable<ContentItem[] | undefined> {
+  public getContent(page: string): Observable<ContentItem[]> {
     switch (page) {
       case 'Landing_page':
         return this.contentLandingPageSubject.asObservable();
@@ -66,7 +58,11 @@ export class ContentService {
       .get<IContentItem>(`${this.url}&filter[Page_for_display]=${page}`, {
         params,
       })
-      .pipe(catchError(this.handleError<IContentItem>('fetchContentList')))
+      .pipe(
+        catchError(
+          this.errorService.handleError<IContentItem>('fetchContentList'),
+        ),
+      )
       .subscribe((content: IContentItem) => {
         switch (page) {
           case 'Landing_page':
@@ -86,16 +82,5 @@ export class ContentService {
             break;
         }
       });
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: Error): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-  private log(message: string) {
-    this.messageService.add(`ContentService: ${message}`);
   }
 }

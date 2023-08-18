@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
-import { EsncardPageComponent } from './pages/esncard-page/esncard-page.component';
-import { EventsPageComponent } from './pages/events-page/events-page.component';
-import { MembersPageComponent } from './pages/members-page/members-page.component';
-import { TeamPageComponent } from './pages/team-page/team-page.component';
-import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
-import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.component';
-import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
+import { RouterModule, Routes } from '@angular/router';
+
 import { CocPageComponent } from './pages/coc-page/coc-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { EsncardPageComponent } from './pages/esncard-page/esncard-page.component';
+import { EventsPageComponent } from './pages/events-page/events-page.component';
+import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
+import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { MembersPageComponent } from './pages/members-page/members-page.component';
+import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
+import { TeamPageComponent } from './pages/team-page/team-page.component';
 
 const routes: Routes = [
   {
