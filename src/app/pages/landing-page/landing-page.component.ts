@@ -49,6 +49,7 @@ export class LandingPageComponent implements OnInit {
     this.mainService.getMainInformation().subscribe({
       next: (mainInfo?: MainItem) => {
         this.mainInfo = mainInfo;
+        this.setImages();
       },
       error: (error) => {
         console.error(error);
