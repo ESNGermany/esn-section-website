@@ -18,8 +18,8 @@ export class ContentService {
   private contentLandingPageSubject = new BehaviorSubject<ContentItem[]>([]);
   private contentMembersPageSubject = new BehaviorSubject<ContentItem[]>([]);
   private contentTeamPageSubject = new BehaviorSubject<ContentItem[]>([]);
-  private contentESNcardPageSubject = new BehaviorSubject<ContentItem[]>([]);
-  private contentIncomingsPageSubject = new BehaviorSubject<ContentItem[]>([]);
+  private contentSupportPageSubject = new BehaviorSubject<ContentItem[]>([]);
+  private contentDonatePageSubject = new BehaviorSubject<ContentItem[]>([]);
 
   private url = `${env.DIRECTUS_URL}content${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
@@ -30,8 +30,8 @@ export class ContentService {
     this.fetchPageContent('Landing_page');
     this.fetchPageContent('Members_page');
     this.fetchPageContent('Team_page');
-    this.fetchPageContent('ESNcard_page');
-    this.fetchPageContent('Incomings_page');
+    this.fetchPageContent('Donate_page');
+    this.fetchPageContent('Support_page');
   }
 
   public getContent(page: string): Observable<ContentItem[]> {
@@ -42,10 +42,10 @@ export class ContentService {
         return this.contentMembersPageSubject.asObservable();
       case 'Team_page':
         return this.contentTeamPageSubject.asObservable();
-      case 'ESNcard_page':
-        return this.contentESNcardPageSubject.asObservable();
-      default: // 'Incomings_page':
-        return this.contentIncomingsPageSubject.asObservable();
+      case 'Support_page':
+        return this.contentSupportPageSubject.asObservable();
+      default: // 'Donate_page':
+        return this.contentDonatePageSubject.asObservable();
     }
   }
 
@@ -74,11 +74,11 @@ export class ContentService {
           case 'Team_page':
             this.contentTeamPageSubject.next(content?.data);
             break;
-          case 'ESNcard_page':
-            this.contentESNcardPageSubject.next(content?.data);
+          case 'Donate_page':
+            this.contentDonatePageSubject.next(content?.data);
             break;
-          case 'Incomings_page':
-            this.contentIncomingsPageSubject.next(content?.data);
+          case 'Support_page':
+            this.contentSupportPageSubject.next(content?.data);
             break;
         }
       });

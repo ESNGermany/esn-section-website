@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CocPageComponent } from './pages/coc-page/coc-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
-import { EsncardPageComponent } from './pages/esncard-page/esncard-page.component';
-import { EventsPageComponent } from './pages/events-page/events-page.component';
+import { SupportPageComponent } from './pages/support-page/support-page.component';
 import { ImprintPageComponent } from './pages/imprint-page/imprint-page.component';
-import { IncomingsPageComponent } from './pages/incomings-page/incomings-page.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
-import { MembersPageComponent } from './pages/members-page/members-page.component';
 import { StatutesPageComponent } from './pages/statutes-page/statutes-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
+import { DonatePageComponent } from './pages/donate-page/donate-page.component';
+import { MembersPageComponent } from './pages/members-page/members-page.component';
+
 
 const routes: Routes = [
   {
@@ -19,24 +19,20 @@ const routes: Routes = [
     component: LandingPageComponent,
   },
   {
-    path: 'esncard',
-    component: EsncardPageComponent,
+    path: 'support',
+    component: SupportPageComponent,
   },
   {
-    path: 'events',
-    component: EventsPageComponent,
+    path: 'donate',
+    component: DonatePageComponent,
   },
   {
-    path: 'for-members',
+    path: 'membership',
     component: MembersPageComponent,
   },
   {
     path: 'team',
     component: TeamPageComponent,
-  },
-  {
-    path: 'for-incomings',
-    component: IncomingsPageComponent,
   },
   {
     path: 'legal-notice',

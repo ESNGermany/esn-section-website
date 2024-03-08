@@ -23,28 +23,22 @@
       [routerLinkActiveOptions]="{ exact: true }"
       ><li class="mobile-li hover-zoom">Home</li></a
     >
-    <a routerLink="/esncard" (click)="toggleMenu()"
+    <a routerLink="/support" (click)="toggleMenu()"
       ><li class="mobile-li hover-zoom" routerLinkActive="colorActiveLink">
-        ESNcard & Partners
+        Get Support
       </li></a
     >
     <a
-      routerLink="/events"
+      routerLink="/donate"
       (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
-      ><li class="mobile-li hover-zoom">Events</li></a
+      ><li class="mobile-li hover-zoom">Donate</li></a
     >
     <a
-      routerLink="/for-incomings"
+      routerLink="/membership"
       (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
-      ><li class="mobile-li hover-zoom">For Incomings</li></a
-    >
-    <a
-      routerLink="/for-members"
-      (click)="toggleMenu()"
-      routerLinkActive="colorActiveLink"
-      ><li class="mobile-li hover-zoom">For Members</li></a
+      ><li class="mobile-li hover-zoom">Membership</li></a
     >
     <a
       routerLink="/team"
@@ -83,23 +77,18 @@
     >
       <div class="text-2xl flex justify-between lg:flex-grow max-w-screen-xl">
         <div class="relative addhover">
-          <a routerLink="/esncard" routerLinkActive="addhoverActive">
-            <button class="mobile-but">ESNcard & Partners</button></a
+          <a routerLink="/support" routerLinkActive="addhoverActive">
+            <button class="mobile-but">Get Support</button></a
           >
         </div>
         <div class="relative addhover">
-          <a routerLink="/events" routerLinkActive="addhoverActive">
-            <button class="mobile-but">Events</button></a
+          <a routerLink="/donate" routerLinkActive="addhoverActive">
+            <button class="mobile-but">Donate</button></a
           >
         </div>
         <div class="relative addhover">
-          <a routerLink="/for-incomings" routerLinkActive="addhoverActive">
-            <button class="mobile-but">For Incomings</button></a
-          >
-        </div>
-        <div class="relative addhover">
-          <a routerLink="/for-members" routerLinkActive="addhoverActive"
-            ><button class="mobile-but">For Members</button></a
+          <a routerLink="/membership" routerLinkActive="addhoverActive">
+            <button class="mobile-but">Membership</button></a
           >
         </div>
         <div class="relative addhover">
