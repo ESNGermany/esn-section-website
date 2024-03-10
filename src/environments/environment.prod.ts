@@ -7,7 +7,7 @@ export const environment = {
   DIRECTUS_URL_ITEMS: 'https://directus.esn-germany.de/items/',
   DIRECTUS_URL_IMAGE: 'https://directus.esn-germany.de/assets/',
   DIRECTUS_URL_FILES: 'https://directus.esn-germany.de/files/',
-  DIRECTUS_URL: 'https://directus.esn-germany.de/items/website_',
+  DIRECTUS_URL: 'https://directus.esn-germany.de/items/alumni_',
   DIRECTUS_SECTION_FILTER: `?filter[section][name]=`,
   timeStamp: '2023-07-28 13:02:16',
 };
