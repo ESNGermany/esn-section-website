@@ -15,8 +15,8 @@ export interface ContentItem {
     | 'Landing_page'
     | 'Members_page'
     | 'Team_page'
-    | 'ESNcard_page'
-    | 'Incomings_page';
+    | 'Donate_page'
+    | 'Support_page';
   Order_on_page: number;
   Image: {
     id: string;
