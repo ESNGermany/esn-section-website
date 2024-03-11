@@ -18,7 +18,7 @@ export class MainService {
   private mainInformationSubject = new BehaviorSubject<MainItem | undefined>(
     undefined,
   );
-  private url = `${env.DIRECTUS_URL}main_information${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
+  private url = `${env.DIRECTUS_URL}main_information`;
 
   constructor(
     private errorService: ErrorService,
