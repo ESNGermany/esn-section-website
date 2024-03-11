@@ -21,7 +21,7 @@ export class ContentService {
   private contentSupportPageSubject = new BehaviorSubject<ContentItem[]>([]);
   private contentDonatePageSubject = new BehaviorSubject<ContentItem[]>([]);
 
-  private url = `${env.DIRECTUS_URL}content${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
+  private url = `${env.DIRECTUS_URL}content`;
 
   constructor(
     private errorService: ErrorService,
