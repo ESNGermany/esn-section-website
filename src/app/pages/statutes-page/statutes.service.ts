@@ -17,7 +17,7 @@ export class StatutesService {
   private statutesSubject = new BehaviorSubject<StatutesItem | undefined>(
     undefined,
   );
-  private url = `${env.DIRECTUS_URL}statutes${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
+  private url = `${env.DIRECTUS_URL}website_statutes${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
 
   constructor(
     private errorService: ErrorService,

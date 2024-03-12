@@ -20,7 +20,7 @@ export class FaqService {
   private faqSubjectCorona = new BehaviorSubject<FaqItem[]>([]);
   private faqSubjectESNcard = new BehaviorSubject<FaqItem[]>([]);
   private faqSubjectOther = new BehaviorSubject<FaqItem[]>([]);
-  private url = `${env.DIRECTUS_URL}faq${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&filter[category][category]=`;
+  private url = `${env.DIRECTUS_URL}website_faq${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&filter[category][category]=`;
 
   constructor(
     private errorService: ErrorService,

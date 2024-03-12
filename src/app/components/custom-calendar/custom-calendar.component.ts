@@ -73,7 +73,7 @@ export class CustomCalendarComponent {
             ];
           }>(
             environment.DIRECTUS_URL +
-              'events' +
+              'website_events' +
               environment.DIRECTUS_SECTION_FILTER +
               environment.SECTION_NAME +
               '&fields=*,' +

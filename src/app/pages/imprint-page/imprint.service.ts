@@ -17,7 +17,7 @@ export class ImprintService {
   private imprintSubject = new BehaviorSubject<ImprintItem | undefined>(
     undefined,
   );
-  private url = `${env.DIRECTUS_URL}imprint${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&fields=title,text`;
+  private url = `${env.DIRECTUS_URL}website_imprint${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}&fields=title,text`;
 
   constructor(
     private errorService: ErrorService,
