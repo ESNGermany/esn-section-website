@@ -29,11 +29,21 @@
       </li></a
     >
     <a
+      *ngIf="!mainInfo?.events_menu_external_url; else externalEventsLinkMobile"
       routerLink="/events"
       (click)="toggleMenu()"
       routerLinkActive="colorActiveLink"
       ><li class="mobile-li hover-zoom">Events</li></a
     >
+    <ng-template #externalEventsLinkMobile>
+      <a
+        [href]="mainInfo!.events_menu_external_url"
+        target="_blank"
+        rel="noopener"
+        (click)="toggleMenu()"
+        ><li class="mobile-li hover-zoom">Events</li></a
+      >
+    </ng-template>
     <a
       routerLink="/for-incomings"
       (click)="toggleMenu()"
@@ -88,9 +98,22 @@
           >
         </div>
         <div class="relative addhover">
-          <a routerLink="/events" routerLinkActive="addhoverActive">
+          <a
+            *ngIf="!mainInfo?.events_menu_external_url; else externalEventsLinkDesktop"
+            routerLink="/events"
+            routerLinkActive="addhoverActive"
+          >
             <button class="mobile-but">Events</button></a
           >
+          <ng-template #externalEventsLinkDesktop>
+            <a
+              [href]="mainInfo!.events_menu_external_url"
+              target="_blank"
+              rel="noopener"
+            >
+              <button class="mobile-but">Events</button></a
+            >
+          </ng-template>
         </div>
         <div class="relative addhover">
           <a routerLink="/for-incomings" routerLinkActive="addhoverActive">

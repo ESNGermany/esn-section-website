@@ -18,6 +18,7 @@ export interface MainItem {
   welcome_message_front_page: string;
   button_color: string;
   eventpage_text: string;
+  events_menu_external_url?: string;
   header_image: {
     id: string;
   };
