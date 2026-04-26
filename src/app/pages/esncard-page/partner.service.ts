@@ -22,7 +22,7 @@ export class PartnerService {
   private nationalPartnerSubject = new BehaviorSubject<NationalPartnerItem[]>(
     [],
   );
-  private url = `${env.DIRECTUS_URL}partners${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
+  private url = `${env.DIRECTUS_URL}partners${env.DIRECTUS_SECTION_FILTER}${env.SECTION_ID}`;
 
   constructor(
     private errorService: ErrorService,

@@ -21,7 +21,7 @@ export class ContentService {
   private contentESNcardPageSubject = new BehaviorSubject<ContentItem[]>([]);
   private contentIncomingsPageSubject = new BehaviorSubject<ContentItem[]>([]);
 
-  private url = `${env.DIRECTUS_URL}content${env.DIRECTUS_SECTION_FILTER}${env.SECTION_NAME}`;
+  private url = `${env.DIRECTUS_URL}content${env.DIRECTUS_SECTION_FILTER}${env.SECTION_ID}`;
 
   constructor(
     private errorService: ErrorService,
