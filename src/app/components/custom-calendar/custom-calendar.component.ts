@@ -75,7 +75,7 @@ export class CustomCalendarComponent {
             environment.DIRECTUS_URL +
               'website_events' +
               environment.DIRECTUS_SECTION_FILTER +
-              environment.SECTION_NAME +
+              environment.SECTION_ID +
               '&fields=*,' +
               'causes.esn_causes_id.name' +
               '&filter[start][_gt]=' +
