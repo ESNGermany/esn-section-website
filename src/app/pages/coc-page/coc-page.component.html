@@ -1,9 +1,9 @@
 <div *ngIf="cocItem; else loading" class="outer">
   <div class="markdown-div">
     <div class="title-div">
-      <p class="title-p">{{ cocItem.Title }}</p>
+      <p class="title-p">{{ cocItem.data[0].title }}</p>
     </div>
-    <markdown [data]="cocItem.MarkdownText"></markdown>
+    <markdown [data]="cocItem.data[0].text"></markdown>
   </div>
 </div>
 <ng-template #loading>

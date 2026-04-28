@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { ErrorService } from 'src/app/services/error.service';
+import { environment as env } from '../../../environments/environment';
 
 import { CocItem } from './coc-item';
 
 @Injectable()
 export class CocService {
   private cocSubject = new BehaviorSubject<CocItem | undefined>(undefined);
-  private url = 'https://strapi.esn-germany.de/web-legal-documents/4';
+  private url = `${env.DIRECTUS_URL}coc${env.DIRECTUS_SECTION_FILTER}${env.SECTION_ID}`;
 
   constructor(
     private errorService: ErrorService,
