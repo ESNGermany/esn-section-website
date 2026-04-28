@@ -25,7 +25,7 @@ export class ImprintESNGermanyService {
   }
 
   private fetchESNGermanyImprint(): void {
-    const url = 'https://strapi.esn-germany.de/website-imprints';
+    const url = 'https://directus.esn-germany.de/items/national_website_imprint';
 
     this.http
       .get<ImprintESNGermanyItem>(url)
